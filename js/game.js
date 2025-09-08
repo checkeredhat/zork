@@ -6,6 +6,17 @@ class Game {
         this.objects = {};
         this.vocabulary = {};
         this.parser = null;
+        this.light_timer = 0;
+        this.isGameOver = false;
+        this.damWaterLevel = 'high'; // high, low
+        this.glacierMelted = false;
+        this.playerSize = 'normal'; // normal, small, large
+        this.poisonGasTimer = 0;
+        this.robot = {
+            room: null,
+            inventory: []
+        };
+        this.isCarouselSpinning = true;
     }
 
     async start() {
@@ -19,6 +30,8 @@ class Game {
             score: 0,
             inventory: []
         });
+
+        this.robot.room = this.rooms['ROBOT-ROOM'];
 
         this.look();
     }
@@ -100,19 +113,45 @@ class Game {
 
     go(direction) {
         const currentRoom = this.player.room;
-        const exit = currentRoom.exits.find(e => e.direction.toLowerCase() === direction.toLowerCase());
+        let exit = currentRoom.exits.find(e => e.direction.toLowerCase() === direction.toLowerCase());
+
+        if (currentRoom.id === 'CAROUSEL-ROOM' && this.isCarouselSpinning) {
+            const exits = currentRoom.exits;
+            exit = exits[Math.floor(Math.random() * exits.length)];
+            this.ui.display("The room spins, and you stumble out a random exit.");
+        }
 
         if (exit) {
             if (exit.condition) {
-                const conditionObject = this.objects[exit.condition];
-                if (!conditionObject || !conditionObject.flags.isOpen) {
-                    this.ui.display(exit.message || "You can't go that way.");
-                    return;
+                if (exit.condition === 'DAM_WATER_LOW') {
+                    if (this.damWaterLevel !== 'low') {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
+                } else if (exit.condition === 'GLACIER_MELTED') {
+                    if (!this.glacierMelted) {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
+                } else if (exit.condition === 'PLAYER_SMALL') {
+                    if (this.playerSize !== 'small') {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
+                } else {
+                    const conditionObject = this.objects[exit.condition];
+                    if (!conditionObject || !conditionObject.flags.isOpen) {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
                 }
             }
 
             if (exit.roomId) {
                 this.player.room = this.rooms[exit.roomId];
+                if (exit.roomId === 'CAGE') {
+                    this.poisonGasTimer = 5; // 5 turns to solve the puzzle
+                }
                 this.look();
             } else if (exit.message) {
                 this.ui.display(exit.message);
@@ -255,8 +294,325 @@ class Game {
         this.ui.display("You can't move that.");
     }
 
-    handleObjectAction(verb, gameObject) {
+    read(gameObject) {
+        if (!gameObject) {
+            this.ui.display("There's nothing to read.");
+            return;
+        }
+        if (!gameObject.flags.isReadable) {
+            this.ui.display("That's not something you can read.");
+            return;
+        }
+        if (gameObject.action) {
+            return this.handleObjectAction('read', gameObject);
+        }
+        this.ui.display("There's nothing special to read on it.");
+    }
+
+    throw(directObject, indirectObject) {
+        if (!directObject) {
+            this.ui.display("What do you want to throw?");
+            return;
+        }
+        if (this.player.inventory.indexOf(directObject) === -1) {
+            this.ui.display("You don't have that.");
+            return;
+        }
+
+        this.player.inventory = this.player.inventory.filter(obj => obj.id !== directObject.id);
+        this.player.room.objects.push(directObject);
+        directObject.room = this.player.room;
+
+        this.ui.display(`You threw the ${directObject.names[0]}.`);
+
+        if (indirectObject && indirectObject.action) {
+            this.handleObjectAction('throw', directObject, indirectObject);
+        }
+    }
+
+    use(directObject, indirectObject) {
+        if (!directObject || !indirectObject) {
+            this.ui.display("You need to specify what to use and what to use it on.");
+            return;
+        }
+
+        if (indirectObject.action) {
+            this.handleObjectAction('use', directObject, indirectObject);
+        } else {
+            this.ui.display("You can't use that here.");
+        }
+    }
+
+    push(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to push?");
+            return;
+        }
+        if (gameObject.action) {
+            return this.handleObjectAction('push', gameObject);
+        }
+        this.ui.display("You can't push that.");
+    }
+
+    eat(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to eat?");
+            return;
+        }
+        if (!gameObject.flags.isEdible) {
+            this.ui.display("You can't eat that.");
+            return;
+        }
+
+        if (gameObject.action === 'EAT-CAKE-SMALL') {
+            this.ui.display("You eat the small cake. You suddenly feel yourself shrinking!");
+            this.playerSize = 'small';
+            this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+            return;
+        }
+
+        if (gameObject.action === 'EAT-CAKE-LARGE') {
+            this.ui.display("You eat the large cake. You suddenly feel yourself growing!");
+            this.playerSize = 'large';
+            this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+            return;
+        }
+
+        // Remove the object from inventory or room
+        this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+        this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== gameObject.id);
+        this.ui.display(`You eat the ${gameObject.names[0]}. It's delicious!`);
+    }
+
+    drink(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to drink?");
+            return;
+        }
+        if (!gameObject.flags.isDrinkable) {
+            this.ui.display("You can't drink that.");
+            return;
+        }
+        // Special case for water in the bottle
+        if (gameObject.id === 'WATER' && this.objects['BOTTL'].contents.includes('WATER')) {
+            this.objects['BOTTL'].contents = [];
+            this.ui.display("You drink the water. It's refreshing.");
+        } else {
+            this.ui.display("You can't drink that.");
+        }
+    }
+
+    turn(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to turn?");
+            return;
+        }
+        if (gameObject.action) {
+            return this.handleObjectAction('turn', gameObject);
+        }
+        this.ui.display("You can't turn that.");
+    }
+
+    tie(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to tie?");
+            return;
+        }
+        if (gameObject.id !== 'ROPE') {
+            this.ui.display("You can't tie that.");
+            return;
+        }
+        // For now, a simple message. A real implementation would need an indirect object.
+        this.ui.display("You tie the rope to a nearby railing.");
+        gameObject.flags.isTied = true;
+    }
+
+    untie(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to untie?");
+            return;
+        }
+        if (gameObject.id !== 'ROPE' || !gameObject.flags.isTied) {
+            this.ui.display("You can't untie that.");
+            return;
+        }
+        this.ui.display("You untie the rope.");
+        gameObject.flags.isTied = false;
+    }
+
+    burn(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to burn?");
+            return;
+        }
+        const lightSource = this.player.inventory.find(obj => obj.flags.isLightSource && obj.flags.isLit);
+        if (!lightSource) {
+            this.ui.display("You have no source of fire.");
+            return;
+        }
+        if (!gameObject.flags.isBurnable) {
+            this.ui.display("You can't burn that.");
+            return;
+        }
+        // For now, just destroy the object
+        this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+        this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== gameObject.id);
+        this.ui.display(`The ${gameObject.names[0]} burns to a crisp and is gone.`);
+    }
+
+    light(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to light?");
+            return;
+        }
+        if (!gameObject.flags.isLightSource) {
+            this.ui.display("You can't light that.");
+            return;
+        }
+        if (gameObject.flags.isLit) {
+            this.ui.display("It's already lit.");
+            return;
+        }
+        gameObject.flags.isLit = true;
+        this.ui.display(`You light the ${gameObject.names[0]}.`);
+    }
+
+    knock(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to knock on?");
+            return;
+        }
+        if (gameObject.flags.isDoor) {
+            this.ui.display(`You knock on the ${gameObject.names[0]}. There is no answer.`);
+        } else {
+            this.ui.display("That's not something you can knock on.");
+        }
+    }
+
+    yell() {
+        this.ui.display("Aaaarrrrgggghhhh!");
+    }
+
+    jump() {
+        this.ui.display("You jump on the spot, but nothing happens.");
+    }
+
+    rub(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to rub?");
+            return;
+        }
+        this.ui.display(`You rub the ${gameObject.names[0]}, but nothing happens.`);
+    }
+
+    pray() {
+        this.ui.display("You pray to the heavens, but there is no divine intervention.");
+    }
+
+    exorcise(gameObject) {
+        if (!gameObject) {
+            this.ui.display("Who or what do you want to exorcise?");
+            return;
+        }
+        this.ui.display(`You attempt to exorcise the ${gameObject.names[0]}, but it has no effect.`);
+    }
+
+    commandRobot(command) {
+        // A very simple robot command parser
+        const tokens = command.toLowerCase().split(' ');
+        const verb = tokens[0];
+        const directObject = tokens.length > 1 ? tokens.slice(1).join(' ') : null;
+
+        const robotObject = this.objects['ROBOT'];
+        if (robotObject.room !== this.player.room) {
+            this.ui.display("The robot is not here.");
+            return;
+        }
+
+        switch (verb) {
+            case 'go':
+                const direction = directObject;
+                const robotRoom = this.robot.room;
+                const exit = robotRoom.exits.find(e => e.direction.toLowerCase() === direction.toLowerCase());
+                if (exit) {
+                    this.robot.room = this.rooms[exit.roomId];
+                    this.ui.display("The robot whirs and moves to the " + direction);
+                } else {
+                    this.ui.display("The robot cannot go that way.");
+                }
+                break;
+            case 'take':
+                const objToTake = this.robot.room.objects.find(o => o.names.includes(directObject));
+                if (objToTake && objToTake.flags.isTakeable) {
+                    this.robot.room.objects = this.robot.room.objects.filter(o => o.id !== objToTake.id);
+                    this.robot.inventory.push(objToTake);
+                    this.ui.display(`The robot takes the ${objToTake.names[0]}.`);
+                } else {
+                    this.ui.display("The robot cannot take that.");
+                }
+                break;
+            default:
+                this.ui.display("The robot does not understand that command.");
+        }
+    }
+
+    handleObjectAction(verb, directObject, indirectObject) {
+        const gameObject = indirectObject || directObject;
         switch (gameObject.action) {
+            case 'MAGIC-MIRROR':
+                if (verb === 'rub') {
+                    this.ui.display("The mirror shimmers and you feel a strange sensation...");
+                    if (this.player.room.id === 'MIRROR-ROOM-1') {
+                        this.player.room = this.rooms['MIRROR-ROOM-2'];
+                    } else {
+                        this.player.room = this.rooms['MIRROR-ROOM-1'];
+                    }
+                    this.look();
+                }
+                break;
+            case 'CAROUSEL-BUTTONS':
+                if (verb === 'push') {
+                    if (this.isCarouselSpinning) {
+                        this.isCarouselSpinning = false;
+                        this.ui.display("You push the buttons. The spinning slows to a halt.");
+                    } else {
+                        this.ui.display("The carousel is already stopped.");
+                    }
+                }
+                break;
+            case 'GLACIER':
+                if (verb === 'throw' && directObject.id === 'TORCH' && directObject.flags.isLit) {
+                    this.ui.display("The lit torch melts the glacier, revealing a path to the north!");
+                    this.glacierMelted = true;
+                    // Remove the glacier from the room
+                    this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== 'GLACIER');
+                } else {
+                    this.ui.display("Throwing that at the glacier has no effect.");
+                }
+                break;
+            case 'DAM-BOLT':
+                if ((verb === 'use' && directObject.id === 'WRENCH') || verb === 'turn') {
+                    if (gameObject.flags.isLoose) {
+                        this.ui.display("The bolt is already loose.");
+                    } else {
+                        const wrench = this.player.inventory.find(obj => obj.id === 'WRENCH');
+                        if (verb === 'turn' && !wrench) {
+                            this.ui.display("The bolt is too tight to turn by hand.");
+                            return;
+                        }
+                        gameObject.flags.isLoose = true;
+                        this.ui.display("You turn the bolt. The sluice gate opens, and the reservoir drains with a mighty roar.");
+                        this.damWaterLevel = 'low';
+                    }
+                } else {
+                    this.ui.display("You can't do that.");
+                }
+                break;
+            case 'DAM-PANEL':
+                if (verb === 'push') {
+                    this.ui.display("You push the buttons, but nothing happens. The panel seems to be dead.");
+                }
+                break;
             case 'RUG':
                 if (verb === 'move') {
                     if (gameObject.flags.isMoved) {
@@ -293,9 +649,56 @@ class Game {
         }
     }
 
+    gameOver(message) {
+        this.ui.display(message);
+        this.ui.display("\n**** You have died ****");
+        this.isGameOver = true;
+        // Here you might want to disable the input as well
+        this.ui.inputElement.disabled = true;
+    }
+
     processTurn(command) {
+        if (this.isGameOver) {
+            return; // Don't process commands if the game is over
+        }
         if (!command) return;
+
+        // Handle robot command separately
+        if (command.toLowerCase().startsWith('robot,')) {
+            const robotCommand = command.substring(7).trim();
+            this.commandRobot(robotCommand);
+            return;
+        }
+
         this.ui.displayPrompt(`> ${command}`);
+
+        // Poison gas timer
+        if (this.poisonGasTimer > 0) {
+            this.poisonGasTimer--;
+            if (this.poisonGasTimer > 0) {
+                this.ui.display(`The hissing sound grows louder. You have ${this.poisonGasTimer} turns left.`);
+            } else {
+                this.gameOver("You have succumbed to the poison gas!");
+                return;
+            }
+        }
+
+        // Light timer logic
+        const lightSource = this.player.inventory.find(obj => obj.flags.isLight && obj.light > 0);
+        if (lightSource) {
+            lightSource.light--;
+            if (lightSource.light === 10) {
+                this.ui.display("Your light source is growing dim.");
+            } else if (lightSource.light === 0) {
+                this.ui.display("Your light source has run out.");
+            }
+        }
+
+        const currentRoom = this.player.room;
+        if (!currentRoom.isLight && !lightSource) {
+            this.gameOver("It is pitch black. You are likely to be eaten by a grue.");
+            return;
+        }
 
         const context = {
             roomObjects: this.player.room.objects,
@@ -335,6 +738,60 @@ class Game {
                 break;
             case 'move':
                 this.move(action.directObject);
+                break;
+            case 'read':
+                this.read(action.directObject);
+                break;
+            case 'throw':
+                this.throw(action.directObject, action.indirectObject);
+                break;
+            case 'use':
+                this.use(action.directObject, action.indirectObject);
+                break;
+            case 'push':
+                this.push(action.directObject);
+                break;
+            case 'eat':
+                this.eat(action.directObject);
+                break;
+            case 'drink':
+                this.drink(action.directObject);
+                break;
+            case 'turn':
+                this.turn(action.directObject);
+                break;
+            case 'tie':
+                this.tie(action.directObject);
+                break;
+            case 'untie':
+                this.untie(action.directObject);
+                break;
+            case 'burn':
+                this.burn(action.directObject);
+                break;
+            case 'light':
+                this.light(action.directObject);
+                break;
+            case 'knock':
+                this.knock(action.directObject);
+                break;
+            case 'yell':
+                this.yell();
+                break;
+            case 'jump':
+                this.jump();
+                break;
+            case 'rub':
+                this.rub(action.directObject);
+                break;
+            case 'pray':
+                this.pray();
+                break;
+            case 'exorcise':
+                this.exorcise(action.directObject);
+                break;
+            case 'robot':
+                this.commandRobot(action.directObject);
                 break;
             default:
                 this.ui.display("I don't know how to do that yet.");

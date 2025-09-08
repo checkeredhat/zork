@@ -18,7 +18,22 @@
         "attack": ["fight", "kill", "hit", "mung"],
         "open": [],
         "close": [],
-        "move": []
+        "move": [],
+        "push": ["press"],
+        "use": [],
+        "eat": [],
+        "drink": [],
+        "turn": [],
+        "tie": [],
+        "untie": [],
+        "burn": [],
+        "light": [],
+        "knock": [],
+        "yell": ["shout"],
+        "jump": [],
+        "rub": [],
+        "pray": [],
+        "exorcise": []
     },
     "prepositions": [
         "with",

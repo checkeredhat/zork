@@ -17,6 +17,10 @@ class Parser {
     }
 
     parse(inputText, context) {
+        if (inputText.toLowerCase().startsWith('robot,')) {
+            return { verb: 'robot', directObject: inputText.substring(6).trim() };
+        }
+
         const tokens = inputText.toLowerCase().trim().split(/\s+/);
         const filteredTokens = tokens.filter(t => !this.vocabulary.buzzwords.includes(t));
 
@@ -26,6 +30,7 @@ class Parser {
 
         let verb = null;
         let directObject = null;
+        let indirectObject = null;
 
         const firstToken = filteredTokens[0];
 
@@ -53,11 +58,33 @@ class Parser {
             }
         }
 
+        const availableObjects = [...context.roomObjects, ...context.inventoryObjects];
+
+        // Handle verbs with prepositions
+        const preposition = filteredTokens.find(t => this.vocabulary.prepositions.includes(t));
+        if (preposition) {
+            const prepIndex = filteredTokens.indexOf(preposition);
+            if (prepIndex > 1 && prepIndex < filteredTokens.length - 1) {
+                const directObjectTokens = filteredTokens.slice(1, prepIndex);
+                const indirectObjectTokens = filteredTokens.slice(prepIndex + 1);
+
+                directObject = this.findObject(directObjectTokens, context.inventoryObjects);
+                indirectObject = this.findObject(indirectObjectTokens, context.roomObjects);
+
+                if (!directObject) {
+                    return { error: `You don't have a "${directObjectTokens.join(' ')}".` };
+                }
+                if (!indirectObject) {
+                    return { error: `I can't see a "${indirectObjectTokens.join(' ')}" here.` };
+                }
+
+                return { verb, directObject, indirectObject };
+            }
+        }
+
         // Find the direct object for other verbs
         if (filteredTokens.length > 1) {
             const objectTokens = filteredTokens.slice(1);
-            const availableObjects = [...context.roomObjects, ...context.inventoryObjects];
-
             directObject = this.findObject(objectTokens, availableObjects);
 
             if (!directObject) {
@@ -65,40 +92,31 @@ class Parser {
             }
         }
 
-        return { verb, directObject, indirectObject: null };
+        return { verb, directObject, indirectObject };
     }
 
     findObject(objectTokens, availableObjects) {
-        let bestMatch = null;
-        let highestScore = -1;
-
         for (const obj of availableObjects) {
-            const nameTokens = [];
-            const adjTokens = [];
-            const otherTokens = [];
-
-            for (const token of objectTokens) {
-                if (obj.names.includes(token)) {
-                    nameTokens.push(token);
-                } else if ((obj.adjectives || []).includes(token)) {
-                    adjTokens.push(token);
-                } else {
-                    otherTokens.push(token);
+            let mainName = null;
+            // Find which of the object's names is in the tokens
+            for (const name of obj.names) {
+                if (objectTokens.includes(name)) {
+                    mainName = name;
+                    break;
                 }
             }
 
-            if (!nameMatch) {
-                continue; // This object is not a candidate if no name matches
-            }
+            if (mainName) {
+                // A name for the object was found in the input.
+                // Now, check if the other tokens are valid adjectives for this object.
+                const remainingTokens = objectTokens.filter(t => t !== mainName);
+                const adjectivesMatch = remainingTokens.every(token => (obj.adjectives || []).includes(token));
 
-            // Check that all remaining tokens are valid adjectives for the object
-            const adjectivesMatch = remainingTokens.every(token => (obj.adjectives || []).includes(token));
-
-            if (adjectivesMatch) {
-                return obj; // Found a match
-
+                if (adjectivesMatch) {
+                    return obj; // Found a perfect match
+                }
             }
         }
-        return bestMatch;
+        return null; // No matching object found
     }
 }
