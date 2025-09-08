@@ -175,6 +175,32 @@ class Game {
         }
     }
 
+    close(gameObject) {
+        if (!gameObject) {
+            this.ui.display("You can't see that here.");
+            return;
+        }
+        if (!gameObject.flags.isContainer) {
+            this.ui.display("That's not a container.");
+            return;
+        }
+        if (!gameObject.flags.isOpen) {
+            this.ui.display("It's already closed.");
+            return;
+        }
+
+        gameObject.flags.isOpen = false;
+        this.ui.display(`You close the ${gameObject.names[0]}.`);
+    }
+
+    attack(gameObject) {
+        if (!gameObject) {
+            this.ui.display("You can't see that here.");
+            return;
+        }
+        this.ui.display(`Attacking the ${gameObject.names[0]} doesn't seem to be a productive idea.`);
+    }
+
     processTurn(command) {
         if (!command) return;
         this.ui.displayPrompt(`> ${command}`);
@@ -208,6 +234,12 @@ class Game {
                 break;
             case 'open':
                 this.open(action.directObject);
+                break;
+            case 'close':
+                this.close(action.directObject);
+                break;
+            case 'attack':
+                this.attack(action.directObject);
                 break;
             default:
                 this.ui.display("I don't know how to do that yet.");
