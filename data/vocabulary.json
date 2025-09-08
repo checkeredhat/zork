@@ -33,7 +33,10 @@
         "jump": [],
         "rub": [],
         "pray": [],
-        "exorcise": []
+        "exorcise": [],
+        "frobozz": [],
+        "hello": ["hi"],
+        "curses": ["shit", "fuck", "damn"]
     },
     "prepositions": [
         "with",

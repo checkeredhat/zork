@@ -16,7 +16,22 @@ class Game {
             room: null,
             inventory: []
         };
+        this.thief = {
+            room: null,
+            inventory: [],
+            timer: 0
+        };
         this.isCarouselSpinning = true;
+        this.deathMessages = {};
+        this.ghostTimer = 0;
+        this.trollDefeated = false;
+        this.offendedMessages = [
+            "Such language in a high-class establishment like this!",
+            "You ought to be ashamed of yourself.",
+            "It's not so bad. You could have been killed already.",
+            "Tough shit, asshole.",
+            "Oh, dear. Such language from a supposed winning adventurer!"
+        ];
     }
 
     async start() {
@@ -40,13 +55,15 @@ class Game {
         this.ui.display("Loading game data...");
 
         try {
-            const [vocabData, objectsData, roomsData] = await Promise.all([
+            const [vocabData, objectsData, roomsData, deathMessagesData] = await Promise.all([
                 fetch('data/vocabulary.json').then(res => res.json()),
                 fetch('data/objects.json').then(res => res.json()),
-                fetch('data/rooms.json').then(res => res.json())
+                fetch('data/rooms.json').then(res => res.json()),
+                fetch('data/death_messages.json').then(res => res.json())
             ]);
 
             this.vocabulary = vocabData;
+            this.deathMessages = deathMessagesData;
 
             for (const objectId in objectsData) {
                 this.objects[objectId] = new GameObject(objectsData[objectId]);
@@ -135,6 +152,11 @@ class Game {
                     }
                 } else if (exit.condition === 'PLAYER_SMALL') {
                     if (this.playerSize !== 'small') {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
+                } else if (exit.condition === 'trollDefeated') {
+                    if (!this.trollDefeated) {
                         this.ui.display(exit.message || "You can't go that way.");
                         return;
                     }
@@ -262,25 +284,126 @@ class Game {
     }
 
     attack(gameObject) {
-        if (!gameObject) {
+        if (!gameObject || !gameObject.flags.isVillain) {
             this.ui.display("There is nothing here to attack.");
             return;
         }
 
-        if (!gameObject.flags.isVillain) {
-            this.ui.display(`Attacking the ${gameObject.names[0]} doesn't seem to be a productive idea.`);
-            return;
-        }
-
-        // It's a villain, check for a weapon
         const weapon = this.player.inventory.find(obj => obj.flags.isWeapon);
         if (!weapon) {
             this.ui.display(`Attacking the ${gameObject.names[0]} with your bare hands is suicidal!`);
             return;
         }
 
-        // TODO: Implement a real combat system. For now, a generic message.
-        this.ui.display(`You attack the ${gameObject.names[0]} with the ${weapon.names[0]}.`);
+        this.handleCombatRound(this.player, gameObject, weapon);
+    }
+
+    handleCombatRound(attacker, defender, weapon) {
+        // Attacker's turn
+        let hitChance = (attacker.strength || 0) + (weapon.accuracy || 75);
+        let attackRoll = Math.random() * 100;
+
+        if (attackRoll < hitChance) {
+            let damage = weapon.damage + Math.floor(Math.random() * 5); // Add some randomness
+            defender.health -= damage;
+            this.ui.display(`You strike the ${defender.names[0]} with the ${weapon.names[0]}, dealing ${damage} damage.`);
+
+            if (defender.health <= 0) {
+                this.ui.display(`You have defeated the ${defender.names[0]}!`);
+                defender.flags.isVillain = false; // No longer a threat
+                defender.description = `The slain ${defender.names[0]} lies on the ground.`;
+                if (defender.id === 'TROLL') {
+                    this.trollDefeated = true;
+                }
+                return;
+            }
+        } else {
+            this.ui.display(`You swing at the ${defender.names[0]} but miss.`);
+        }
+
+        // Defender's turn
+        hitChance = (defender.strength || 0) + (defender.accuracy || 75);
+        attackRoll = Math.random() * 100;
+
+        if (attackRoll < hitChance) {
+            let damage = defender.damage + Math.floor(Math.random() * 3);
+            this.player.health -= damage;
+            this.ui.display(`The ${defender.names[0]} strikes back, dealing ${damage} damage to you. Your health is now ${this.player.health}.`);
+
+            if (this.player.health <= 0) {
+                this.gameOver(defender.id);
+            }
+        } else {
+            this.ui.display(`The ${defender.names[0]} attacks you but misses.`);
+        }
+    }
+
+    thiefUpdate() {
+        if (this.thief.timer > 0) {
+            this.thief.timer--;
+            return;
+        }
+
+        const thiefObject = this.objects['THIEF'];
+        if (!thiefObject) return;
+
+        // Chance to appear
+        if (!this.thief.room) {
+            if (Math.random() < 0.1) { // 10% chance to appear
+                const roomKeys = Object.keys(this.rooms);
+                const randomRoomKey = roomKeys[Math.floor(Math.random() * roomKeys.length)];
+                const randomRoom = this.rooms[randomRoomKey];
+
+                if (randomRoom.isLight) {
+                    this.thief.room = randomRoom;
+                    randomRoom.objects.push(thiefObject);
+                    if (this.player.room === randomRoom) {
+                        this.ui.display("A shady-looking figure suddenly appears!");
+                    }
+                    this.thief.timer = 20; // Time until next action
+                }
+            }
+        } else {
+            // Chance to move
+            if (Math.random() < 0.5) {
+                const exits = this.thief.room.exits;
+                if (exits.length > 0) {
+                    const randomExit = exits[Math.floor(Math.random() * exits.length)];
+                    if (randomExit.roomId) {
+                        // Remove from old room
+                        this.thief.room.objects = this.thief.room.objects.filter(obj => obj.id !== 'THIEF');
+                        // Add to new room
+                        this.thief.room = this.rooms[randomExit.roomId];
+                        this.thief.room.objects.push(thiefObject);
+                    }
+                }
+            }
+
+            // Chance to steal
+            if (this.thief.room === this.player.room) {
+                if (Math.random() < 0.3) {
+                    const valuableObjects = this.player.inventory.filter(obj => obj.value > 0);
+                    if (valuableObjects.length > 0) {
+                        const stolenObject = valuableObjects[Math.floor(Math.random() * valuableObjects.length)];
+                        this.player.inventory = this.player.inventory.filter(obj => obj.id !== stolenObject.id);
+                        this.thief.inventory.push(stolenObject);
+                        this.ui.display(`The thief steals your ${stolenObject.names[0]}!`);
+                    }
+                }
+            }
+
+            // Chance to disappear
+            if (Math.random() < 0.1) {
+                if (this.player.room === this.thief.room) {
+                    this.ui.display("The thief vanishes into the shadows.");
+                }
+                this.thief.room.objects = this.thief.room.objects.filter(obj => obj.id !== 'THIEF');
+                this.thief.room = null;
+                this.thief.timer = 100; // Time until he can appear again
+            } else {
+                this.thief.timer = 10; // Time until next action
+            }
+        }
     }
 
     move(gameObject) {
@@ -556,9 +679,32 @@ class Game {
         }
     }
 
+    ghostEvent() {
+        this.ui.display("A ghost appears in the room and is appalled at your having desecrated the remains of a fellow adventurer. He casts a curse on all of your valuables and orders them banished to the Land of the Living Dead. The ghost leaves, muttering obscenities.");
+        const lld = this.rooms['LLD2'];
+        const valuables = this.player.inventory.filter(obj => obj.value > 0);
+        valuables.forEach(obj => {
+            obj.flags.isCursed = true;
+            this.player.inventory = this.player.inventory.filter(o => o.id !== obj.id);
+            lld.objects.push(obj);
+        });
+
+        const ghost = this.objects['GHOST'];
+        ghost.room = this.player.room;
+        this.player.room.objects.push(ghost);
+        this.ghostTimer = 5;
+    }
+
     handleObjectAction(verb, directObject, indirectObject) {
         const gameObject = indirectObject || directObject;
         switch (gameObject.action) {
+            case 'SKELETON':
+                if (verb === 'take' || verb === 'move') {
+                    this.ghostEvent();
+                } else {
+                    this.ui.display("You can't do that to the skeleton.");
+                }
+                break;
             case 'MAGIC-MIRROR':
                 if (verb === 'rub') {
                     this.ui.display("The mirror shimmers and you feel a strange sensation...");
@@ -649,7 +795,8 @@ class Game {
         }
     }
 
-    gameOver(message) {
+    gameOver(cause = 'DEFAULT') {
+        const message = this.deathMessages[cause] || this.deathMessages['DEFAULT'];
         this.ui.display(message);
         this.ui.display("\n**** You have died ****");
         this.isGameOver = true;
@@ -672,13 +819,28 @@ class Game {
 
         this.ui.displayPrompt(`> ${command}`);
 
+        this.thiefUpdate();
+
+        // Ghost timer
+        if (this.ghostTimer > 0) {
+            this.ghostTimer--;
+            if (this.ghostTimer === 0) {
+                const ghost = this.objects['GHOST'];
+                if (ghost && ghost.room === this.player.room) {
+                    this.ui.display("The ghost fades away.");
+                    this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== 'GHOST');
+                    ghost.room = null;
+                }
+            }
+        }
+
         // Poison gas timer
         if (this.poisonGasTimer > 0) {
             this.poisonGasTimer--;
             if (this.poisonGasTimer > 0) {
                 this.ui.display(`The hissing sound grows louder. You have ${this.poisonGasTimer} turns left.`);
             } else {
-                this.gameOver("You have succumbed to the poison gas!");
+                this.gameOver('GAS');
                 return;
             }
         }
@@ -696,7 +858,7 @@ class Game {
 
         const currentRoom = this.player.room;
         if (!currentRoom.isLight && !lightSource) {
-            this.gameOver("It is pitch black. You are likely to be eaten by a grue.");
+            this.gameOver('GRUE');
             return;
         }
 
@@ -792,6 +954,15 @@ class Game {
                 break;
             case 'robot':
                 this.commandRobot(action.directObject);
+                break;
+            case 'frobozz':
+                this.ui.display("The FROBOZZ Corporation created, owns, and operates this dungeon.");
+                break;
+            case 'hello':
+                this.ui.display("Hello.");
+                break;
+            case 'curses':
+                this.ui.display(this.offendedMessages[Math.floor(Math.random() * this.offendedMessages.length)]);
                 break;
             default:
                 this.ui.display("I don't know how to do that yet.");

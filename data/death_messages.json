@@ -1,0 +1,15 @@
+{
+    "BOMB": "   BOOOOOOOOOOOM      ",
+    "RAINBOW": "The structural integrity of the rainbow seems to have left it, leaving you about 450 feet in the air, supported by water vapor.",
+    "DROWN": "Unfortunately, that leaves you in the water, where you drown.",
+    "FALLS": "Oh dear, you seem to have gone over Aragain Falls.  Not a very smart thing to do, apparently.",
+    "GRUE": "It is pitch black. You are likely to be eaten by a grue.",
+    "GAS": "You have succumbed to the poison gas!",
+    "VAPORS": "Just before you pass out, you notice that the vapors from the flask's contents are fatal.",
+    "CRUSHED": "The room seems to have become too small to hold you.  It seems that the walls are not as compressible as your body, which is somewhat demolished.",
+    "ICEBLAST": "You have been blasted to smithereens (wherever they are).",
+    "POISON": "Time passes...and you die from some obscure poisoning.",
+    "TROLL": "The troll's axe removes your head.",
+    "THIEF": "The thief's stilletto has found a home in your back.",
+    "DEFAULT": "You have died."
+}
