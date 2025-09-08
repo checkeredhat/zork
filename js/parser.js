@@ -69,16 +69,21 @@ class Parser {
     }
 
     findObject(objectTokens, availableObjects) {
-        for (const obj of availableObjects) {
-            const remainingTokens = [...objectTokens];
-            let nameMatch = false;
+        let bestMatch = null;
+        let highestScore = -1;
 
-            // Check for a name match and remove it
-            for (let i = 0; i < remainingTokens.length; i++) {
-                if (obj.names.includes(remainingTokens[i])) {
-                    nameMatch = true;
-                    remainingTokens.splice(i, 1);
-                    break; // Found a name, stop searching for names
+        for (const obj of availableObjects) {
+            const nameTokens = [];
+            const adjTokens = [];
+            const otherTokens = [];
+
+            for (const token of objectTokens) {
+                if (obj.names.includes(token)) {
+                    nameTokens.push(token);
+                } else if ((obj.adjectives || []).includes(token)) {
+                    adjTokens.push(token);
+                } else {
+                    otherTokens.push(token);
                 }
             }
 
@@ -91,8 +96,9 @@ class Parser {
 
             if (adjectivesMatch) {
                 return obj; // Found a match
+
             }
         }
-        return null; // No matching object found
+        return bestMatch;
     }
 }
