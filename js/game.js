@@ -325,16 +325,169 @@ class Game {
         this.ui.display("You can't push that.");
     }
 
+    eat(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to eat?");
+            return;
+        }
+        if (!gameObject.flags.isEdible) {
+            this.ui.display("You can't eat that.");
+            return;
+        }
+        // Remove the object from inventory or room
+        this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+        this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== gameObject.id);
+        this.ui.display(`You eat the ${gameObject.names[0]}. It's delicious!`);
+    }
+
+    drink(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to drink?");
+            return;
+        }
+        if (!gameObject.flags.isDrinkable) {
+            this.ui.display("You can't drink that.");
+            return;
+        }
+        // Special case for water in the bottle
+        if (gameObject.id === 'WATER' && this.objects['BOTTL'].contents.includes('WATER')) {
+            this.objects['BOTTL'].contents = [];
+            this.ui.display("You drink the water. It's refreshing.");
+        } else {
+            this.ui.display("You can't drink that.");
+        }
+    }
+
+    turn(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to turn?");
+            return;
+        }
+        if (gameObject.action) {
+            return this.handleObjectAction('turn', gameObject);
+        }
+        this.ui.display("You can't turn that.");
+    }
+
+    tie(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to tie?");
+            return;
+        }
+        if (gameObject.id !== 'ROPE') {
+            this.ui.display("You can't tie that.");
+            return;
+        }
+        // For now, a simple message. A real implementation would need an indirect object.
+        this.ui.display("You tie the rope to a nearby railing.");
+        gameObject.flags.isTied = true;
+    }
+
+    untie(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to untie?");
+            return;
+        }
+        if (gameObject.id !== 'ROPE' || !gameObject.flags.isTied) {
+            this.ui.display("You can't untie that.");
+            return;
+        }
+        this.ui.display("You untie the rope.");
+        gameObject.flags.isTied = false;
+    }
+
+    burn(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to burn?");
+            return;
+        }
+        const lightSource = this.player.inventory.find(obj => obj.flags.isLightSource && obj.flags.isLit);
+        if (!lightSource) {
+            this.ui.display("You have no source of fire.");
+            return;
+        }
+        if (!gameObject.flags.isBurnable) {
+            this.ui.display("You can't burn that.");
+            return;
+        }
+        // For now, just destroy the object
+        this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+        this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== gameObject.id);
+        this.ui.display(`The ${gameObject.names[0]} burns to a crisp and is gone.`);
+    }
+
+    light(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to light?");
+            return;
+        }
+        if (!gameObject.flags.isLightSource) {
+            this.ui.display("You can't light that.");
+            return;
+        }
+        if (gameObject.flags.isLit) {
+            this.ui.display("It's already lit.");
+            return;
+        }
+        gameObject.flags.isLit = true;
+        this.ui.display(`You light the ${gameObject.names[0]}.`);
+    }
+
+    knock(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to knock on?");
+            return;
+        }
+        if (gameObject.flags.isDoor) {
+            this.ui.display(`You knock on the ${gameObject.names[0]}. There is no answer.`);
+        } else {
+            this.ui.display("That's not something you can knock on.");
+        }
+    }
+
+    yell() {
+        this.ui.display("Aaaarrrrgggghhhh!");
+    }
+
+    jump() {
+        this.ui.display("You jump on the spot, but nothing happens.");
+    }
+
+    rub(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to rub?");
+            return;
+        }
+        this.ui.display(`You rub the ${gameObject.names[0]}, but nothing happens.`);
+    }
+
+    pray() {
+        this.ui.display("You pray to the heavens, but there is no divine intervention.");
+    }
+
+    exorcise(gameObject) {
+        if (!gameObject) {
+            this.ui.display("Who or what do you want to exorcise?");
+            return;
+        }
+        this.ui.display(`You attempt to exorcise the ${gameObject.names[0]}, but it has no effect.`);
+    }
+
     handleObjectAction(verb, directObject, indirectObject) {
         const gameObject = indirectObject || directObject;
         switch (gameObject.action) {
             case 'DAM-BOLT':
-                if (verb === 'use' && directObject.id === 'WRENCH') {
+                if ((verb === 'use' && directObject.id === 'WRENCH') || verb === 'turn') {
                     if (gameObject.flags.isLoose) {
                         this.ui.display("The bolt is already loose.");
                     } else {
+                        const wrench = this.player.inventory.find(obj => obj.id === 'WRENCH');
+                        if (verb === 'turn' && !wrench) {
+                            this.ui.display("The bolt is too tight to turn by hand.");
+                            return;
+                        }
                         gameObject.flags.isLoose = true;
-                        this.ui.display("You loosen the bolt with the wrench. The sluice gate opens, and the reservoir drains with a mighty roar.");
+                        this.ui.display("You turn the bolt. The sluice gate opens, and the reservoir drains with a mighty roar.");
                         this.damWaterLevel = 'low';
                     }
                 } else {
@@ -464,6 +617,45 @@ class Game {
                 break;
             case 'push':
                 this.push(action.directObject);
+                break;
+            case 'eat':
+                this.eat(action.directObject);
+                break;
+            case 'drink':
+                this.drink(action.directObject);
+                break;
+            case 'turn':
+                this.turn(action.directObject);
+                break;
+            case 'tie':
+                this.tie(action.directObject);
+                break;
+            case 'untie':
+                this.untie(action.directObject);
+                break;
+            case 'burn':
+                this.burn(action.directObject);
+                break;
+            case 'light':
+                this.light(action.directObject);
+                break;
+            case 'knock':
+                this.knock(action.directObject);
+                break;
+            case 'yell':
+                this.yell();
+                break;
+            case 'jump':
+                this.jump();
+                break;
+            case 'rub':
+                this.rub(action.directObject);
+                break;
+            case 'pray':
+                this.pray();
+                break;
+            case 'exorcise':
+                this.exorcise(action.directObject);
                 break;
             default:
                 this.ui.display("I don't know how to do that yet.");

@@ -20,7 +20,20 @@
         "close": [],
         "move": [],
         "push": ["press"],
-        "use": []
+        "use": [],
+        "eat": [],
+        "drink": [],
+        "turn": [],
+        "tie": [],
+        "untie": [],
+        "burn": [],
+        "light": [],
+        "knock": [],
+        "yell": ["shout"],
+        "jump": [],
+        "rub": [],
+        "pray": [],
+        "exorcise": []
     },
     "prepositions": [
         "with",

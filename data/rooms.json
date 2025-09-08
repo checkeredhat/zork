@@ -63,7 +63,7 @@
             { "direction": "UP", "roomId": "ATTIC" },
             { "direction": "DOWN", "message": "Only Santa Claus climbs down chimneys." }
         ],
-        "objects": ["SBAG", "BOTTL"],
+        "objects": ["SBAG", "BOTTL", "MATCHBOOK"],
         "action": "KITCHEN"
     },
     "LROOM": {
@@ -76,7 +76,7 @@
             { "direction": "WEST", "roomId": "BLROO", "condition": "MAGIC-FLAG", "message": "The door is nailed shut." },
             { "direction": "DOWN", "roomId": "CELLA", "condition": "TRAP-DOOR" }
         ],
-        "objects": ["SWORD", "LAMP", "RUG", "TCASE", "DOOR"],
+        "objects": ["SWORD", "LAMP", "RUG", "TCASE", "DOOR", "ROPE"],
         "action": "LIVING-ROOM"
     },
     "TROLL": {

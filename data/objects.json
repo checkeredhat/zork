@@ -161,5 +161,21 @@
         "initialDescription": "On the wall is a control panel.",
         "flags": { "isTakeable": false },
         "action": "DAM-PANEL"
+    },
+    "ROPE": {
+        "id": "ROPE",
+        "names": ["rope"],
+        "description": "A long rope.",
+        "initialDescription": "A coiled rope is here.",
+        "flags": { "isTakeable": true, "isTieable": true, "isTied": false },
+        "size": 20
+    },
+    "MATCHBOOK": {
+        "id": "MATCHBOOK",
+        "names": ["matchbook", "matches"],
+        "description": "A book of matches.",
+        "initialDescription": "There is a book of matches here.",
+        "flags": { "isTakeable": true, "isLightSource": true, "isLit": false },
+        "size": 1
     }
 }
