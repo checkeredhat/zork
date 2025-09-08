@@ -1,46 +1,181 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Zork.js</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZORK: The Great Underground Empire</title>
     <style>
         body {
-            background-color: #000;
-            color: #0f0;
+            background-color: #0d0d0d;
+            color: #FFB000; /* Amber color */
             font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
         }
-        #output {
-            white-space: pre-wrap;
-            word-wrap: break-word;
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #FFB000;
+            padding: 20px 40px;
+            box-shadow: 0 0 15px rgba(255, 176, 0, 0.2);
+        }
+
+        h1, h2 {
+            color: #FFD700; /* Brighter gold for headers */
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            margin-bottom: 0;
+        }
+
+        h2 {
+            border-bottom: 1px solid #FFB000;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #FFB000;
+        }
+
+        blockquote {
+            font-style: italic;
+            text-align: center;
+            font-size: 1.1em;
+            margin: 30px 0;
             padding: 10px;
+            border-left: 3px solid #FFB000;
+            border-right: 3px solid #FFB000;
         }
-        #input {
-            width: 100%;
-            background-color: #000;
-            color: #0f0;
-            border: none;
-            outline: none;
+
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .game-button {
+            background-color: transparent;
+            color: #FFB000;
+            border: 2px solid #FFB000;
+            padding: 15px 30px;
+            font-size: 1.2em;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .game-button:hover {
+            background-color: #FFB000;
+            color: #0d0d0d;
+            box-shadow: 0 0 10px rgba(255, 176, 0, 0.5);
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #FFB000;
+            margin: 40px 0;
+        }
+
+        a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background-color: #222;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .citation {
+            background-color: #1a1a1a;
+            border: 1px dashed #FFB000;
+            padding: 15px;
+            font-size: 0.9em;
+            white-space: pre-wrap; /* Allows wrapping */
+            word-wrap: break-word;
         }
     </style>
 </head>
 <body>
-    <div id="output"></div>
-    <input type="text" id="input" autofocus />
 
-    <!-- Core classes must be loaded before the main game logic -->
-    <script src="js/ui.js"></script>
-    <script src="js/gameObject.js"></script>
-    <script src="js/room.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/exit.js"></script>
-    <script src="js/parser.js"></script>
+    <div class="container">
+        <header>
+            <h1>ZORK</h1>
+            <h2 style="border:none; margin-top:0;">The Great Underground Empire</h2>
+        </header>
 
-    <!-- Game class uses the core classes -->
-    <script src="js/game.js"></script>
+        <main>
+            <img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Zork_I_box_art.jpg" alt="Zork I Box Art - A path leads to a white house under a stormy sky.">
 
-    <!-- Main entry point, must be last -->
-    <script src="js/main.js"></script>
+            <blockquote>
+                <p>You are standing in an open field west of a white house, with a boarded front door.</p>
+                <p>There is a small mailbox here.</p>
+            </blockquote>
+
+            <p>Welcome, adventurer, to a landmark in gaming history. <strong>Zork</strong> is one of the earliest interactive fiction games and a direct descendant of the original mainframe text adventure, <em>Colossal Cave Adventure</em>. Prepare to enter a world of sprawling dungeons, perplexing puzzles, and dangerous creatures. Your greatest tools will be your wits and your words.</p>
+
+            <div class="button-container">
+                <button class="game-button" onclick="startGame()">BEGIN YOUR ADVENTURE</button>
+            </div>
+
+            <hr>
+
+            <section id="about">
+                <h2>About This Version</h2>
+                <p>This is a faithful web-based port of the original <strong>1977 version of Zork</strong>. Every effort has been made to preserve the classic experience, from the parser to the puzzles, so you can enjoy it on any modern browser.</p>
+                <ul>
+                    <li><strong>Javascript Port by:</strong> <strong>James Schweda</strong> (<a href="http://jamesschweda.com" target="_blank" rel="noopener noreferrer">jamesschweda.com</a>)</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <section id="history">
+                <h2>A Piece of Computing History 📜</h2>
+                <p>The game you are about to play is more than just a game; it's an artifact from the golden age of mainframe computing.</p>
+                <p>This port was developed directly from the original <strong>MDL (MIT Design Language)</strong> source code written between 1977 and 1979 at the Massachusetts Institute of Technology. The original creators were <strong>Tim Anderson, Marc Blank, Bruce Daniels, and Dave Lebling</strong>, members of the MIT Laboratory for Computer Science Dynamic Modelling Group.</p>
+                <p>The source code was preserved on magnetic tape and recovered as part of the <strong>MIT, Tapes of Tech Square (ToTS) collection</strong>. Originally created on a <strong>PDP-10</strong> timesharing computer, these files represent a foundational piece of interactive entertainment.</p>
+            </section>
+
+            <hr>
+
+            <section id="attribution">
+                <h2>Attribution and Rights</h2>
+                <p>This project is a celebration of open-source history and is made possible by the archivists and programmers who have preserved this code for future generations.</p>
+                <ul>
+                    <li><strong>Source Code:</strong> The original Zork source code files are held in the <strong>Massachusetts Institute of Technology, Department of Distinctive Collections (MC-0741)</strong>. Special thanks to digital archivist <strong>Joe Carrano</strong> for his work on the files and to <strong>Lars Brinkhoff</strong> for his assistance in identifying and extracting them.</li>
+                    <li><strong>License:</strong> To the extent that MIT holds rights in these files, they are released under the terms of the <strong>MIT No Attribution License</strong>. For any questions regarding permissions, please contact <code>permissions-lib@mit.edu</code>.</li>
+                    <li><strong>Preferred Citation:</strong>
+                        <p class="citation"><code>[filename], Zork source code, 1977, Massachusetts Institute of Technology, Tapes of Tech Square (ToTS) collection, MC-0741. Massachusetts Institute of Technology, Department of Distinctive Collections, Cambridge, Massachusetts.</code></p>
+                    </li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // --- For the Development Team ---
+        // This function is called by the 'BEGIN YOUR ADVENTURE' button.
+        // It redirects the user to the main game page.
+        function startGame() {
+            window.location.href = 'game.html';
+        }
+    </script>
+
 </body>
 </html>
