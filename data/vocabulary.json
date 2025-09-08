@@ -17,7 +17,8 @@
         "inventory": ["i"],
         "attack": ["fight", "kill", "hit", "mung"],
         "open": [],
-        "close": []
+        "close": [],
+        "move": []
     },
     "prepositions": [
         "with",

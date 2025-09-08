@@ -106,8 +106,15 @@
         "adjectives": ["oriental"],
         "description": "carpet",
         "action": "RUG",
-        "flags": { "isNotDescribed": true, "isTakeable": false },
+        "flags": { "isNotDescribed": true, "isTakeable": false, "isMoved": false },
         "size": 9999
+    },
+    "DOOR": {
+        "id": "DOOR",
+        "names": ["door", "trap-door"],
+        "description": "trap door",
+        "action": "TRAP-DOOR",
+        "flags": { "isVisible": false, "isDoor": true, "isOpen": false, "isTakeable": false }
     },
     "TCASE": {
         "id": "TCASE",
@@ -118,5 +125,18 @@
         "flags": { "isContainer": true, "isTransparent": true, "isTakeable": false },
         "size": 9999,
         "capacity": 9999
+    },
+    "TROLL": {
+        "id": "TROLL",
+        "names": ["troll"],
+        "description": "A nasty-looking troll, brandishing a bloody axe.",
+        "flags": { "isVillain": true, "isActor": true, "isTakeable": false }
+    },
+    "AXE": {
+        "id": "AXE",
+        "names": ["axe"],
+        "adjectives": ["bloody"],
+        "description": "a bloody axe",
+        "flags": { "isWeapon": true, "isTakeable": true }
     }
 }
