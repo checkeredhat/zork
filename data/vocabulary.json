@@ -1,54 +1,4 @@
 {
-    "directions": {
-        "north": ["n"],
-        "south": ["s"],
-        "east": ["e"],
-        "west": ["w"],
-        "up": ["u"],
-        "down": ["d"],
-        "enter": ["in"],
-        "exit": ["out", "leave"]
-    },
-    "verbs": {
-        "take": ["get", "hold", "carry"],
-        "drop": ["release"],
-        "go": ["walk", "proceed"],
-        "look": ["l", "stare", "gaze"],
-        "inventory": ["i"],
-        "attack": ["fight", "kill", "hit", "mung"],
-        "open": [],
-        "close": [],
-        "move": [],
-        "push": ["press"],
-        "use": [],
-        "eat": [],
-        "drink": [],
-        "turn": [],
-        "tie": [],
-        "untie": [],
-        "burn": [],
-        "light": [],
-        "knock": [],
-        "yell": ["shout"],
-        "jump": [],
-        "rub": [],
-        "pray": [],
-        "exorcise": [],
-        "frobozz": [],
-        "hello": ["hi"],
-        "curses": ["shit", "fuck", "damn"]
-    },
-    "prepositions": [
-        "with",
-        "at",
-        "to",
-        "in",
-        "on",
-        "under",
-        "into",
-        "down",
-        "up"
-    ],
     "adjectives": [
         "brown",
         "nasty",
@@ -66,5 +16,278 @@
         "an",
         "this",
         "over"
-    ]
+    ],
+    "directions": {
+        "down": [
+            "d"
+        ],
+        "east": [
+            "e"
+        ],
+        "enter": [
+            "in"
+        ],
+        "exit": [
+            "out",
+            "leave"
+        ],
+        "north": [
+            "n"
+        ],
+        "south": [
+            "s"
+        ],
+        "up": [
+            "u"
+        ],
+        "west": [
+            "w"
+        ]
+    },
+    "prepositions": [
+        "with",
+        "at",
+        "to",
+        "in",
+        "on",
+        "under",
+        "into",
+        "down",
+        "up"
+    ],
+    "verbs": {
+        "attac": [
+            "fight",
+            "mung",
+            "hack",
+            "frob",
+            "hurt",
+            "injur",
+            "damag",
+            "hit"
+        ],
+        "back": [],
+        "blast": [],
+        "board": [],
+        "brand": [
+            "flaun"
+        ],
+        "brief": [],
+        "brush": [
+            "clean"
+        ],
+        "burn": [
+            "incin",
+            "ignit"
+        ],
+        "c-int": [],
+        "chomp": [
+            "lose",
+            "barf"
+        ],
+        "close": [],
+        "curse": [
+            "shit",
+            "fuck",
+            "damn"
+        ],
+        "dead!": [],
+        "defla": [],
+        "diagn": [],
+        "dig": [],
+        "disem": [],
+        "drink": [
+            "imbib",
+            "swall"
+        ],
+        "drop": [
+            "relea"
+        ],
+        "dunge": [],
+        "eat": [
+            "consu",
+            "gobbl",
+            "munch",
+            "taste"
+        ],
+        "exami": [
+            "descr",
+            "what",
+            "whats",
+            "what'"
+        ],
+        "exorc": [
+            "xorci"
+        ],
+        "extin": [
+            "douse"
+        ],
+        "fill": [],
+        "find": [],
+        "first?": [],
+        "frobo": [],
+        "geron": [],
+        "give": [
+            "hand",
+            "donat"
+        ],
+        "grani": [],
+        "hack?": [],
+        "hello": [
+            "hi"
+        ],
+        "help": [],
+        "infla": [],
+        "info": [],
+        "inven": [
+            "list"
+        ],
+        "jargon": [
+            "foo",
+            "bletch"
+        ],
+        "jump": [
+            "leap",
+            "vault"
+        ],
+        "kick": [
+            "bite",
+            "taunt"
+        ],
+        "kill": [
+            "murde",
+            "slay",
+            "dispa"
+        ],
+        "knock": [],
+        "light": [],
+        "lock": [],
+        "look": [
+            "l",
+            "stare",
+            "gaze"
+        ],
+        "lower": [],
+        "melt": [
+            "liqui"
+        ],
+        "move": [
+            "pull",
+            "tug"
+        ],
+        "mumbl": [
+            "sigh"
+        ],
+        "odyss": [
+            "ulyss"
+        ],
+        "open": [],
+        "pick": [],
+        "plug": [
+            "glue",
+            "patch"
+        ],
+        "poke": [
+            "jab",
+            "break"
+        ],
+        "pour": [
+            "spill"
+        ],
+        "pray": [],
+        "push": [
+            "press"
+        ],
+        "put": [
+            "stuff",
+            "place",
+            "inser"
+        ],
+        "quit": [],
+        "raise": [
+            "lift"
+        ],
+        "read": [
+            "skim",
+            "scan"
+        ],
+        "repen": [],
+        "resto": [],
+        "ring": [
+            "peal"
+        ],
+        "rub": [
+            "cares",
+            "touch",
+            "fondl"
+        ],
+        "save": [],
+        "score": [],
+        "scrip": [],
+        "skip": [
+            "hop"
+        ],
+        "strik": [],
+        "super": [],
+        "swim": [
+            "bathe",
+            "wade"
+        ],
+        "swing": [
+            "thrus"
+        ],
+        "take": [
+            "get",
+            "hold",
+            "carry"
+        ],
+        "tell": [
+            "comma",
+            "reque"
+        ],
+        "templ": [],
+        "throw": [
+            "hurl",
+            "chuck"
+        ],
+        "tie": [
+            "knot",
+            "faste"
+        ],
+        "time": [],
+        "treas": [],
+        "turn": [],
+        "unbri": [],
+        "unloc": [],
+        "unscr": [],
+        "unsup": [],
+        "untie": [
+            "relea",
+            "free"
+        ],
+        "versi": [],
+        "wait": [],
+        "wake": [
+            "awake",
+            "surpr",
+            "start"
+        ],
+        "walk": [],
+        "walk-in": [],
+        "wave": [],
+        "well": [],
+        "where": [
+            "find",
+            "seek",
+            "see"
+        ],
+        "win": [
+            "winna"
+        ],
+        "yell": [
+            "screa",
+            "shout"
+        ],
+        "zork": []
+    }
 }

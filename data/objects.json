@@ -1,315 +1,1989 @@
 {
-    "MAILB": {
-        "id": "MAILB",
-        "names": ["mailbox", "box"],
-        "description": "small mailbox",
-        "initialDescription": "There is a small mailbox here.",
-        "adjectives": ["small"],
-        "flags": { "isContainer": true, "isTakeable": false, "isOpen": false },
-        "capacity": 10,
-        "contents": ["ADVER"]
+    "#####": {
+        "id": "#####",
+        "names": [
+            "cretin"
+        ],
+        "description": "You are here",
+        "flags": {
+            "isVisible": true
+        }
     },
     "ADVER": {
         "id": "ADVER",
-        "names": ["leaflet", "pamphlet", "booklet"],
+        "names": [
+            "leaflet",
+            "pamphlet",
+            "booklet"
+        ],
         "description": "small leaflet",
         "initialDescription": "There is a small leaflet here.",
-        "flags": { "isBurnable": true, "isReadable": true },
+        "flags": {
+            "isBurnable": true,
+            "isReadable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
         "size": 2,
         "canContain": "MAILB"
     },
-    "WIND1": {
-        "id": "WIND1",
-        "names": ["window"],
-        "description": "kitchen window",
-        "action": "WINDOW-FUNCTION",
-        "flags": { "isDoor": true, "isNotDescribed": true, "isTakeable": false }
+    "AXE": {
+        "id": "AXE",
+        "names": [
+            "axe"
+        ],
+        "adjectives": [
+            "bloody"
+        ],
+        "description": "a bloody axe",
+        "flags": {
+            "isWeapon": true,
+            "isTakeable": true
+        },
+        "damage": 12
     },
-    "KITCHEN-WINDOW": {
-        "id": "KITCHEN-WINDOW",
-        "names": ["window"],
-        "description": "The kitchen window is closed.",
-        "flags": { "isDoor": true, "isTakeable": false }
+    "BAGCO": {
+        "id": "BAGCO",
+        "names": [
+            "bag",
+            "coins"
+        ],
+        "adjectives": [
+            "leath"
+        ],
+        "description": "bag of coins",
+        "initialDescription": "An old leather bag, bulging with coins, is here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 10,
+        "size": 15
     },
-    "SBAG": {
-        "id": "SBAG",
-        "names": ["bag", "sack", "baggie"],
-        "adjectives": ["brown"],
-        "description": "sandwich bag",
-        "initialDescription": "On the table is an elongated brown sack, smelling of hot peppers.",
-        "flags": { "isContainer": true, "isOn": true, "isTakeable": true },
-        "size": 3,
-        "capacity": 15,
-        "contents": ["GARLI", "FOOD"]
+    "BALLO": {
+        "id": "BALLO",
+        "names": [
+            "basket",
+            "baske"
+        ],
+        "adjectives": [
+            "wicker"
+        ],
+        "description": "basket",
+        "initialDescription": "There is a very large and extremely heavy wicker basket with a cloth bag here. Inside the basket is a metal receptacle of some kind. Attached to the basket on the outside is a piece of wire.",
+        "flags": {
+            "isVehicle": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "size": 70,
+        "capacity": 100,
+        "contents": [
+            "CBAG",
+            "BROPE",
+            "RECEP"
+        ],
+        "action": "BALLOON"
     },
-    "GARLI": {
-        "id": "GARLI",
-        "names": ["garlic", "clove"],
-        "description": "clove of garlic",
-        "flags": { "isTakeable": true, "isEdible": true },
+    "BAR": {
+        "id": "BAR",
+        "names": [
+            "bar"
+        ],
+        "adjectives": [
+            "plati"
+        ],
+        "description": "platinum bar",
+        "initialDescription": "There is a large platinum bar here.",
+        "flags": {
+            "isSacred": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 12,
+        "size": 20
+    },
+    "BELL": {
+        "id": "BELL",
+        "names": [
+            "bell"
+        ],
+        "adjectives": [
+            "brass"
+        ],
+        "description": "bell",
+        "initialDescription": "There is a small brass bell here.",
+        "longDescription": "Lying in a corner of the room is a small brass bell.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 5
+    },
+    "BLABE": {
+        "id": "BLABE",
+        "names": [
+            "label"
+        ],
+        "adjectives": [
+            "blue"
+        ],
+        "description": "blue label",
+        "initialDescription": "There is a blue label here.",
+        "flags": {
+            "isReadable": true,
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
         "size": 1,
-        "canContain": "SBAG"
+        "canContain": "BALLO"
     },
-    "FOOD": {
-        "id": "FOOD",
-        "names": ["sandwich", "lunch", "pepper", "dinner", "snack"],
-        "description": "hot pepper sandwich",
-        "flags": { "isEdible": true, "isTakeable": true },
-        "size": 2,
-        "canContain": "SBAG"
+    "BLAMP": {
+        "id": "BLAMP",
+        "names": [
+            "lamp",
+            "lante"
+        ],
+        "adjectives": [
+            "broke"
+        ],
+        "description": "broken lamp",
+        "initialDescription": "There is a broken brass lantern here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 0
+    },
+    "BLANT": {
+        "id": "BLANT",
+        "names": [
+            "lante",
+            "lamp"
+        ],
+        "adjectives": [
+            "used",
+            "burne",
+            "dead",
+            "usele"
+        ],
+        "description": "burned-out lantern",
+        "initialDescription": "There is a burned-out lantern here.",
+        "longDescription": "The deceased adventurer's useless lantern is here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 20
+    },
+    "BLBK": {
+        "id": "BLBK",
+        "names": [
+            "book"
+        ],
+        "adjectives": [
+            "blue"
+        ],
+        "description": "blue book",
+        "initialDescription": "There is a blue book here.",
+        "flags": {
+            "isContainer": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 10,
+        "capacity": 2
+    },
+    "BLICE": {
+        "id": "BLICE",
+        "names": [
+            "cake",
+            "icing"
+        ],
+        "adjectives": [
+            "blue",
+            "ecch"
+        ],
+        "description": "piece of cake with blue icing",
+        "initialDescription": "There is a piece of cake with blue (ecch) icing here.",
+        "flags": {
+            "isEdible": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 4,
+        "action": "CAKE-FUNCTION"
+    },
+    "BONES": {
+        "id": "BONES",
+        "names": [
+            "skeleton",
+            "body"
+        ],
+        "description": "skeleton",
+        "initialDescription": "A skeleton, probably the remains of a luckless adventurer, lies here.",
+        "flags": {
+            "isTakeable": false,
+            "isVisible": true
+        },
+        "action": "SKELETON"
+    },
+    "BOOK": {
+        "id": "BOOK",
+        "names": [
+            "book",
+            "praye",
+            "bible",
+            "goodb"
+        ],
+        "adjectives": [
+            "black"
+        ],
+        "description": "book",
+        "initialDescription": "There is a large black book here.",
+        "longDescription": "On the altar is a large black book, open to page 569.",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true,
+            "isReadable": true
+        },
+        "size": 10,
+        "action": "BLACK-BOOK"
     },
     "BOTTL": {
         "id": "BOTTL",
-        "names": ["bottle", "container", "pitcher"],
-        "adjectives": ["glass"],
+        "names": [
+            "bottle",
+            "container",
+            "pitcher"
+        ],
+        "adjectives": [
+            "glass"
+        ],
         "description": "glass bottle",
         "initialDescription": "A bottle is sitting on the table.",
         "action": "BOTTLE-FUNCTION",
-        "flags": { "isContainer": true, "isTransparent": true, "isTakeable": true },
+        "flags": {
+            "isContainer": true,
+            "isTransparent": true,
+            "isTakeable": true
+        },
         "size": 5,
         "capacity": 4,
-        "contents": ["WATER"]
+        "contents": [
+            "WATER"
+        ]
     },
-    "WATER": {
-        "id": "WATER",
-        "names": ["water", "liquid", "h2o"],
-        "description": "quantity of water",
-        "action": "WATER-FUNCTION",
-        "flags": { "isDrinkable": true, "isTakeable": false },
-        "size": 4,
-        "canContain": "BOTTL"
+    "BRACE": {
+        "id": "BRACE",
+        "names": [
+            "bracelet",
+            "jewel"
+        ],
+        "adjectives": [
+            "sapphire-encrusted",
+            "sapph"
+        ],
+        "description": "sapphire bracelet",
+        "initialDescription": "There is a sapphire-encrusted bracelet here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 5,
+        "size": 10
     },
-    "SWORD": {
-        "id": "SWORD",
-        "names": ["sword", "orcrist", "glamdring", "blade"],
-        "adjectives": ["elvish"],
-        "description": "elvish sword",
-        "initialDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity.",
-        "action": "SWORD",
-        "flags": { "isTakeable": true, "isWeapon": true },
+    "BRICK": {
+        "id": "BRICK",
+        "names": [
+            "brick"
+        ],
+        "adjectives": [
+            "square",
+            "clay"
+        ],
+        "description": "a square clay brick",
+        "flags": {
+            "isTakeable": true,
+            "isBurnable": true
+        },
+        "size": 9,
+        "value": 2
+    },
+    "BROPE": {
+        "id": "BROPE",
+        "names": [
+            "wire"
+        ],
+        "adjectives": [
+            "braided"
+        ],
+        "description": "braided wire",
+        "flags": {
+            "isTieable": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "action": "WIRE-FUNCTION",
+        "canContain": "BALLO"
+    },
+    "BUCKE": {
+        "id": "BUCKE",
+        "names": [
+            "bucket"
+        ],
+        "adjectives": [
+            "woode"
+        ],
+        "description": "wooden bucket",
+        "initialDescription": "There is a wooden bucket here, 3 feet in diameter and 3 feet high.",
+        "flags": {
+            "isVehicle": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "capacity": 100,
+        "action": "BUCKET"
+    },
+    "BUOY": {
+        "id": "BUOY",
+        "names": [
+            "buoy"
+        ],
+        "adjectives": [
+            "red"
+        ],
+        "description": "red buoy",
+        "initialDescription": "There is a red buoy here (probably a warning).",
+        "flags": {
+            "isContainer": true,
+            "isTakeable": true,
+            "isVisible": true,
+            "findMe": true
+        },
+        "size": 10,
+        "capacity": 20,
+        "contents": [
+            "EMERA"
+        ]
+    },
+    "CAGE": {
+        "id": "CAGE",
+        "names": [],
+        "description": "mangled cage",
+        "initialDescription": "There is a mangled cage here.",
+        "flags": {
+            "isVisible": true,
+            "isNotDescribed": true,
+            "isTakeable": false
+        },
+        "size": 60
+    },
+    "CANDL": {
+        "id": "CANDL",
+        "names": [
+            "candles"
+        ],
+        "description": "pair of candles",
+        "initialDescription": "There are two candles here.",
+        "longDescription": "On the two ends of the altar are burning candles.",
+        "flags": {
+            "isLightSource": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "light": 1,
+        "size": 10
+    },
+    "CARD": {
+        "id": "CARD",
+        "names": [
+            "card",
+            "note"
+        ],
+        "description": "card",
+        "initialDescription": "There is a card with writing on it here.",
+        "flags": {
+            "isReadable": true,
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 1,
+        "canContain": "SAFE"
+    },
+    "CBAG": {
+        "id": "CBAG",
+        "names": [
+            "bag"
+        ],
+        "adjectives": [
+            "cloth"
+        ],
+        "description": "cloth bag",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "canContain": "BALLO"
+    },
+    "CHALI": {
+        "id": "CHALI",
+        "names": [
+            "chalice",
+            "cup",
+            "goble"
+        ],
+        "description": "chalice",
+        "initialDescription": "There is a silver chalice, intricately engraved, here.",
+        "flags": {
+            "isContainer": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 10,
+        "size": 10,
+        "capacity": 5,
+        "action": "CHALICE"
+    },
+    "COAL": {
+        "id": "COAL",
+        "names": [
+            "heap",
+            "charc"
+        ],
+        "description": "small pile of coal",
+        "initialDescription": "There is a small heap of coal here.",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 20,
+        "value": 0
+    },
+    "COFFI": {
+        "id": "COFFI",
+        "names": [
+            "coffin",
+            "caske"
+        ],
+        "adjectives": [
+            "gold"
+        ],
+        "description": "gold coffin",
+        "initialDescription": "There is a solid-gold coffin, used for the burial of Ramses II, here.",
+        "flags": {
+            "isContainer": true,
+            "isSacred": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 3,
+        "size": 55,
+        "capacity": 35
+    },
+    "COKES": {
+        "id": "COKES",
+        "names": [
+            "bottles",
+            "coke"
+        ],
+        "adjectives": [
+            "coke"
+        ],
+        "description": "bunch of Coke bottles",
+        "initialDescription": "Many empty Coke bottles are here. Alas, they can't hold water.",
+        "longDescription": "There is a large pile of empty Coke bottles here, evidently produced by the implementers during their long struggle to win totally.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 15,
+        "action": "COKE-BOTTLES"
+    },
+    "CROWN": {
+        "id": "CROWN",
+        "names": [
+            "crown"
+        ],
+        "adjectives": [
+            "gaudy"
+        ],
+        "description": "crown",
+        "initialDescription": "The excessively gaudy crown of Lord Dimwit Flathead is here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 15,
+        "size": 10,
+        "canContain": "SAFE"
+    },
+    "CYCLO": {
+        "id": "CYCLO",
+        "names": [
+            "cyclops",
+            "one-e",
+            "monst"
+        ],
+        "description": "cyclops",
+        "flags": {
+            "isVillain": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "action": "CYCLOPS"
+    },
+    "DBALL": {
+        "id": "DBALL",
+        "names": [
+            "balloon",
+            "ballo",
+            "baske"
+        ],
+        "adjectives": [
+            "broken"
+        ],
+        "description": "broken balloon",
+        "initialDescription": "There is a balloon here, broken into pieces.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 40
+    },
+    "DBOAT": {
+        "id": "DBOAT",
+        "names": [
+            "boat",
+            "plast",
+            "pile"
+        ],
+        "description": "plastic boat (with hole)",
+        "initialDescription": "There is a pile of plastic here with a large hole in it.",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 20,
+        "action": "DBOAT-FUNCTION"
+    },
+    "DIAMO": {
+        "id": "DIAMO",
+        "names": [
+            "diamond"
+        ],
+        "adjectives": [
+            "huge",
+            "perfectly",
+            "cut"
+        ],
+        "description": "huge diamond",
+        "initialDescription": "There is an enormous diamond (perfectly cut) here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 10,
+        "size": 5
+    },
+    "ECAKE": {
+        "id": "ECAKE",
+        "names": [
+            "cake"
+        ],
+        "adjectives": [
+            "eatme",
+            "eat-m"
+        ],
+        "description": "piece of 'Eat Me' cake",
+        "initialDescription": "There is a piece of cake here with the words 'Eat Me' on it.",
+        "flags": {
+            "isEdible": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 10,
+        "action": "EATME-FUNCTION"
+    },
+    "EMERA": {
+        "id": "EMERA",
+        "names": [
+            "emerald"
+        ],
+        "description": "large emerald",
+        "initialDescription": "There is an emerald here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 5,
         "size": 5,
-        "damage": 10,
-        "value": 10
+        "canContain": "BUOY"
+    },
+    "FBASK": {
+        "id": "FBASK",
+        "names": [
+            "basket",
+            "cage",
+            "dumbw"
+        ],
+        "description": "basket",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "action": "DUMBWAITER"
+    },
+    "FLASK": {
+        "id": "FLASK",
+        "names": [
+            "flask"
+        ],
+        "adjectives": [
+            "glass"
+        ],
+        "description": "glass flask filled with liquid",
+        "initialDescription": "A stoppered glass flask with a skull-and-crossbones marking is here. The flask is filled with some clear liquid.",
+        "flags": {
+            "isTransparent": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 10,
+        "capacity": 5,
+        "action": "FLASK-FUNCTION"
+    },
+    "FOOD": {
+        "id": "FOOD",
+        "names": [
+            "sandwich",
+            "lunch",
+            "peppe",
+            "dinne",
+            "snack"
+        ],
+        "description": "hot pepper sandwich",
+        "initialDescription": "A hot pepper sandwich is here.",
+        "longDescription": ".lunch",
+        "flags": {
+            "isEdible": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 5,
+        "value": 0,
+        "canContain": "SBAG"
+    },
+    "FUSE": {
+        "id": "FUSE",
+        "names": [
+            "fuse",
+            "coil",
+            "wire"
+        ],
+        "adjectives": [
+            "shiny",
+            "thin"
+        ],
+        "description": "wire coil",
+        "initialDescription": "There is a coil of thin shiny wire here.",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 1,
+        "action": "FUSE-FUNCTION"
+    },
+    "GARLI": {
+        "id": "GARLI",
+        "names": [
+            "garlic",
+            "clove"
+        ],
+        "description": "clove of garlic",
+        "initialDescription": "There is a clove of garlic here.",
+        "flags": {
+            "isTakeable": true,
+            "isEdible": true,
+            "isVisible": true
+        },
+        "size": 5,
+        "value": 0,
+        "canContain": "SBAG"
+    },
+    "GHOST": {
+        "id": "GHOST",
+        "names": [
+            "ghost",
+            "spirit",
+            "fiend"
+        ],
+        "description": "A ghostly figure floats in the air.",
+        "flags": {
+            "isActor": true,
+            "isTakeable": false
+        },
+        "action": "GHOST-FUNCTION"
+    },
+    "GNOME": {
+        "id": "GNOME",
+        "names": [
+            "gnome",
+            "troll"
+        ],
+        "description": "Volcano Gnome",
+        "initialDescription": "There is a nervous Volcano Gnome here.",
+        "flags": {
+            "isVillain": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "action": "GNOME-FUNCTION"
+    },
+    "GRAIL": {
+        "id": "GRAIL",
+        "names": [
+            "grail"
+        ],
+        "description": "grail",
+        "initialDescription": "There is an extremely valuable (perhaps original) grail here.",
+        "flags": {
+            "isContainer": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 2,
+        "size": 10,
+        "capacity": 5
+    },
+    "GRBK": {
+        "id": "GRBK",
+        "names": [
+            "book"
+        ],
+        "adjectives": [
+            "green"
+        ],
+        "description": "green book",
+        "initialDescription": "There is a green book here.",
+        "flags": {
+            "isContainer": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 10,
+        "capacity": 2
+    },
+    "GRUE": {
+        "id": "GRUE",
+        "names": [
+            "grue"
+        ],
+        "adjectives": [
+            "lurking"
+        ],
+        "description": "lurking grue",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "action": "GRUE-FUNCTION"
+    },
+    "GUANO": {
+        "id": "GUANO",
+        "names": [
+            "guano",
+            "crap",
+            "shit",
+            "hunk"
+        ],
+        "description": "hunk of bat guano",
+        "initialDescription": "There is a hunk of bat guano here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 20
+    },
+    "GUIDE": {
+        "id": "GUIDE",
+        "names": [
+            "guidebook",
+            "book"
+        ],
+        "adjectives": [
+            "tour"
+        ],
+        "description": "tour guidebook",
+        "initialDescription": "There are tour guidebooks here.",
+        "longDescription": "Some guidebooks entitled 'Flood Control Dam #3' are on the reception desk.",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 5
+    },
+    "GUNK": {
+        "id": "GUNK",
+        "names": [
+            "mess",
+            "slag"
+        ],
+        "adjectives": [
+            "vitre"
+        ],
+        "description": "piece of vitreous slag",
+        "initialDescription": "There is a small piece of vitreous slag here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 10,
+        "value": 0,
+        "action": "GUNK-FUNCTION"
+    },
+    "HEADS": {
+        "id": "HEADS",
+        "names": [
+            "heads",
+            "head",
+            "pole",
+            "poles",
+            "pdl",
+            "bkd",
+            "taa",
+            "marc",
+            "imple",
+            "loser"
+        ],
+        "description": "set of poled heads",
+        "initialDescription": "There are four heads here, mounted securely on poles.",
+        "flags": {
+            "isTakeable": false,
+            "isSacred": true,
+            "isVisible": true
+        },
+        "action": "HEAD-FUNCTION"
+    },
+    "HOOK1": {
+        "id": "HOOK1",
+        "names": [
+            "hook"
+        ],
+        "description": "hook",
+        "initialDescription": "There is a small hook attached to the rock here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false
+        }
+    },
+    "HOOK2": {
+        "id": "HOOK2",
+        "names": [
+            "hook"
+        ],
+        "description": "hook",
+        "initialDescription": "There is a small hook attached to the rock here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false
+        }
+    },
+    "IBOAT": {
+        "id": "IBOAT",
+        "names": [
+            "boat",
+            "plast",
+            "pile"
+        ],
+        "description": "plastic inflatable boat",
+        "initialDescription": "There is a folded pile of plastic here which has a small valve attached.",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 20,
+        "action": "IBOAT-FUNCTION"
+    },
+    "ICE": {
+        "id": "ICE",
+        "names": [
+            "ice",
+            "glacier"
+        ],
+        "description": "glacier",
+        "initialDescription": "A mass of ice fills the western half of the room.",
+        "flags": {
+            "isVillain": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "action": "GLACIER"
+    },
+    "IRBOX": {
+        "id": "IRBOX",
+        "names": [
+            "box"
+        ],
+        "adjectives": [
+            "iron",
+            "dented"
+        ],
+        "description": "iron box",
+        "initialDescription": "There is a dented iron box here.",
+        "flags": {
+            "isTakeable": true,
+            "isContainer": true
+        },
+        "size": 40,
+        "capacity": 20,
+        "contents": [
+            "STRAD"
+        ]
+    },
+    "JADE": {
+        "id": "JADE",
+        "names": [
+            "figurine"
+        ],
+        "adjectives": [
+            "jade"
+        ],
+        "description": "an exquisite jade figurine",
+        "initialDescription": "There is an exquisite jade figurine here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 5,
+        "size": 10
+    },
+    "KEYS": {
+        "id": "KEYS",
+        "names": [
+            "keys"
+        ],
+        "description": "set of skeleton keys",
+        "initialDescription": "There is a set of skeleton keys here.",
+        "flags": {
+            "isTool": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 10
+    },
+    "KNIFE": {
+        "id": "KNIFE",
+        "names": [
+            "knife",
+            "blade"
+        ],
+        "adjectives": [
+            "nasty"
+        ],
+        "description": "a nasty-looking knife",
+        "flags": {
+            "isWeapon": true,
+            "isTakeable": true
+        },
+        "damage": 6
+    },
+    "LABEL": {
+        "id": "LABEL",
+        "names": [
+            "label",
+            "finep"
+        ],
+        "adjectives": [
+            "tan"
+        ],
+        "description": "tan label",
+        "initialDescription": "There is a tan label here.",
+        "flags": {
+            "isBurnable": true,
+            "isReadable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 2,
+        "canContain": "RBOAT"
     },
     "LAMP": {
         "id": "LAMP",
-        "names": ["lamp", "lantern"],
-        "adjectives": ["brass"],
+        "names": [
+            "lamp",
+            "lantern"
+        ],
+        "adjectives": [
+            "brass"
+        ],
         "description": "brass lantern",
         "initialDescription": "A battery-powered brass lantern is on the trophy case.",
         "action": "LANTERN",
-        "flags": { "isTakeable": true, "isLight": true },
+        "flags": {
+            "isTakeable": true,
+            "isLight": true
+        },
         "light": 300,
         "size": 15,
         "value": 5
     },
+    "LCASE": {
+        "id": "LCASE",
+        "names": [
+            "case"
+        ],
+        "adjectives": [
+            "large"
+        ],
+        "description": "large case",
+        "initialDescription": "There is a large case here, containing objects which you used to possess.",
+        "flags": {
+            "isTransparent": true,
+            "isVisible": true,
+            "isTakeable": false
+        }
+    },
+    "LEAVE": {
+        "id": "LEAVE",
+        "names": [
+            "leaf",
+            "pile"
+        ],
+        "description": "pile of leaves",
+        "initialDescription": "There is a pile of leaves on the ground.",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 25
+    },
+    "LISTS": {
+        "id": "LISTS",
+        "names": [
+            "paper",
+            "list",
+            "print",
+            "listi",
+            "stack"
+        ],
+        "description": "stack of listings",
+        "initialDescription": "There is an enormous stack of line-printer paper here. It is barely readable.",
+        "longDescription": "There is a gigantic pile of line-printer output here. Although the paper once contained useful information, almost nothing can be distinguished now.",
+        "flags": {
+            "isReadable": true,
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 70
+    },
+    "MACHI": {
+        "id": "MACHI",
+        "names": [
+            "machine",
+            "pdp10",
+            "dryer",
+            "lid"
+        ],
+        "description": "machine",
+        "flags": {
+            "isContainer": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "size": 99999,
+        "capacity": 50,
+        "action": "MACHINE-FUNCTION"
+    },
+    "MAILB": {
+        "id": "MAILB",
+        "names": [
+            "mailbox",
+            "box"
+        ],
+        "description": "small mailbox",
+        "initialDescription": "There is a small mailbox here.",
+        "adjectives": [
+            "small"
+        ],
+        "flags": {
+            "isContainer": true,
+            "isTakeable": false,
+            "isOpen": false
+        },
+        "capacity": 10,
+        "contents": [
+            "ADVER"
+        ]
+    },
+    "MATCH": {
+        "id": "MATCH",
+        "names": [
+            "matchbook",
+            "flint"
+        ],
+        "description": "matchbook",
+        "initialDescription": "There is a matchbook whose cover says 'Visit Beautiful FCD#3' here.",
+        "flags": {
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 2,
+        "action": "MATCH-FUNCTION"
+    },
+    "ORICE": {
+        "id": "ORICE",
+        "names": [
+            "cake",
+            "icing"
+        ],
+        "adjectives": [
+            "orang"
+        ],
+        "description": "piece of cake with orange icing",
+        "initialDescription": "There is a piece of cake with orange icing here.",
+        "flags": {
+            "isEdible": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 4,
+        "action": "CAKE-FUNCTION"
+    },
+    "PAINT": {
+        "id": "PAINT",
+        "names": [
+            "painting",
+            "art",
+            "canva",
+            "maste"
+        ],
+        "description": "painting",
+        "initialDescription": "A masterpiece by a neglected genius is here.",
+        "longDescription": "Fortunately, there is still one chance for you to be a vandal, for on the far wall is a work of unparalleled beauty.",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 4,
+        "size": 15,
+        "action": "PAINTING"
+    },
+    "PAPER": {
+        "id": "PAPER",
+        "names": [
+            "newspaper",
+            "newsp",
+            "issue",
+            "repor",
+            "magaz",
+            "news"
+        ],
+        "description": "newspaper",
+        "flags": {
+            "isBurnable": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 2
+    },
+    "PEARL": {
+        "id": "PEARL",
+        "names": [
+            "necklace"
+        ],
+        "description": "pearl necklace",
+        "initialDescription": "There is a pearl necklace here with hundreds of large pearls.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 9,
+        "size": 10
+    },
+    "POOL": {
+        "id": "POOL",
+        "names": [
+            "pool",
+            "sewag"
+        ],
+        "adjectives": [
+            "large"
+        ],
+        "description": "pool of sewage",
+        "initialDescription": "The leak has submerged the depressed area in a pool of sewage.",
+        "flags": {
+            "isVillain": true,
+            "isVisible": true,
+            "isTakeable": false
+        }
+    },
+    "POT": {
+        "id": "POT",
+        "names": [
+            "pot"
+        ],
+        "adjectives": [
+            "gold"
+        ],
+        "description": "pot filled with gold",
+        "initialDescription": "There is a pot of gold here.",
+        "longDescription": "At the end of the rainbow is a pot of gold.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 10,
+        "size": 15
+    },
+    "PUBK": {
+        "id": "PUBK",
+        "names": [
+            "book"
+        ],
+        "adjectives": [
+            "purple"
+        ],
+        "description": "purple book",
+        "initialDescription": "There is a purple book here.",
+        "flags": {
+            "isContainer": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 10,
+        "capacity": 2,
+        "contents": [
+            "STAMP"
+        ]
+    },
+    "PUMP": {
+        "id": "PUMP",
+        "names": [
+            "pump",
+            "air-p",
+            "airpu"
+        ],
+        "description": "hand-held air pump",
+        "initialDescription": "There is a small pump here.",
+        "flags": {
+            "isTool": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 5
+    },
+    "PUTTY": {
+        "id": "PUTTY",
+        "names": [
+            "putty",
+            "mater",
+            "gunk",
+            "glue"
+        ],
+        "adjectives": [
+            "visco"
+        ],
+        "description": "viscous material",
+        "initialDescription": "There is some gunk here",
+        "flags": {
+            "isTool": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 6,
+        "canContain": "TUBE"
+    },
+    "RBOAT": {
+        "id": "RBOAT",
+        "names": [
+            "boat"
+        ],
+        "adjectives": [
+            "plast",
+            "seawo"
+        ],
+        "description": "magic boat",
+        "initialDescription": "There is an inflated boat here.",
+        "flags": {
+            "isVehicle": true,
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 20,
+        "capacity": 100,
+        "action": "RBOAT-FUNCTION",
+        "contents": [
+            "LABEL"
+        ]
+    },
+    "RBTLB": {
+        "id": "RBTLB",
+        "names": [
+            "paper"
+        ],
+        "adjectives": [
+            "green"
+        ],
+        "description": "green piece of paper",
+        "initialDescription": "There is a green piece of paper here.",
+        "flags": {
+            "isBurnable": true,
+            "isReadable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 3
+    },
+    "RCAGE": {
+        "id": "RCAGE",
+        "names": [
+            "cage"
+        ],
+        "adjectives": [
+            "iron"
+        ],
+        "description": "iron cage",
+        "initialDescription": "There is an iron cage in the middle of the room.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false
+        }
+    },
+    "RDICE": {
+        "id": "RDICE",
+        "names": [
+            "cake",
+            "icing"
+        ],
+        "adjectives": [
+            "red"
+        ],
+        "description": "piece of cake with red icing",
+        "initialDescription": "There is a piece of cake with red icing here.",
+        "flags": {
+            "isEdible": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 4,
+        "action": "CAKE-FUNCTION"
+    },
+    "RECEP": {
+        "id": "RECEP",
+        "names": [
+            "receptacle"
+        ],
+        "description": "receptacle",
+        "flags": {
+            "isContainer": true,
+            "isSearchable": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "capacity": 6,
+        "canContain": "BALLO"
+    },
+    "REFL1": {
+        "id": "REFL1",
+        "names": [
+            "mirror",
+            "mirro"
+        ],
+        "description": "mirror",
+        "flags": {
+            "isTakeable": false,
+            "isNotTakeableWithMessage": true,
+            "isVillain": true,
+            "isVisible": true
+        },
+        "action": "MIRROR-MIRROR"
+    },
+    "REFL2": {
+        "id": "REFL2",
+        "names": [
+            "mirror",
+            "mirro"
+        ],
+        "description": "mirror",
+        "flags": {
+            "isTakeable": false,
+            "isNotTakeableWithMessage": true,
+            "isVillain": true,
+            "isVisible": true
+        },
+        "action": "MIRROR-MIRROR"
+    },
+    "RKNIF": {
+        "id": "RKNIF",
+        "names": [
+            "knife"
+        ],
+        "adjectives": [
+            "rusty"
+        ],
+        "description": "rusty knife",
+        "initialDescription": "There is a rusty knife here.",
+        "longDescription": "Beside the skeleton is a rusty knife.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true,
+            "isWeapon": true
+        },
+        "size": 20
+    },
+    "ROBOT": {
+        "id": "ROBOT",
+        "names": [
+            "robot"
+        ],
+        "description": "A shiny metal robot.",
+        "flags": {
+            "isTakeable": false,
+            "isActor": true
+        },
+        "action": "ROBOT"
+    },
+    "ROPE": {
+        "id": "ROPE",
+        "names": [
+            "rope"
+        ],
+        "description": "A long rope.",
+        "initialDescription": "A coiled rope is here.",
+        "flags": {
+            "isTakeable": true,
+            "isTieable": true,
+            "isTied": false
+        },
+        "size": 20
+    },
+    "RUBY": {
+        "id": "RUBY",
+        "names": [
+            "ruby"
+        ],
+        "description": "ruby",
+        "initialDescription": "There is a moby ruby lying here.",
+        "longDescription": "On the floor lies a moby ruby.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 15,
+        "size": 5
+    },
     "RUG": {
         "id": "RUG",
-        "names": ["rug", "carpet"],
-        "adjectives": ["oriental"],
+        "names": [
+            "rug",
+            "carpet"
+        ],
+        "adjectives": [
+            "oriental"
+        ],
         "description": "carpet",
         "action": "RUG",
-        "flags": { "isNotDescribed": true, "isTakeable": false, "isMoved": false },
+        "flags": {
+            "isNotDescribed": true,
+            "isTakeable": false,
+            "isMoved": false
+        },
         "size": 9999
     },
-    "DOOR": {
-        "id": "DOOR",
-        "names": ["door", "trap-door"],
-        "description": "trap door",
-        "action": "TRAP-DOOR",
-        "flags": { "isVisible": false, "isDoor": true, "isOpen": false, "isTakeable": false }
+    "SAFE": {
+        "id": "SAFE",
+        "names": [
+            "safe",
+            "box"
+        ],
+        "description": "box",
+        "flags": {
+            "isContainer": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "capacity": 15,
+        "contents": [
+            "CROWN",
+            "CARD"
+        ],
+        "action": "SAFE-FUNCTION"
+    },
+    "SAFFR": {
+        "id": "SAFFR",
+        "names": [
+            "tin",
+            "spice"
+        ],
+        "adjectives": [
+            "rare"
+        ],
+        "description": "tin of spices",
+        "initialDescription": "There is a tin of rare spices here.",
+        "flags": {
+            "isTakeable": true
+        },
+        "value": 5,
+        "size": 8
+    },
+    "SBAG": {
+        "id": "SBAG",
+        "names": [
+            "bag",
+            "sack",
+            "baggi"
+        ],
+        "adjectives": [
+            "brown"
+        ],
+        "description": "sandwich bag",
+        "initialDescription": "On the table is an elongated brown sack, smelling of hot peppers.",
+        "flags": {
+            "isContainer": true,
+            "isFlammable": true,
+            "isVisible": true,
+            "isTakeable": true
+        },
+        "size": 3,
+        "capacity": 15,
+        "contents": [
+            "GARLI",
+            "FOOD"
+        ]
+    },
+    "SCREW": {
+        "id": "SCREW",
+        "names": [
+            "screwdriver"
+        ],
+        "description": "screwdriver",
+        "initialDescription": "There is a screwdriver here.",
+        "flags": {
+            "isTool": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 5
+    },
+    "SHOVE": {
+        "id": "SHOVE",
+        "names": [
+            "shovel"
+        ],
+        "description": "shovel",
+        "initialDescription": "There is a large shovel here.",
+        "flags": {
+            "isTool": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 15
+    },
+    "SPHER": {
+        "id": "SPHER",
+        "names": [
+            "sphere",
+            "ball"
+        ],
+        "adjectives": [
+            "crystal",
+            "glass"
+        ],
+        "description": "crystal sphere",
+        "initialDescription": "There is a beautiful crystal sphere here.",
+        "flags": {
+            "isTakeable": false,
+            "isNotTakeableWithMessage": true,
+            "isSacred": true,
+            "isVisible": true
+        },
+        "value": 6,
+        "size": 10,
+        "action": "SPHERE-FUNCTION"
+    },
+    "SSLOT": {
+        "id": "SSLOT",
+        "names": [
+            "slot",
+            "hole"
+        ],
+        "description": "hole",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false,
+            "isOpen": true
+        }
+    },
+    "STAMP": {
+        "id": "STAMP",
+        "names": [
+            "stamp"
+        ],
+        "description": "stamp",
+        "initialDescription": "There is a Flathead Commemorative stamp here.",
+        "flags": {
+            "isReadable": true,
+            "isBurnable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 4,
+        "size": 1
+    },
+    "STATU": {
+        "id": "STATU",
+        "names": [
+            "statue",
+            "sculp",
+            "rock"
+        ],
+        "description": "statue",
+        "initialDescription": "There is a beautiful statue here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 10,
+        "size": 8
+    },
+    "STICK": {
+        "id": "STICK",
+        "names": [
+            "stick"
+        ],
+        "adjectives": [
+            "sharp",
+            "broke"
+        ],
+        "description": "broken sharp stick",
+        "initialDescription": "A sharp stick, which appears to have been broken at one end, is here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": true
+        },
+        "size": 3,
+        "action": "STICK-FUNCTION"
+    },
+    "STILL": {
+        "id": "STILL",
+        "names": [
+            "stilletto"
+        ],
+        "adjectives": [
+            "vicious"
+        ],
+        "description": "vicious-looking stilletto",
+        "initialDescription": "There is a vicious-looking stilletto here.",
+        "flags": {
+            "isWeapon": true,
+            "isVisible": true,
+            "isTakeable": true
+        },
+        "size": 10,
+        "canContain": "THIEF"
+    },
+    "STRAD": {
+        "id": "STRAD",
+        "names": [
+            "violin",
+            "violi"
+        ],
+        "adjectives": [
+            "fancy"
+        ],
+        "description": "fancy violin",
+        "initialDescription": "There is a Stradavarius here.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 10,
+        "size": 10,
+        "canContain": "IRBOX"
+    },
+    "SWORD": {
+        "id": "SWORD",
+        "names": [
+            "sword",
+            "orcrist",
+            "glamdring",
+            "blade"
+        ],
+        "adjectives": [
+            "elvish"
+        ],
+        "description": "elvish sword",
+        "initialDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity.",
+        "action": "SWORD",
+        "flags": {
+            "isTakeable": true,
+            "isWeapon": true
+        },
+        "size": 5,
+        "damage": 10,
+        "value": 10
+    },
+    "TBASK": {
+        "id": "TBASK",
+        "names": [
+            "basket",
+            "cage",
+            "dumbw"
+        ],
+        "description": "basket",
+        "initialDescription": "At the end of the chain is a basket.",
+        "flags": {
+            "isContainer": true,
+            "isTransparent": true,
+            "isVisible": true,
+            "isTakeable": false
+        },
+        "capacity": 50,
+        "action": "DUMBWAITER"
     },
     "TCASE": {
         "id": "TCASE",
-        "names": ["case"],
-        "adjectives": ["trophy"],
+        "names": [
+            "case"
+        ],
+        "adjectives": [
+            "trophy"
+        ],
         "description": "trophy case",
         "action": "TROPHY-CASE",
-        "flags": { "isContainer": true, "isTransparent": true, "isTakeable": false },
+        "flags": {
+            "isContainer": true,
+            "isTransparent": true,
+            "isTakeable": false
+        },
         "size": 9999,
         "capacity": 9999
     },
+    "THIEF": {
+        "id": "THIEF",
+        "names": [
+            "thief",
+            "robber",
+            "crook",
+            "criminal",
+            "bandi",
+            "gent",
+            "gentl",
+            "man",
+            "shady",
+            "thug",
+            "bagma",
+            "mafia"
+        ],
+        "description": "There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stilletto.",
+        "flags": {
+            "isVillain": true,
+            "isActor": true,
+            "isTakeable": false,
+            "isVisible": true
+        },
+        "action": "ROBBER-FUNCTION",
+        "health": 100,
+        "strength": 10,
+        "accuracy": 80,
+        "damage": 10,
+        "contents": [
+            "STILL"
+        ]
+    },
+    "TOMB": {
+        "id": "TOMB",
+        "names": [
+            "tomb",
+            "grave"
+        ],
+        "description": "tomb",
+        "initialDescription": "There is a tomb here, made of the finest marble, and large enough for four headless corpses. On one end is the cryptic inscription:\n\t\t    \n\t\t      \"Feel Free.\"\n",
+        "flags": {
+            "isTakeable": false,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "action": "HEAD-FUNCTION"
+    },
+    "TORCH": {
+        "id": "TORCH",
+        "names": [
+            "torch"
+        ],
+        "adjectives": [
+            "ivory"
+        ],
+        "description": "torch",
+        "initialDescription": "There is an ivory torch here.",
+        "longDescription": "Sitting on the pedestal is a flaming torch, made of ivory.",
+        "flags": {
+            "isTool": true,
+            "isLightSource": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 14,
+        "size": 20,
+        "light": 1
+    },
+    "TRIDE": {
+        "id": "TRIDE",
+        "names": [
+            "trident",
+            "fork"
+        ],
+        "adjectives": [
+            "crystal"
+        ],
+        "description": "crystal trident",
+        "initialDescription": "Neptune's own crystal trident is here.",
+        "longDescription": "On the shore lies Neptune's own crystal trident.",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 4,
+        "size": 20
+    },
     "TROLL": {
         "id": "TROLL",
-        "names": ["troll"],
+        "names": [
+            "troll"
+        ],
         "description": "A nasty-looking troll, brandishing a bloody axe.",
-        "flags": { "isVillain": true, "isActor": true, "isTakeable": false },
+        "flags": {
+            "isVillain": true,
+            "isActor": true,
+            "isTakeable": false
+        },
         "health": 50,
         "strength": 10,
         "accuracy": 75,
         "damage": 8
     },
-    "AXE": {
-        "id": "AXE",
-        "names": ["axe"],
-        "adjectives": ["bloody"],
-        "description": "a bloody axe",
-        "flags": { "isWeapon": true, "isTakeable": true },
-        "damage": 12
-    },
-    "WRENCH": {
-        "id": "WRENCH",
-        "names": ["wrench"],
-        "description": "A large wrench.",
-        "initialDescription": "There is a wrench here.",
-        "flags": { "isTakeable": true },
-        "size": 10
-    },
-    "BOLT": {
-        "id": "BOLT",
-        "names": ["bolt", "nut"],
-        "description": "A large bolt, tightly fastened.",
-        "flags": { "isTakeable": false, "isLoose": false },
-        "action": "DAM-BOLT"
-    },
-    "PANEL": {
-        "id": "PANEL",
-        "names": ["panel", "buttons"],
-        "description": "A control panel with four buttons.",
-        "initialDescription": "On the wall is a control panel.",
-        "flags": { "isTakeable": false },
-        "action": "DAM-PANEL"
-    },
-    "ROPE": {
-        "id": "ROPE",
-        "names": ["rope"],
-        "description": "A long rope.",
-        "initialDescription": "A coiled rope is here.",
-        "flags": { "isTakeable": true, "isTieable": true, "isTied": false },
-        "size": 20
-    },
-    "MATCHBOOK": {
-        "id": "MATCHBOOK",
-        "names": ["matchbook", "matches"],
-        "description": "A book of matches.",
-        "initialDescription": "There is a book of matches here.",
-        "flags": { "isTakeable": true, "isLightSource": true, "isLit": false },
-        "size": 1
-    },
-    "GLACIER": {
-        "id": "GLACIER",
-        "names": ["glacier"],
-        "description": "A massive, impassable glacier.",
-        "flags": { "isTakeable": false, "isMelted": false },
-        "action": "GLACIER"
-    },
-    "TORCH": {
-        "id": "TORCH",
-        "names": ["torch"],
-        "description": "A wooden torch.",
-        "initialDescription": "A torch lies on the ground.",
-        "flags": { "isTakeable": true, "isLightSource": true, "isLit": false },
-        "size": 5
-    },
-    "CAKE1": {
-        "id": "CAKE1",
-        "names": ["cake"],
-        "adjectives": ["small"],
-        "description": "A small cake.",
-        "initialDescription": "There is a small cake here.",
-        "flags": { "isTakeable": true, "isEdible": true },
-        "action": "EAT-CAKE-SMALL"
-    },
-    "CAKE2": {
-        "id": "CAKE2",
-        "names": ["cake"],
-        "adjectives": ["large"],
-        "description": "A large cake.",
-        "initialDescription": "There is a large cake here.",
-        "flags": { "isTakeable": true, "isEdible": true },
-        "action": "EAT-CAKE-LARGE"
-    },
-    "ROBOT": {
-        "id": "ROBOT",
-        "names": ["robot"],
-        "description": "A shiny metal robot.",
-        "flags": { "isTakeable": false, "isActor": true },
-        "action": "ROBOT"
-    },
-    "SPHERE": {
-        "id": "SPHERE",
-        "names": ["sphere"],
-        "description": "A shimmering, iridescent sphere.",
-        "initialDescription": "There is a sphere here.",
-        "flags": { "isTakeable": true },
-        "size": 10
-    },
-    "BUTTONS": {
-        "id": "BUTTONS",
-        "names": ["buttons", "panel"],
-        "description": "A panel of buttons.",
-        "flags": { "isTakeable": false },
-        "action": "CAROUSEL-BUTTONS"
-    },
-    "MAGIC-MIRROR": {
-        "id": "MAGIC-MIRROR",
-        "names": ["mirror"],
-        "description": "A magic mirror.",
-        "flags": { "isTakeable": false },
-        "action": "MAGIC-MIRROR"
-    },
-    "BRICK": {
-        "id": "BRICK",
-        "names": ["brick"],
-        "adjectives": ["square", "clay"],
-        "description": "a square clay brick",
-        "flags": { "isTakeable": true, "isBurnable": true },
-        "size": 9,
-        "value": 2
-    },
-    "KNIFE": {
-        "id": "KNIFE",
-        "names": ["knife", "blade"],
-        "adjectives": ["nasty"],
-        "description": "a nasty-looking knife",
-        "flags": { "isWeapon": true, "isTakeable": true },
-        "damage": 6
-    },
     "TRUNK": {
         "id": "TRUNK",
-        "names": ["trunk", "chest"],
+        "names": [
+            "trunk",
+            "chest"
+        ],
         "description": "an old trunk, bulging with assorted jewels",
-        "flags": { "isTakeable": true, "isContainer": true },
+        "flags": {
+            "isTakeable": true,
+            "isContainer": true
+        },
         "value": 15
     },
-    "CHALICE": {
-        "id": "CHALICE",
-        "names": ["chalice", "cup", "goblet"],
-        "description": "a silver chalice, intricately engraved",
-        "flags": { "isTakeable": true, "isContainer": true },
-        "value": 10
+    "TUBE": {
+        "id": "TUBE",
+        "names": [
+            "tube"
+        ],
+        "description": "tube",
+        "initialDescription": "There is an object which looks like a tube of toothpaste here.",
+        "flags": {
+            "isContainer": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 10,
+        "capacity": 7,
+        "contents": [
+            "PUTTY"
+        ],
+        "action": "TUBE-FUNCTION"
     },
-    "THIEF": {
-        "id": "THIEF",
-        "names": ["thief", "robber", "crook", "criminal", "bandit", "gentleman", "man", "shady", "thug", "bagman", "mafioso"],
-        "description": "There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stilletto.",
-        "flags": { "isVillain": true, "isActor": true, "isTakeable": false },
-        "health": 40,
-        "strength": 8,
-        "accuracy": 80,
-        "damage": 6,
-        "action": "ROBBER-FUNCTION"
+    "WATER": {
+        "id": "WATER",
+        "names": [
+            "water",
+            "liquid",
+            "h2o"
+        ],
+        "description": "quantity of water",
+        "action": "WATER-FUNCTION",
+        "flags": {
+            "isDrinkable": true,
+            "isTakeable": false
+        },
+        "size": 4,
+        "canContain": "BOTTL"
     },
-    "STILLETTO": {
-        "id": "STILLETTO",
-        "names": ["stilletto"],
-        "adjectives": ["vicious"],
-        "description": "a vicious-looking stilletto",
-        "flags": { "isWeapon": true, "isTakeable": true },
-        "damage": 8
+    "WHBK": {
+        "id": "WHBK",
+        "names": [
+            "book"
+        ],
+        "adjectives": [
+            "white"
+        ],
+        "description": "white book",
+        "initialDescription": "There is a white book here.",
+        "flags": {
+            "isContainer": true,
+            "isTakeable": true,
+            "isReadable": true,
+            "isVisible": true
+        },
+        "size": 10,
+        "capacity": 2
     },
-    "SKELETON": {
-        "id": "SKELETON",
-        "names": ["skeleton", "bones", "body"],
-        "description": "A skeleton, probably the remains of a luckless adventurer, lies here.",
-        "flags": { "isTakeable": false },
-        "action": "SKELETON"
+    "WRENC": {
+        "id": "WRENC",
+        "names": [
+            "wrench"
+        ],
+        "description": "wrench",
+        "initialDescription": "There is a wrench here.",
+        "flags": {
+            "isTool": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "size": 10
     },
-    "GHOST": {
-        "id": "GHOST",
-        "names": ["ghost", "spirit", "fiend"],
-        "description": "A ghostly figure floats in the air.",
-        "flags": { "isActor": true, "isTakeable": false },
-        "action": "GHOST-FUNCTION"
+    "ZORKM": {
+        "id": "ZORKM",
+        "names": [
+            "zorkmid",
+            "coin"
+        ],
+        "adjectives": [
+            "gold",
+            "priceless"
+        ],
+        "description": "priceless zorkmid",
+        "initialDescription": "There is an engraved zorkmid coin here.",
+        "longDescription": "On the floor is a gold zorkmid coin (a valuable collector's item).",
+        "flags": {
+            "isReadable": true,
+            "isTakeable": true,
+            "isVisible": true
+        },
+        "value": 10,
+        "size": 10
     }
 }
