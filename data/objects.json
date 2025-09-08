@@ -87,7 +87,9 @@
         "initialDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity.",
         "action": "SWORD",
         "flags": { "isTakeable": true, "isWeapon": true },
-        "size": 5
+        "size": 5,
+        "damage": 10,
+        "value": 10
     },
     "LAMP": {
         "id": "LAMP",
@@ -98,7 +100,8 @@
         "action": "LANTERN",
         "flags": { "isTakeable": true, "isLight": true },
         "light": 300,
-        "size": 15
+        "size": 15,
+        "value": 5
     },
     "RUG": {
         "id": "RUG",
@@ -130,14 +133,19 @@
         "id": "TROLL",
         "names": ["troll"],
         "description": "A nasty-looking troll, brandishing a bloody axe.",
-        "flags": { "isVillain": true, "isActor": true, "isTakeable": false }
+        "flags": { "isVillain": true, "isActor": true, "isTakeable": false },
+        "health": 50,
+        "strength": 10,
+        "accuracy": 75,
+        "damage": 8
     },
     "AXE": {
         "id": "AXE",
         "names": ["axe"],
         "adjectives": ["bloody"],
         "description": "a bloody axe",
-        "flags": { "isWeapon": true, "isTakeable": true }
+        "flags": { "isWeapon": true, "isTakeable": true },
+        "damage": 12
     },
     "WRENCH": {
         "id": "WRENCH",
@@ -239,5 +247,69 @@
         "description": "A magic mirror.",
         "flags": { "isTakeable": false },
         "action": "MAGIC-MIRROR"
+    },
+    "BRICK": {
+        "id": "BRICK",
+        "names": ["brick"],
+        "adjectives": ["square", "clay"],
+        "description": "a square clay brick",
+        "flags": { "isTakeable": true, "isBurnable": true },
+        "size": 9,
+        "value": 2
+    },
+    "KNIFE": {
+        "id": "KNIFE",
+        "names": ["knife", "blade"],
+        "adjectives": ["nasty"],
+        "description": "a nasty-looking knife",
+        "flags": { "isWeapon": true, "isTakeable": true },
+        "damage": 6
+    },
+    "TRUNK": {
+        "id": "TRUNK",
+        "names": ["trunk", "chest"],
+        "description": "an old trunk, bulging with assorted jewels",
+        "flags": { "isTakeable": true, "isContainer": true },
+        "value": 15
+    },
+    "CHALICE": {
+        "id": "CHALICE",
+        "names": ["chalice", "cup", "goblet"],
+        "description": "a silver chalice, intricately engraved",
+        "flags": { "isTakeable": true, "isContainer": true },
+        "value": 10
+    },
+    "THIEF": {
+        "id": "THIEF",
+        "names": ["thief", "robber", "crook", "criminal", "bandit", "gentleman", "man", "shady", "thug", "bagman", "mafioso"],
+        "description": "There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stilletto.",
+        "flags": { "isVillain": true, "isActor": true, "isTakeable": false },
+        "health": 40,
+        "strength": 8,
+        "accuracy": 80,
+        "damage": 6,
+        "action": "ROBBER-FUNCTION"
+    },
+    "STILLETTO": {
+        "id": "STILLETTO",
+        "names": ["stilletto"],
+        "adjectives": ["vicious"],
+        "description": "a vicious-looking stilletto",
+        "flags": { "isWeapon": true, "isTakeable": true },
+        "damage": 8
+    },
+    "SKELETON": {
+        "id": "SKELETON",
+        "names": ["skeleton", "bones", "body"],
+        "description": "A skeleton, probably the remains of a luckless adventurer, lies here.",
+        "flags": { "isTakeable": false },
+        "action": "SKELETON"
+    },
+    "GHOST": {
+        "id": "GHOST",
+        "names": ["ghost", "spirit", "fiend"],
+        "description": "A ghostly figure floats in the air.",
+        "flags": { "isActor": true, "isTakeable": false },
+        "action": "GHOST-FUNCTION"
     }
 }

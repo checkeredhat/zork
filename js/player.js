@@ -3,8 +3,9 @@ class Player {
         room,
         inventory = [],
         score = 0,
+        health = 100,
         vehicle = null,
-        strength = 0,
+        strength = 10,
         flags = {}
     }) {
         this.room = room; // AROOM

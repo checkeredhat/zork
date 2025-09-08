@@ -72,14 +72,23 @@
         "shortDescription": "Living Room",
         "isLight": true,
         "exits": [
-            { "direction": "EAST", "roomId": "KITCHITCH" },
+            { "direction": "EAST", "roomId": "KITCH" },
             { "direction": "WEST", "roomId": "BLROO", "condition": "MAGIC-FLAG", "message": "The door is nailed shut." },
             { "direction": "DOWN", "roomId": "CELLA", "condition": "TRAP-DOOR" },
-            { "direction": "UP", "roomId": "WONDERLAND-ROOM" },
-            { "direction": "NORTH", "roomId": "MIRROR-ROOM-1" }
+            { "direction": "UP", "roomId": "ATTIC" }
         ],
-        "objects": ["SWORD", "LAMP", "RUG", "TCASE", "DOOR", "ROPE"],
+        "objects": ["SWORD", "LAMP", "RUG", "TCASE", "DOOR"],
         "action": "LIVING-ROOM"
+    },
+    "ATTIC": {
+        "id": "ATTIC",
+        "longDescription": "You are in the attic. The only exit is stairs that lead down.",
+        "shortDescription": "Attic",
+        "isLight": true,
+        "exits": [
+            { "direction": "DOWN", "roomId": "KITCH" }
+        ],
+        "objects": ["BRICK", "ROPE", "KNIFE"]
     },
     "TROLL": {
         "id": "TROLL",
@@ -87,10 +96,42 @@
         "shortDescription": "Troll Room",
         "isLight": true,
         "exits": [
-            { "direction": "WEST", "message": "The troll blocks your path." },
-            { "direction": "EAST", "roomId": "CAROUSEL-ROOM" }
+            { "direction": "WEST", "roomId": "CELLA", "condition": "trollDefeated", "message": "The troll blocks your path." },
+            { "direction": "EAST", "roomId": "CRAW4", "condition": "trollDefeated", "message": "The troll blocks your path." },
+            { "direction": "NORTH", "roomId": "PASS1", "condition": "trollDefeated", "message": "The troll blocks your path." },
+            { "direction": "SOUTH", "roomId": "MAZE1", "condition": "trollDefeated", "message": "The troll blocks your path." }
         ],
         "objects": ["TROLL", "AXE"]
+    },
+    "CRAW4": {
+        "id": "CRAW4",
+        "longDescription": "You are in a north-south crawlway; a passage goes to the east also. There is a hole above, but it provides no opportunities for climbing.",
+        "shortDescription": "North-South Crawlway",
+        "isLight": true,
+        "exits": [
+            { "direction": "WEST", "roomId": "TROLL" }
+        ],
+        "objects": []
+    },
+    "PASS1": {
+        "id": "PASS1",
+        "longDescription": "You are in a narrow east-west passageway. There is a narrow stairway leading down at the north end of the room.",
+        "shortDescription": "East-West Passage",
+        "isLight": true,
+        "exits": [
+            { "direction": "SOUTH", "roomId": "TROLL" }
+        ],
+        "objects": []
+    },
+    "MAZE1": {
+        "id": "MAZE1",
+        "longDescription": "You are in a maze of twisty little passages, all alike.",
+        "shortDescription": "Maze",
+        "isLight": true,
+        "exits": [
+            { "direction": "NORTH", "roomId": "TROLL" }
+        ],
+        "objects": []
     },
     "CAROUSEL-ROOM": {
         "id": "CAROUSEL-ROOM",
@@ -243,5 +284,55 @@
         "isLight": true,
         "exits": [],
         "objects": ["MAGIC-MIRROR"]
+    },
+    "MAZE5": {
+        "id": "MAZE5",
+        "longDescription": "You are in a maze of twisty little passages, all alike.",
+        "shortDescription": "Maze",
+        "isLight": true,
+        "exits": [
+            { "direction": "EAST", "roomId": "DEAD2" },
+            { "direction": "NORTH", "roomId": "MAZE3" },
+            { "direction": "SW", "roomId": "MAZE6" }
+        ],
+        "objects": ["SKELETON"]
+    },
+    "DEAD2": {
+        "id": "DEAD2",
+        "longDescription": "You are in a dead end.",
+        "shortDescription": "Dead End",
+        "isLight": true,
+        "exits": [
+            { "direction": "WEST", "roomId": "MAZE5" }
+        ],
+        "objects": []
+    },
+    "MAZE3": {
+        "id": "MAZE3",
+        "longDescription": "You are in a maze of twisty little passages, all alike.",
+        "shortDescription": "Maze",
+        "isLight": true,
+        "exits": [
+            { "direction": "SOUTH", "roomId": "MAZE5" }
+        ],
+        "objects": []
+    },
+    "MAZE6": {
+        "id": "MAZE6",
+        "longDescription": "You are in a maze of twisty little passages, all alike.",
+        "shortDescription": "Maze",
+        "isLight": true,
+        "exits": [
+            { "direction": "NE", "roomId": "MAZE5" }
+        ],
+        "objects": []
+    },
+    "LLD2": {
+        "id": "LLD2",
+        "longDescription": "You are in the Land of the Living Dead, a large desolate room. Although it is apparently uninhabited, you can hear the sounds of thousands of lost souls weeping and moaning.",
+        "shortDescription": "Land of the Living Dead",
+        "isLight": false,
+        "exits": [],
+        "objects": []
     }
 }
