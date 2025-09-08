@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zork.js</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+        #output {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            padding: 10px;
+        }
+        #input {
+            width: 100%;
+            background-color: #000;
+            color: #0f0;
+            border: none;
+            outline: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="output"></div>
+    <input type="text" id="input" autofocus />
+
+    <!-- Core classes must be loaded before the main game logic -->
+    <script src="js/ui.js"></script>
+    <script src="js/gameObject.js"></script>
+    <script src="js/room.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/exit.js"></script>
+    <script src="js/parser.js"></script>
+
+    <!-- Game class uses the core classes -->
+    <script src="js/game.js"></script>
+
+    <!-- Main entry point, must be last -->
+    <script src="js/main.js"></script>
+</body>
+</html>

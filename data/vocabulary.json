@@ -1,0 +1,51 @@
+{
+    "directions": {
+        "north": ["n"],
+        "south": ["s"],
+        "east": ["e"],
+        "west": ["w"],
+        "up": ["u"],
+        "down": ["d"],
+        "enter": ["in"],
+        "exit": ["out", "leave"]
+    },
+    "verbs": {
+        "take": ["get", "hold", "carry"],
+        "drop": ["release"],
+        "go": ["walk", "proceed"],
+        "look": ["l", "stare", "gaze"],
+        "inventory": ["i"],
+        "attack": ["fight", "kill", "hit", "mung"],
+        "open": [],
+        "close": []
+    },
+    "prepositions": [
+        "with",
+        "at",
+        "to",
+        "in",
+        "on",
+        "under",
+        "into",
+        "down",
+        "up"
+    ],
+    "adjectives": [
+        "brown",
+        "nasty",
+        "elvish",
+        "brassy",
+        "broken"
+    ],
+    "buzzwords": [
+        "by",
+        "is",
+        "one",
+        "it",
+        "a",
+        "the",
+        "an",
+        "this",
+        "over"
+    ]
+}
