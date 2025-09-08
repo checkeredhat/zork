@@ -5,7 +5,7 @@
         "description": "small mailbox",
         "initialDescription": "There is a small mailbox here.",
         "adjectives": ["small"],
-        "flags": { "isContainer": true, "isTakeable": false },
+        "flags": { "isContainer": true, "isTakeable": false, "isOpen": false },
         "capacity": 10,
         "contents": ["ADVER"]
     },

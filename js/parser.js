@@ -87,7 +87,7 @@ class Parser {
             }
 
             // Check that all remaining tokens are valid adjectives for the object
-            const adjectivesMatch = remainingTokens.every(token => obj.adjectives.includes(token));
+            const adjectivesMatch = remainingTokens.every(token => (obj.adjectives || []).includes(token));
 
             if (adjectivesMatch) {
                 return obj; // Found a match

@@ -141,6 +141,40 @@ class Game {
         });
     }
 
+    open(gameObject) {
+        if (!gameObject) {
+            this.ui.display("You can't see that here.");
+            return;
+        }
+        if (!gameObject.flags.isContainer) {
+            this.ui.display("That's not a container.");
+            return;
+        }
+        if (gameObject.flags.isOpen) {
+            this.ui.display("It's already open.");
+            return;
+        }
+
+        gameObject.flags.isOpen = true;
+        this.ui.display(`You open the ${gameObject.names[0]}.`);
+
+        // Reveal contents
+        if (gameObject.contents && gameObject.contents.length > 0) {
+            this.ui.display("Inside, you see:");
+            gameObject.contents.forEach(objId => {
+                const obj = this.objects[objId];
+                if (obj) {
+                    this.ui.display(`- A ${obj.description}`);
+                    // Add the object to the room
+                    this.player.room.objects.push(obj);
+                    // Remove from container's contents
+                }
+            });
+            // Clear the contents from the container after revealing them
+            gameObject.contents = [];
+        }
+    }
+
     processTurn(command) {
         if (!command) return;
         this.ui.displayPrompt(`> ${command}`);
@@ -171,6 +205,9 @@ class Game {
                 break;
             case 'inventory':
                 this.inventory();
+                break;
+            case 'open':
+                this.open(action.directObject);
                 break;
             default:
                 this.ui.display("I don't know how to do that yet.");
