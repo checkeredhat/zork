@@ -87,13 +87,16 @@ class Parser {
                 }
             }
 
-            // To be a candidate, at least one name must match and there should be no unknown words.
-            if (nameTokens.length > 0 && otherTokens.length === 0) {
-                const score = nameTokens.length + adjTokens.length;
-                if (score > highestScore) {
-                    highestScore = score;
-                    bestMatch = obj;
-                }
+            if (!nameMatch) {
+                continue; // This object is not a candidate if no name matches
+            }
+
+            // Check that all remaining tokens are valid adjectives for the object
+            const adjectivesMatch = remainingTokens.every(token => (obj.adjectives || []).includes(token));
+
+            if (adjectivesMatch) {
+                return obj; // Found a match
+
             }
         }
         return bestMatch;

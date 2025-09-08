@@ -76,7 +76,18 @@
             { "direction": "WEST", "roomId": "BLROO", "condition": "MAGIC-FLAG", "message": "The door is nailed shut." },
             { "direction": "DOWN", "roomId": "CELLA", "condition": "TRAP-DOOR" }
         ],
-        "objects": ["SWORD", "LAMP", "RUG", "TCASE"],
+        "objects": ["SWORD", "LAMP", "RUG", "TCASE", "DOOR"],
         "action": "LIVING-ROOM"
+    },
+    "TROLL": {
+        "id": "TROLL",
+        "longDescription": "This is a large room with passages to the east and west. A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.",
+        "shortDescription": "Troll Room",
+        "isLight": true,
+        "exits": [
+            { "direction": "WEST", "message": "The troll blocks your path." },
+            { "direction": "EAST", "message": "The troll blocks your path." }
+        ],
+        "objects": ["TROLL", "AXE"]
     }
 }
