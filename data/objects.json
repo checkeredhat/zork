@@ -1,0 +1,122 @@
+{
+    "MAILB": {
+        "id": "MAILB",
+        "names": ["mailbox", "box"],
+        "description": "small mailbox",
+        "initialDescription": "There is a small mailbox here.",
+        "adjectives": ["small"],
+        "flags": { "isContainer": true, "isTakeable": false },
+        "capacity": 10,
+        "contents": ["ADVER"]
+    },
+    "ADVER": {
+        "id": "ADVER",
+        "names": ["leaflet", "pamphlet", "booklet"],
+        "description": "small leaflet",
+        "initialDescription": "There is a small leaflet here.",
+        "flags": { "isBurnable": true, "isReadable": true },
+        "size": 2,
+        "canContain": "MAILB"
+    },
+    "WIND1": {
+        "id": "WIND1",
+        "names": ["window"],
+        "description": "kitchen window",
+        "action": "WINDOW-FUNCTION",
+        "flags": { "isDoor": true, "isNotDescribed": true, "isTakeable": false }
+    },
+    "KITCHEN-WINDOW": {
+        "id": "KITCHEN-WINDOW",
+        "names": ["window"],
+        "description": "The kitchen window is closed.",
+        "flags": { "isDoor": true, "isTakeable": false }
+    },
+    "SBAG": {
+        "id": "SBAG",
+        "names": ["bag", "sack", "baggie"],
+        "adjectives": ["brown"],
+        "description": "sandwich bag",
+        "initialDescription": "On the table is an elongated brown sack, smelling of hot peppers.",
+        "flags": { "isContainer": true, "isOn": true, "isTakeable": true },
+        "size": 3,
+        "capacity": 15,
+        "contents": ["GARLI", "FOOD"]
+    },
+    "GARLI": {
+        "id": "GARLI",
+        "names": ["garlic", "clove"],
+        "description": "clove of garlic",
+        "flags": { "isTakeable": true, "isEdible": true },
+        "size": 1,
+        "canContain": "SBAG"
+    },
+    "FOOD": {
+        "id": "FOOD",
+        "names": ["sandwich", "lunch", "pepper", "dinner", "snack"],
+        "description": "hot pepper sandwich",
+        "flags": { "isEdible": true, "isTakeable": true },
+        "size": 2,
+        "canContain": "SBAG"
+    },
+    "BOTTL": {
+        "id": "BOTTL",
+        "names": ["bottle", "container", "pitcher"],
+        "adjectives": ["glass"],
+        "description": "glass bottle",
+        "initialDescription": "A bottle is sitting on the table.",
+        "action": "BOTTLE-FUNCTION",
+        "flags": { "isContainer": true, "isTransparent": true, "isTakeable": true },
+        "size": 5,
+        "capacity": 4,
+        "contents": ["WATER"]
+    },
+    "WATER": {
+        "id": "WATER",
+        "names": ["water", "liquid", "h2o"],
+        "description": "quantity of water",
+        "action": "WATER-FUNCTION",
+        "flags": { "isDrinkable": true, "isTakeable": false },
+        "size": 4,
+        "canContain": "BOTTL"
+    },
+    "SWORD": {
+        "id": "SWORD",
+        "names": ["sword", "orcrist", "glamdring", "blade"],
+        "adjectives": ["elvish"],
+        "description": "elvish sword",
+        "initialDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity.",
+        "action": "SWORD",
+        "flags": { "isTakeable": true, "isWeapon": true },
+        "size": 5
+    },
+    "LAMP": {
+        "id": "LAMP",
+        "names": ["lamp", "lantern"],
+        "adjectives": ["brass"],
+        "description": "brass lantern",
+        "initialDescription": "A battery-powered brass lantern is on the trophy case.",
+        "action": "LANTERN",
+        "flags": { "isTakeable": true, "isLight": true },
+        "light": -1,
+        "size": 15
+    },
+    "RUG": {
+        "id": "RUG",
+        "names": ["rug", "carpet"],
+        "adjectives": ["oriental"],
+        "description": "carpet",
+        "action": "RUG",
+        "flags": { "isNotDescribed": true, "isTakeable": false },
+        "size": 9999
+    },
+    "TCASE": {
+        "id": "TCASE",
+        "names": ["case"],
+        "adjectives": ["trophy"],
+        "description": "trophy case",
+        "action": "TROPHY-CASE",
+        "flags": { "isContainer": true, "isTransparent": true, "isTakeable": false },
+        "size": 9999,
+        "capacity": 9999
+    }
+}
