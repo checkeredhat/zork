@@ -74,7 +74,9 @@
         "exits": [
             { "direction": "EAST", "roomId": "KITCHITCH" },
             { "direction": "WEST", "roomId": "BLROO", "condition": "MAGIC-FLAG", "message": "The door is nailed shut." },
-            { "direction": "DOWN", "roomId": "CELLA", "condition": "TRAP-DOOR" }
+            { "direction": "DOWN", "roomId": "CELLA", "condition": "TRAP-DOOR" },
+            { "direction": "UP", "roomId": "WONDERLAND-ROOM" },
+            { "direction": "NORTH", "roomId": "MIRROR-ROOM-1" }
         ],
         "objects": ["SWORD", "LAMP", "RUG", "TCASE", "DOOR", "ROPE"],
         "action": "LIVING-ROOM"
@@ -86,9 +88,32 @@
         "isLight": true,
         "exits": [
             { "direction": "WEST", "message": "The troll blocks your path." },
-            { "direction": "EAST", "message": "The troll blocks your path." }
+            { "direction": "EAST", "roomId": "CAROUSEL-ROOM" }
         ],
         "objects": ["TROLL", "AXE"]
+    },
+    "CAROUSEL-ROOM": {
+        "id": "CAROUSEL-ROOM",
+        "longDescription": "You are in a circular room that is spinning. There are exits in all directions.",
+        "shortDescription": "Carousel Room",
+        "isLight": true,
+        "exits": [
+            { "direction": "NORTH", "roomId": "MACHINE-ROOM" },
+            { "direction": "SOUTH", "roomId": "TROLL" },
+            { "direction": "EAST", "roomId": "LROOM" },
+            { "direction": "WEST", "roomId": "KITCH" }
+        ],
+        "objects": []
+    },
+    "MACHINE-ROOM": {
+        "id": "MACHINE-ROOM",
+        "longDescription": "You are in a room with a large, noisy machine. There is a panel of buttons on the wall.",
+        "shortDescription": "Machine Room",
+        "isLight": true,
+        "exits": [
+            { "direction": "SOUTH", "roomId": "CAROUSEL-ROOM" }
+        ],
+        "objects": ["BUTTONS"]
     },
     "CLEAR": {
         "id": "CLEAR",
@@ -96,9 +121,32 @@
         "shortDescription": "Clearing",
         "isLight": true,
         "exits": [
-            { "direction": "SOUTH", "roomId": "DAM" }
+            { "direction": "SOUTH", "roomId": "DAM" },
+            { "direction": "NORTH", "roomId": "ICY-CAVERN" }
         ],
         "objects": []
+    },
+    "ICY-CAVERN": {
+        "id": "ICY-CAVERN",
+        "longDescription": "You are in a large, icy cavern. The air is cold and still. A narrow passage leads to the south.",
+        "shortDescription": "Icy Cavern",
+        "isLight": false,
+        "exits": [
+            { "direction": "SOUTH", "roomId": "CLEAR" },
+            { "direction": "NORTH", "roomId": "GLACIER" }
+        ],
+        "objects": ["TORCH"]
+    },
+    "GLACIER": {
+        "id": "GLACIER",
+        "longDescription": "You are at the edge of a massive glacier. It blocks your path to the north.",
+        "shortDescription": "Glacier",
+        "isLight": false,
+        "exits": [
+            { "direction": "SOUTH", "roomId": "ICY-CAVERN" },
+            { "direction": "NORTH", "condition": "GLACIER_MELTED", "message": "The glacier blocks your path." }
+        ],
+        "objects": ["GLACIER"]
     },
     "DAM": {
         "id": "DAM",
@@ -130,9 +178,31 @@
         "isLight": true,
         "exits": [
             { "direction": "WEST", "roomId": "DAM-LOBBY" },
-            { "direction": "DOWN", "roomId": "RESERVOIR" }
+            { "direction": "DOWN", "roomId": "RESERVOIR" },
+            { "direction": "EAST", "roomId": "ROBOT-ROOM" }
         ],
         "objects": ["WRENCH", "BOLT"]
+    },
+    "ROBOT-ROOM": {
+        "id": "ROBOT-ROOM",
+        "longDescription": "You are in a room filled with strange equipment. A deactivated robot stands in the corner. A passage leads west.",
+        "shortDescription": "Robot Room",
+        "isLight": true,
+        "exits": [
+            { "direction": "WEST", "roomId": "MAINT-ROOM" },
+            { "direction": "NORTH", "roomId": "CAGE" }
+        ],
+        "objects": ["ROBOT"]
+    },
+    "CAGE": {
+        "id": "CAGE",
+        "longDescription": "You are in a large cage. As you enter, a heavy door slams shut behind you, and a hissing sound begins. A shiny sphere is on a pedestal in the center of the room.",
+        "shortDescription": "The Cage",
+        "isLight": true,
+        "exits": [
+            { "direction": "SOUTH", "message": "The door is sealed." }
+        ],
+        "objects": ["SPHERE"]
     },
     "RESERVOIR": {
         "id": "RESERVOIR",
@@ -144,5 +214,34 @@
             { "direction": "SOUTH", "message": "The tunnel is too dark to enter." }
         ],
         "objects": []
+    },
+    "WONDERLAND-ROOM": {
+        "id": "WONDERLAND-ROOM",
+        "longDescription": "You are in a strange room with walls that seem to shift and shimmer. There is a small, round hole in the wall to the north.",
+        "shortDescription": "Wonderland Room",
+        "isLight": true,
+        "exits": [
+            { "direction": "SOUTH", "roomId": "LROOM" },
+            { "direction": "NORTH", "condition": "PLAYER_SMALL", "message": "The hole is too small to fit through." }
+        ],
+        "objects": ["CAKE1", "CAKE2"]
+    },
+    "MIRROR-ROOM-1": {
+        "id": "MIRROR-ROOM-1",
+        "longDescription": "You are in a room with a large, ornate mirror on the wall.",
+        "shortDescription": "Mirror Room",
+        "isLight": true,
+        "exits": [
+            { "direction": "SOUTH", "roomId": "LROOM" }
+        ],
+        "objects": ["MAGIC-MIRROR"]
+    },
+    "MIRROR-ROOM-2": {
+        "id": "MIRROR-ROOM-2",
+        "longDescription": "You are in a room with a large, plain mirror on the wall.",
+        "shortDescription": "Mirror Room",
+        "isLight": true,
+        "exits": [],
+        "objects": ["MAGIC-MIRROR"]
     }
 }

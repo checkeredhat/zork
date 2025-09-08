@@ -177,5 +177,67 @@
         "initialDescription": "There is a book of matches here.",
         "flags": { "isTakeable": true, "isLightSource": true, "isLit": false },
         "size": 1
+    },
+    "GLACIER": {
+        "id": "GLACIER",
+        "names": ["glacier"],
+        "description": "A massive, impassable glacier.",
+        "flags": { "isTakeable": false, "isMelted": false },
+        "action": "GLACIER"
+    },
+    "TORCH": {
+        "id": "TORCH",
+        "names": ["torch"],
+        "description": "A wooden torch.",
+        "initialDescription": "A torch lies on the ground.",
+        "flags": { "isTakeable": true, "isLightSource": true, "isLit": false },
+        "size": 5
+    },
+    "CAKE1": {
+        "id": "CAKE1",
+        "names": ["cake"],
+        "adjectives": ["small"],
+        "description": "A small cake.",
+        "initialDescription": "There is a small cake here.",
+        "flags": { "isTakeable": true, "isEdible": true },
+        "action": "EAT-CAKE-SMALL"
+    },
+    "CAKE2": {
+        "id": "CAKE2",
+        "names": ["cake"],
+        "adjectives": ["large"],
+        "description": "A large cake.",
+        "initialDescription": "There is a large cake here.",
+        "flags": { "isTakeable": true, "isEdible": true },
+        "action": "EAT-CAKE-LARGE"
+    },
+    "ROBOT": {
+        "id": "ROBOT",
+        "names": ["robot"],
+        "description": "A shiny metal robot.",
+        "flags": { "isTakeable": false, "isActor": true },
+        "action": "ROBOT"
+    },
+    "SPHERE": {
+        "id": "SPHERE",
+        "names": ["sphere"],
+        "description": "A shimmering, iridescent sphere.",
+        "initialDescription": "There is a sphere here.",
+        "flags": { "isTakeable": true },
+        "size": 10
+    },
+    "BUTTONS": {
+        "id": "BUTTONS",
+        "names": ["buttons", "panel"],
+        "description": "A panel of buttons.",
+        "flags": { "isTakeable": false },
+        "action": "CAROUSEL-BUTTONS"
+    },
+    "MAGIC-MIRROR": {
+        "id": "MAGIC-MIRROR",
+        "names": ["mirror"],
+        "description": "A magic mirror.",
+        "flags": { "isTakeable": false },
+        "action": "MAGIC-MIRROR"
     }
 }

@@ -9,6 +9,14 @@ class Game {
         this.light_timer = 0;
         this.isGameOver = false;
         this.damWaterLevel = 'high'; // high, low
+        this.glacierMelted = false;
+        this.playerSize = 'normal'; // normal, small, large
+        this.poisonGasTimer = 0;
+        this.robot = {
+            room: null,
+            inventory: []
+        };
+        this.isCarouselSpinning = true;
     }
 
     async start() {
@@ -22,6 +30,8 @@ class Game {
             score: 0,
             inventory: []
         });
+
+        this.robot.room = this.rooms['ROBOT-ROOM'];
 
         this.look();
     }
@@ -103,12 +113,28 @@ class Game {
 
     go(direction) {
         const currentRoom = this.player.room;
-        const exit = currentRoom.exits.find(e => e.direction.toLowerCase() === direction.toLowerCase());
+        let exit = currentRoom.exits.find(e => e.direction.toLowerCase() === direction.toLowerCase());
+
+        if (currentRoom.id === 'CAROUSEL-ROOM' && this.isCarouselSpinning) {
+            const exits = currentRoom.exits;
+            exit = exits[Math.floor(Math.random() * exits.length)];
+            this.ui.display("The room spins, and you stumble out a random exit.");
+        }
 
         if (exit) {
             if (exit.condition) {
                 if (exit.condition === 'DAM_WATER_LOW') {
                     if (this.damWaterLevel !== 'low') {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
+                } else if (exit.condition === 'GLACIER_MELTED') {
+                    if (!this.glacierMelted) {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
+                } else if (exit.condition === 'PLAYER_SMALL') {
+                    if (this.playerSize !== 'small') {
                         this.ui.display(exit.message || "You can't go that way.");
                         return;
                     }
@@ -123,6 +149,9 @@ class Game {
 
             if (exit.roomId) {
                 this.player.room = this.rooms[exit.roomId];
+                if (exit.roomId === 'CAGE') {
+                    this.poisonGasTimer = 5; // 5 turns to solve the puzzle
+                }
                 this.look();
             } else if (exit.message) {
                 this.ui.display(exit.message);
@@ -280,24 +309,24 @@ class Game {
         this.ui.display("There's nothing special to read on it.");
     }
 
-    throw(gameObject) {
-        if (!gameObject) {
+    throw(directObject, indirectObject) {
+        if (!directObject) {
             this.ui.display("What do you want to throw?");
             return;
         }
-        if (this.player.inventory.indexOf(gameObject) === -1) {
+        if (this.player.inventory.indexOf(directObject) === -1) {
             this.ui.display("You don't have that.");
             return;
         }
 
-        this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
-        this.player.room.objects.push(gameObject);
-        gameObject.room = this.player.room;
+        this.player.inventory = this.player.inventory.filter(obj => obj.id !== directObject.id);
+        this.player.room.objects.push(directObject);
+        directObject.room = this.player.room;
 
-        this.ui.display(`You threw the ${gameObject.names[0]}.`);
+        this.ui.display(`You threw the ${directObject.names[0]}.`);
 
-        if (gameObject.action) {
-            this.handleObjectAction('throw', gameObject);
+        if (indirectObject && indirectObject.action) {
+            this.handleObjectAction('throw', directObject, indirectObject);
         }
     }
 
@@ -334,6 +363,21 @@ class Game {
             this.ui.display("You can't eat that.");
             return;
         }
+
+        if (gameObject.action === 'EAT-CAKE-SMALL') {
+            this.ui.display("You eat the small cake. You suddenly feel yourself shrinking!");
+            this.playerSize = 'small';
+            this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+            return;
+        }
+
+        if (gameObject.action === 'EAT-CAKE-LARGE') {
+            this.ui.display("You eat the large cake. You suddenly feel yourself growing!");
+            this.playerSize = 'large';
+            this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+            return;
+        }
+
         // Remove the object from inventory or room
         this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
         this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== gameObject.id);
@@ -473,9 +517,79 @@ class Game {
         this.ui.display(`You attempt to exorcise the ${gameObject.names[0]}, but it has no effect.`);
     }
 
+    commandRobot(command) {
+        // A very simple robot command parser
+        const tokens = command.toLowerCase().split(' ');
+        const verb = tokens[0];
+        const directObject = tokens.length > 1 ? tokens.slice(1).join(' ') : null;
+
+        const robotObject = this.objects['ROBOT'];
+        if (robotObject.room !== this.player.room) {
+            this.ui.display("The robot is not here.");
+            return;
+        }
+
+        switch (verb) {
+            case 'go':
+                const direction = directObject;
+                const robotRoom = this.robot.room;
+                const exit = robotRoom.exits.find(e => e.direction.toLowerCase() === direction.toLowerCase());
+                if (exit) {
+                    this.robot.room = this.rooms[exit.roomId];
+                    this.ui.display("The robot whirs and moves to the " + direction);
+                } else {
+                    this.ui.display("The robot cannot go that way.");
+                }
+                break;
+            case 'take':
+                const objToTake = this.robot.room.objects.find(o => o.names.includes(directObject));
+                if (objToTake && objToTake.flags.isTakeable) {
+                    this.robot.room.objects = this.robot.room.objects.filter(o => o.id !== objToTake.id);
+                    this.robot.inventory.push(objToTake);
+                    this.ui.display(`The robot takes the ${objToTake.names[0]}.`);
+                } else {
+                    this.ui.display("The robot cannot take that.");
+                }
+                break;
+            default:
+                this.ui.display("The robot does not understand that command.");
+        }
+    }
+
     handleObjectAction(verb, directObject, indirectObject) {
         const gameObject = indirectObject || directObject;
         switch (gameObject.action) {
+            case 'MAGIC-MIRROR':
+                if (verb === 'rub') {
+                    this.ui.display("The mirror shimmers and you feel a strange sensation...");
+                    if (this.player.room.id === 'MIRROR-ROOM-1') {
+                        this.player.room = this.rooms['MIRROR-ROOM-2'];
+                    } else {
+                        this.player.room = this.rooms['MIRROR-ROOM-1'];
+                    }
+                    this.look();
+                }
+                break;
+            case 'CAROUSEL-BUTTONS':
+                if (verb === 'push') {
+                    if (this.isCarouselSpinning) {
+                        this.isCarouselSpinning = false;
+                        this.ui.display("You push the buttons. The spinning slows to a halt.");
+                    } else {
+                        this.ui.display("The carousel is already stopped.");
+                    }
+                }
+                break;
+            case 'GLACIER':
+                if (verb === 'throw' && directObject.id === 'TORCH' && directObject.flags.isLit) {
+                    this.ui.display("The lit torch melts the glacier, revealing a path to the north!");
+                    this.glacierMelted = true;
+                    // Remove the glacier from the room
+                    this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== 'GLACIER');
+                } else {
+                    this.ui.display("Throwing that at the glacier has no effect.");
+                }
+                break;
             case 'DAM-BOLT':
                 if ((verb === 'use' && directObject.id === 'WRENCH') || verb === 'turn') {
                     if (gameObject.flags.isLoose) {
@@ -548,7 +662,26 @@ class Game {
             return; // Don't process commands if the game is over
         }
         if (!command) return;
+
+        // Handle robot command separately
+        if (command.toLowerCase().startsWith('robot,')) {
+            const robotCommand = command.substring(7).trim();
+            this.commandRobot(robotCommand);
+            return;
+        }
+
         this.ui.displayPrompt(`> ${command}`);
+
+        // Poison gas timer
+        if (this.poisonGasTimer > 0) {
+            this.poisonGasTimer--;
+            if (this.poisonGasTimer > 0) {
+                this.ui.display(`The hissing sound grows louder. You have ${this.poisonGasTimer} turns left.`);
+            } else {
+                this.gameOver("You have succumbed to the poison gas!");
+                return;
+            }
+        }
 
         // Light timer logic
         const lightSource = this.player.inventory.find(obj => obj.flags.isLight && obj.light > 0);
@@ -610,7 +743,7 @@ class Game {
                 this.read(action.directObject);
                 break;
             case 'throw':
-                this.throw(action.directObject);
+                this.throw(action.directObject, action.indirectObject);
                 break;
             case 'use':
                 this.use(action.directObject, action.indirectObject);
@@ -656,6 +789,9 @@ class Game {
                 break;
             case 'exorcise':
                 this.exorcise(action.directObject);
+                break;
+            case 'robot':
+                this.commandRobot(action.directObject);
                 break;
             default:
                 this.ui.display("I don't know how to do that yet.");
