@@ -89,31 +89,89 @@ class Game {
         }
     }
 
+    thiefUpdate() {
+        if (this.thief.timer > 0) {
+            this.thief.timer--;
+            return;
+        }
+
+        const thiefObject = this.objects['THIEF'];
+        if (!thiefObject) return;
+
+        // Chance to appear
+        if (!this.thief.room) {
+            if (Math.random() < 0.1) { // 10% chance to appear
+                const roomKeys = Object.keys(this.rooms);
+                const randomRoomKey = roomKeys[Math.floor(Math.random() * roomKeys.length)];
+                const randomRoom = this.rooms[randomRoomKey];
+
+                if (randomRoom.isLight && !randomRoom.flags.isSacred) {
+                    this.thief.room = randomRoom;
+                    randomRoom.objects.push(thiefObject);
+                    if (this.player.room === randomRoom) {
+                        this.ui.display("A shady-looking figure suddenly appears!");
+                    }
+                    this.thief.timer = 20; // Time until next action
+                }
+            }
+        } else {
+            // Chance to move
+            if (Math.random() < 0.5) {
+                const exits = this.thief.room.exits;
+                if (exits.length > 0) {
+                    const randomExit = exits[Math.floor(Math.random() * exits.length)];
+                    if (randomExit.roomId) {
+                        // Remove from old room
+                        this.thief.room.objects = this.thief.room.objects.filter(obj => obj.id !== 'THIEF');
+                        // Add to new room
+                        this.thief.room = this.rooms[randomExit.roomId];
+                        this.thief.room.objects.push(thiefObject);
+                    }
+                }
+            }
+
+            // Chance to steal
+            if (this.thief.room === this.player.room) {
+                if (Math.random() < 0.3) {
+                    const valuableObjects = this.player.inventory.filter(obj => obj.value > 0);
+                    if (valuableObjects.length > 0) {
+                        const stolenObject = valuableObjects[Math.floor(Math.random() * valuableObjects.length)];
+                        this.player.inventory = this.player.inventory.filter(obj => obj.id !== stolenObject.id);
+                        this.thief.inventory.push(stolenObject);
+                        this.ui.display(`The thief steals your ${stolenObject.names[0]}!`);
+                    }
+                }
+            }
+
+            // Chance to disappear
+            if (Math.random() < 0.1) {
+                if (this.player.room === this.thief.room) {
+                    this.ui.display("The thief vanishes into the shadows.");
+                }
+                this.thief.room.objects = this.thief.room.objects.filter(obj => obj.id !== 'THIEF');
+                this.thief.room = null;
+                this.thief.timer = 100; // Time until he can appear again
+            } else {
+                this.thief.timer = 10; // Time until next action
+            }
+        }
+    }
+
     look() {
         const currentRoom = this.player.room;
 
-        // Special case for living room description
-        if (currentRoom.id === 'LROOM') {
-            let desc = "You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, and a trophy case.";
-            const rug = this.objects['RUG'];
-            const door = this.objects['DOOR'];
-            if (rug.flags.isMoved) {
-                if (door.flags.isOpen) {
-                    desc += " Lying beside the rug is an open trap door.";
-                } else {
-                    desc += " Lying beside the rug is a closed trap door.";
-                }
-            } else {
-                desc += " A large oriental rug is in the center of the room.";
-            }
-            this.ui.display(desc);
-            currentRoom.isSeen = true;
+        if (currentRoom.isSeen) {
+            this.ui.display(currentRoom.shortDescription);
         } else {
-             if (currentRoom.isSeen) {
-                this.ui.display(currentRoom.shortDescription);
-            } else {
-                this.ui.display(currentRoom.longDescription);
-                currentRoom.isSeen = true;
+            this.ui.display(currentRoom.longDescription);
+            currentRoom.isSeen = true;
+        }
+
+        // Check for sword glow
+        const sword = this.objects['SWORD'];
+        if (sword && (this.player.inventory.includes(sword) || currentRoom.objects.includes(sword))) {
+            if (window.gameActions && window.gameActions[sword.action]) {
+                window.gameActions[sword.action](this);
             }
         }
 
@@ -171,6 +229,9 @@ class Game {
 
             if (exit.roomId) {
                 this.player.room = this.rooms[exit.roomId];
+                if (this.player.room.action && window.gameActions && window.gameActions[this.player.room.action]) {
+                    window.gameActions[this.player.room.action](this, 'walk-in');
+                }
                 if (exit.roomId === 'CAGE') {
                     this.poisonGasTimer = 5; // 5 turns to solve the puzzle
                 }
@@ -188,6 +249,13 @@ class Game {
             this.ui.display("I don't see that here.");
             return;
         }
+
+        if (gameObject.action) {
+            if (this.handleObjectAction('take', gameObject)) {
+                return;
+            }
+        }
+
         if (!gameObject.flags.isTakeable) {
             this.ui.display("You can't take that.");
             return;
@@ -232,9 +300,6 @@ class Game {
         if (!gameObject) {
             this.ui.display("You can't see that here.");
             return;
-        }
-        if (gameObject.action) {
-            return this.handleObjectAction('close', gameObject);
         }
         if (!gameObject.flags.isContainer) {
             this.ui.display("That's not a container.");
@@ -525,12 +590,18 @@ class Game {
         }
     }
 
-    turn(gameObject) {
+    turn(gameObject, state) { // state can be 'on' or 'off'
         if (!gameObject) {
             this.ui.display("What do you want to turn?");
             return;
         }
         if (gameObject.action) {
+            // Pass the state to the action handler
+            if (state === 'on') {
+                return this.handleObjectAction('turn on', gameObject);
+            } else if (state === 'off') {
+                return this.handleObjectAction('turn off', gameObject);
+            }
             return this.handleObjectAction('turn', gameObject);
         }
         this.ui.display("You can't turn that.");
@@ -568,8 +639,17 @@ class Game {
             this.ui.display("What do you want to burn?");
             return;
         }
-        const lightSource = this.player.inventory.find(obj => obj.flags.isLightSource && obj.flags.isLit);
-        if (!lightSource) {
+
+        let hasFire = this.player.inventory.find(obj => obj.flags.isLightSource && obj.flags.isLit);
+        const matches = this.objects['MATCH'];
+
+        if (!hasFire && matches && this.player.inventory.includes(matches) && matches.light > 0) {
+            this.ui.display("(using a match)");
+            this.handleObjectAction('light', matches); // Use a match
+            hasFire = true; // Now we have fire
+        }
+
+        if (!hasFire) {
             this.ui.display("You have no source of fire.");
             return;
         }
@@ -577,6 +657,7 @@ class Game {
             this.ui.display("You can't burn that.");
             return;
         }
+
         // For now, just destroy the object
         this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
         this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== gameObject.id);
@@ -588,6 +669,10 @@ class Game {
             this.ui.display("What do you want to light?");
             return;
         }
+        // Delegate to action system if available
+        if (gameObject.action && this.handleObjectAction('light', gameObject)) {
+            return;
+        }
         if (!gameObject.flags.isLightSource) {
             this.ui.display("You can't light that.");
             return;
@@ -596,6 +681,7 @@ class Game {
             this.ui.display("It's already lit.");
             return;
         }
+        // Generic fallback
         gameObject.flags.isLit = true;
         this.ui.display(`You light the ${gameObject.names[0]}.`);
     }
@@ -697,102 +783,13 @@ class Game {
 
     handleObjectAction(verb, directObject, indirectObject) {
         const gameObject = indirectObject || directObject;
-        switch (gameObject.action) {
-            case 'SKELETON':
-                if (verb === 'take' || verb === 'move') {
-                    this.ghostEvent();
-                } else {
-                    this.ui.display("You can't do that to the skeleton.");
-                }
-                break;
-            case 'MAGIC-MIRROR':
-                if (verb === 'rub') {
-                    this.ui.display("The mirror shimmers and you feel a strange sensation...");
-                    if (this.player.room.id === 'MIRROR-ROOM-1') {
-                        this.player.room = this.rooms['MIRROR-ROOM-2'];
-                    } else {
-                        this.player.room = this.rooms['MIRROR-ROOM-1'];
-                    }
-                    this.look();
-                }
-                break;
-            case 'CAROUSEL-BUTTONS':
-                if (verb === 'push') {
-                    if (this.isCarouselSpinning) {
-                        this.isCarouselSpinning = false;
-                        this.ui.display("You push the buttons. The spinning slows to a halt.");
-                    } else {
-                        this.ui.display("The carousel is already stopped.");
-                    }
-                }
-                break;
-            case 'GLACIER':
-                if (verb === 'throw' && directObject.id === 'TORCH' && directObject.flags.isLit) {
-                    this.ui.display("The lit torch melts the glacier, revealing a path to the north!");
-                    this.glacierMelted = true;
-                    // Remove the glacier from the room
-                    this.player.room.objects = this.player.room.objects.filter(obj => obj.id !== 'GLACIER');
-                } else {
-                    this.ui.display("Throwing that at the glacier has no effect.");
-                }
-                break;
-            case 'DAM-BOLT':
-                if ((verb === 'use' && directObject.id === 'WRENCH') || verb === 'turn') {
-                    if (gameObject.flags.isLoose) {
-                        this.ui.display("The bolt is already loose.");
-                    } else {
-                        const wrench = this.player.inventory.find(obj => obj.id === 'WRENCH');
-                        if (verb === 'turn' && !wrench) {
-                            this.ui.display("The bolt is too tight to turn by hand.");
-                            return;
-                        }
-                        gameObject.flags.isLoose = true;
-                        this.ui.display("You turn the bolt. The sluice gate opens, and the reservoir drains with a mighty roar.");
-                        this.damWaterLevel = 'low';
-                    }
-                } else {
-                    this.ui.display("You can't do that.");
-                }
-                break;
-            case 'DAM-PANEL':
-                if (verb === 'push') {
-                    this.ui.display("You push the buttons, but nothing happens. The panel seems to be dead.");
-                }
-                break;
-            case 'RUG':
-                if (verb === 'move') {
-                    if (gameObject.flags.isMoved) {
-                        this.ui.display("Having moved the carpet previously, you find it impossible to move it again.");
-                    } else {
-                        gameObject.flags.isMoved = true;
-                        const door = this.objects['DOOR'];
-                        door.flags.isVisible = true;
-                        this.ui.display("With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap-door appears.");
-                    }
-                } else {
-                    this.ui.display("I don't know how to do that to the rug.");
-                }
-                break;
-            case 'TRAP-DOOR':
-                if (verb === 'open') {
-                    if (gameObject.flags.isOpen) {
-                        this.ui.display("It's already open.");
-                    } else {
-                        gameObject.flags.isOpen = true;
-                        this.ui.display("The door reluctantly opens to reveal a rickety staircase descending into darkness.");
-                    }
-                } else if (verb === 'close') {
-                    if (!gameObject.flags.isOpen) {
-                        this.ui.display("It's already closed.");
-                    } else {
-                        gameObject.flags.isOpen = false;
-                        this.ui.display("The door swings shut and closes.");
-                    }
-                }
-                break;
-            default:
-                this.ui.display("I don't know how to do that.");
+        if (gameObject.action && window.gameActions && window.gameActions[gameObject.action]) {
+            const handled = window.gameActions[gameObject.action](this, verb, directObject, indirectObject);
+            if (handled) {
+                return true;
+            }
         }
+        return false;
     }
 
     gameOver(cause = 'DEFAULT') {
@@ -873,6 +870,26 @@ class Game {
             return;
         }
 
+        // Room-specific action handling
+        if (currentRoom.action && window.gameActions && window.gameActions[currentRoom.action]) {
+            const handled = window.gameActions[currentRoom.action](this, action.verb, action.directObject, action.indirectObject);
+            if (handled) {
+                return;
+            }
+        }
+
+        // Object-specific action handling
+        if (action.directObject && action.directObject.action) {
+            if (this.handleObjectAction(action.verb, action.directObject, action.indirectObject)) {
+                return;
+            }
+        }
+        if (action.indirectObject && action.indirectObject.action) {
+            if (this.handleObjectAction(action.verb, action.directObject, action.indirectObject)) {
+                return;
+            }
+        }
+
         switch (action.verb) {
             case 'look':
                 this.look();
@@ -920,7 +937,7 @@ class Game {
                 this.drink(action.directObject);
                 break;
             case 'turn':
-                this.turn(action.directObject);
+                this.turn(action.directObject, action.indirectObject);
                 break;
             case 'tie':
                 this.tie(action.directObject);
