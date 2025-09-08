@@ -6,6 +6,9 @@ class Game {
         this.objects = {};
         this.vocabulary = {};
         this.parser = null;
+        this.light_timer = 0;
+        this.isGameOver = false;
+        this.damWaterLevel = 'high'; // high, low
     }
 
     async start() {
@@ -104,10 +107,17 @@ class Game {
 
         if (exit) {
             if (exit.condition) {
-                const conditionObject = this.objects[exit.condition];
-                if (!conditionObject || !conditionObject.flags.isOpen) {
-                    this.ui.display(exit.message || "You can't go that way.");
-                    return;
+                if (exit.condition === 'DAM_WATER_LOW') {
+                    if (this.damWaterLevel !== 'low') {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
+                } else {
+                    const conditionObject = this.objects[exit.condition];
+                    if (!conditionObject || !conditionObject.flags.isOpen) {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
                 }
             }
 
@@ -255,8 +265,87 @@ class Game {
         this.ui.display("You can't move that.");
     }
 
-    handleObjectAction(verb, gameObject) {
+    read(gameObject) {
+        if (!gameObject) {
+            this.ui.display("There's nothing to read.");
+            return;
+        }
+        if (!gameObject.flags.isReadable) {
+            this.ui.display("That's not something you can read.");
+            return;
+        }
+        if (gameObject.action) {
+            return this.handleObjectAction('read', gameObject);
+        }
+        this.ui.display("There's nothing special to read on it.");
+    }
+
+    throw(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to throw?");
+            return;
+        }
+        if (this.player.inventory.indexOf(gameObject) === -1) {
+            this.ui.display("You don't have that.");
+            return;
+        }
+
+        this.player.inventory = this.player.inventory.filter(obj => obj.id !== gameObject.id);
+        this.player.room.objects.push(gameObject);
+        gameObject.room = this.player.room;
+
+        this.ui.display(`You threw the ${gameObject.names[0]}.`);
+
+        if (gameObject.action) {
+            this.handleObjectAction('throw', gameObject);
+        }
+    }
+
+    use(directObject, indirectObject) {
+        if (!directObject || !indirectObject) {
+            this.ui.display("You need to specify what to use and what to use it on.");
+            return;
+        }
+
+        if (indirectObject.action) {
+            this.handleObjectAction('use', directObject, indirectObject);
+        } else {
+            this.ui.display("You can't use that here.");
+        }
+    }
+
+    push(gameObject) {
+        if (!gameObject) {
+            this.ui.display("What do you want to push?");
+            return;
+        }
+        if (gameObject.action) {
+            return this.handleObjectAction('push', gameObject);
+        }
+        this.ui.display("You can't push that.");
+    }
+
+    handleObjectAction(verb, directObject, indirectObject) {
+        const gameObject = indirectObject || directObject;
         switch (gameObject.action) {
+            case 'DAM-BOLT':
+                if (verb === 'use' && directObject.id === 'WRENCH') {
+                    if (gameObject.flags.isLoose) {
+                        this.ui.display("The bolt is already loose.");
+                    } else {
+                        gameObject.flags.isLoose = true;
+                        this.ui.display("You loosen the bolt with the wrench. The sluice gate opens, and the reservoir drains with a mighty roar.");
+                        this.damWaterLevel = 'low';
+                    }
+                } else {
+                    this.ui.display("You can't do that.");
+                }
+                break;
+            case 'DAM-PANEL':
+                if (verb === 'push') {
+                    this.ui.display("You push the buttons, but nothing happens. The panel seems to be dead.");
+                }
+                break;
             case 'RUG':
                 if (verb === 'move') {
                     if (gameObject.flags.isMoved) {
@@ -293,9 +382,37 @@ class Game {
         }
     }
 
+    gameOver(message) {
+        this.ui.display(message);
+        this.ui.display("\n**** You have died ****");
+        this.isGameOver = true;
+        // Here you might want to disable the input as well
+        this.ui.inputElement.disabled = true;
+    }
+
     processTurn(command) {
+        if (this.isGameOver) {
+            return; // Don't process commands if the game is over
+        }
         if (!command) return;
         this.ui.displayPrompt(`> ${command}`);
+
+        // Light timer logic
+        const lightSource = this.player.inventory.find(obj => obj.flags.isLight && obj.light > 0);
+        if (lightSource) {
+            lightSource.light--;
+            if (lightSource.light === 10) {
+                this.ui.display("Your light source is growing dim.");
+            } else if (lightSource.light === 0) {
+                this.ui.display("Your light source has run out.");
+            }
+        }
+
+        const currentRoom = this.player.room;
+        if (!currentRoom.isLight && !lightSource) {
+            this.gameOver("It is pitch black. You are likely to be eaten by a grue.");
+            return;
+        }
 
         const context = {
             roomObjects: this.player.room.objects,
@@ -335,6 +452,18 @@ class Game {
                 break;
             case 'move':
                 this.move(action.directObject);
+                break;
+            case 'read':
+                this.read(action.directObject);
+                break;
+            case 'throw':
+                this.throw(action.directObject);
+                break;
+            case 'use':
+                this.use(action.directObject, action.indirectObject);
+                break;
+            case 'push':
+                this.push(action.directObject);
                 break;
             default:
                 this.ui.display("I don't know how to do that yet.");

@@ -18,7 +18,9 @@
         "attack": ["fight", "kill", "hit", "mung"],
         "open": [],
         "close": [],
-        "move": []
+        "move": [],
+        "push": ["press"],
+        "use": []
     },
     "prepositions": [
         "with",

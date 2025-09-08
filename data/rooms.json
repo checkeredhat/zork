@@ -89,5 +89,60 @@
             { "direction": "EAST", "message": "The troll blocks your path." }
         ],
         "objects": ["TROLL", "AXE"]
+    },
+    "CLEAR": {
+        "id": "CLEAR",
+        "longDescription": "You are in a clearing, with a forest surrounding you on all sides. A path leads south.",
+        "shortDescription": "Clearing",
+        "isLight": true,
+        "exits": [
+            { "direction": "SOUTH", "roomId": "DAM" }
+        ],
+        "objects": []
+    },
+    "DAM": {
+        "id": "DAM",
+        "longDescription": "You are standing on the top of the Frotz Dam, which was constructed in 1934. The dam is made of reinforced concrete, and is quite impressive. The spillway is to the north. The reservoir is to the south.",
+        "shortDescription": "Dam",
+        "isLight": true,
+        "exits": [
+            { "direction": "NORTH", "roomId": "DAM-LOBBY" },
+            { "direction": "SOUTH", "roomId": "RESERVOIR", "condition": "DAM_WATER_LOW", "message": "You can't go that way. The reservoir is deep and fast-moving." }
+        ],
+        "objects": []
+    },
+    "DAM-LOBBY": {
+        "id": "DAM-LOBBY",
+        "longDescription": "You are in the lobby of the dam. There are doors to the east and west, and a path leading north. The lobby is filled with informational plaques about the dam's construction.",
+        "shortDescription": "Dam Lobby",
+        "isLight": true,
+        "exits": [
+            { "direction": "NORTH", "roomId": "CLEAR" },
+            { "direction": "EAST", "roomId": "MAINT-ROOM" },
+            { "direction": "WEST", "message": "The door is locked." }
+        ],
+        "objects": ["PANEL"]
+    },
+    "MAINT-ROOM": {
+        "id": "MAINT-ROOM",
+        "longDescription": "You are in the maintenance room. It's filled with tools and equipment. A greasy ladder leads down.",
+        "shortDescription": "Maintenance Room",
+        "isLight": true,
+        "exits": [
+            { "direction": "WEST", "roomId": "DAM-LOBBY" },
+            { "direction": "DOWN", "roomId": "RESERVOIR" }
+        ],
+        "objects": ["WRENCH", "BOLT"]
+    },
+    "RESERVOIR": {
+        "id": "RESERVOIR",
+        "longDescription": "You are at the bottom of the reservoir. The water is gone, revealing a muddy, littered bottom. A rusty metal gate is set into the dam wall to the north. A narrow tunnel leads to the south.",
+        "shortDescription": "Reservoir Bottom",
+        "isLight": false,
+        "exits": [
+            { "direction": "UP", "roomId": "MAINT-ROOM" },
+            { "direction": "SOUTH", "message": "The tunnel is too dark to enter." }
+        ],
+        "objects": []
     }
 }

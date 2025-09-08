@@ -97,7 +97,7 @@
         "initialDescription": "A battery-powered brass lantern is on the trophy case.",
         "action": "LANTERN",
         "flags": { "isTakeable": true, "isLight": true },
-        "light": -1,
+        "light": 300,
         "size": 15
     },
     "RUG": {
@@ -138,5 +138,28 @@
         "adjectives": ["bloody"],
         "description": "a bloody axe",
         "flags": { "isWeapon": true, "isTakeable": true }
+    },
+    "WRENCH": {
+        "id": "WRENCH",
+        "names": ["wrench"],
+        "description": "A large wrench.",
+        "initialDescription": "There is a wrench here.",
+        "flags": { "isTakeable": true },
+        "size": 10
+    },
+    "BOLT": {
+        "id": "BOLT",
+        "names": ["bolt", "nut"],
+        "description": "A large bolt, tightly fastened.",
+        "flags": { "isTakeable": false, "isLoose": false },
+        "action": "DAM-BOLT"
+    },
+    "PANEL": {
+        "id": "PANEL",
+        "names": ["panel", "buttons"],
+        "description": "A control panel with four buttons.",
+        "initialDescription": "On the wall is a control panel.",
+        "flags": { "isTakeable": false },
+        "action": "DAM-PANEL"
     }
 }
