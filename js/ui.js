@@ -11,6 +11,16 @@ class UI {
         this.outputElement.scrollTop = this.outputElement.scrollHeight;
     }
 
+    displayPrompt(text) {
+        const p = document.createElement('p');
+        const span = document.createElement('span');
+        span.className = 'prompt';
+        span.textContent = text;
+        p.appendChild(span);
+        this.outputElement.appendChild(p);
+        this.outputElement.scrollTop = this.outputElement.scrollHeight;
+    }
+
     onInput(callback) {
         this.inputElement.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {

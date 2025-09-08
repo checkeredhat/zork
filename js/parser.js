@@ -27,22 +27,33 @@ class Parser {
         let verb = null;
         let directObject = null;
 
-        const verbToken = filteredTokens[0];
+        const firstToken = filteredTokens[0];
 
-        // Check if it's a known verb
-        if (this.verbs[verbToken]) {
-            verb = this.verbs[verbToken];
-        }
-        // Check if it's a direction (which implies a "go" verb)
-        else if (this.directions[verbToken]) {
+        // Is the first token a direction? (e.g., "north")
+        if (this.directions[firstToken]) {
             verb = 'go';
-            directObject = this.directions[verbToken];
+            directObject = this.directions[firstToken];
             return { verb, directObject, indirectObject: null };
-        } else {
-            return { error: `I don't know the verb "${verbToken}".` };
         }
 
-        // Find the direct object if more tokens exist
+        // Is the first token a verb?
+        if (this.verbs[firstToken]) {
+            verb = this.verbs[firstToken];
+        } else {
+            return { error: `I don't know the verb "${firstToken}".` };
+        }
+
+        // Handle 'go' verb specifically (e.g., "go north")
+        if (verb === 'go') {
+            if (filteredTokens.length > 1 && this.directions[filteredTokens[1]]) {
+                directObject = this.directions[filteredTokens[1]];
+                return { verb, directObject, indirectObject: null };
+            } else {
+                return { error: "Where do you want to go?" };
+            }
+        }
+
+        // Find the direct object for other verbs
         if (filteredTokens.length > 1) {
             const objectTokens = filteredTokens.slice(1);
             const availableObjects = [...context.roomObjects, ...context.inventoryObjects];
@@ -50,7 +61,7 @@ class Parser {
             directObject = this.findObject(objectTokens, availableObjects);
 
             if (!directObject) {
-                 return { error: `I can't see a "${objectTokens.join(' ')}" here.`};
+                return { error: `I can't see a "${objectTokens.join(' ')}" here.` };
             }
         }
 
@@ -59,18 +70,29 @@ class Parser {
 
     findObject(objectTokens, availableObjects) {
         for (const obj of availableObjects) {
-            // Check against object names (e.g., "sword", "orcrist")
-            const nameMatch = objectTokens.every(token => obj.names.includes(token));
+            const remainingTokens = [...objectTokens];
+            let nameMatch = false;
 
-            if (nameMatch) return obj;
+            // Check for a name match and remove it
+            for (let i = 0; i < remainingTokens.length; i++) {
+                if (obj.names.includes(remainingTokens[i])) {
+                    nameMatch = true;
+                    remainingTokens.splice(i, 1);
+                    break; // Found a name, stop searching for names
+                }
+            }
 
-            // Check against adjectives + name (e.g., "elvish sword")
-            const adjectiveMatch = objectTokens.length > 1 &&
-                                   obj.adjectives.includes(objectTokens[0]) &&
-                                   obj.names.includes(objectTokens[1]);
+            if (!nameMatch) {
+                continue; // This object is not a candidate if no name matches
+            }
 
-            if (adjectiveMatch) return obj;
+            // Check that all remaining tokens are valid adjectives for the object
+            const adjectivesMatch = remainingTokens.every(token => obj.adjectives.includes(token));
+
+            if (adjectivesMatch) {
+                return obj; // Found a match
+            }
         }
-        return null;
+        return null; // No matching object found
     }
 }

@@ -143,7 +143,7 @@ class Game {
 
     processTurn(command) {
         if (!command) return;
-        this.ui.display(`> ${command}`);
+        this.ui.displayPrompt(`> ${command}`);
 
         const context = {
             roomObjects: this.player.room.objects,
