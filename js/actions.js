@@ -1,6 +1,206 @@
 // js/actions.js
 
 const actions = {
+    'READ-ADVER': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`(Taken)
+"WELCOME TO DUNGEON!
+
+DUNGEON is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortal man. Hardened adventurers have run screaming from the terrors contained within!
+
+In DUNGEON the intrepid explorer delves into the forgotten secrets of a lost labyrinth deep in the bowels of the earth, searching for vast treasures long hidden from prying eyes, treasures guarded by fearsome monsters and diabolical traps!
+
+No PDP-10 should be without one!"`);
+            // In the original, taking the leaflet is automatic. We'll simulate that.
+            const leaflet = game.objects['ADVER'];
+            if (leaflet.room) {
+                // Remove from room and add to inventory
+                leaflet.room.objects = leaflet.room.objects.filter(obj => obj.id !== 'ADVER');
+                game.player.inventory.push(leaflet);
+                leaflet.room = null;
+            }
+            return true; // Handled
+        }
+        return false; // Not handled
+    },
+
+    'READ-BLABE': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"!!!! FROBOZZ MAGIC BALLOON COMPANY !!!!
+
+Hello, Aviator!
+
+Instructions for use:
+
+   To get into balloon, say 'Board'
+   To leave balloon, say 'Disembark'
+   To land, say 'Land'
+
+Warranty:
+
+   No warranty is expressed or implied.  You're on your own, sport!
+
+					Good Luck."`);
+            return true;
+        }
+        return false;
+    },
+
+    'READ-GREEK': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display("This book is written in a tongue with which I am unfamiliar.");
+            return true;
+        }
+        return false;
+    },
+
+    'READ-CARD': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"Warning:
+    This room was constructed over very weak rock strata. Detonation of explosives in this room is strictly prohibited!
+			Frobozz Magic Cave Company
+			per M. Agrippa, foreman"`);
+            return true;
+        }
+        return false;
+    },
+
+    'READ-GUIDE': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"Guide Book to Flood Control Dam #3
+
+Flood Control Dam #3 (FCD#3) was constructed in year 783 of the Great Underground Empire to harness the destructive power of the Frigid River. This work was supported by a grant of 37 million zorkmids from the Central Bureaucracy and your omnipotent local tyrant Lord Dimwit Flathead the Excessive. This impressive structure is composed of 3.7 cubic feet of concrete, is 256 feet tall at the center, and 193 feet wide at the top. The reservoir created behind the dam has a volume of 37 billion cubic feet, an area of 12 million square feet, and a shore line of 36 thousand feet.
+
+The construction of FCD#3 took 112 days from ground breaking to the dedication. It required a work force of 384 slaves, 34 slave drivers, 12 engineers, 2 turtle doves, and a partridge in a pear tree. The work was managed by a command team composed of 2345 bureaucrats, 2347 secretaries (at least two of which can type), 12,256 paper shufflers, 52,469 rubber stampers, 245,193 red tape processors, and nearly one million dead trees.
+
+We will now point out some of the more interesting features of FCD#3 as we conduct you on a guided tour of the facilities:
+1) You start your tour here in the Dam Lobby. You will notice on your right that ........."`);
+            return true;
+        }
+        return false;
+    },
+
+    'READ-LABEL': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"!!!! FROBOZZ MAGIC BOAT COMPANY !!!!
+
+Hello, Sailor!
+
+Instructions for use:
+
+   To get into boat, say 'Board'
+   To leave boat, say 'Disembark'
+
+   To get into a body of water, say 'Launch'
+   To get to shore, say 'Land'
+
+Warranty:
+
+  This boat is guaranteed against all defects in parts and workmanship for a period of 76 milliseconds from date of purchase or until first used, whichever comes first.
+
+Warning:
+   This boat is made of plastic.		Good Luck!"`);
+            return true;
+        }
+        return false;
+    },
+
+    'READ-LISTS': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"<DEFINE FEEL-FREE (LOSER)
+<TELL \\"FEEL-FREE, CHOMPER!\\">>
+...
+The rest is, alas, unintelligible (as were the implementers)."`);
+            return true;
+        }
+        return false;
+    },
+
+    'READ-PAPER': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"US NEWS & DUNGEON REPORT
+12/12/77 - Late Dungeon Edition
+
+In order to get a more-or-less working version, we have installed one with some known bugs..."`);
+            return true;
+        }
+        return false;
+    },
+
+    'READ-RBTLB': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"!!!! FROBOZZ MAGIC ROBOT COMPANY !!!!
+
+Hello, Master!
+
+I am a late-model robot, trained at MIT Tech to perform various simple household functions.
+
+Instructions for use:
+To activate me, use the following formula:
+>TELL ROBOT '<something to do>' <cr>
+The quotation marks are required!
+
+Warranty:
+No warranty is expressed or implied.
+
+At your service!"`);
+            return true;
+        }
+        return false;
+    },
+
+    'READ-STAMP': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"---v----v----v----v----v----v----v----v---
+| |
+| |||||||||| LORD |
+> !|||| | DIMWIT <
+| |||| ---| FLATHEAD |
+| |||C CC \\ |
+> |||| _\\\\ |
+| ||| (____| |
+| || | |
+> |______| Our <
+| /   \\\\ Excessive |
+| /     \\\\ Leader |
+> | | |
+| | | |
+| |
+> G.U.E. POSTAGE 3 Zorkmids <
+| |
+---^----^----^----^----^----^----^----^---"`);
+            return true;
+        }
+        return false;
+    },
+
+    'READ-ZORKM': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display(`"--------------------------
+/      Gold Zorkmid	 \\
+/  T e n   T h o u s a n d   \\
+/        Z O R K M I D S	   \\
+/				    \\
+/        ||||||||||||||||||	     \\
+/        !||||		 ||||!	      \\
+|	   |||   ^^  ^^   |||	       |
+|	   |||	 OO  OO   |||	       |
+| In Frobs  |||	   <<    |||  We Trust |
+|	     || (______) ||	       |
+|	      |          |	       |
+|	      |__________|	       |
+\\				      /
+\\    -- Lord Dimwit Flathead --    /
+\\    -- Beloved of Zorkers --    /
+\\				   /
+\\	     * 722 G.U.E. *       /
+\\				 /
+--------------------------"`);
+            return true;
+        }
+        return false;
+    },
+
     'DUMBWAITER': (game, verb) => {
         if (verb === 'raise') {
             if (game.isBasketAtTop) {
