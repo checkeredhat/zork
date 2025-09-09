@@ -305,6 +305,12 @@ class Game {
                         this.ui.display(exit.message || "You can't go that way.");
                         return;
                     }
+                } else if (exit.condition === 'KITCHEN-WINDOW') {
+                    const kitchenWindow = this.objects['KITCHEN-WINDOW'];
+                    if (!kitchenWindow || !kitchenWindow.flags.isOpen) {
+                        this.ui.display("The window is closed.");
+                        return;
+                    }
                 } else {
                     const conditionObject = this.objects[exit.condition];
                     if (!conditionObject || !conditionObject.flags.isOpen) {

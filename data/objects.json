@@ -1979,6 +1979,44 @@
         },
         "size": 10
     },
+    "WIND1": {
+        "id": "WIND1",
+        "names": [
+            "window",
+            "win"
+        ],
+        "description": "window",
+        "action": "WINDOW-FUNCTION",
+        "flags": {
+            "isVisible": true,
+            "isNotDescribed": true,
+            "isOpen": false,
+            "isTakeable": false
+        }
+    },
+    "WIND2": {
+        "id": "WIND2",
+        "names": [
+            "window",
+            "win"
+        ],
+        "description": "window",
+        "action": "WINDOW-FUNCTION",
+        "flags": {
+            "isVisible": true,
+            "isNotDescribed": true,
+            "isOpen": true,
+            "isTakeable": false
+        }
+    },
+    "KITCHEN-WINDOW": {
+        "id": "KITCHEN-WINDOW",
+        "names": [],
+        "description": "",
+        "flags": {
+            "isOpen": false
+        }
+    },
     "ZORKM": {
         "id": "ZORKM",
         "names": [

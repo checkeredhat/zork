@@ -287,13 +287,17 @@ At your service!"`);
         }
     },
 
-    'WINDOW-FUNCTION': (game, verb) => {
-        const window = game.objects['WIND1'] || game.objects['WIND2'];
+    'WINDOW-FUNCTION': (game, verb, directObject) => {
+        const window = directObject;
+        const kitchenWindow = game.objects['KITCHEN-WINDOW'];
         if (verb === 'open') {
             if (window.flags.isOpen) {
                 game.ui.display("It's already open.");
             } else {
                 window.flags.isOpen = true;
+                if (window.id === 'WIND1') {
+                    kitchenWindow.flags.isOpen = true;
+                }
                 game.ui.display("With great effort, you open the window.");
             }
             return true;
@@ -302,6 +306,9 @@ At your service!"`);
                 game.ui.display("It's already closed.");
             } else {
                 window.flags.isOpen = false;
+                if (window.id === 'WIND1') {
+                    kitchenWindow.flags.isOpen = false;
+                }
                 game.ui.display("The window closes.");
             }
             return true;
