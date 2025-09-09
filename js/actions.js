@@ -1,4 +1,5 @@
 // js/actions.js
+import { OFLAGS, RBITS, hasFlag, setFlag, clearFlag } from './flags.js';
 
 const actions = {
     'CMACH-ROOM': (game, verb, directObject) => {
@@ -56,7 +57,7 @@ const actions = {
                 game.ui.display("In disturbing the pile of leaves, you uncover a grating which was previously hidden from view.");
                 leaves.room.objects = leaves.room.objects.filter(o => o.id !== 'LEAVE');
                 delete leaves.room; // The leaves are scattered and gone
-                grating.flags.isVisible = true;
+                grating.oflags = setFlag(grating.oflags, OFLAGS.OVISON);
                 return true;
             }
         }
@@ -167,7 +168,7 @@ const actions = {
                 game.ui.display("Having moved the carpet previously, you find it impossible to move it again.");
             } else {
                 rug.flags.isMoved = true;
-                trapDoor.flags.isVisible = true;
+                trapDoor.oflags = setFlag(trapDoor.oflags, OFLAGS.OVISON);
                 game.ui.display("With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap-door appears.");
             }
             return true;
@@ -179,7 +180,7 @@ const actions = {
         if (verb === 'throw') {
             if (directObject && directObject.id === 'TORCH') {
                 const torch = directObject;
-                if (torch.flags.isLit) {
+                if (hasFlag(torch.oflags, OFLAGS.FLAMEBIT)) {
                     game.ui.display("The torch hits the glacier and explodes into a great ball of flame, devouring the glacier. The water from the melting glacier rushes downstream, carrying the torch with it. In the place of the glacier, there is a passageway leading west.");
                     game.glacierMelted = true;
                     game.player.inventory = game.player.inventory.filter(obj => obj.id !== 'TORCH');
@@ -203,7 +204,7 @@ const actions = {
 
     'TROLL': (game, verb) => {
         const troll = game.objects['TROLL'];
-        if (!troll.flags.isVillain) {
+        if (!hasFlag(troll.oflags, OFLAGS.VILLAIN)) {
             return false;
         }
         if (verb === 'move') {
@@ -307,7 +308,8 @@ Flood Control Dam #3 (FCD#3) was constructed in year 783 of the Great Undergroun
 
 The construction of FCD#3 took 112 days from ground breaking to the dedication. It required a work force of 384 slaves, 34 slave drivers, 12 engineers, 2 turtle doves, and a partridge in a pear tree. The work was managed by a command team composed of 2345 bureaucrats, 2347 secretaries (at least two of which can type), 12,256 paper shufflers, 52,469 rubber stampers, 245,193 red tape processors, and nearly one million dead trees.
 
-We will now point out some of the more interesting features of FCD#3 as we conduct you on a guided tour of the facilities:
+We will now point out some of the more interesting features
+of FCD#3 as we conduct you on a guided tour of the facilities:
 1) You start your tour here in the Dam Lobby. You will notice on your right that ........."`);
             return true;
         }
@@ -489,7 +491,7 @@ At your service!"`);
 
     'BOOM-ROOM': (game, verb, directObject) => {
         const isLightVerb = (verb === 'light' || verb === 'turn on');
-        const hasLitObject = game.player.inventory.find(obj => (obj.id === 'CANDL' || obj.id === 'TORCH') && obj.flags.isLit);
+        const hasLitObject = game.player.inventory.find(obj => (obj.id === 'CANDL' || obj.id === 'TORCH') && hasFlag(obj.oflags, OFLAGS.FLAMEBIT));
 
         if (verb === 'walk-in' && hasLitObject) {
             const litObject = hasLitObject;
@@ -512,7 +514,7 @@ At your service!"`);
         if (!sword) return;
 
         const room = game.player.room;
-        const villainsInRoom = room.objects.filter(obj => obj.flags.isVillain && obj.id !== 'THIEF'); // Thief is special
+        const villainsInRoom = room.objects.filter(obj => hasFlag(obj.oflags, OFLAGS.VILLAIN) && obj.id !== 'THIEF'); // Thief is special
 
         if (villainsInRoom.length > 0) {
             // In the original, this is a demon that runs continuously.
@@ -661,7 +663,7 @@ At your service!"`);
                 tube.flags.isOpen = true;
                 game.ui.display("You open the tube, and a viscous material oozes out.");
                 const putty = game.objects['PUTTY'];
-                putty.flags.isVisible = true;
+                putty.oflags = setFlag(putty.oflags, OFLAGS.OVISON);
                 game.player.room.objects.push(putty);
             }
             return true;
@@ -673,7 +675,7 @@ At your service!"`);
             const thief = game.thief;
             const thiefObject = game.objects['THIEF'];
             // Check if the thief is present and not defeated
-            if (thief.room === game.player.room && thiefObject.flags.isVillain) {
+            if (thief.room === game.player.room && hasFlag(thiefObject.oflags, OFLAGS.VILLAIN)) {
                 game.ui.display("Realizing just in time that you'd be stabbed in the back if you attempted to take the chalice, you return to the fray.");
                 return true; // Prevent the take action
             }
@@ -692,7 +694,7 @@ At your service!"`);
 
         // Handle 'attack' verb
         if (verb === 'attack') {
-            if (!cyclops.flags.isVillain) {
+            if (!hasFlag(cyclops.oflags, OFLAGS.VILLAIN)) {
                 game.ui.display("There is no need to attack the sleeping cyclops.");
                 return true;
             }
@@ -719,7 +721,7 @@ At your service!"`);
             if (directObject.id === 'WATER') {
                 if (game.cyclopsIsThirsty) {
                     game.ui.display("The cyclops drinks the water, then promptly falls asleep. The staircase is now unblocked.");
-                    cyclops.flags.isVillain = false;
+                    cyclops.oflags = clearFlag(cyclops.oflags, OFLAGS.VILLAIN);
                     cyclops.description = "The cyclops is sleeping peacefully, snoring loudly.";
                     cyclops.initialDescription = "The cyclops is sleeping peacefully, snoring loudly.";
                     const bottle = player.inventory.find(obj => obj.id === 'BOTTL');
@@ -745,7 +747,7 @@ At your service!"`);
         }
 
         // Default message for just looking or other actions
-        if (cyclops.flags.isVillain) {
+        if (hasFlag(cyclops.oflags, OFLAGS.VILLAIN)) {
             game.ui.display("The cyclops is a fearsome creature, but appears to be asleep.");
         } else {
             game.ui.display(cyclops.description);
@@ -933,7 +935,7 @@ At your service!"`);
             if (player.room.id === 'TREAS') {
                 player.room.objects.forEach(obj => {
                     if (obj.id !== 'THIEF' && obj.id !== 'CHALI') {
-                        obj.flags.isVisible = true;
+                        obj.oflags = setFlag(obj.oflags, OFLAGS.OVISON);
                     }
                 });
                 game.ui.display("The treasures of the room reappear!");
@@ -953,7 +955,7 @@ At your service!"`);
                 game.ui.display("Having moved the carpet previously, you find it impossible to move it again.");
             } else {
                 rug.flags.isMoved = true;
-                door.flags.isVisible = true;
+                door.oflags = setFlag(door.oflags, OFLAGS.OVISON);
                 game.ui.display("With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap-door appears.");
             }
             return true; // Action was handled
@@ -988,18 +990,18 @@ At your service!"`);
         if (verb === 'light' || verb === 'turn on') {
             if (lantern.light === 0) {
                 game.ui.display("The lantern appears to be dead.");
-            } else if (lantern.flags.isLit) {
+            } else if (hasFlag(lantern.oflags, OFLAGS.FLAMEBIT)) {
                 game.ui.display("The lantern is already on.");
             } else {
-                lantern.flags.isLit = true;
+                lantern.oflags = setFlag(lantern.oflags, OFLAGS.FLAMEBIT);
                 game.ui.display("The brass lantern is now on.");
             }
             return true;
         } else if (verb === 'turn off') {
-            if (!lantern.flags.isLit) {
+            if (!hasFlag(lantern.oflags, OFLAGS.FLAMEBIT)) {
                 game.ui.display("The lantern is already off.");
             } else {
-                lantern.flags.isLit = false;
+                lantern.oflags = clearFlag(lantern.oflags, OFLAGS.FLAMEBIT);
                 game.ui.display("The brass lantern is now off.");
             }
             return true;
@@ -1045,18 +1047,18 @@ will be brighter. Send for our free brochure today."`);
     'CANDLES': (game, verb) => {
         const candles = game.objects['CANDL'];
         if (verb === 'light') {
-            if (candles.flags.isLit) {
+            if (hasFlag(candles.oflags, OFLAGS.FLAMEBIT)) {
                 game.ui.display("They're already lit.");
             } else {
-                candles.flags.isLit = true;
+                candles.oflags = setFlag(candles.oflags, OFLAGS.FLAMEBIT);
                 game.ui.display("The candles are now lit.");
             }
             return true;
         } else if (verb === 'extinguish') {
-            if (!candles.flags.isLit) {
+            if (!hasFlag(candles.oflags, OFLAGS.FLAMEBIT)) {
                 game.ui.display("They're already out.");
             } else {
-                candles.flags.isLit = false;
+                candles.oflags = clearFlag(candles.oflags, OFLAGS.FLAMEBIT);
                 game.ui.display("The candles are now out.");
             }
             return true;
@@ -1195,7 +1197,7 @@ will be brighter. Send for our free brochure today."`);
         }
         if (verb === 'FUSE_BURN_OUT') {
             const fuse = game.objects['FUSE'];
-            fuse.flags.isVisible = false;
+            fuse.oflags = clearFlag(fuse.oflags, OFLAGS.OVISON);
 
             const fuseContainer = Object.values(game.objects).find(obj => obj.contents && obj.contents.includes('FUSE'));
 
@@ -1225,7 +1227,7 @@ will be brighter. Send for our free brochure today."`);
                     game.ui.display("You hear a distant explosion.");
                 }
 
-                brick.flags.isVisible = false;
+                brick.oflags = clearFlag(brick.oflags, OFLAGS.OVISON);
                 if (brick.room) {
                     brick.room.objects = brick.room.objects.filter(o => o.id !== 'BRICK');
                     delete brick.room;
@@ -1265,7 +1267,7 @@ will be brighter. Send for our free brochure today."`);
                         game.ui.display("There is a rumbling sound and a stream of water appears to burst from the dam, but it is evidently not enough to cause any damage.");
                         game.damGatesOpen = true;
                         // This also makes the TRUNK visible in the original
-                        game.objects['TRUNK'].flags.isVisible = true;
+                        game.objects['TRUNK'].oflags = setFlag(game.objects['TRUNK'].oflags, OFLAGS.OVISON);
 
                     } else {
                         game.ui.display("Click.");
@@ -1400,7 +1402,7 @@ will be brighter. Send for our free brochure today."`);
                 } else {
                     robot.flags.panelOpen = true;
                     const slot = game.objects['ROBOT-SLOT'];
-                    if(slot) slot.flags.isVisible = true;
+                    if(slot) slot.oflags = setFlag(slot.oflags, OFLAGS.OVISON);
                     game.ui.display("The robot's panel opens, revealing a slot.");
                 }
                 return true;
@@ -1420,7 +1422,7 @@ will be brighter. Send for our free brochure today."`);
         if (slot && slot.contents && slot.contents.includes('RBATT') && !robot.flags.isCharged) {
             robot.flags.isCharged = true;
             robot.flags.panelOpen = false;
-            slot.flags.isVisible = false;
+            slot.oflags = clearFlag(slot.oflags, OFLAGS.OVISON);
             // remove battery from slot contents to prevent re-triggering
             slot.contents = [];
             game.ui.display("The robot's panel closes and the robot says, \"Ready.\"");

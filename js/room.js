@@ -1,3 +1,5 @@
+import { RBITS, setFlag } from './flags.js';
+
 class Room {
     constructor({
         id,
@@ -21,17 +23,33 @@ class Room {
         this.action = action; // RACTION
         this.value = value; // RVAL
 
-        // RBITS
-        this.flags = {
-            isOnLand: true,
-            isWater: false,
-            isAir: false,
-            isSacred: false,
-            canFillBottle: false,
-            isMunged: false,
-            isBucket: false,
-            isHouse: false,
-            ...flags
+        this.rbits = 0;
+        this.initRFlags(flags);
+    }
+
+    initRFlags(flags) {
+        let rbits = 0;
+
+        const flagMap = {
+            isOnLand: RBITS.RLANDBIT,
+            isWater: RBITS.RWATERBIT,
+            isAir: RBITS.RAIRBIT,
+            isSacred: RBITS.RSACREDBIT,
+            canFillBottle: RBITS.RFILLBIT,
+            isMunged: RBITS.RMUNGBIT,
+            isBucket: RBITS.RBUCKBIT,
+            isHouse: RBITS.RHOUSEBIT,
         };
+
+        // Set default flags
+        rbits = setFlag(rbits, RBITS.RLANDBIT); // isOnLand is default
+
+        for (const [key, value] of Object.entries(flags)) {
+            if (flagMap[key] && value === true) {
+                rbits = setFlag(rbits, flagMap[key]);
+            }
+        }
+
+        this.rbits = rbits;
     }
 }

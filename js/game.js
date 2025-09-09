@@ -1,3 +1,5 @@
+import { OFLAGS, RBITS, hasFlag, setFlag, clearFlag } from './flags.js';
+
 class Game {
     constructor(ui) {
         this.ui = ui;
@@ -75,7 +77,6 @@ class Game {
             const [vocabData, objectsData, roomsData, deathMessagesData] = await Promise.all([
                 fetch('data/vocabulary.json').then(res => res.json()),
                 fetch('data/objects.json').then(res => res.json()),
-                fetch('data/rooms.json').then(res => res.json()),
                 fetch('data/death_messages.json').then(res => res.json())
             ]);
 
@@ -188,7 +189,7 @@ class Game {
         const nextRoom = this.rooms[nextRoomId];
 
         // Skip sacred rooms
-        if (nextRoom.flags.isSacred) {
+        if (hasFlag(nextRoom.rbits, RBITS.RSACREDBIT)) {
             this.thief.patrolIndex = (this.thief.patrolIndex + 1) % this.thief.patrolRoute.length;
             const nextNextRoomId = this.thief.patrolRoute[this.thief.patrolIndex];
             this.thief.room = this.rooms[nextNextRoomId];
@@ -213,7 +214,7 @@ class Game {
     robAdventurer(player, thiefInventory) {
         const stolenItems = [];
         player.inventory.forEach(obj => {
-            if (obj.value > 0 && !obj.flags.isSacred) {
+            if (obj.value > 0 && !hasFlag(obj.oflags, OFLAGS.SACREDBIT)) {
                 stolenItems.push(obj);
             }
         });
@@ -227,7 +228,7 @@ class Game {
     robRoom(room, thiefInventory, probability) {
         const stolenItems = [];
         room.objects.forEach(obj => {
-            if (obj.value > 0 && !obj.flags.isSacred && obj.flags.isVisible && (Math.random() * 100) < probability) {
+            if (obj.value > 0 && !hasFlag(obj.oflags, OFLAGS.SACREDBIT) && hasFlag(obj.oflags, OFLAGS.OVISON) && (Math.random() * 100) < probability) {
                  stolenItems.push(obj);
             }
         });
@@ -256,7 +257,7 @@ class Game {
             }
         }
 
-        const visibleObjects = currentRoom.objects.filter(obj => obj.flags.isVisible);
+        const visibleObjects = currentRoom.objects.filter(obj => hasFlag(obj.oflags, OFLAGS.OVISON));
         if (visibleObjects.length > 0) {
             visibleObjects.forEach(obj => {
                 const desc = !obj.isTouched && obj.initialDescription ? obj.initialDescription : obj.description;
@@ -316,7 +317,7 @@ class Game {
                     }
                 } else if (exit.condition === 'CYCLOPS_ASLEEP') {
                     const cyclops = this.objects['CYCLO'];
-                    if (cyclops.flags.isVillain) {
+                    if (hasFlag(cyclops.oflags, OFLAGS.VILLAIN)) {
                         this.ui.display(exit.message || "You can't go that way.");
                         return;
                     }
@@ -370,7 +371,7 @@ class Game {
             }
         }
 
-        if (!gameObject.flags.isTakeable) {
+        if (!hasFlag(gameObject.oflags, OFLAGS.TAKEBIT)) {
             this.ui.display("You can't take that.");
             return;
         }
@@ -421,7 +422,7 @@ class Game {
             this.ui.display("You can't see that here.");
             return;
         }
-        if (!gameObject.flags.isContainer) {
+        if (!hasFlag(gameObject.oflags, OFLAGS.CONTBIT)) {
             this.ui.display("That's not a container.");
             return;
         }
@@ -455,7 +456,7 @@ class Game {
         if (gameObject.action) {
             return this.handleObjectAction('open', gameObject);
         }
-        if (!gameObject.flags.isContainer) {
+        if (!hasFlag(gameObject.oflags, OFLAGS.CONTBIT)) {
             this.ui.display("That's not a container.");
             return;
         }
@@ -493,12 +494,12 @@ class Game {
     }
 
     attack(gameObject) {
-        if (!gameObject || !gameObject.flags.isVillain) {
+        if (!gameObject || !hasFlag(gameObject.oflags, OFLAGS.VILLAIN)) {
             this.ui.display("There is nothing here to attack.");
             return;
         }
 
-        const weapon = this.player.inventory.find(obj => obj.flags.isWeapon);
+        const weapon = this.player.inventory.find(obj => hasFlag(obj.oflags, OFLAGS.WEAPONBIT));
         if (!weapon) {
             this.ui.display(`Attacking the ${gameObject.names[0]} with your bare hands is suicidal!`);
             return;
@@ -523,7 +524,7 @@ class Game {
             }
 
             if (defender.health <= 0) {
-                defender.flags.isVillain = false; // No longer a threat
+                defender.oflags = clearFlag(defender.oflags, OFLAGS.VILLAIN); // No longer a threat
                 if (defender.id === 'TROLL') {
                     this.ui.display("An unconscious troll is sprawled on the floor. All passages out of the room are open.");
                     defender.description = "An unconscious troll is sprawled on the floor.";
@@ -590,7 +591,7 @@ class Game {
             this.ui.display("There's nothing to read.");
             return;
         }
-        if (!gameObject.flags.isReadable) {
+        if (!hasFlag(gameObject.oflags, OFLAGS.READBIT)) {
             this.ui.display("That's not something you can read.");
             return;
         }
@@ -679,7 +680,7 @@ class Game {
             }
         }
 
-        if (!indirectObject.flags.isContainer) {
+        if (!hasFlag(indirectObject.oflags, OFLAGS.CONTBIT)) {
             this.ui.display("You can't put things in that.");
             return;
         }
@@ -700,7 +701,7 @@ class Game {
             this.ui.display("What do you want to eat?");
             return;
         }
-        if (!gameObject.flags.isEdible) {
+        if (!hasFlag(gameObject.oflags, OFLAGS.FOODBIT)) {
             this.ui.display("You can't eat that.");
             return;
         }
@@ -730,7 +731,7 @@ class Game {
             this.ui.display("What do you want to drink?");
             return;
         }
-        if (!gameObject.flags.isDrinkable) {
+        if (!hasFlag(gameObject.oflags, OFLAGS.DRINKBIT)) {
             this.ui.display("You can't drink that.");
             return;
         }
@@ -788,7 +789,7 @@ class Game {
     }
 
     board(gameObject) {
-        if (!gameObject || !gameObject.flags.isVehicle) {
+        if (!gameObject || !hasFlag(gameObject.oflags, OFLAGS.VEHBIT)) {
             this.ui.display("You can't board that.");
             return;
         }
@@ -825,7 +826,7 @@ class Game {
             return;
         }
 
-        let hasFire = this.player.inventory.find(obj => obj.flags.isLightSource && obj.flags.isLit);
+        let hasFire = this.player.inventory.find(obj => hasFlag(obj.oflags, OFLAGS.LIGHTBIT) && hasFlag(obj.oflags, OFLAGS.FLAMEBIT));
         const matches = this.objects['MATCH'];
 
         if (!hasFire && matches && this.player.inventory.includes(matches) && matches.light > 0) {
@@ -838,7 +839,7 @@ class Game {
             this.ui.display("You have no source of fire.");
             return;
         }
-        if (!gameObject.flags.isBurnable) {
+        if (!hasFlag(gameObject.oflags, OFLAGS.BURNBIT)) {
             this.ui.display("You can't burn that.");
             return;
         }
@@ -858,16 +859,16 @@ class Game {
         if (gameObject.action && this.handleObjectAction('light', gameObject)) {
             return;
         }
-        if (!gameObject.flags.isLightSource) {
+        if (!hasFlag(gameObject.oflags, OFLAGS.LIGHTBIT)) {
             this.ui.display("You can't light that.");
             return;
         }
-        if (gameObject.flags.isLit) {
+        if (hasFlag(gameObject.oflags, OFLAGS.FLAMEBIT)) {
             this.ui.display("It's already lit.");
             return;
         }
         // Generic fallback
-        gameObject.flags.isLit = true;
+        gameObject.oflags = setFlag(gameObject.oflags, OFLAGS.FLAMEBIT);
         this.ui.display(`You light the ${gameObject.names[0]}.`);
     }
 
@@ -876,7 +877,7 @@ class Game {
             this.ui.display("What do you want to knock on?");
             return;
         }
-        if (gameObject.flags.isDoor) {
+        if (hasFlag(gameObject.oflags, OFLAGS.DOORBIT)) {
             this.ui.display(`You knock on the ${gameObject.names[0]}. There is no answer.`);
         } else {
             this.ui.display("That's not something you can knock on.");
@@ -954,7 +955,7 @@ class Game {
                 break;
             case 'take':
                 const objToTake = this.robot.room.objects.find(o => o.names.includes(directObject));
-                if (objToTake && objToTake.flags.isTakeable) {
+                if (objToTake && hasFlag(objToTake.oflags, OFLAGS.TAKEBIT)) {
                     this.robot.room.objects = this.robot.room.objects.filter(o => o.id !== objToTake.id);
                     this.robot.inventory.push(objToTake);
                     this.ui.display(`The robot takes the ${objToTake.names[0]}.`);
@@ -1065,7 +1066,7 @@ class Game {
         }
 
         // Light timer logic
-        const lightSource = this.player.inventory.find(obj => obj.flags.isLight && obj.light > 0);
+        const lightSource = this.player.inventory.find(obj => hasFlag(obj.oflags, OFLAGS.FLAMEBIT) && obj.light > 0);
         if (lightSource) {
             lightSource.light--;
             if (lightSource.light === 10) {
@@ -1223,7 +1224,7 @@ class Game {
                 if (this.player.room.id === 'CYCLO' && !this.cyclopsIsGone) {
                     this.ui.display("The cyclops, hearing the name of his deadly nemesis, flees the room by knocking down the wall on the north of the room.");
                     this.cyclopsIsGone = true;
-                    this.objects['CYCLO'].flags.isVisible = false;
+                    this.objects['CYCLO'].oflags = clearFlag(this.objects['CYCLO'].oflags, OFLAGS.OVISON);
                     // This should reveal a new exit. For now, we'll just remove the cyclops.
                     // A more complete implementation would modify the room's exits.
                 } else {

@@ -1418,7 +1418,7 @@
             "isTakeable": true,
             "isVisible": true,
             "isLightSource": true,
-            "isLight": true
+            "isOn": true
         },
         "light": -1,
         "size": 15,
