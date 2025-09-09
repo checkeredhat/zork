@@ -247,9 +247,7 @@
                 "message": "The chain is not climbable."
             }
         ],
-        "objects": [
-            "FBASK"
-        ],
+        "objects": [],
         "action": "NO-OBJS"
     },
     "BWELL": {
@@ -327,7 +325,7 @@
     "CAROU": {
         "id": "CAROU",
         "longDescription": "You are in a large, circular room with smooth, featureless walls. The room is rotating slowly.",
-        "shortDescription": "Round Room",
+        "shortDescription": "Round room",
         "isLight": false,
         "exits": [
             {

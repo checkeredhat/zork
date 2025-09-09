@@ -1,6 +1,73 @@
 // js/actions.js
 
 const actions = {
+    'DUMBWAITER': (game, verb) => {
+        if (verb === 'raise') {
+            if (game.isBasketAtTop) {
+                game.ui.display("It's already at the top.");
+            } else {
+                const tshaft = game.rooms['TSHAF'];
+                const bshaf = game.rooms['BSHAF'];
+                const basket = game.objects['TBASK'];
+
+                // Move basket from bottom to top
+                bshaf.objects = bshaf.objects.filter(obj => obj.id !== basket.id);
+                tshaft.objects.push(basket);
+                basket.room = tshaft;
+
+                game.isBasketAtTop = true;
+                game.ui.display("The basket is raised to the top of the shaft.");
+            }
+            return true;
+        } else if (verb === 'lower') {
+            if (!game.isBasketAtTop) {
+                game.ui.display("It's already at the bottom.");
+            } else {
+                const tshaft = game.rooms['TSHAF'];
+                const bshaf = game.rooms['BSHAF'];
+                const basket = game.objects['TBASK'];
+
+                // Move basket from top to bottom
+                tshaft.objects = tshaft.objects.filter(obj => obj.id !== basket.id);
+                bshaf.objects.push(basket);
+                basket.room = bshaf;
+
+                game.isBasketAtTop = false;
+                game.ui.display("The basket is lowered to the bottom of the shaft.");
+            }
+            return true;
+        } else if (verb === 'take') {
+            const currentRoomId = game.player.room.id;
+            if ((game.isBasketAtTop && currentRoomId === 'TSHAF') || (!game.isBasketAtTop && currentRoomId === 'BSHAF')) {
+                game.ui.display("The cage is securely fastened to the iron chain.");
+            } else {
+                game.ui.display("I don't see that here.");
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'BOOM-ROOM': (game, verb, directObject) => {
+        const isLightVerb = (verb === 'light' || verb === 'turn on');
+        const hasLitObject = game.player.inventory.find(obj => (obj.id === 'CANDL' || obj.id === 'TORCH') && obj.flags.isLit);
+
+        if (verb === 'walk-in' && hasLitObject) {
+            const litObject = hasLitObject;
+            game.ui.display(`Oh dear. It appears that the smell coming from this room was coal gas. I would have thought twice about carrying a ${litObject.description} in here.`);
+            game.gameOver('BOMB');
+            return true; // Handled
+        }
+
+        if (isLightVerb && (directObject.id === 'CANDL' || directObject.id === 'TORCH')) {
+            game.ui.display(`I didn't realize that adventurers are stupid enough to light a ${directObject.description} in a room which reeks of coal gas. Fortunately, there is justice in the world.`);
+            game.gameOver('BOMB');
+            return true; // Handled
+        }
+
+        return false; // Not handled
+    },
+
     'SWORD': (game) => {
         const sword = game.objects['SWORD'];
         if (!sword) return;
@@ -312,5 +379,175 @@ const actions = {
         return false;
     }
 };
+
+    'DBOAT-FUNCTION': (game, verb, directObject, indirectObject) => {
+        if (verb === 'inflate') {
+            game.ui.display("This boat will not inflate since some moron put a hole in it.");
+            return true;
+        }
+        if (verb === 'plug') {
+            if (indirectObject && indirectObject.id === 'PUTTY') {
+                game.ui.display("Well done. The boat is repaired.");
+                // Swap DBOAT for IBOAT
+                const dboat = game.objects['DBOAT'];
+                const iboat = game.objects['IBOAT'];
+                if (game.player.inventory.includes(dboat)) {
+                    game.player.inventory = game.player.inventory.filter(obj => obj.id !== 'DBOAT');
+                    game.player.inventory.push(iboat);
+                } else {
+                    const room = dboat.room;
+                    room.objects = room.objects.filter(obj => obj.id !== 'DBOAT');
+                    room.objects.push(iboat);
+                    iboat.room = room;
+                }
+                dboat.room = null;
+            } else {
+                game.ui.display(`Plugging the hole with ${indirectObject ? indirectObject.description : 'your finger'} doesn't seem to work.`);
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'IBOAT-FUNCTION': (game, verb) => {
+        if (verb === 'inflate') {
+            const iboat = game.objects['IBOAT'];
+            const pump = game.objects['PUMP'];
+            if (!iboat.room) {
+                 game.ui.display("The boat must be on the ground to be inflated.");
+                 return true;
+            }
+            if (!game.player.inventory.includes(pump)) {
+                game.ui.display("I don't think you have enough lung-power to inflate this boat.");
+            } else {
+                game.ui.display("The boat inflates and appears seaworthy.");
+                // Swap IBOAT for RBOAT
+                const rboat = game.objects['RBOAT'];
+                const room = iboat.room;
+                room.objects = room.objects.filter(obj => obj.id !== 'IBOAT');
+                room.objects.push(rboat);
+                rboat.room = room;
+                iboat.room = null;
+                game.deflateFlag = false; // Corresponds to DEFLATE!-FLAG
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'RBOAT-FUNCTION': (game, verb) => {
+        const rboat = game.objects['RBOAT'];
+        if (verb === 'board') {
+            const stick = game.objects['STICK'];
+            if (game.player.inventory.includes(stick)) {
+                game.ui.display("There is a hissing sound and the boat deflates.");
+                // Swap RBOAT for DBOAT
+                const dboat = game.objects['DBOAT'];
+                const room = rboat.room;
+                room.objects = room.objects.filter(obj => obj.id !== 'RBOAT');
+                room.objects.push(dboat);
+                dboat.room = room;
+                rboat.room = null;
+            } else {
+                // Actual board logic will be in game.js
+                return false;
+            }
+            return true;
+        }
+        if (verb === 'deflate') {
+            if (game.player.vehicle === rboat) {
+                game.ui.display("You can't deflate the boat while you're in it.");
+            } else if (!rboat.room) {
+                game.ui.display("The boat must be on the ground to be deflated.");
+            } else {
+                game.ui.display("The boat deflates.");
+                 // Swap RBOAT for IBOAT
+                const iboat = game.objects['IBOAT'];
+                const room = rboat.room;
+                room.objects = room.objects.filter(obj => obj.id !== 'RBOAT');
+                room.objects.push(iboat);
+                iboat.room = room;
+                rboat.room = null;
+                game.deflateFlag = true; // Corresponds to DEFLATE!-FLAG
+            }
+            return true;
+        }
+         if (verb === 'disembark') {
+            if (game.player.room.id.includes("RIVR")) {
+                 game.gameOver("DROWN");
+                 return true;
+            }
+            return false; // let game.js handle it
+        }
+        return false;
+    },
+
+    'SAFE-FUNCTION': (game, verb) => {
+        if (verb === 'open') {
+            if (game.isSafeOpen) {
+                game.ui.display("The box has no door!");
+            } else {
+                game.ui.display("The box is rusted and will not open.");
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'BRICK-FUNCTION': (game, verb) => {
+        if (verb === 'burn') {
+            game.ui.display("Now you've done it. It seems that the brick has other properties than weight, namely the ability to blow you to smithereens.");
+            game.gameOver('BOMB');
+            return true;
+        }
+        return false;
+    },
+
+    'FUSE-FUNCTION': (game, verb, directObject) => {
+        if (verb === 'burn') {
+            game.ui.display("The wire starts to burn.");
+            game.timers.push({ turns: 2, action: 'FUSE_BURN_OUT', targetId: 'FUSE' });
+            return true;
+        }
+        if (verb === 'FUSE_BURN_OUT') {
+            const fuse = game.objects['FUSE'];
+            const brick = game.objects['BRICK'];
+
+            // Hide the fuse
+            fuse.flags.isVisible = false;
+
+            const fuseContainer = Object.values(game.objects).find(obj => obj.contents && obj.contents.includes('FUSE'));
+
+            if (fuseContainer && fuseContainer.id === 'BRICK') {
+                // Hide the brick
+                brick.flags.isVisible = false;
+                brick.room = null;
+
+                const brickContainer = Object.values(game.objects).find(obj => obj.contents && obj.contents.includes('BRICK'));
+                const brickRoom = brick.room;
+
+                if (brickRoom === game.player.room) {
+                    game.ui.display("The resulting explosion throws you against the walls, causing your untimely demise.");
+                    game.gameOver('BOMB');
+                } else if (brickRoom && brickRoom.id === 'SAFE') {
+                     if (brickContainer && brickContainer.id === 'SSLOT') {
+                        game.ui.display("There is an explosion nearby.");
+                        game.isSafeOpen = true;
+                        game.objects['SAFE'].flags.isOpen = true;
+                        // In a more complete implementation, this would trigger another timer for room collapse.
+                     } else {
+                        game.ui.display("There is an explosion nearby.");
+                     }
+                } else {
+                    game.ui.display("There is an explosion nearby.");
+                }
+
+            } else {
+                game.ui.display("The wire rapidly burns into nothingness.");
+            }
+            return true;
+        }
+        return false;
+    },
 
 window.gameActions = actions;

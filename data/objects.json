@@ -312,7 +312,8 @@
             "isBurnable": true
         },
         "size": 9,
-        "value": 2
+        "value": 2,
+        "action": "BRICK-FUNCTION"
     },
     "BROPE": {
         "id": "BROPE",
@@ -993,7 +994,7 @@
         "adjectives": [
             "nasty"
         ],
-        "description": "a nasty-looking knife",
+        "description": "knife",
         "flags": {
             "isWeapon": true,
             "isTakeable": true
@@ -1029,7 +1030,7 @@
         "adjectives": [
             "brass"
         ],
-        "description": "brass lantern",
+        "description": "lamp",
         "initialDescription": "A battery-powered brass lantern is on the trophy case.",
         "action": "LANTERN",
         "flags": {
@@ -1470,7 +1471,7 @@
         "names": [
             "rope"
         ],
-        "description": "A long rope.",
+        "description": "rope",
         "initialDescription": "A coiled rope is here.",
         "flags": {
             "isTakeable": true,
@@ -1734,7 +1735,7 @@
         "adjectives": [
             "elvish"
         ],
-        "description": "elvish sword",
+        "description": "sword",
         "initialDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity.",
         "action": "SWORD",
         "flags": {
