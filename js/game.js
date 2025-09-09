@@ -83,7 +83,10 @@ class Game {
 
             for (const roomId in roomsData) {
                 const roomData = roomsData[roomId];
-                const objectsInRoom = roomData.objects.map(id => this.objects[id]);
+                // Filter out undefined objects that might result from bad data
+                const objectsInRoom = roomData.objects
+                    .map(id => this.objects[id])
+                    .filter(obj => obj !== undefined);
 
                 this.rooms[roomId] = new Room({
                     ...roomData,

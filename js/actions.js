@@ -524,8 +524,7 @@ const actions = {
             return true;
         }
         return false;
-    }
-};
+    },
 
     'DBOAT-FUNCTION': (game, verb, directObject, indirectObject) => {
         if (verb === 'inflate') {
@@ -695,6 +694,7 @@ const actions = {
             return true;
         }
         return false;
-    },
+    }
+};
 
 window.gameActions = actions;
