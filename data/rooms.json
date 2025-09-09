@@ -34,7 +34,7 @@
         "exits": [
             {
                 "direction": "NW",
-                "message": "There is a chasm too large to jump across."
+                "condition": "SMDROP"
             },
             {
                 "direction": "EAST",
@@ -42,11 +42,11 @@
             },
             {
                 "direction": "WEST",
-                "message": "There is a chasm too large to jump across."
+                "condition": "SMDROP"
             },
             {
                 "direction": "DOWN",
-                "message": "There is a chasm too large to jump across."
+                "condition": "SMDROP"
             }
         ],
         "objects": [
@@ -229,14 +229,12 @@
             {
                 "direction": "OUT",
                 "condition": "EMPTY-HANDED",
-                "roomId": "TIMBE",
-                "message": "You cannot fit through this passage with that load."
+                "roomId": "TIMBE"
             },
             {
                 "direction": "NE",
                 "condition": "EMPTY-HANDED",
-                "roomId": "TIMBE",
-                "message": "You cannot fit through this passage with that load."
+                "roomId": "TIMBE"
             },
             {
                 "direction": "UP",
@@ -331,56 +329,47 @@
             {
                 "direction": "NORTH",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "CAVE4",
-                "action": "CAROUSEL-EXIT"
+                "roomId": "CAVE4"
             },
             {
                 "direction": "SOUTH",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "CAVE4",
-                "action": "CAROUSEL-EXIT"
+                "roomId": "CAVE4"
             },
             {
                 "direction": "EAST",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "MGRAI",
-                "action": "CAROUSEL-EXIT"
+                "roomId": "MGRAI"
             },
             {
                 "direction": "WEST",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "PASS1",
-                "action": "CAROUSEL-EXIT"
+                "roomId": "PASS1"
             },
             {
                 "direction": "NW",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "CANY1",
-                "action": "CAROUSEL-EXIT"
+                "roomId": "CANY1"
             },
             {
                 "direction": "NE",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "PASS5",
-                "action": "CAROUSEL-EXIT"
+                "roomId": "PASS5"
             },
             {
                 "direction": "SE",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "PASS4",
-                "action": "CAROUSEL-EXIT"
+                "roomId": "PASS4"
             },
             {
                 "direction": "SW",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "MAZE1",
-                "action": "CAROUSEL-EXIT"
+                "roomId": "MAZE1"
             },
             {
                 "direction": "EXIT",
                 "condition": "CAROUSEL-FLIP",
-                "roomId": "PASS3",
-                "action": "CAROUSEL-OUT"
+                "roomId": "PASS3"
             }
         ],
         "objects": [
@@ -597,12 +586,33 @@
         "isLight": true,
         "exits": [
             {
-                "direction": "SOUTH",
-                "roomId": "DAM"
+                "direction": "SW",
+                "roomId": "EHOUS"
+            },
+            {
+                "direction": "SE",
+                "roomId": "FORE5"
             },
             {
                 "direction": "NORTH",
-                "roomId": "ICY-CAVERN"
+                "roomId": "CLEAR"
+            },
+            {
+                "direction": "EAST",
+                "roomId": "CLEAR"
+            },
+            {
+                "direction": "WEST",
+                "roomId": "FORE3"
+            },
+            {
+                "direction": "SOUTH",
+                "roomId": "FORE2"
+            },
+            {
+                "direction": "DOWN",
+                "roomId": "MGRAT",
+                "condition": "KEY-FLAG"
             }
         ],
         "objects": []
@@ -741,8 +751,20 @@
         "isLight": true,
         "exits": [
             {
+                "direction": "NORTH",
+                "roomId": "CHAS2"
+            },
+            {
+                "direction": "SOUTH",
+                "roomId": "STUDI"
+            },
+            {
                 "direction": "EAST",
                 "roomId": "MTROL"
+            },
+            {
+                "direction": "UP",
+                "message": "Not even a human fly could get up it"
             }
         ],
         "objects": []
@@ -759,14 +781,12 @@
             },
             {
                 "direction": "NORTH",
-                "condition": "CYCLOPS_GONE",
-                "roomId": "BLROO",
+                "condition": "MAGIC-FLAG",
                 "message": "The north wall is solid rock."
             },
             {
                 "direction": "UP",
-                "condition": "CYCLOPS_ASLEEP",
-                "roomId": "TREAS",
+                "condition": "CYCLOPS-FLAG",
                 "message": "The cyclops doesn't look like he'll let you past."
             }
         ],
@@ -782,14 +802,20 @@
         "isLight": true,
         "exits": [
             {
-                "direction": "NORTH",
-                "roomId": "DAM-LOBBY"
+                "direction": "SOUTH",
+                "roomId": "CANY1"
             },
             {
-                "direction": "SOUTH",
-                "roomId": "RESERVOIR",
-                "condition": "DAM_WATER_LOW",
-                "message": "You can't go that way. The reservoir is deep and fast-moving."
+                "direction": "DOWN",
+                "roomId": "DOCK"
+            },
+            {
+                "direction": "EAST",
+                "roomId": "CAVE3"
+            },
+            {
+                "direction": "NORTH",
+                "roomId": "LOBBY"
             }
         ],
         "objects": []
@@ -924,14 +950,12 @@
             {
                 "direction": "DOWN",
                 "roomId": "MTORC",
-                "condition": "DOME-FLAG",
-                "message": "You cannot go down without fracturing many bones."
+                "condition": "DOME-FLAG"
             },
             {
                 "direction": "CLIMB",
                 "roomId": "MTORC",
-                "condition": "DOME-FLAG",
-                "message": "You cannot go down without fracturing many bones."
+                "condition": "DOME-FLAG"
             }
         ],
         "objects": [
@@ -980,8 +1004,7 @@
             {
                 "direction": "EAST",
                 "roomId": "CRAW1",
-                "condition": "EGYPT-FLAG",
-                "message": "The passage is too narrow to accomodate coffins."
+                "condition": "EGYPT-FLAG"
             }
         ],
         "objects": [
@@ -1303,6 +1326,11 @@
             {
                 "direction": "DOWN",
                 "message": "Only Santa Claus climbs down chimneys."
+            },
+            {
+                "direction": "EXIT",
+                "roomId": "EHOUS",
+                "condition": "KITCHEN-WINDOW"
             }
         ],
         "objects": [
@@ -1439,8 +1467,7 @@
             {
                 "direction": "EAST",
                 "condition": "LLD-FLAG",
-                "roomId": "LLD2",
-                "message": "Some invisible force prevents you from passing through the gate."
+                "roomId": "LLD2"
             },
             {
                 "direction": "UP",
@@ -1449,8 +1476,7 @@
             {
                 "direction": "ENTER",
                 "condition": "LLD-FLAG",
-                "roomId": "LLD2",
-                "message": "Some invisible force prevents you from passing through the gate."
+                "roomId": "LLD2"
             }
         ],
         "objects": [
@@ -1465,7 +1491,20 @@
         "longDescription": "You are in the Land of the Living Dead, a large desolate room. Although it is apparently uninhabited, you can hear the sounds of thousands of lost souls weeping and moaning.",
         "shortDescription": "Land of the Living Dead",
         "isLight": false,
-        "exits": [],
+        "exits": [
+            {
+                "direction": "EAST",
+                "roomId": "TOMB"
+            },
+            {
+                "direction": "EXIT",
+                "roomId": "LLD1"
+            },
+            {
+                "direction": "WEST",
+                "roomId": "LLD1"
+            }
+        ],
         "objects": []
     },
     "LOBBY": {
@@ -1512,10 +1551,6 @@
                 "direction": "DOWN",
                 "roomId": "CELLA",
                 "condition": "TRAP-DOOR"
-            },
-            {
-                "direction": "UP",
-                "roomId": "ATTIC"
             }
         ],
         "objects": [
@@ -1552,43 +1587,35 @@
         "exits": [
             {
                 "direction": "NORTH",
-                "condition": "FROBOZZ",
-                "roomId": "CMACH"
+                "condition": "MAGCMACH"
             },
             {
                 "direction": "SOUTH",
-                "condition": "FROBOZZ",
-                "roomId": "CMACH"
+                "condition": "MAGCMACH"
             },
             {
                 "direction": "WEST",
-                "condition": "FROBOZZ",
-                "roomId": "CMACH"
+                "condition": "MAGCMACH"
             },
             {
                 "direction": "NE",
-                "condition": "FROBOZZ",
-                "roomId": "CMACH"
+                "condition": "MAGCMACH"
             },
             {
                 "direction": "NW",
-                "condition": "FROBOZZ",
-                "roomId": "ALICE"
+                "condition": "MAGALICE"
             },
             {
                 "direction": "SW",
-                "condition": "FROBOZZ",
-                "roomId": "ALICE"
+                "condition": "MAGALICE"
             },
             {
                 "direction": "SE",
-                "condition": "FROBOZZ",
-                "roomId": "ALICE"
+                "condition": "MAGALICE"
             },
             {
                 "direction": "EAST",
-                "condition": "FROBOZZ",
-                "roomId": "CMACH"
+                "condition": "MAGCMACH"
             }
         ],
         "objects": [
@@ -1779,6 +1806,18 @@
             {
                 "direction": "WEST",
                 "roomId": "MTROL"
+            },
+            {
+                "direction": "NORTH",
+                "roomId": "MAZE1"
+            },
+            {
+                "direction": "SOUTH",
+                "roomId": "MAZE2"
+            },
+            {
+                "direction": "EAST",
+                "roomId": "MAZE4"
             }
         ],
         "objects": []
@@ -1811,7 +1850,15 @@
         "isLight": true,
         "exits": [
             {
-                "direction": "SOUTH",
+                "direction": "WEST",
+                "roomId": "MAZE2"
+            },
+            {
+                "direction": "NORTH",
+                "roomId": "MAZE4"
+            },
+            {
+                "direction": "UP",
                 "roomId": "MAZE5"
             }
         ],
@@ -1868,8 +1915,20 @@
         "isLight": true,
         "exits": [
             {
-                "direction": "NE",
+                "direction": "DOWN",
                 "roomId": "MAZE5"
+            },
+            {
+                "direction": "EAST",
+                "roomId": "MAZE7"
+            },
+            {
+                "direction": "WEST",
+                "roomId": "MAZE6"
+            },
+            {
+                "direction": "UP",
+                "roomId": "MAZE9"
             }
         ],
         "objects": []
@@ -1993,8 +2052,7 @@
             {
                 "direction": "UP",
                 "condition": "KEY-FLAG",
-                "roomId": "CLEAR",
-                "message": "The grating is locked"
+                "roomId": "CLEAR"
             }
         ],
         "objects": [
@@ -2277,20 +2335,17 @@
             {
                 "direction": "EAST",
                 "roomId": "CRAW4",
-                "condition": "TROLL-FLAG",
-                "message": "The troll fends you off with a menacing gesture."
+                "condition": "TROLL-FLAG"
             },
             {
                 "direction": "NORTH",
                 "roomId": "PASS1",
-                "condition": "TROLL-FLAG",
-                "message": "The troll fends you off with a menacing gesture."
+                "condition": "TROLL-FLAG"
             },
             {
                 "direction": "SOUTH",
                 "roomId": "MAZE1",
-                "condition": "TROLL-FLAG",
-                "message": "The troll fends you off with a menacing gesture."
+                "condition": "TROLL-FLAG"
             }
         ],
         "objects": [
@@ -2415,18 +2470,15 @@
         "exits": [
             {
                 "direction": "UP",
-                "condition": "RAINBOW",
-                "roomId": "RAINB"
+                "condition": "CRAIN"
             },
             {
                 "direction": "NW",
-                "condition": "RAINBOW",
-                "roomId": "RAINB"
+                "condition": "CRAIN"
             },
             {
                 "direction": "WEST",
-                "condition": "RAINBOW",
-                "roomId": "RAINB"
+                "condition": "CRAIN"
             },
             {
                 "direction": "SE",
@@ -2510,14 +2562,12 @@
             {
                 "direction": "CROSS",
                 "roomId": "RESES",
-                "condition": "LOW-TIDE",
-                "message": "You are not equipped for swimming."
+                "condition": "LOW-TIDE"
             },
             {
                 "direction": "SOUTH",
                 "roomId": "RESES",
-                "condition": "LOW-TIDE",
-                "message": "You are not equipped for swimming."
+                "condition": "LOW-TIDE"
             }
         ],
         "objects": [
@@ -2534,8 +2584,7 @@
             {
                 "direction": "SOUTH",
                 "roomId": "RAVI1",
-                "condition": "EGYPT-FLAG",
-                "message": "The coffin will not fit through this passage."
+                "condition": "EGYPT-FLAG"
             },
             {
                 "direction": "WEST",
@@ -2544,20 +2593,17 @@
             {
                 "direction": "CROSS",
                 "roomId": "RESEN",
-                "condition": "LOW-TIDE",
-                "message": "You are not equipped for swimming."
+                "condition": "LOW-TIDE"
             },
             {
                 "direction": "NORTH",
                 "roomId": "RESEN",
-                "condition": "LOW-TIDE",
-                "message": "You are not equipped for swimming."
+                "condition": "LOW-TIDE"
             },
             {
                 "direction": "UP",
                 "roomId": "CANY1",
-                "condition": "EGYPT-FLAG",
-                "message": "The stairs are too steep for carrying the coffin."
+                "condition": "EGYPT-FLAG"
             }
         ],
         "objects": [
@@ -2578,8 +2624,7 @@
             {
                 "direction": "EAST",
                 "condition": "RIDDLE-FLAG",
-                "roomId": "MPEAR",
-                "message": "Your way is blocked by an invisible force."
+                "roomId": "MPEAR"
             }
         ],
         "objects": [
@@ -2689,7 +2734,7 @@
             },
             {
                 "direction": "LAND",
-                "message": "You must specify which direction to land."
+                "message": "Specify the direction to land"
             }
         ],
         "objects": [
@@ -2870,8 +2915,7 @@
             {
                 "direction": "UP",
                 "condition": "LIGHT-LOAD",
-                "roomId": "KITCH",
-                "message": "The chimney is too narrow for you and all of your baggage."
+                "roomId": "KITCH"
             }
         ],
         "objects": []
@@ -2946,8 +2990,7 @@
             {
                 "direction": "SW",
                 "condition": "EMPTY-HANDED",
-                "roomId": "BSHAF",
-                "message": "You cannot fit through this passage with that load."
+                "roomId": "BSHAF"
             }
         ],
         "objects": [],
@@ -3152,8 +3195,7 @@
             {
                 "direction": "SOUTH",
                 "roomId": "WCLF2",
-                "condition": "DEFLATE",
-                "message": "The path is too narrow."
+                "condition": "DEFLATE"
             },
             {
                 "direction": "LAUNC",
@@ -3172,8 +3214,7 @@
             {
                 "direction": "NORTH",
                 "roomId": "WCLF1",
-                "condition": "DEFLATE",
-                "message": "The path is too narrow."
+                "condition": "DEFLATE"
             },
             {
                 "direction": "LAUNC",
