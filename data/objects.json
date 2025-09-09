@@ -771,7 +771,11 @@
         "value": 0,
         "trophyValue": 0,
         "size": 99999,
-        "capacity": 10000
+        "capacity": 10000,
+        "health": 75,
+        "strength": 15,
+        "accuracy": 80,
+        "damage": 10
     },
     "DBALL": {
         "id": "DBALL",

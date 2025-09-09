@@ -483,7 +483,7 @@
             },
             {
                 "direction": "DOWN",
-                "message": "Are you out of your mind?"
+                "death": "FALL"
             }
         ],
         "objects": []
