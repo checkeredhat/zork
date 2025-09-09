@@ -748,6 +748,7 @@ At your service!"`);
     },
 
     'MIRROR-MIRROR': (game, verb, directObject) => {
+        // directObject is the mirror object itself, REFL1 or REFL2
         if (verb === 'take') {
             game.ui.display("Nobody but a greedy surgeon would allow you to attempt that trick.");
             return true;
@@ -766,31 +767,19 @@ At your service!"`);
         if (verb === 'mung' || verb === 'throw' || verb === 'attack') {
             game.isMirrorBroken = true;
             game.ui.display("You have broken the mirror. I hope you have a seven years supply of good luck handy.");
+
+            // Remove the mirror from the room to "destroy" it
+            if (directObject && directObject.room) {
+                directObject.room.objects = directObject.room.objects.filter(obj => obj.id !== directObject.id);
+                directObject.room = null; // Dissociate from room
+            }
             return true;
         }
 
         if (verb === 'rub') {
-            const currentRoomId = game.player.room.id;
-            const otherRoomId = currentRoomId === 'MIRR1' ? 'MIRR2' : 'MIRR1';
-            const currentRoom = game.rooms[currentRoomId];
-            const otherRoom = game.rooms[otherRoomId];
-
-            // Swap objects
-            const currentObjects = [...currentRoom.objects];
-            const otherObjects = [...otherRoom.objects];
-            currentRoom.objects = otherObjects;
-            otherRoom.objects = currentObjects;
-
-            // Update object's room reference
-            currentRoom.objects.forEach(obj => obj.room = currentRoom);
-            otherRoom.objects.forEach(obj => obj.room = otherRoom);
-
-            // Swap player
-            game.player.room = otherRoom;
-
-            game.ui.display("There is a rumble from deep within the earth and the room shakes.");
-            game.look(); // Show the new room
-            return true;
+            // The QA guide implies nothing should happen.
+            // Returning false will let the default "I don't know how to do that" message show, which is appropriate.
+            return false;
         }
 
         return false;
