@@ -1,6 +1,228 @@
 // js/actions.js
 
 const actions = {
+    'WINDOW-FUNCTION': (game, verb) => {
+        const kitchenWindow = game.objects['KITCHEN-WINDOW'];
+        const wind1 = game.objects['WIND1'];
+
+        if (verb === 'open') {
+            if (kitchenWindow.flags.isOpen) {
+                game.ui.display("The window is already open.");
+            } else {
+                kitchenWindow.flags.isOpen = true;
+                wind1.flags.isOpen = true;
+                game.ui.display("With great effort, you open the window.");
+            }
+            return true;
+        } else if (verb === 'close') {
+            if (!kitchenWindow.flags.isOpen) {
+                game.ui.display("The window is already closed.");
+            } else {
+                kitchenWindow.flags.isOpen = false;
+                wind1.flags.isOpen = false;
+                game.ui.display("The window closes.");
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'KITCHEN': (game, verb, directObject, indirectObject, command) => {
+        // This is a room-specific action to handle window operations without a direct object
+        if (command && command.toLowerCase().includes('window')) {
+            // The parser will give us the verb ('open' or 'close'). We can just call the main window function.
+            return actions['WINDOW-FUNCTION'](game, verb);
+        }
+        return false;
+    },
+
+    'LEAF-PILE': (game, verb) => {
+        if (verb === 'move') {
+            const leaves = game.objects['LEAVE'];
+            const grating = game.objects['GRAT1'];
+            if (leaves.room === game.player.room) {
+                game.ui.display("In disturbing the pile of leaves, you uncover a grating which was previously hidden from view.");
+                leaves.room.objects = leaves.room.objects.filter(o => o.id !== 'LEAVE');
+                delete leaves.room; // The leaves are scattered and gone
+                grating.flags.isVisible = true;
+                return true;
+            }
+        }
+        return false;
+    },
+
+    'GRATING-ACTION': (game, verb, directObject, indirectObject) => {
+        // directObject is the target (GRAT1), indirectObject is the tool (KEYS)
+        const grating = directObject;
+
+        if (verb === 'unlock') {
+            if (indirectObject && indirectObject.id === 'KEYS') {
+                if (grating.flags.isLocked === false) {
+                    game.ui.display("The grating is already unlocked.");
+                } else {
+                    grating.flags.isLocked = false;
+                    game.ui.display("The grating is now unlocked.");
+                }
+            } else {
+                game.ui.display("You can't unlock the grating with that.");
+            }
+            return true;
+        }
+
+        if (verb === 'open') {
+            if (grating.flags.isLocked) {
+                game.ui.display("The grating is locked.");
+                return true;
+            }
+            if (grating.flags.isOpen) {
+                game.ui.display("It is already open.");
+            } else {
+                grating.flags.isOpen = true;
+                game.ui.display("The grating opens to reveal a dark hole.");
+            }
+            return true;
+        }
+
+        if (verb === 'close') {
+            if (!grating.flags.isOpen) {
+                game.ui.display("It is already closed.");
+            } else {
+                grating.flags.isOpen = false;
+                game.ui.display("You close the grating.");
+            }
+            return true;
+        }
+
+        if (verb === 'lock') {
+            if (indirectObject && indirectObject.id === 'KEYS') {
+                if (grating.flags.isLocked) {
+                    game.ui.display("The grating is already locked.");
+                } else {
+                    if (grating.flags.isOpen) {
+                        game.ui.display("You can't lock it while it's open.");
+                    }
+                    else {
+                        grating.flags.isLocked = true;
+                        game.ui.display("The grating is now locked.");
+                    }
+                }
+            } else {
+                game.ui.display("You can't lock it with that.");
+            }
+            return true;
+        }
+
+        return false;
+    },
+
+    'MAINT-ROOM': (game, verb, directObject, indirectObject) => {
+        if (verb === 'plug') {
+            if (directObject && directObject.id === 'LEAK') {
+                if (indirectObject && indirectObject.id === 'PUTTY') {
+                    const putty = game.objects['PUTTY'];
+                    const hasPutty = game.player.inventory.includes(putty) || game.player.room.objects.includes(putty);
+
+                    if (hasPutty) {
+                        game.ui.display("By some miracle of elven technology, you have managed to stop the leak in the dam.");
+                        game.damWaterLevel = 'low';
+
+                        game.player.inventory = game.player.inventory.filter(o => o.id !== 'PUTTY');
+                        game.player.room.objects = game.player.room.objects.filter(o => o.id !== 'PUTTY');
+
+                        const leak = game.objects['LEAK'];
+                        game.player.room.objects = game.player.room.objects.filter(o => o.id !== 'LEAK');
+                        delete leak.room;
+
+                        return true;
+                    } else {
+                        game.ui.display("You don't have any putty.");
+                        return true;
+                    }
+                } else {
+                    game.ui.display("You can't plug the leak with that.");
+                    return true;
+                }
+            }
+        }
+        return false;
+    },
+
+    'LIVING-ROOM': (game, verb, directObject) => {
+        const rug = game.objects['RUG'];
+        const trapDoor = game.objects['TRAP-DOOR'];
+        if (verb === 'move' && directObject.id === 'RUG') {
+            if (rug.flags.isMoved) {
+                game.ui.display("Having moved the carpet previously, you find it impossible to move it again.");
+            } else {
+                rug.flags.isMoved = true;
+                trapDoor.flags.isVisible = true;
+                game.ui.display("With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap-door appears.");
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'GLACIER': (game, verb, directObject) => {
+        if (verb === 'throw') {
+            if (directObject && directObject.id === 'TORCH') {
+                const torch = directObject;
+                if (torch.flags.isLit) {
+                    game.ui.display("The torch hits the glacier and explodes into a great ball of flame, devouring the glacier. The water from the melting glacier rushes downstream, carrying the torch with it. In the place of the glacier, there is a passageway leading west.");
+                    game.glacierMelted = true;
+                    game.player.inventory = game.player.inventory.filter(obj => obj.id !== 'TORCH');
+                    const ice = game.objects['ICE'];
+                    const room = game.player.room;
+                    room.objects = room.objects.filter(obj => obj.id !== 'ICE');
+                    ice.room = null;
+                } else {
+                    game.ui.display("The glacier is unmoved by your ridiculous attempt.");
+                }
+            } else {
+                game.ui.display("The glacier is unmoved by your ridiculous attempt.");
+            }
+            return true;
+        } else if (verb === 'melt') {
+             game.ui.display("How exactly are you going to melt this glacier?");
+             return true;
+        }
+        return false;
+    },
+
+    'TROLL': (game, verb) => {
+        const troll = game.objects['TROLL'];
+        if (!troll.flags.isVillain) {
+            return false;
+        }
+        if (verb === 'move') {
+            game.ui.display("The troll spits in your face, saying 'Better luck next time.'");
+            return true;
+        }
+        return false;
+    },
+
+    'TRAP-DOOR': (game, verb) => {
+        const trapDoor = game.objects['TRAP-DOOR'];
+        if (verb === 'open') {
+            if (trapDoor.flags.isOpen) {
+                game.ui.display("It's already open.");
+            } else {
+                trapDoor.flags.isOpen = true;
+                game.ui.display("The door reluctantly opens to reveal a rickety staircase descending into darkness.");
+            }
+            return true;
+        } else if (verb === 'close') {
+            if (!trapDoor.flags.isOpen) {
+                game.ui.display("It's already closed.");
+            } else {
+                trapDoor.flags.isOpen = false;
+                game.ui.display("The door swings shut and closes.");
+            }
+            return true;
+        }
+        return false;
+    },
+
     'READ-ADVER': (game, verb) => {
         if (verb === 'read') {
             game.ui.display(`(Taken)
@@ -370,11 +592,18 @@ At your service!"`);
                 } else {
                     game.ui.display("The machine comes to life (figuratively) with a dazzling display of colored lights and bizarre noises. After a few moments, the excitement abates.");
                     const coal = machine.contents.find(objId => objId === 'COAL');
+                    const battery = machine.contents.find(objId => objId === 'BATTE');
+
                     if (coal) {
                         machine.contents = machine.contents.filter(objId => objId !== 'COAL');
                         machine.contents.push('DIAMO');
-                        game.objects['DIAMO'].room = null;
+                        game.objects['DIAMO'].room = null; // Becomes a contained object
                         game.objects['DIAMO'].canContain = 'MACHI';
+                    } else if (battery) {
+                        machine.contents = machine.contents.filter(objId => objId !== 'BATTE');
+                        machine.contents.push('RBATT');
+                        game.objects['RBATT'].room = null; // Becomes a contained object
+                        game.objects['RBATT'].canContain = 'MACHI';
                     } else if (machine.contents.length > 0) {
                         machine.contents = ['GUNK'];
                         game.objects['GUNK'].room = null;
@@ -422,6 +651,19 @@ At your service!"`);
         }
         return false;
     },
+    'CHALICE': (game, verb) => {
+        if (verb === 'take') {
+            const thief = game.thief;
+            const thiefObject = game.objects['THIEF'];
+            // Check if the thief is present and not defeated
+            if (thief.room === game.player.room && thiefObject.flags.isVillain) {
+                game.ui.display("Realizing just in time that you'd be stabbed in the back if you attempted to take the chalice, you return to the fray.");
+                return true; // Prevent the take action
+            }
+        }
+        return false; // Otherwise, allow the default take action
+    },
+
     'CYCLOPS': (game, verb, directObject) => {
         const cyclops = game.objects['CYCLO'];
         const player = game.player;
@@ -450,6 +692,7 @@ At your service!"`);
                     game.ui.display("The cyclops drinks the water, then promptly falls asleep. The staircase is now unblocked.");
                     cyclops.flags.isVillain = false;
                     cyclops.description = "The cyclops is sleeping peacefully, snoring loudly.";
+                    cyclops.initialDescription = "The cyclops is sleeping peacefully, snoring loudly.";
                     // Logic to remove water from bottle should be here or in the 'drink' action itself
                     const bottle = player.inventory.find(obj => obj.id === 'BOTTL');
                     if (bottle) {
@@ -519,6 +762,11 @@ At your service!"`);
     },
 
     'MIRROR-MIRROR': (game, verb, directObject) => {
+        if (verb === 'take') {
+            game.ui.display("Nobody but a greedy surgeon would allow you to attempt that trick.");
+            return true;
+        }
+
         if (game.isMirrorBroken) {
             game.ui.display("The mirror is broken into many pieces.");
             return true;
@@ -559,6 +807,50 @@ At your service!"`);
             return true;
         }
 
+        return false;
+    },
+
+    'BALLOON': (game, verb) => {
+        const balloonObj = game.objects['BALLO'];
+        if (game.player.vehicle !== balloonObj) {
+            return false; // These actions only work inside the balloon
+        }
+        if (verb === 'land') {
+            const currentRoom = game.player.room;
+            const landingExit = currentRoom.exits.find(e => e.direction === 'LAND');
+            if (landingExit) {
+                game.ui.display("You have landed the balloon.");
+                game.player.room = game.rooms[landingExit.roomId];
+                game.look();
+            } else {
+                game.ui.display("You can't land here.");
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'RECEPTACLE-ACTION': (game, verb, directObject, indirectObject) => {
+        // directObject is the item being put (COAL), indirectObject is the container (RECEP)
+        if (verb === 'put') {
+            if (directObject.id === 'COAL') {
+                game.balloon.fuel += 10; // Add 10 turns of fuel
+                game.player.inventory = game.player.inventory.filter(o => o.id !== 'COAL');
+                game.ui.display("The coal burns hot, and the balloon begins to rise.");
+                if (!game.balloon.isInflated) {
+                    game.balloon.isInflated = true;
+                    // Move player into the balloon vehicle
+                    game.player.vehicle = game.objects['BALLO'];
+                }
+                // For simplicity, let's just move the player to the air room
+                game.player.room = game.rooms['VAIR1'];
+                game.look();
+                return true;
+            } else {
+                game.ui.display("That's not a suitable fuel.");
+                return true;
+            }
+        }
         return false;
     },
 
@@ -856,7 +1148,7 @@ At your service!"`);
         return false;
     },
 
-    'FUSE-FUNCTION': (game, verb, directObject) => {
+    'FUSE-FUNCTION': (game, verb) => {
         if (verb === 'burn') {
             game.ui.display("The wire starts to burn.");
             game.timers.push({ turns: 2, action: 'FUSE_BURN_OUT', targetId: 'FUSE' });
@@ -864,40 +1156,291 @@ At your service!"`);
         }
         if (verb === 'FUSE_BURN_OUT') {
             const fuse = game.objects['FUSE'];
-            const brick = game.objects['BRICK'];
-
-            // Hide the fuse
             fuse.flags.isVisible = false;
 
             const fuseContainer = Object.values(game.objects).find(obj => obj.contents && obj.contents.includes('FUSE'));
 
             if (fuseContainer && fuseContainer.id === 'BRICK') {
-                // Hide the brick
-                brick.flags.isVisible = false;
-                brick.room = null;
-
+                const brick = game.objects['BRICK'];
                 const brickContainer = Object.values(game.objects).find(obj => obj.contents && obj.contents.includes('BRICK'));
-                const brickRoom = brick.room;
+                const slot = game.objects['SSLOT'];
 
-                if (brickRoom === game.player.room) {
+                if (brickContainer === slot && slot.room.id === 'SAFE') {
+                    game.ui.display("There is a loud explosion and the door of the safe is blown open.");
+                    game.isSafeOpen = true;
+                    game.objects['SAFE'].flags.isOpen = true;
+                }
+                else if (brick.room && brick.room.id === 'SAFE') {
+                    game.ui.display("The resulting explosion shakes the room, and you are showered with plaster. This was a bad idea, as the room is built over weak rock strata. The floor collapses, and you die.");
+                    game.gameOver('BOMB');
+                }
+                else if (brick.room === game.player.room) {
                     game.ui.display("The resulting explosion throws you against the walls, causing your untimely demise.");
                     game.gameOver('BOMB');
-                } else if (brickRoom && brickRoom.id === 'SAFE') {
-                     if (brickContainer && brickContainer.id === 'SSLOT') {
-                        game.ui.display("There is an explosion nearby.");
-                        game.isSafeOpen = true;
-                        game.objects['SAFE'].flags.isOpen = true;
-                        // In a more complete implementation, this would trigger another timer for room collapse.
-                     } else {
-                        game.ui.display("There is an explosion nearby.");
-                     }
-                } else {
-                    game.ui.display("There is an explosion nearby.");
+                }
+                else if (game.player.inventory.includes(brick)) {
+                    game.ui.display("The brick in your inventory explodes!");
+                    game.gameOver('BOMB');
+                }
+                else {
+                    game.ui.display("You hear a distant explosion.");
+                }
+
+                brick.flags.isVisible = false;
+                if (brick.room) {
+                    brick.room.objects = brick.room.objects.filter(o => o.id !== 'BRICK');
+                    delete brick.room;
+                }
+                if (brickContainer) {
+                    brickContainer.contents = brickContainer.contents.filter(id => id !== 'BRICK');
                 }
 
             } else {
                 game.ui.display("The wire rapidly burns into nothingness.");
             }
+            return true;
+        }
+        return false;
+    },
+
+    'BUTTON-ACTION': (game, verb, directObject) => {
+        if (verb === 'push') {
+            const buttonId = directObject.id;
+            const damLobby = game.rooms['LOBBY'];
+
+            switch (buttonId) {
+                case 'BUTN1': // Yellow
+                    damLobby.description = "This is the dam lobby. To your left is a mural of the dam showing the spillway control gates, and a button to the right of it. The button is yellow. Above the button is a brass plaque saying 'YELLOW'.";
+                    game.yellowButtonPushed = true;
+                    break;
+                case 'BUTN2': // Brown
+                    damLobby.description = "This is the dam lobby. To your left is a mural of the dam showing the spillway control gates, and a button to the right of it. The button is brown. Above the button is a brass plaque saying 'BROWN'.";
+                    game.brownButtonPushed = true;
+                    break;
+                case 'BUTN3': // Red
+                    damLobby.description = "This is the dam lobby. To your left is a mural of the dam showing the spillway control gates, and a button to the right of it. The button is red. Above the button is a brass plaque saying 'RED'.";
+                    game.redButtonPushed = true;
+                    break;
+                case 'BUTN4': // Blue
+                    if (game.yellowButtonPushed && game.redButtonPushed && !game.brownButtonPushed && game.damWaterLevel === 'low') {
+                        game.ui.display("There is a rumbling sound and a stream of water appears to burst from the dam, but it is evidently not enough to cause any damage.");
+                        game.damGatesOpen = true;
+                        // This also makes the TRUNK visible in the original
+                        game.objects['TRUNK'].flags.isVisible = true;
+
+                    } else {
+                        game.ui.display("Click.");
+                    }
+                    // Reset for next attempt
+                    game.yellowButtonPushed = false;
+                    game.redButtonPushed = false;
+                    game.brownButtonPushed = false;
+                    break;
+            }
+            game.ui.display("Click.");
+            return true;
+        }
+        return false;
+    },
+
+    'RIDDLE-ROOM': (game, verb, directObject, indirectObject, command) => {
+        if (verb === 'say') {
+            // The parser should give us the full command. We need to extract the said text.
+            const saidText = command.substring(command.indexOf('say') + 4).replace(/"/g, '').trim();
+            if (saidText.toLowerCase() === 'a well') {
+                game.ui.display("The guardian of the door, a sphinx-like creature, is apparently satisfied and disappears in a puff of smoke, revealing the passage to the south.");
+                game.riddleSolved = true; // You might use a global flag like this
+                const sphinx = game.objects['SPHIN'];
+                if (sphinx && sphinx.room) {
+                    sphinx.room.objects = sphinx.room.objects.filter(o => o.id !== 'SPHIN');
+                    delete sphinx.room;
+                }
+                const riddleFlag = game.objects['RIDDLE-FLAG'];
+                if(riddleFlag) riddleFlag.flags.isOpen = true;
+            } else {
+                game.ui.display("The sphinx looks at you with a disdainful expression, and you notice that the door is still blocked.");
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'EATME-FUNCTION': (game, verb, directObject) => {
+        if (verb === 'eat') {
+            if (game.playerSize === 'large') {
+                game.ui.display("You can't get any larger!");
+                return true;
+            }
+            game.ui.display("You eat the 'Eat Me' cake. You begin to grow larger and larger!");
+            game.playerSize = 'large';
+            // Remove cake from game
+            if (directObject.room) {
+                directObject.room.objects = directObject.room.objects.filter(o => o.id !== directObject.id);
+            } else {
+                game.player.inventory = game.player.inventory.filter(o => o.id !== directObject.id);
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'CAKE-FUNCTION': (game, verb, directObject) => {
+        if (verb === 'eat') {
+            if (game.playerSize === 'small') {
+                game.ui.display("You can't get any smaller!");
+                return true;
+            }
+            game.ui.display(`You eat the ${directObject.description}. You begin to shrink!`);
+            game.playerSize = 'small';
+            // Remove icing from game
+            if (directObject.room) {
+                directObject.room.objects = directObject.room.objects.filter(o => o.id !== directObject.id);
+            } else {
+                game.player.inventory = game.player.inventory.filter(o => o.id !== directObject.id);
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'FLASK-FUNCTION': (game, verb, directObject) => {
+        if (verb === 'drink') {
+             if (game.playerSize === 'small') {
+                game.ui.display("You can't get any smaller!");
+                return true;
+            }
+            game.ui.display("You drink the liquid from the flask. It has a strange, shrinking taste.");
+            game.playerSize = 'small';
+            // Empty the flask
+            directObject.contents = [];
+            directObject.description = "glass flask (empty)";
+            return true;
+        }
+        return false;
+    },
+
+    'TDOOR-FUNCTION': (game, verb, directObject, indirectObject) => {
+        const door = game.objects['TDOOR'];
+        if (verb === 'unlock') {
+            const key = game.player.inventory.find(o => o.id === 'TKEY');
+            if (key) {
+                if (door.flags.isLocked) {
+                    door.flags.isLocked = false;
+                    game.ui.display("The tiny door is now unlocked.");
+                } else {
+                    game.ui.display("It's already unlocked.");
+                }
+            } else {
+                game.ui.display("You don't have the key.");
+            }
+            return true;
+        }
+        if (verb === 'open') {
+            if (door.flags.isLocked) {
+                game.ui.display("The tiny door is locked.");
+            } else if (door.flags.isOpen) {
+                game.ui.display("It's already open.");
+            } else {
+                door.flags.isOpen = true;
+                game.ui.display("The tiny door opens.");
+            }
+            return true;
+        }
+        return false;
+    },
+
+    'ROBOT-FUNCTION': (game, verb, directObject, indirectObject, command) => {
+        const robot = game.objects['ROBOT'];
+        if (!robot) return false;
+
+        // Handle 'give' to robot
+        if (verb === 'give' && directObject && indirectObject && indirectObject.id === 'ROBOT') {
+            if (directObject.id === 'WRENC') {
+                if (robot.flags.panelOpen) {
+                    game.ui.display("The panel is already open.");
+                } else {
+                    robot.flags.panelOpen = true;
+                    const slot = game.objects['ROBOT-SLOT'];
+                    if(slot) slot.flags.isVisible = true;
+                    game.ui.display("The robot's panel opens, revealing a slot.");
+                }
+                return true;
+            }
+            if (directObject.id === 'SCREW') {
+                robot.inventory.push(directObject);
+                game.player.inventory = game.player.inventory.filter(o => o.id !== 'SCREW');
+                game.ui.display("The robot takes the screwdriver and places it in a hidden compartment.");
+                return true;
+            }
+        }
+
+        // Handle 'put battery in slot' - this is a bit of a hack
+        // The main 'put' logic in game.js would need to be aware of this special case.
+        // A listener system on objects would be better. For now, we check it here.
+        const slot = game.objects['ROBOT-SLOT'];
+        if (slot && slot.contents && slot.contents.includes('RBATT') && !robot.flags.isCharged) {
+            robot.flags.isCharged = true;
+            robot.flags.panelOpen = false;
+            slot.flags.isVisible = false;
+            // remove battery from slot contents to prevent re-triggering
+            slot.contents = [];
+            game.ui.display("The robot's panel closes and the robot says, \"Ready.\"");
+            return true;
+        }
+
+
+        // Handle 'tell robot "..."'
+        if (verb === 'tell' && directObject && directObject.id === 'ROBOT') {
+            if (!robot.flags.isCharged) {
+                game.ui.display("The robot does not respond.");
+                return true;
+            }
+
+            const robotCommand = command.substring(command.indexOf('robot') + 5).replace(/"/g, '').trim();
+            const parts = robotCommand.split(' ');
+            const robotVerb = parts[0].toLowerCase();
+            const robotNoun = parts.length > 1 ? parts.slice(1).join(' ') : '';
+
+
+            if (robotVerb === 'go') {
+                const direction = robotNoun.toUpperCase();
+                const robotRoom = robot.room;
+                const exit = robotRoom.exits.find(e => e.direction === direction);
+                if (exit && !exit.condition) {
+                    robot.room = game.rooms[exit.roomId];
+                    game.ui.display(`The robot rolls ${direction}.`);
+                } else {
+                    game.ui.display("The robot is unable to go that way.");
+                }
+                return true;
+            }
+
+            if (robotVerb === 'push') {
+                const buttonName = robotNoun;
+                const robotRoom = robot.room;
+                const button = robotRoom.objects.find(o => o.names.map(n => n.toLowerCase()).includes(buttonName.toLowerCase()));
+
+                if (button && button.action === 'BUTTON-ACTION') {
+                    game.ui.display(`The robot pushes the ${buttonName} button.`);
+                    actions['BUTTON-ACTION'](game, 'push', button);
+                } else {
+                    game.ui.display("The robot doesn't see that button here.");
+                }
+                return true;
+            }
+
+            game.ui.display("The robot does not understand that command.");
+            return true;
+        }
+
+        return false;
+    },
+
+    'WIN-GAME': (game, verb) => {
+        if (verb === 'walk-in') {
+            game.ui.display("You have won! Your final score is " + game.player.score + " out of 350.");
+            game.isGameOver = true;
+            game.ui.inputElement.disabled = true;
             return true;
         }
         return false;

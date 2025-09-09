@@ -33,6 +33,14 @@
         "trophyValue": 0,
         "capacity": 0
     },
+    "MSWIT": {
+        "id": "MSWIT",
+        "names": ["SWITCH"],
+        "description": "switch",
+        "initialDescription": "On the machine is a switch, which is labelled 'START'.",
+        "flags": { "isVisible": true, "isTakeable": false },
+        "action": "MSWITCH-FUNCTION"
+    },
     "ATABL": {
         "id": "ATABL",
         "names": [
@@ -95,6 +103,24 @@
         "trophyValue": 5,
         "capacity": 0
     },
+    "BATTE": {
+        "id": "BATTE",
+        "names": ["BATTERY"],
+        "adjectives": ["SAD-LOOKING", "DEAD"],
+        "description": "sad-looking battery",
+        "initialDescription": "There is a sad-looking battery here.",
+        "flags": { "isTakeable": true, "isVisible": true },
+        "size": 5
+    },
+    "RBATT": {
+        "id": "RBATT",
+        "names": ["BATTERY"],
+        "adjectives": ["CHARGED", "CHARGED-UP"],
+        "description": "charged-up battery",
+        "initialDescription": "There is a charged-up battery here.",
+        "flags": { "isTakeable": true, "isVisible": true },
+        "size": 5
+    },
     "BALLO": {
         "id": "BALLO",
         "names": [
@@ -122,6 +148,47 @@
         "light": 0,
         "value": 0,
         "trophyValue": 0
+    },
+    "TDOOR": {
+        "id": "TDOOR",
+        "names": ["DOOR"],
+        "adjectives": ["TINY"],
+        "description": "tiny door",
+        "initialDescription": "There is a tiny door here.",
+        "flags": { "isOpen": false, "isLocked": true, "isTakeable": false, "isVisible": true },
+        "action": "TDOOR-FUNCTION"
+    },
+    "BUTN1": {
+        "id": "BUTN1",
+        "names": ["BUTTON", "YELLOW"],
+        "adjectives": ["YELLOW"],
+        "description": "yellow button",
+        "flags": { "isVisible": true, "isTakeable": false },
+        "action": "BUTTON-ACTION"
+    },
+    "BUTN2": {
+        "id": "BUTN2",
+        "names": ["BUTTON", "BROWN"],
+        "adjectives": ["BROWN"],
+        "description": "brown button",
+        "flags": { "isVisible": true, "isTakeable": false },
+        "action": "BUTTON-ACTION"
+    },
+    "BUTN3": {
+        "id": "BUTN3",
+        "names": ["BUTTON", "RED"],
+        "adjectives": ["RED"],
+        "description": "red button",
+        "flags": { "isVisible": true, "isTakeable": false },
+        "action": "BUTTON-ACTION"
+    },
+    "BUTN4": {
+        "id": "BUTN4",
+        "names": ["BUTTON", "BLUE"],
+        "adjectives": ["BLUE"],
+        "description": "blue button",
+        "flags": { "isVisible": true, "isTakeable": false },
+        "action": "BUTTON-ACTION"
     },
     "BAR": {
         "id": "BAR",
@@ -286,6 +353,36 @@
         "trophyValue": 0,
         "capacity": 0
     },
+    "RNBUT": {
+        "id": "RNBUT",
+        "names": ["button"],
+        "adjectives": ["round"],
+        "description": "a round button",
+        "action": "BUTTON-ACTION",
+        "flags": { "isVisible": true, "isTakeable": false }
+    },
+    "SQBUT": {
+        "id": "SQBUT",
+        "names": ["button"],
+        "adjectives": ["square"],
+        "description": "a square button",
+        "action": "BUTTON-ACTION",
+        "flags": { "isVisible": true, "isTakeable": false }
+    },
+    "TRBUT": {
+        "id": "TRBUT",
+        "names": ["button"],
+        "adjectives": ["triangular"],
+        "description": "a triangular button",
+        "action": "BUTTON-ACTION",
+        "flags": { "isVisible": true, "isTakeable": false }
+    },
+    "MAGIC-FLAG": {
+        "id": "MAGIC-FLAG",
+        "names": [],
+        "description": "",
+        "flags": { "isOpen": false }
+    },
     "BONES": {
         "id": "BONES",
         "names": [
@@ -305,6 +402,12 @@
         "trophyValue": 0,
         "size": 99999,
         "capacity": 0
+    },
+    "RIDDLE-FLAG": {
+        "id": "RIDDLE-FLAG",
+        "names": [],
+        "description": "",
+        "flags": { "isOpen": false, "isVisible": false }
     },
     "BOOK": {
         "id": "BOOK",
@@ -663,7 +766,7 @@
             "isTakeable": false
         },
         "action": "CYCLOPS",
-        "initialDescription": "",
+    "initialDescription": "A cyclops, who looks prepared to eat you, is standing here.",
         "light": 0,
         "value": 0,
         "trophyValue": 0,
@@ -733,6 +836,13 @@
         "light": 0,
         "trophyValue": 6,
         "capacity": 0
+    },
+    "SPHIN": {
+        "id": "SPHIN",
+        "names": ["SPHINX", "GUARDIAN", "CREATURE"],
+        "description": "sphinx",
+        "initialDescription": "The way south is blocked by a sphinx.",
+        "flags": { "isVisible": true, "isTakeable": false, "isVillain": true }
     },
     "ECAKE": {
         "id": "ECAKE",
@@ -913,6 +1023,27 @@
         "trophyValue": 0,
         "size": 99999,
         "capacity": 0
+    },
+    "GRAT1": {
+        "id": "GRAT1",
+        "names": ["grating", "grate"],
+        "description": "A grating is here, settled into the ground.",
+        "flags": {
+            "isVisible": false,
+            "isOpen": false,
+            "isLocked": true,
+            "isTakeable": false
+        },
+        "action": "GRATING-ACTION"
+    },
+    "GRAT2": {
+        "id": "GRAT2",
+        "names": ["grating", "grate"],
+        "description": "There is a grating on the ceiling.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false
+        }
     },
     "GRAIL": {
         "id": "GRAIL",
@@ -1119,6 +1250,14 @@
         "trophyValue": 0,
         "capacity": 0
     },
+    "KITCHEN-WINDOW": {
+        "id": "KITCHEN-WINDOW",
+        "names": [],
+        "description": "",
+        "flags": {
+            "isOpen": false
+        }
+    },
     "ICE": {
         "id": "ICE",
         "names": [
@@ -1187,7 +1326,7 @@
         "flags": {
             "isTool": true,
             "isTakeable": true,
-            "isVisible": true
+            "isVisible": false
         },
         "size": 10,
         "light": 0,
@@ -1225,6 +1364,15 @@
         "trophyValue": 0,
         "size": 5,
         "capacity": 0
+    },
+    "LEAK": {
+        "id": "LEAK",
+        "names": ["leak"],
+        "description": "There is a leak in the dam here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": false
+        }
     },
     "LABEL": {
         "id": "LABEL",
@@ -1347,12 +1495,14 @@
         "flags": {
             "isContainer": true,
             "isVisible": true,
-            "isTakeable": false
+            "isTakeable": false,
+            "isOpen": false
         },
         "size": 99999,
         "capacity": 50,
+        "contents": [],
         "action": "MACHINE-FUNCTION",
-        "initialDescription": "",
+        "initialDescription": "There is a large machine here, which is reminiscent of a clothes dryer. On the front is a switch, which is labelled 'START'.",
         "light": 0,
         "value": 0,
         "trophyValue": 0
@@ -1524,6 +1674,12 @@
         "light": 0,
         "trophyValue": 10,
         "capacity": 0
+    },
+    "PRAYER-FLAG": {
+        "id": "PRAYER-FLAG",
+        "names": [],
+        "description": "",
+        "flags": { "isOpen": false, "isVisible": false }
     },
     "PUBK": {
         "id": "PUBK",
@@ -1702,6 +1858,7 @@
             "isSearchable": true,
             "isTakeable": false
         },
+        "action": "RECEPTACLE-ACTION",
         "capacity": 6,
         "canContain": "BALLO",
         "initialDescription": "",
@@ -1775,26 +1932,26 @@
     },
     "ROBOT": {
         "id": "ROBOT",
-        "names": [
-            "R2D2",
-            "C3PO",
-            "ROBBY"
-        ],
+        "names": [ "ROBOT", "R2D2", "C3PO", "ROBBY" ],
         "description": "robot",
+        "initialDescription": "There is a robot here, apparently inactive.",
         "flags": {
-            "isSacred": true,
-            "isVillain": true,
-            "isVisible": true,
             "isActor": true,
-            "isTakeable": false
+            "isTakeable": false,
+            "isVisible": true,
+            "panelOpen": false,
+            "isCharged": false
         },
         "action": "ROBOT-FUNCTION",
-        "initialDescription": "There is a robot here.",
-        "light": 0,
-        "value": 0,
-        "trophyValue": 0,
-        "size": 0,
-        "capacity": 0
+        "contents": [ "ROBOT-SLOT" ],
+        "inventory": []
+    },
+    "ROBOT-SLOT": {
+        "id": "ROBOT-SLOT",
+        "names": ["SLOT"],
+        "description": "slot",
+        "flags": { "isContainer": true, "isVisible": false, "isTakeable": false, "isOpen": true },
+        "capacity": 1
     },
     "ROPE": {
         "id": "ROPE",
@@ -1839,7 +1996,8 @@
     "RUG": {
         "id": "RUG",
         "names": [
-            "CARPE"
+            "CARPE",
+            "rug"
         ],
         "adjectives": [
             "ORIEN"
@@ -2102,6 +2260,18 @@
         "size": 10,
         "canContain": "IRBOX"
     },
+    "TRAP-DOOR": {
+        "id": "TRAP-DOOR",
+        "names": ["door", "trapdoor", "cover"],
+        "adjectives": ["trap", "dusty"],
+        "description": "trap door",
+        "action": "TRAP-DOOR",
+        "flags": {
+            "isVisible": false,
+            "isOpen": false,
+            "isTakeable": false
+        }
+    },
     "SWORD": {
         "id": "SWORD",
         "names": [
@@ -2145,6 +2315,15 @@
         },
         "capacity": 50,
         "action": "DUMBWAITER"
+    },
+    "TKEY": {
+        "id": "TKEY",
+        "names": ["KEY"],
+        "adjectives": ["TINY", "GOLD"],
+        "description": "tiny gold key",
+        "initialDescription": "There is a tiny gold key here.",
+        "flags": { "isTakeable": true, "isVisible": true },
+        "size": 1
     },
     "TCASE": {
         "id": "TCASE",
@@ -2200,7 +2379,7 @@
         "contents": [
             "STILL"
         ],
-        "initialDescription": "%,ROBBER-C-DESC",
+    "initialDescription": "",
         "light": 0,
         "value": 0,
         "trophyValue": 0,
@@ -2280,7 +2459,7 @@
         "strength": 10,
         "accuracy": 75,
         "damage": 8,
-        "initialDescription": "%,TROLLDESC",
+    "initialDescription": "A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.",
         "action": "TROLL",
         "contents": [
             "AXE"
@@ -2294,12 +2473,14 @@
     "TRUNK": {
         "id": "TRUNK",
         "names": [
-            "CHEST"
+            "CHEST",
+            "JEWELS"
         ],
         "description": "trunk with jewels",
         "flags": {
             "isTakeable": true,
-            "isContainer": true
+            "isContainer": true,
+            "isVisible": false
         },
         "value": 15,
         "initialDescription": "There is an old trunk here, bulging with assorted jewels.",
