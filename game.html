@@ -16,29 +16,32 @@
 
         #terminal {
             width: 80ch;
-            height: calc(24 * 1.2em); /* 24 rows, with line height */
-            overflow: hidden;
+            height: calc(24 * 1.2em); /* 24 lines of text */
+            overflow: hidden;         /* no scroll bar */
+            background: #000;
+            color: #33ff33;
+            font-family: monospace;
+            font-size: 16px;
+            line-height: 1.2em;
+            user-select: none;
+            padding: 0.5em;
+            white-space: pre;          /* preserve spacing */
             margin: 2rem auto;
-            white-space: pre-wrap;
             text-shadow: 0 0 4px #33ff33, 0 0 8px #33ff33;
             user-select: none;
             padding: 0.5em;
             display: flex;
             flex-direction: column;
         }
-
-        #input-display::after {
-            content: "";
-            display: inline-block;
-            width: 0.6em;
-            height: 1.2em; /* Match line-height */
-            background: #33ff33;
+        /* blinking cursor after the input line */
+        .input-line::after {
+            content: "█";
             animation: blink 1s steps(1) infinite;
-            vertical-align: bottom; /* Align with the text baseline */
+            margin-left: 1px;
         }
 
         @keyframes blink {
-            50% { background: transparent; }
+            50% { opacity: 0; }
         }
 
         body::after {
@@ -58,15 +61,6 @@
             pointer-events: none;
         }
 
-        #output {
-            flex-grow: 1;
-            overflow: hidden; /* Ensure no scrollbar appears on the output itself */
-        }
-
-        #input-container {
-            display: flex;
-        }
-
         #input {
             /* Hide the actual input field */
             position: absolute;
@@ -76,14 +70,8 @@
     </style>
 </head>
 <body>
-    <div id="terminal">
-        <div id="output"></div>
-        <div id="input-container">
-            <span class="prompt">></span>
-            <span id="input-display"></span>
-            <input type="text" id="input" autofocus />
-        </div>
-    </div>
+    <div id="terminal"></div>
+    <input type="text" id="input" autofocus />
 
     <!-- Core classes must be loaded before the main game logic -->
     <script src="js/ui.js"></script>
