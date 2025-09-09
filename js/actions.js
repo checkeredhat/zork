@@ -215,19 +215,49 @@ const actions = {
         }
         return false;
     },
-    'CYCLOPS': (game, verb, directObject, indirectObject) => {
+    'CYCLOPS': (game, verb, directObject) => {
         const cyclops = game.objects['CYCLO'];
+        const player = game.player;
+
         if (verb === 'attack') {
             game.ui.display("The cyclops is much larger and stronger than you. Attacking it would be suicide.");
             return true;
         }
-        if (verb === 'give' && directObject && directObject.id === 'FOOD') {
-            game.ui.display("The cyclops seems to like the food. He eats it, then becomes very sleepy and dozes off. You can now pass him.");
-            cyclops.flags.isVillain = false;
-            cyclops.description = "The cyclops is sleeping peacefully.";
-            game.player.inventory = game.player.inventory.filter(obj => obj.id !== 'FOOD');
+
+        if (verb === 'give' && directObject) {
+            if (!player.inventory.includes(directObject)) {
+                game.ui.display("You don't have that.");
+                return true;
+            }
+
+            if (directObject.id === 'FOOD') {
+                game.ui.display("The cyclops, who is not overly proud, graciously accepts the gift and not having the most discriminating tastes, gleefully eats it.");
+                game.cyclopsIsThirsty = true;
+                player.inventory = player.inventory.filter(obj => obj.id !== 'FOOD');
+                game.ui.display("The cyclops now appears to be thirsty.");
+                return true;
+            }
+
+            if (directObject.id === 'WATER') {
+                if (game.cyclopsIsThirsty) {
+                    game.ui.display("The cyclops drinks the water, then promptly falls asleep. The staircase is now unblocked.");
+                    cyclops.flags.isVillain = false;
+                    cyclops.description = "The cyclops is sleeping peacefully, snoring loudly.";
+                    // Logic to remove water from bottle should be here or in the 'drink' action itself
+                    const bottle = player.inventory.find(obj => obj.id === 'BOTTL');
+                    if (bottle) {
+                        bottle.contents = [];
+                    }
+                } else {
+                    game.ui.display("The cyclops, not being thirsty, refuses your offer.");
+                }
+                return true;
+            }
+
+            game.ui.display("The cyclops is not so stupid as to eat THAT!");
             return true;
         }
+
         return false;
     },
     'CHALICE': (game, verb, directObject, indirectObject) => {
@@ -248,6 +278,21 @@ const actions = {
         // The stilletto is just a weapon. The combat system handles it.
         return false;
     },
+    'ECHO-ROOM': (game, verb, directObject, indirectObject, command) => {
+        if (game.isEchoFixed) {
+            return false; // Don't handle if the echo is fixed
+        }
+
+        if (command.toLowerCase().trim() === 'echo') {
+            game.isEchoFixed = true;
+            game.ui.display("The acoustics of the room change subtly.");
+        } else {
+            game.ui.display(command);
+        }
+
+        return true; // Command is handled (or echoed)
+    },
+
     'STICK-FUNCTION': (game, verb, directObject, indirectObject) => {
         if (verb === 'wave') {
             const room = game.player.room;
@@ -266,12 +311,114 @@ const actions = {
         return false;
     },
 
-    'ROBBER-FUNCTION': (game, verb, directObject, indirectObject) => {
+    'MIRROR-MIRROR': (game, verb, directObject) => {
+        if (game.isMirrorBroken) {
+            game.ui.display("The mirror is broken into many pieces.");
+            return true;
+        }
+
+        if (verb === 'look' || verb === 'examine') {
+            game.ui.display("There is an ugly person staring at you.");
+            return true;
+        }
+
+        if (verb === 'mung' || verb === 'throw' || verb === 'attack') {
+            game.isMirrorBroken = true;
+            game.ui.display("You have broken the mirror. I hope you have a seven years supply of good luck handy.");
+            return true;
+        }
+
+        if (verb === 'rub') {
+            const currentRoomId = game.player.room.id;
+            const otherRoomId = currentRoomId === 'MIRR1' ? 'MIRR2' : 'MIRR1';
+            const currentRoom = game.rooms[currentRoomId];
+            const otherRoom = game.rooms[otherRoomId];
+
+            // Swap objects
+            const currentObjects = [...currentRoom.objects];
+            const otherObjects = [...otherRoom.objects];
+            currentRoom.objects = otherObjects;
+            otherRoom.objects = currentObjects;
+
+            // Update object's room reference
+            currentRoom.objects.forEach(obj => obj.room = currentRoom);
+            otherRoom.objects.forEach(obj => obj.room = otherRoom);
+
+            // Swap player
+            game.player.room = otherRoom;
+
+            game.ui.display("There is a rumble from deep within the earth and the room shakes.");
+            game.look(); // Show the new room
+            return true;
+        }
+
+        return false;
+    },
+
+    'ROBBER-FUNCTION': (game, verb, directObject) => {
         const thief = game.objects['THIEF'];
+        const player = game.player;
+
         if (verb === 'attack') {
+            // The main combat logic is in game.handleCombatRound
             game.attack(thief);
             return true;
         }
+
+        if (verb === 'give' && directObject) {
+            if (player.inventory.includes(directObject)) {
+                // Handle the "brick bomb" case from MDL
+                if (directObject.id === 'BRICK' && directObject.contents.includes('FUSE')) {
+                     const fuse = game.objects['FUSE'];
+                     if (fuse.timer) { // Assuming a timer is set when lit
+                        game.ui.display("The thief seems rather offended by your offer. Do you think he's as stupid as you are?");
+                        return true;
+                     }
+                }
+
+                player.inventory = player.inventory.filter(obj => obj.id !== directObject.id);
+                game.thief.inventory.push(directObject);
+                game.ui.display(`The thief places the ${directObject.names[0]} in his bag and thanks you politely.`);
+            } else {
+                game.ui.display("You don't have that.");
+            }
+            return true;
+        }
+
+        if (verb === 'throw' && directObject) {
+             if (player.inventory.includes(directObject)) {
+                player.inventory = player.inventory.filter(obj => obj.id !== directObject.id);
+                // In MDL, this has a chance to scare him off. For now, he just gets angry.
+                thief.isAngry = true;
+                game.ui.display(`You throw the ${directObject.names[0]} at the thief, who deftly catches it. He does not look pleased.`);
+                game.thief.inventory.push(directObject);
+             } else {
+                game.ui.display("You don't have that.");
+             }
+             return true;
+        }
+
+
+        // This will be called from the combat system when the thief is defeated
+        if (verb === 'dead') {
+            game.ui.display("As the thief dies, the power of his magic decreases, and his booty remains.");
+            thief.inventory.forEach(obj => {
+                player.room.objects.push(obj);
+            });
+            thief.inventory = [];
+
+            // If in treasure room, make items visible again
+            if (player.room.id === 'TREAS') {
+                player.room.objects.forEach(obj => {
+                    if (obj.id !== 'THIEF' && obj.id !== 'CHALI') {
+                        obj.flags.isVisible = true;
+                    }
+                });
+                game.ui.display("The treasures of the room reappear!");
+            }
+            return true;
+        }
+
         return false;
     },
 

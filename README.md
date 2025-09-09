@@ -29,3 +29,18 @@ A file tree listing the files in the [```zork```](../master/zork) directory show
 To the extent that MIT holds rights in these files, they are released under the terms of the [MIT No Attribution License](https://opensource.org/licenses/MIT-0). See the ```LICENSE.md``` file for more information. Any questions about permissions should be directed to [permissions-lib@mit.edu](mailto:permissions-lib@mit.edu)
 ## Acknowledgements
 Thanks to [Lars Brinkhoff](https://github.com/larsbrinkhoff) for help with identifying these files and with extracting them using the itstar program mentioned above.
+
+## JavaScript Version
+This repository also contains a JavaScript port of the original Zork game, which can be played in a web browser.
+
+### How to Play
+1.  Open the `game.html` file in a modern web browser.
+2.  Type commands into the input field at the bottom of the screen and press Enter.
+3.  Explore the Great Underground Empire!
+
+### Recent Updates
+This JavaScript version has been updated to more closely match the behavior of the original 1977 MDL version of Zork. These updates include:
+*   **Thief Behavior:** The thief's logic has been updated to be more faithful to the original, including his patrol routes, robbing behavior, and interactions with the player.
+*   **Visual Appearance:** The game's appearance has been updated to mimic a classic green phosphor CRT terminal, for a more authentic retro experience.
+*   **Puzzle Logic:** Several puzzles have been updated to match the original MDL implementation, including the mirror room, the cyclops, and the loud room.
+*   **Data Verification:** A thorough verification of the game's data has been performed to correct discrepancies in object and room properties.

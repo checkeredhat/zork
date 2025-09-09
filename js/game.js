@@ -29,6 +29,10 @@ class Game {
         this.isBasketAtTop = true;
         this.deflateFlag = true;
         this.isSafeOpen = false;
+        this.isMirrorBroken = false;
+        this.cyclopsIsThirsty = false;
+        this.cyclopsIsGone = false;
+        this.isEchoFixed = false;
         this.timers = [];
         this.deathMessages = {};
         this.ghostTimer = 0;
@@ -287,6 +291,17 @@ class Game {
                         this.ui.display(exit.message || "You can't go that way.");
                         return;
                     }
+                } else if (exit.condition === 'CYCLOPS_GONE') {
+                    if (!this.cyclopsIsGone) {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
+                } else if (exit.condition === 'CYCLOPS_ASLEEP') {
+                    const cyclops = this.objects['CYCLO'];
+                    if (cyclops.flags.isVillain) {
+                        this.ui.display(exit.message || "You can't go that way.");
+                        return;
+                    }
                 } else {
                     const conditionObject = this.objects[exit.condition];
                     if (!conditionObject || !conditionObject.flags.isOpen) {
@@ -449,6 +464,9 @@ class Game {
                 if (defender.id === 'TROLL') {
                     this.trollDefeated = true;
                 }
+                if (defender.id === 'THIEF') {
+                    this.handleObjectAction('dead', defender);
+                }
                 return;
             }
         } else {
@@ -469,74 +487,6 @@ class Game {
             }
         } else {
             this.ui.display(`The ${defender.names[0]} attacks you but misses.`);
-        }
-    }
-
-    thiefUpdate() {
-        if (this.thief.timer > 0) {
-            this.thief.timer--;
-            return;
-        }
-
-        const thiefObject = this.objects['THIEF'];
-        if (!thiefObject) return;
-
-        // Chance to appear
-        if (!this.thief.room) {
-            if (Math.random() < 0.1) { // 10% chance to appear
-                const roomKeys = Object.keys(this.rooms);
-                const randomRoomKey = roomKeys[Math.floor(Math.random() * roomKeys.length)];
-                const randomRoom = this.rooms[randomRoomKey];
-
-                if (randomRoom.isLight) {
-                    this.thief.room = randomRoom;
-                    randomRoom.objects.push(thiefObject);
-                    if (this.player.room === randomRoom) {
-                        this.ui.display("A shady-looking figure suddenly appears!");
-                    }
-                    this.thief.timer = 20; // Time until next action
-                }
-            }
-        } else {
-            // Chance to move
-            if (Math.random() < 0.5) {
-                const exits = this.thief.room.exits;
-                if (exits.length > 0) {
-                    const randomExit = exits[Math.floor(Math.random() * exits.length)];
-                    if (randomExit.roomId) {
-                        // Remove from old room
-                        this.thief.room.objects = this.thief.room.objects.filter(obj => obj.id !== 'THIEF');
-                        // Add to new room
-                        this.thief.room = this.rooms[randomExit.roomId];
-                        this.thief.room.objects.push(thiefObject);
-                    }
-                }
-            }
-
-            // Chance to steal
-            if (this.thief.room === this.player.room) {
-                if (Math.random() < 0.3) {
-                    const valuableObjects = this.player.inventory.filter(obj => obj.value > 0);
-                    if (valuableObjects.length > 0) {
-                        const stolenObject = valuableObjects[Math.floor(Math.random() * valuableObjects.length)];
-                        this.player.inventory = this.player.inventory.filter(obj => obj.id !== stolenObject.id);
-                        this.thief.inventory.push(stolenObject);
-                        this.ui.display(`The thief steals your ${stolenObject.names[0]}!`);
-                    }
-                }
-            }
-
-            // Chance to disappear
-            if (Math.random() < 0.1) {
-                if (this.player.room === this.thief.room) {
-                    this.ui.display("The thief vanishes into the shadows.");
-                }
-                this.thief.room.objects = this.thief.room.objects.filter(obj => obj.id !== 'THIEF');
-                this.thief.room = null;
-                this.thief.timer = 100; // Time until he can appear again
-            } else {
-                this.thief.timer = 10; // Time until next action
-            }
         }
     }
 
@@ -960,10 +910,7 @@ class Game {
             return; // Don't process commands if the game is over
         }
 
-        // Thief's treasure room defense
-        if (this.player.room.id === 'TREAS' && this.thief.room.id !== 'TREAS') {
-            this.thiefUpdate();
-        }
+        this.thiefUpdate();
 
         if (!command) return;
 
@@ -974,9 +921,8 @@ class Game {
             return;
         }
 
-        this.ui.displayPrompt(`> ${command}`);
-
-        this.thiefUpdate();
+        // The command is now displayed by the UI class
+        // this.ui.displayPrompt(`> ${command}`);
 
         // Ghost timer
         if (this.ghostTimer > 0) {
@@ -1032,7 +978,7 @@ class Game {
 
         // Room-specific action handling
         if (currentRoom.action && window.gameActions && window.gameActions[currentRoom.action]) {
-            const handled = window.gameActions[currentRoom.action](this, action.verb, action.directObject, action.indirectObject);
+            const handled = window.gameActions[currentRoom.action](this, action.verb, action.directObject, action.indirectObject, command);
             if (handled) {
                 return;
             }
@@ -1149,6 +1095,18 @@ class Game {
                 break;
             case 'curses':
                 this.ui.display(this.offendedMessages[Math.floor(Math.random() * this.offendedMessages.length)]);
+                break;
+            case 'odysseus':
+            case 'sinbad':
+                if (this.player.room.id === 'CYCLO' && !this.cyclopsIsGone) {
+                    this.ui.display("The cyclops, hearing the name of his deadly nemesis, flees the room by knocking down the wall on the north of the room.");
+                    this.cyclopsIsGone = true;
+                    this.objects['CYCLO'].flags.isVisible = false;
+                    // This should reveal a new exit. For now, we'll just remove the cyclops.
+                    // A more complete implementation would modify the room's exits.
+                } else {
+                    this.ui.display("Wasn't he a sailor?");
+                }
                 break;
             default:
                 this.ui.display("I don't know how to do that yet.");

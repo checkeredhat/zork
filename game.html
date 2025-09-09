@@ -4,34 +4,76 @@
     <title>Zork.js</title>
     <style>
         body {
-            background-color: #0d0d0d;
-            color: #FFB000; /* Amber */
-            font-family: 'Courier New', Courier, monospace;
+            background: #000;
+            color: #33ff33;
+            font-family: "Courier New", Courier, monospace;
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.2;
+            -webkit-font-smoothing: none;
+            -moz-osx-font-smoothing: none;
+            margin: 0;
         }
-        #output {
+
+        #terminal {
+            width: 80ch;
+            margin: 2rem auto;
             white-space: pre-wrap;
-            word-wrap: break-word;
-            padding: 10px;
+            text-shadow: 0 0 4px #33ff33, 0 0 8px #33ff33;
         }
+
+        .cursor {
+            display: inline-block;
+            width: 0.6em;
+            background: #33ff33;
+            animation: blink 1s steps(1) infinite;
+        }
+
+        @keyframes blink {
+            50% { background: transparent; }
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(0,0,0,0.2) 50%, transparent 50%);
+            background-size: 100% 2px;
+            pointer-events: none;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 70%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+        }
+
+        #input-container {
+            display: flex;
+        }
+
         #input {
-            width: 100%;
-            background-color: #0d0d0d;
-            color: #FFD700; /* Gold */
+            background-color: transparent;
+            color: #33ff33;
             border: none;
             outline: none;
             font-family: 'Courier New', Courier, monospace;
             font-size: 16px;
-        }
-        .prompt {
-            color: #FFD700; /* Gold */
+            width: calc(100% - 1em); /* Adjust width to leave space for cursor */
+            text-shadow: 0 0 4px #33ff33, 0 0 8px #33ff33;
         }
     </style>
 </head>
 <body>
-    <div id="output"></div>
-    <input type="text" id="input" autofocus />
+    <div id="terminal">
+        <div id="output"></div>
+        <div id="input-container">
+            <span class="prompt">></span>
+            <input type="text" id="input" autofocus />
+            <span class="cursor"></span>
+        </div>
+    </div>
 
     <!-- Core classes must be loaded before the main game logic -->
     <script src="js/ui.js"></script>
