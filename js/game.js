@@ -17,11 +17,19 @@ class Game {
             inventory: []
         };
         this.thief = {
-            room: null,
+            room: null, // Current room object
             inventory: [],
-            timer: 0
+            timer: 0, // Countdown for next action
+            patrolRoute: [], // Array of room IDs
+            patrolIndex: 0, // Current position in the patrol route
+            isHidden: true, // Whether the thief is 'hiding' in a room
+            isAngry: false // Fight flag
         };
         this.isCarouselSpinning = true;
+        this.isBasketAtTop = true;
+        this.deflateFlag = true;
+        this.isSafeOpen = false;
+        this.timers = [];
         this.deathMessages = {};
         this.ghostTimer = 0;
         this.trollDefeated = false;
@@ -79,7 +87,9 @@ class Game {
                 });
 
                 objectsInRoom.forEach(obj => obj.room = this.rooms[roomId]);
+                this.thief.patrolRoute.push(roomId);
             }
+            this.thief.room = this.rooms[this.thief.patrolRoute[0]];
 
             this.ui.display("Loading complete.");
 
@@ -90,71 +100,130 @@ class Game {
     }
 
     thiefUpdate() {
-        if (this.thief.timer > 0) {
-            this.thief.timer--;
+        const thiefObject = this.objects['THIEF'];
+        const playerRoom = this.player.room;
+        const thiefRoom = this.thief.room;
+
+        // If player is in the Treasure Room, the thief always appears and attacks.
+        if (playerRoom.id === 'TREAS' && thiefRoom.id !== 'TREAS') {
+            this.moveThiefTo(this.rooms['TREAS']);
+            this.thief.isHidden = false;
+            this.thief.isAngry = true;
+            this.ui.display("You hear a scream of anguish as you violate the robber's hideaway. Using passages unknown to you, he rushes to its defense.");
             return;
         }
 
-        const thiefObject = this.objects['THIEF'];
-        if (!thiefObject) return;
+        // If the player is in the same room as the thief...
+        if (playerRoom === thiefRoom) {
+            if (this.thief.isHidden) {
+                // 30% chance to reveal himself
+                if (Math.random() < 0.3) {
+                    this.thief.isHidden = false;
+                    this.ui.display("Someone carrying a large bag is casually leaning against one of the walls here. He does not speak, but it is clear from his aspect that the bag will be taken only over his dead body.");
+                }
+            } else {
+                // If revealed, he might act.
+                // 30% chance to steal everything and leave
+                if (Math.random() < 0.3) {
+                    const stolenFromPlayer = this.robAdventurer(this.player, this.thief.inventory);
+                    const stolenFromRoom = this.robRoom(playerRoom, this.thief.inventory, 100); // 100% chance
 
-        // Chance to appear
-        if (!this.thief.room) {
-            if (Math.random() < 0.1) { // 10% chance to appear
-                const roomKeys = Object.keys(this.rooms);
-                const randomRoomKey = roomKeys[Math.floor(Math.random() * roomKeys.length)];
-                const randomRoom = this.rooms[randomRoomKey];
-
-                if (randomRoom.isLight && !randomRoom.flags.isSacred) {
-                    this.thief.room = randomRoom;
-                    randomRoom.objects.push(thiefObject);
-                    if (this.player.room === randomRoom) {
-                        this.ui.display("A shady-looking figure suddenly appears!");
+                    if (stolenFromPlayer.length > 0 || stolenFromRoom.length > 0) {
+                         this.ui.display("The other occupant just left, still carrying his large bag. You may not have noticed that he robbed you blind first.");
+                    } else {
+                        this.ui.display("The other occupant (he of the large bag), finding nothing of value, left disgusted.");
                     }
-                    this.thief.timer = 20; // Time until next action
+                    this.moveThiefToNextRoom();
+                    this.thief.isHidden = true;
+
+                } else if (Math.random() < 0.3) { // Another 30% chance to just leave
+                    this.ui.display("The holder of the large bag just left, looking disgusted. Fortunately, he took nothing.");
+                    this.moveThiefToNextRoom();
+                    this.thief.isHidden = true;
                 }
             }
         } else {
-            // Chance to move
-            if (Math.random() < 0.5) {
-                const exits = this.thief.room.exits;
-                if (exits.length > 0) {
-                    const randomExit = exits[Math.floor(Math.random() * exits.length)];
-                    if (randomExit.roomId) {
-                        // Remove from old room
-                        this.thief.room.objects = this.thief.room.objects.filter(obj => obj.id !== 'THIEF');
-                        // Add to new room
-                        this.thief.room = this.rooms[randomExit.roomId];
-                        this.thief.room.objects.push(thiefObject);
-                    }
-                }
-            }
+             // Thief is not in the same room. He moves along his patrol route.
+             this.moveThiefToNextRoom();
+             // 75% chance to rob the new room if it's been seen by the player
+             if (this.thief.room.isSeen && Math.random() < 0.75) {
+                 this.robRoom(this.thief.room, this.thief.inventory, 75);
+             }
+        }
 
-            // Chance to steal
-            if (this.thief.room === this.player.room) {
-                if (Math.random() < 0.3) {
-                    const valuableObjects = this.player.inventory.filter(obj => obj.value > 0);
-                    if (valuableObjects.length > 0) {
-                        const stolenObject = valuableObjects[Math.floor(Math.random() * valuableObjects.length)];
-                        this.player.inventory = this.player.inventory.filter(obj => obj.id !== stolenObject.id);
-                        this.thief.inventory.push(stolenObject);
-                        this.ui.display(`The thief steals your ${stolenObject.names[0]}!`);
-                    }
+        // 30% chance to drop a non-valuable item
+        if (thiefRoom.id !== 'TREAS' && this.thief.inventory.length > 0 && Math.random() < 0.3) {
+            const worthlessItems = this.thief.inventory.filter(obj => obj.value === 0);
+            if (worthlessItems.length > 0) {
+                const droppedItem = worthlessItems[0];
+                this.thief.inventory = this.thief.inventory.filter(obj => obj.id !== droppedItem.id);
+                thiefRoom.objects.push(droppedItem);
+                if (thiefRoom === playerRoom && !this.thief.isHidden) {
+                    this.ui.display(`The robber, rummaging through his bag, dropped a few items he found valueless.`);
                 }
-            }
-
-            // Chance to disappear
-            if (Math.random() < 0.1) {
-                if (this.player.room === this.thief.room) {
-                    this.ui.display("The thief vanishes into the shadows.");
-                }
-                this.thief.room.objects = this.thief.room.objects.filter(obj => obj.id !== 'THIEF');
-                this.thief.room = null;
-                this.thief.timer = 100; // Time until he can appear again
-            } else {
-                this.thief.timer = 10; // Time until next action
             }
         }
+    }
+
+    moveThiefToNextRoom() {
+        const currentThiefRoom = this.thief.room;
+        if (currentThiefRoom) {
+            currentThiefRoom.objects = currentThiefRoom.objects.filter(obj => obj.id !== 'THIEF');
+        }
+
+        this.thief.patrolIndex = (this.thief.patrolIndex + 1) % this.thief.patrolRoute.length;
+        const nextRoomId = this.thief.patrolRoute[this.thief.patrolIndex];
+        const nextRoom = this.rooms[nextRoomId];
+
+        // Skip sacred rooms
+        if (nextRoom.flags.isSacred) {
+            this.thief.patrolIndex = (this.thief.patrolIndex + 1) % this.thief.patrolRoute.length;
+            const nextNextRoomId = this.thief.patrolRoute[this.thief.patrolIndex];
+            this.thief.room = this.rooms[nextNextRoomId];
+        } else {
+             this.thief.room = nextRoom;
+        }
+
+        this.thief.room.objects.push(this.objects['THIEF']);
+    }
+
+    moveThiefTo(room) {
+        const currentThiefRoom = this.thief.room;
+        if (currentThiefRoom) {
+            currentThiefRoom.objects = currentThiefRoom.objects.filter(obj => obj.id !== 'THIEF');
+        }
+        this.thief.room = room;
+        room.objects.push(this.objects['THIEF']);
+        // Update patrol index to match
+        this.thief.patrolIndex = this.thief.patrolRoute.indexOf(room.id);
+    }
+
+    robAdventurer(player, thiefInventory) {
+        const stolenItems = [];
+        player.inventory.forEach(obj => {
+            if (obj.value > 0 && !obj.flags.isSacred) {
+                stolenItems.push(obj);
+            }
+        });
+        stolenItems.forEach(obj => {
+            player.inventory = player.inventory.filter(item => item.id !== obj.id);
+            thiefInventory.push(obj);
+        });
+        return stolenItems;
+    }
+
+    robRoom(room, thiefInventory, probability) {
+        const stolenItems = [];
+        room.objects.forEach(obj => {
+            if (obj.value > 0 && !obj.flags.isSacred && obj.flags.isVisible && (Math.random() * 100) < probability) {
+                 stolenItems.push(obj);
+            }
+        });
+         stolenItems.forEach(obj => {
+            room.objects = room.objects.filter(item => item.id !== obj.id);
+            thiefInventory.push(obj);
+        });
+        return stolenItems;
     }
 
     look() {
@@ -542,6 +611,41 @@ class Game {
         this.ui.display("You can't push that.");
     }
 
+    put(directObject, indirectObject) {
+        if (!directObject || !indirectObject) {
+            this.ui.display("What do you want to put where?");
+            return;
+        }
+
+        if (this.player.inventory.indexOf(directObject) === -1) {
+            this.ui.display("You don't have that.");
+            return;
+        }
+
+        // Special case for fuse and brick
+        if (directObject.id === 'FUSE' && indirectObject.id === 'BRICK') {
+            this.player.inventory = this.player.inventory.filter(obj => obj.id !== 'FUSE');
+            indirectObject.contents.push('FUSE');
+            this.ui.display(`You put the fuse in the brick.`);
+            return;
+        }
+
+        if (!indirectObject.flags.isContainer) {
+            this.ui.display("You can't put things in that.");
+            return;
+        }
+
+        if (!indirectObject.flags.isOpen) {
+            this.ui.display("It's closed.");
+            return;
+        }
+
+        // Basic container logic
+        this.player.inventory = this.player.inventory.filter(obj => obj.id !== directObject.id);
+        indirectObject.contents.push(directObject.id);
+        this.ui.display(`You put the ${directObject.names[0]} in the ${indirectObject.names[0]}.`);
+    }
+
     eat(gameObject) {
         if (!gameObject) {
             this.ui.display("What do you want to eat?");
@@ -632,6 +736,38 @@ class Game {
         }
         this.ui.display("You untie the rope.");
         gameObject.flags.isTied = false;
+    }
+
+    board(gameObject) {
+        if (!gameObject || !gameObject.flags.isVehicle) {
+            this.ui.display("You can't board that.");
+            return;
+        }
+        if (this.player.vehicle) {
+            this.ui.display("You are already in a vehicle.");
+            return;
+        }
+        if (gameObject.action) {
+            if (this.handleObjectAction('board', gameObject)) {
+                return;
+            }
+        }
+        this.player.vehicle = gameObject;
+        this.ui.display(`You board the ${gameObject.names[0]}.`);
+    }
+
+    disembark(gameObject) {
+        if (!this.player.vehicle) {
+            this.ui.display("You are not in a vehicle.");
+            return;
+        }
+        if (this.player.vehicle.action) {
+            if (this.handleObjectAction('disembark', this.player.vehicle)) {
+                return;
+            }
+        }
+        this.ui.display(`You disembark from the ${this.player.vehicle.names[0]}.`);
+        this.player.vehicle = null;
     }
 
     burn(gameObject) {
@@ -801,10 +937,34 @@ class Game {
         this.ui.inputElement.disabled = true;
     }
 
+    tickTimers() {
+        if (this.timers.length === 0) return;
+
+        for (let i = this.timers.length - 1; i >= 0; i--) {
+            const timer = this.timers[i];
+            timer.turns--;
+
+            if (timer.turns <= 0) {
+                const targetObject = this.objects[timer.targetId];
+                if (targetObject && targetObject.action && window.gameActions[targetObject.action]) {
+                    window.gameActions[targetObject.action](this, timer.action, targetObject);
+                }
+                this.timers.splice(i, 1);
+            }
+        }
+    }
+
     processTurn(command) {
+        this.tickTimers();
         if (this.isGameOver) {
             return; // Don't process commands if the game is over
         }
+
+        // Thief's treasure room defense
+        if (this.player.room.id === 'TREAS' && this.thief.room.id !== 'TREAS') {
+            this.thiefUpdate();
+        }
+
         if (!command) return;
 
         // Handle robot command separately
@@ -930,6 +1090,9 @@ class Game {
             case 'push':
                 this.push(action.directObject);
                 break;
+            case 'put':
+                this.put(action.directObject, action.indirectObject);
+                break;
             case 'eat':
                 this.eat(action.directObject);
                 break;
@@ -944,6 +1107,12 @@ class Game {
                 break;
             case 'untie':
                 this.untie(action.directObject);
+                break;
+            case 'board':
+                this.board(action.directObject);
+                break;
+            case 'disembark':
+                this.disembark(action.directObject);
                 break;
             case 'burn':
                 this.burn(action.directObject);
