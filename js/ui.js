@@ -4,20 +4,33 @@ class UI {
         this.inputElement = inputElement;
         this.inputDisplayElement = inputDisplayElement;
         this.promptElement = document.querySelector('.prompt');
+        this.buffer = [];
+        this.MAX_LINES = 23; // 23 for output, 1 for the input line
 
         // Keep the fake terminal focused
         window.addEventListener('click', () => this.inputElement.focus());
+
+        // Disable mousewheel scrolling on the terminal
+        const terminalElement = document.getElementById('terminal');
+        terminalElement.addEventListener('wheel', (event) => {
+            event.preventDefault();
+        });
     }
 
     display(text, isCommand = false) {
-        const p = document.createElement('p');
+        let line = text;
         if (isCommand) {
-            p.textContent = `> ${text}`;
-        } else {
-            p.textContent = text;
+            line = `> ${text}`;
         }
-        this.outputElement.appendChild(p);
-        this.outputElement.scrollTop = this.outputElement.scrollHeight;
+
+        this.buffer.push(line);
+
+        if (this.buffer.length > this.MAX_LINES) {
+            this.buffer.shift(); // Remove the top line
+        }
+
+        // Re-render the entire output
+        this.outputElement.innerHTML = this.buffer.map(l => `<p>${l}</p>`).join('');
     }
 
     onInput(callback) {
