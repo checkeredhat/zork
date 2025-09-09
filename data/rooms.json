@@ -759,13 +759,13 @@
             },
             {
                 "direction": "NORTH",
-                "condition": "MAGIC-FLAG",
+                "condition": "CYCLOPS_GONE",
                 "roomId": "BLROO",
                 "message": "The north wall is solid rock."
             },
             {
                 "direction": "UP",
-                "condition": "CYCLOPS-FLAG",
+                "condition": "CYCLOPS_ASLEEP",
                 "roomId": "TREAS",
                 "message": "The cyclops doesn't look like he'll let you past."
             }

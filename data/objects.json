@@ -16,7 +16,7 @@
             "pamphlet",
             "booklet"
         ],
-        "description": "small leaflet",
+        "description": "leaflet",
         "initialDescription": "There is a small leaflet here.",
         "flags": {
             "isBurnable": true,
@@ -35,7 +35,7 @@
         "adjectives": [
             "bloody"
         ],
-        "description": "a bloody axe",
+        "description": "bloody axe",
         "flags": {
             "isWeapon": true,
             "isTakeable": true

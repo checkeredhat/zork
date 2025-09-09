@@ -2,21 +2,16 @@ class UI {
     constructor(outputElement, inputElement) {
         this.outputElement = outputElement;
         this.inputElement = inputElement;
+        this.promptElement = document.querySelector('.prompt');
     }
 
-    display(text) {
+    display(text, isCommand = false) {
         const p = document.createElement('p');
-        p.textContent = text;
-        this.outputElement.appendChild(p);
-        this.outputElement.scrollTop = this.outputElement.scrollHeight;
-    }
-
-    displayPrompt(text) {
-        const p = document.createElement('p');
-        const span = document.createElement('span');
-        span.className = 'prompt';
-        span.textContent = text;
-        p.appendChild(span);
+        if (isCommand) {
+            p.textContent = `> ${text}`;
+        } else {
+            p.textContent = text;
+        }
         this.outputElement.appendChild(p);
         this.outputElement.scrollTop = this.outputElement.scrollHeight;
     }
@@ -25,6 +20,7 @@ class UI {
         this.inputElement.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 const command = this.inputElement.value;
+                this.display(command, true); // Display the command in the output
                 this.inputElement.value = '';
                 callback(command);
             }

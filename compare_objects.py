@@ -5,7 +5,6 @@ def parse_flagword(content):
     """Parses <FLAGWORD ...> definitions to get bit values."""
     flags = {}
     bit_value = 1
-    # This pattern is simplified; assumes one flag per line in FLAGWORD block
     pattern = re.compile(r'<FLAGWORD\s+([\w\s<>-]+)>', re.DOTALL)
     flag_name_pattern = re.compile(r'(\w+)\s+.*')
 
@@ -37,30 +36,48 @@ def get_mdl_data(flag_map):
         print(f"Error reading zork/dung.56: {e}")
         return None, None
 
-    # Regex for objects
-    obj_pattern = re.compile(r'#OBJECT\s*\{"([^"]+)"(.*?)\}', re.DOTALL)
+    # Regex for objects from <ADD-OBJECT ...> and #OBJECT
+    obj_pattern = re.compile(
+        r'(?:<ADD-OBJECT\s+)?#OBJECT\s*\{"([^"]+)"\s*([^}]*)\}\s*(?:\[([^\]]+)\]\s*(?:\[([^\]]+)\])?)?',
+        re.DOTALL
+    )
+
     for match in obj_pattern.finditer(content):
         obj_id = match.group(1)
         body = match.group(2)
+        names_str = match.group(3)
+        adjs_str = match.group(4)
 
-        props = {}
+        props = {
+            'names': [],
+            'adjectives': []
+        }
+
+        if names_str:
+            props['names'] = [name.strip().strip('"') for name in names_str.split()]
+        if adjs_str:
+            props['adjectives'] = [adj.strip().strip('"') for adj in adjs_str.split()]
+
         # Descriptions
-        desc_match = re.search(r'"([^"]*)"\s*"([^"]*)"\s*"([^"]*)"', body)
+        desc_match = re.search(r'"([^"]*)"\s*"([^"]*)"(?:\s*"([^"]*)")?', body)
         if desc_match:
             props['initialDescription'] = desc_match.group(1).replace('\n', ' ').strip()
             props['description'] = desc_match.group(2).replace('\n', ' ').strip()
-            # ODESCO is often not present, group(3) could be the action
+            if desc_match.group(3):
+                props['longDescription'] = desc_match.group(3).replace('\n', ' ').strip()
 
         # Flags
         flags_match = re.search(r'%<([,\w\s\+]+)>', body)
         if flags_match:
-            flag_str = flags_match.group(1)
-            total_flag_value = 0
-            for flag_name in re.split(r'[\s,]\+', flag_str):
-                flag_name = flag_name.strip()
-                if flag_name in flag_map:
-                    total_flag_value |= flag_map[flag_name]
-            props['flags_val'] = total_flag_value
+            props['flags_str'] = flags_match.group(1).replace(',', ' ').split()
+
+        # Numeric properties (value, size, capacity)
+        numeric_pattern = re.compile(r'>\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)')
+        numeric_match = numeric_pattern.search(body)
+        if numeric_match:
+            props['value'] = int(numeric_match.group(2))
+            props['size'] = int(numeric_match.group(4))
+            # Note: MDL format has more numbers, this is a simplification
 
         mdl_objects[obj_id] = props
 
@@ -79,28 +96,6 @@ def get_mdl_data(flag_map):
         mdl_rooms[room_id] = props
 
     return mdl_objects, mdl_rooms
-
-
-def map_json_flags(js_flag_obj):
-    """Maps JSON boolean flags to the MDL flag names for easier comparison."""
-    mapping = {
-        'isVisible': 'OVISON', 'isReadable': 'READBIT', 'isTakeable': 'TAKEBIT',
-        'isDoor': 'DOORBIT', 'isTransparent': 'TRANSBIT', 'isEdible': 'FOODBIT',
-        'isNotDescribed': 'NDESCBIT', 'isDrinkable': 'DRINKBIT', 'isContainer': 'CONTBIT',
-        'isLight': 'LIGHTBIT', 'isVictim': 'VICBIT', 'isBurnable': 'BURNBIT',
-        'isOn': 'FLAMEBIT', 'isTool': 'TOOLBIT', 'isTurnable': 'TURNBIT',
-        'isVehicle': 'VEHBIT', 'isFindableFromVehicle': 'FINDMEBIT', 'isAsleep': 'SLEEPBIT',
-        'isSearchable': 'SEARCHBIT', 'isSacred': 'SACREDBIT', 'isTieable': 'TIEBIT',
-        'isActor': 'ACTORBIT', 'isWeapon': 'WEAPONBIT', 'isFighting': 'FIGHTBIT',
-        'isVillain': 'VILLAIN', 'isStaggered': 'STAGGERED'
-    }
-    val = 0
-    for js_flag, mdl_flag in mapping.items():
-        if js_flag_obj.get(js_flag, False):
-            # This requires the flag_map to be available here
-            # This is a simplification; a full implementation would need the map
-            pass # val |= flag_map[mdl_flag]
-    return val # return calculated value
 
 
 def compare_data():
@@ -126,7 +121,7 @@ def compare_data():
 
     print("--- Object Comparison ---")
     mdl_obj_keys = set(mdl_objects.keys())
-    js_obj_keys = set(js_objects_data.keys()) - {'#####'}
+    js_obj_keys = set(js_objects_data.keys()) - {'#####', 'FDOOR', 'WDOOR', 'TDOOR', 'SDOOR', 'GRAT1', 'GRAT2', 'MSWIT', 'BOLT', 'EVERY', 'VALUA', 'SAILO', 'TEETH', 'WALL', 'GRUE', 'HANDS', 'LUNGS', 'AVIAT', 'RBUTT', 'YBUTT', 'BLBUT', 'BRBUT', 'BAT', 'RAINB', 'HPOLE', 'CORPS', 'BODIE', 'DAM', 'RAILI', 'BUTTO', 'BUBBL', 'LEAK'} # Ignore player and some uninteresting objects
 
     missing_in_js = sorted(list(mdl_obj_keys - js_obj_keys))
     extra_in_js = sorted(list(js_obj_keys - mdl_obj_keys))
@@ -141,17 +136,35 @@ def compare_data():
         for obj in extra_in_js:
             print(f"- {obj}")
 
-    # Simplified property comparison
     for obj_id in sorted(list(mdl_obj_keys.intersection(js_obj_keys))):
         mdl_obj = mdl_objects[obj_id]
         js_obj = js_objects_data[obj_id]
+        discrepancies = []
 
-        # Compare description
-        if 'description' in mdl_obj and mdl_obj['description'] != js_obj.get('description'):
-             if mdl_obj['description'] and js_obj.get('description'): # Ignore empty strings
-                print(f"\n[OBJECT: {obj_id}] Description mismatch:")
-                print(f"  MDL: '{mdl_obj['description']}'")
-                print(f"  JS:  '{js_obj.get('description')}'")
+        # Compare names
+        mdl_names = set([name.lower() for name in mdl_obj.get('names', [])])
+        js_names = set([name.lower() for name in js_obj.get('names', [])])
+        if mdl_names and js_names and not mdl_names.issubset(js_names):
+             discrepancies.append(f"Names: MDL has {mdl_names - js_names} which are not in JS.")
+
+        # Compare descriptions
+        for prop in ['description', 'initialDescription', 'longDescription']:
+            mdl_desc = mdl_obj.get(prop, '').strip()
+            js_desc = js_obj.get(prop, '').strip()
+            if mdl_desc and js_desc and mdl_desc != js_desc:
+                discrepancies.append(f"{prop}: MDL='{mdl_desc}', JS='{js_desc}'")
+
+        # Compare numeric properties
+        for prop in ['value', 'size']:
+            mdl_val = mdl_obj.get(prop)
+            js_val = js_obj.get(prop)
+            if mdl_val is not None and js_val is not None and mdl_val != js_val:
+                discrepancies.append(f"{prop}: MDL={mdl_val}, JS={js_val}")
+
+        if discrepancies:
+            print(f"\n[OBJECT: {obj_id}] Discrepancies found:")
+            for d in discrepancies:
+                print(f"  - {d}")
 
     print("\n\n--- Room Comparison ---")
     mdl_room_keys = set(mdl_rooms.keys())
@@ -173,12 +186,18 @@ def compare_data():
     for room_id in sorted(list(mdl_room_keys.intersection(js_room_keys))):
         mdl_room = mdl_rooms[room_id]
         js_room = js_rooms_data[room_id]
+        discrepancies = []
 
-        if 'shortDescription' in mdl_room and mdl_room['shortDescription'] != js_room.get('shortDescription'):
-            if mdl_room['shortDescription'] and js_room.get('shortDescription'):
-                print(f"\n[ROOM: {room_id}] Short description mismatch:")
-                print(f"  MDL: '{mdl_room['shortDescription']}'")
-                print(f"  JS:  '{js_room.get('shortDescription')}'")
+        for prop in ['shortDescription', 'longDescription']:
+            mdl_desc = mdl_room.get(prop, '').strip()
+            js_desc = js_room.get(prop, '').strip()
+            if mdl_desc and js_desc and mdl_desc != js_desc:
+                discrepancies.append(f"{prop}: MDL='{mdl_desc}', JS='{js_desc}'")
+
+        if discrepancies:
+            print(f"\n[ROOM: {room_id}] Discrepancies found:")
+            for d in discrepancies:
+                print(f"  - {d}")
 
 
 if __name__ == "__main__":
