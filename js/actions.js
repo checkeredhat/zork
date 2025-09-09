@@ -1,26 +1,37 @@
 // js/actions.js
 
 const actions = {
-    'WINDOW-FUNCTION': (game, verb) => {
-        const kitchenWindow = game.objects['KITCHEN-WINDOW'];
-        const wind1 = game.objects['WIND1'];
+    'WINDOW-FUNCTION': (game, verb, directObject) => {
+        // If called from a room action without a direct object, default to the main window
+        const windowObj = directObject || game.objects['WIND1'];
+        const kitchenWindowFlag = game.objects['KITCHEN-WINDOW'];
+
+        if (!windowObj || windowObj.id !== 'WIND1') {
+            // This function is only for the kitchen window
+            return false;
+        }
 
         if (verb === 'open') {
-            if (kitchenWindow.flags.isOpen) {
+            if (kitchenWindowFlag.flags.isOpen) {
                 game.ui.display("The window is already open.");
             } else {
-                kitchenWindow.flags.isOpen = true;
-                wind1.flags.isOpen = true;
-                game.ui.display("With great effort, you open the window.");
+                kitchenWindowFlag.flags.isOpen = true;
+                windowObj.flags.isOpen = true;
+                game.ui.display("With great effort, you open the window far enough to allow entry.");
             }
             return true;
         } else if (verb === 'close') {
-            if (!kitchenWindow.flags.isOpen) {
+            if (!kitchenWindowFlag.flags.isOpen) {
                 game.ui.display("The window is already closed.");
             } else {
-                kitchenWindow.flags.isOpen = false;
-                wind1.flags.isOpen = false;
-                game.ui.display("The window closes.");
+                // The QA guide says the player must be in the kitchen to close it.
+                if (game.player.room.id === 'KITCH') {
+                    kitchenWindowFlag.flags.isOpen = false;
+                    windowObj.flags.isOpen = false;
+                    game.ui.display("The door swings shut and closes.");
+                } else {
+                    game.ui.display("You can't reach it from here to close it.");
+                }
             }
             return true;
         }
@@ -31,7 +42,7 @@ const actions = {
         // This is a room-specific action to handle window operations without a direct object
         if (command && command.toLowerCase().includes('window')) {
             // The parser will give us the verb ('open' or 'close'). We can just call the main window function.
-            return actions['WINDOW-FUNCTION'](game, verb);
+            return actions['WINDOW-FUNCTION'](game, verb, game.objects['WIND1']);
         }
         return false;
     },
@@ -507,35 +518,6 @@ At your service!"`);
             // Reset description if no villains are present
             sword.description = "elvish sword";
         }
-    },
-
-    'WINDOW-FUNCTION': (game, verb, directObject) => {
-        const window = directObject;
-        const kitchenWindow = game.objects['KITCHEN-WINDOW'];
-        if (verb === 'open') {
-            if (window.flags.isOpen) {
-                game.ui.display("It's already open.");
-            } else {
-                window.flags.isOpen = true;
-                if (window.id === 'WIND1') {
-                    kitchenWindow.flags.isOpen = true;
-                }
-                game.ui.display("With great effort, you open the window.");
-            }
-            return true;
-        } else if (verb === 'close') {
-            if (!window.flags.isOpen) {
-                game.ui.display("It's already closed.");
-            } else {
-                window.flags.isOpen = false;
-                if (window.id === 'WIND1') {
-                    kitchenWindow.flags.isOpen = false;
-                }
-                game.ui.display("The window closes.");
-            }
-            return true;
-        }
-        return false;
     },
 
     'BATS-ROOM': (game, verb) => {
