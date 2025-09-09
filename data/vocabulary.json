@@ -181,7 +181,7 @@
         "odyss": [
             "ulyss"
         ],
-        "open": [],
+        "open": ["squeeze"],
         "pick": [],
         "plug": [
             "glue",
@@ -258,7 +258,7 @@
         "treas": [],
         "turn": [],
         "unbri": [],
-        "unloc": [],
+        "unlock": [],
         "unscr": [],
         "unsup": [],
         "untie": [

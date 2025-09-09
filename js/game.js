@@ -33,6 +33,11 @@ class Game {
         this.cyclopsIsThirsty = false;
         this.cyclopsIsGone = false;
         this.isEchoFixed = false;
+        this.balloon = {
+            room: null, // Room object, null if not in a room
+            fuel: 0, // Number of turns of fuel
+            isInflated: false
+        };
         this.timers = [];
         this.deathMessages = {};
         this.ghostTimer = 0;
@@ -273,6 +278,11 @@ class Game {
         }
 
         if (exit) {
+            if (exit.size && exit.size !== this.playerSize) {
+                this.ui.display(exit.message || "You are not the right size to go that way.");
+                return;
+            }
+
             if (exit.condition) {
                 if (exit.condition === 'DAM_WATER_LOW') {
                     if (this.damWaterLevel !== 'low') {
@@ -441,6 +451,30 @@ class Game {
         this.ui.display(`You close the ${gameObject.names[0]}.`);
     }
 
+    unlock(target, tool) {
+        if (!target || !tool) {
+            this.ui.display("What do you want to unlock, and with what?");
+            return;
+        }
+        if (target.action) {
+            this.handleObjectAction('unlock', target, tool);
+        } else {
+            this.ui.display("You can't unlock that.");
+        }
+    }
+
+    lock(target, tool) {
+        if (!target || !tool) {
+            this.ui.display("What do you want to lock, and with what?");
+            return;
+        }
+        if (target.action) {
+            this.handleObjectAction('lock', target, tool);
+        } else {
+            this.ui.display("You can't lock that.");
+        }
+    }
+
     attack(gameObject) {
         if (!gameObject || !gameObject.flags.isVillain) {
             this.ui.display("There is nothing here to attack.");
@@ -587,6 +621,12 @@ class Game {
             indirectObject.contents.push('FUSE');
             this.ui.display(`You put the fuse in the brick.`);
             return;
+        }
+
+        if (indirectObject.action) {
+            if (this.handleObjectAction('put', directObject, indirectObject)) {
+                return;
+            }
         }
 
         if (!indirectObject.flags.isContainer) {
@@ -810,7 +850,24 @@ class Game {
     }
 
     pray() {
-        this.ui.display("You pray to the heavens, but there is no divine intervention.");
+        if (this.player.room.id === 'TOMB') {
+            const treasures = Object.values(this.objects).filter(obj => obj.trophyValue > 0);
+            const trophyCase = this.objects['TCASE'];
+            // The trophy case contents are object IDs, so we need to get the objects first
+            const caseContents = trophyCase.contents.map(id => this.objects[id]);
+
+            const allTreasuresInCase = treasures.every(treasure => caseContents.some(item => item.id === treasure.id));
+
+            if (allTreasuresInCase) {
+                this.ui.display("The north wall of the tomb opens, revealing a passage.");
+                this.objects['PRAYER-FLAG'].flags.isOpen = true;
+                this.player.score += 25; // Final points
+            } else {
+                this.ui.display("You pray to the heavens, but there is no divine intervention.");
+            }
+        } else {
+            this.ui.display("You pray to the heavens, but there is no divine intervention.");
+        }
     }
 
     exorcise(gameObject) {
@@ -1006,6 +1063,12 @@ class Game {
         }
 
         switch (action.verb) {
+            case 'unlock':
+                this.unlock(action.directObject, action.indirectObject);
+                break;
+            case 'lock':
+                this.lock(action.directObject, action.indirectObject);
+                break;
             case 'look':
                 this.look();
                 break;

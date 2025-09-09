@@ -1,57 +1,29 @@
 {
     "ALICE": {
         "id": "ALICE",
-        "longDescription": "You are in a small square room, in the center of which is a large oblong table, no doubt set for afternoon tea. It is clear from the objects on the table that the users were indeed mad. In the eastern corner of the room is a small hole (no more that four inches high). There are passageways leading away to the west and the northwest.",
+        "longDescription": "You are in a small square room, in the center of which is a large oblong table, no doubt set for afternoon tea. In the eastern corner of the room is a small hole (no more that four inches high). On the south wall is a tiny door. There are passageways leading away to the west and the northwest.",
         "shortDescription": "Tea Room",
         "isLight": false,
         "exits": [
-            {
-                "direction": "EAST",
-                "message": "Only a mouse could get in there."
-            },
-            {
-                "direction": "WEST",
-                "roomId": "TWELL"
-            },
-            {
-                "direction": "NW",
-                "roomId": "MAGNE"
-            }
+            { "direction": "EAST", "roomId": "ALITR", "size": "small", "message": "The hole is too small for you to fit through." },
+            { "direction": "SOUTH", "condition": "TDOOR", "size": "small", "roomId": "BANK", "message": "The tiny door is closed." },
+            { "direction": "WEST", "roomId": "TWELL" },
+            { "direction": "NW", "roomId": "MAGNE" }
         ],
-        "objects": [
-            "ATABL",
-            "ECAKE",
-            "ORICE",
-            "RDICE",
-            "BLICE"
-        ]
+        "objects": [ "ATABL", "ECAKE", "ORICE", "RDICE", "BLICE", "TDOOR" ]
     },
     "ALISM": {
         "id": "ALISM",
-        "longDescription": "You are in an enormous room, in the center of which are four wooden posts delineating a rectanular area, above which is what appears to be a wooden roof. In fact, all objects in this room appear to be abnormally large. To the east is a passageway. There is a large chasm on the west and the northwest.",
+        "longDescription": "You are in an enormous room, in the center of which are four wooden posts delineating a rectanular area, above which is what appears to be a wooden roof. In fact, all objects in this room appear to be abnormally large. To the east is a passageway. There is a large chasm on the west and a tiny hole to the northwest.",
         "shortDescription": "Posts Room",
         "isLight": false,
         "exits": [
-            {
-                "direction": "NW",
-                "condition": "SMDROP"
-            },
-            {
-                "direction": "EAST",
-                "roomId": "ALITR"
-            },
-            {
-                "direction": "WEST",
-                "condition": "SMDROP"
-            },
-            {
-                "direction": "DOWN",
-                "condition": "SMDROP"
-            }
+            { "direction": "NW", "roomId": "TWELL", "size": "small", "message": "The hole is too small for you to fit through." },
+            { "direction": "EAST", "roomId": "ALITR" },
+            { "direction": "WEST", "condition": "SMDROP" },
+            { "direction": "DOWN", "condition": "SMDROP" }
         ],
-        "objects": [
-            "POSTS"
-        ]
+        "objects": [ "POSTS" ]
     },
     "ALITR": {
         "id": "ALITR",
@@ -122,6 +94,16 @@
             }
         ],
         "objects": []
+    },
+    "BANK": {
+        "id": "BANK",
+        "longDescription": "You are in the vault of the Bank of Zork. It is a small, cramped room with a single exit to the north.",
+        "shortDescription": "Bank Vault",
+        "isLight": true,
+        "exits": [
+            { "direction": "NORTH", "roomId": "ALICE" }
+        ],
+        "objects": [ "BAGCO" ]
     },
     "BATS": {
         "id": "BATS",
@@ -481,9 +463,7 @@
                 "message": "You try to ascend the ramp, but it is impossible, and you slide back down."
             }
         ],
-        "objects": [
-            "TDOOR"
-        ],
+        "objects": [],
         "action": "CELLAR",
         "score": 25
     },
@@ -581,7 +561,7 @@
     },
     "CLEAR": {
         "id": "CLEAR",
-        "longDescription": "You are in a clearing, with a forest surrounding you on all sides. A path leads south.",
+        "longDescription": "You are in a clearing, with a forest surrounding you on all sides. A path leads south. On the ground is a large pile of leaves.",
         "shortDescription": "Clearing",
         "isLight": true,
         "exits": [
@@ -612,10 +592,11 @@
             {
                 "direction": "DOWN",
                 "roomId": "MGRAT",
-                "condition": "KEY-FLAG"
+                "condition": "GRAT1",
+                "message": "The grating is closed."
             }
         ],
-        "objects": []
+        "objects": ["LEAVE", "GRAT1"]
     },
     "CLMID": {
         "id": "CLMID",
@@ -665,7 +646,7 @@
     },
     "CMACH": {
         "id": "CMACH",
-        "longDescription": "You are in a room with a square button, a round button, and a triangular button.",
+        "longDescription": "You are in a room with a square button, a round button, and a triangular button. On the wall is a cryptic message written in EBCDIC.",
         "shortDescription": "Machine Room",
         "isLight": false,
         "exits": [
@@ -771,7 +752,7 @@
     },
     "CYCLO": {
         "id": "CYCLO",
-        "longDescription": "You are in a large room, obviously the chamber of the cyclops, who is sleeping on the floor. There is a staircase leading up.",
+    "longDescription": "You are in a large room, obviously the chamber of the cyclops. There is a staircase leading up.",
         "shortDescription": "Cyclops Room",
         "isLight": false,
         "exits": [
@@ -786,8 +767,8 @@
             },
             {
                 "direction": "UP",
-                "condition": "CYCLOPS-FLAG",
-                "message": "The cyclops doesn't look like he'll let you past."
+            "condition": "CYCLOPS_ASLEEP",
+            "message": "The cyclops is standing in front of the staircase, looking menacingly at you."
             }
         ],
         "objects": [
@@ -1100,6 +1081,17 @@
         ],
         "action": "FALLS-ROOM"
     },
+    "FDOOR": {
+        "id": "FDOOR",
+        "longDescription": "You are in a small room before a magnificent door. The door is open.",
+        "shortDescription": "Front of Door",
+        "isLight": true,
+        "exits": [
+            { "direction": "NORTH", "roomId": "ZORK" },
+            { "direction": "SOUTH", "roomId": "TOMB" }
+        ],
+        "objects": []
+    },
     "FANTE": {
         "id": "FANTE",
         "longDescription": "You are on the shore of the River. The river here seems somewhat treacherous. A path travels from north to south here, the south end quickly turning around a sharp corner.",
@@ -1295,7 +1287,7 @@
             },
             {
                 "direction": "WEST",
-                "condition": "GLACIER-FLAG",
+            "condition": "GLACIER_MELTED",
                 "roomId": "RUBYR"
             }
         ],
@@ -1509,7 +1501,7 @@
     },
     "LOBBY": {
         "id": "LOBBY",
-        "longDescription": "This room appears to have been the waiting room for groups touring the dam. There are exits here to the north and east marked 'Private', though the doors are open, and an exit to the south.",
+        "longDescription": "This is the dam lobby. To your left is a mural of the dam showing the spillway control gates, and a button to the right of it. The button is blue. Above the button is a brass plaque saying 'BLUE'. There are exits here to the north and east marked 'Private', though the doors are open, and an exit to the south.",
         "shortDescription": "Dam Lobby",
         "isLight": true,
         "exits": [
@@ -1528,7 +1520,11 @@
         ],
         "objects": [
             "MATCH",
-            "GUIDE"
+            "GUIDE",
+            "BUTN1",
+            "BUTN2",
+            "BUTN3",
+            "BUTN4"
         ]
     },
     "LROOM": {
@@ -1558,7 +1554,7 @@
             "LAMP",
             "RUG",
             "TCASE",
-            "DOOR"
+            "TRAP-DOOR"
         ],
         "action": "LIVING-ROOM"
     },
@@ -1575,7 +1571,8 @@
         ],
         "objects": [
             "MSWIT",
-            "MACHI"
+            "MACHI",
+            "BATTE"
         ],
         "action": "MACHINE-ROOM"
     },
@@ -1619,14 +1616,13 @@
             }
         ],
         "objects": [
-            "RBTLB",
-            "ROBOT"
+            "RBTLB"
         ],
         "action": "MAGNET-ROOM"
     },
     "MAINT": {
         "id": "MAINT",
-        "longDescription": "You are in what appears to have been the maintenance room for Flood Control Dam #3, judging by the assortment of tool chests around the room. Apparently, this room has been ransacked recently, for most of the valuable equipment is gone. On the wall in front of you is a panel of buttons, which are labelled in EBCDIC. However, they are of different colors: Blue, Yellow, Brown, and Red. The doors to this room are in the west and south ends.",
+        "longDescription": "You are in what appears to have been the maintenance room for Flood Control Dam #3, judging by the assortment of tool chests around the room. Apparently, this room has been ransacked recently, for most of the valuable equipment is gone. The doors to this room are in the west and south ends.",
         "shortDescription": "Maintenance Room",
         "isLight": false,
         "exits": [
@@ -1643,11 +1639,8 @@
             "LEAK",
             "TUBE",
             "WRENC",
-            "BLBUT",
-            "RBUTT",
-            "BRBUT",
-            "YBUTT",
-            "SCREW"
+            "SCREW",
+            "ROBOT"
         ],
         "action": "MAINT-ROOM"
     },
@@ -2041,7 +2034,7 @@
     },
     "MGRAT": {
         "id": "MGRAT",
-        "longDescription": "You are in a small room with a grating on the floor. The grating is locked.",
+        "longDescription": "You are in a small room. On the ceiling is a grating.",
         "shortDescription": "Grating Room",
         "isLight": false,
         "exits": [
@@ -2051,14 +2044,15 @@
             },
             {
                 "direction": "UP",
-                "condition": "KEY-FLAG",
-                "roomId": "CLEAR"
+                "condition": "GRAT1",
+                "roomId": "CLEAR",
+                "message": "The grating is closed."
             }
         ],
         "objects": [
             "GRAT2"
         ],
-        "action": "MAZE-11"
+        "action": ""
     },
     "MINE1": {
         "id": "MINE1",
@@ -2335,17 +2329,20 @@
             {
                 "direction": "EAST",
                 "roomId": "CRAW4",
-                "condition": "TROLL-FLAG"
+                "condition": "trollDefeated",
+                "message": "The troll fends you off with a menacing gesture."
             },
             {
                 "direction": "NORTH",
                 "roomId": "PASS1",
-                "condition": "TROLL-FLAG"
+                "condition": "trollDefeated",
+                "message": "The troll fends you off with a menacing gesture."
             },
             {
                 "direction": "SOUTH",
                 "roomId": "MAZE1",
-                "condition": "TROLL-FLAG"
+                "condition": "trollDefeated",
+                "message": "The troll fends you off with a menacing gesture."
             }
         ],
         "objects": [
@@ -2562,12 +2559,14 @@
             {
                 "direction": "CROSS",
                 "roomId": "RESES",
-                "condition": "LOW-TIDE"
+                "condition": "DAM_WATER_LOW",
+                "message": "You can't cross the reservoir with the water level so high."
             },
             {
                 "direction": "SOUTH",
                 "roomId": "RESES",
-                "condition": "LOW-TIDE"
+                "condition": "DAM_WATER_LOW",
+                "message": "You can't cross the reservoir with the water level so high."
             }
         ],
         "objects": [
@@ -2593,12 +2592,14 @@
             {
                 "direction": "CROSS",
                 "roomId": "RESEN",
-                "condition": "LOW-TIDE"
+                "condition": "DAM_WATER_LOW",
+                "message": "You can't cross the reservoir with the water level so high."
             },
             {
                 "direction": "NORTH",
                 "roomId": "RESEN",
-                "condition": "LOW-TIDE"
+                "condition": "DAM_WATER_LOW",
+                "message": "You can't cross the reservoir with the water level so high."
             },
             {
                 "direction": "UP",
@@ -2624,12 +2625,15 @@
             {
                 "direction": "EAST",
                 "condition": "RIDDLE-FLAG",
-                "roomId": "MPEAR"
+                "roomId": "MPEAR",
+                "message": "The way is blocked by the sphinx."
             }
         ],
         "objects": [
-            "SDOOR"
-        ]
+            "SPHIN",
+            "RIDDLE-FLAG"
+        ],
+        "action": "RIDDLE-ROOM"
     },
     "RIVR1": {
         "id": "RIVR1",
@@ -3022,6 +3026,12 @@
             {
                 "direction": "WEST",
                 "roomId": "LLD2"
+            },
+            {
+                "direction": "NORTH",
+                "condition": "PRAYER-FLAG",
+                "roomId": "FDOOR",
+                "message": "The north wall is solid rock."
             }
         ],
         "objects": [
@@ -3108,7 +3118,8 @@
             }
         ],
         "objects": [
-            "ETCH2"
+            "ETCH2",
+            "TKEY"
         ]
     },
     "VAIR1": {
@@ -3250,5 +3261,14 @@
         "objects": [
             "MAILB"
         ]
+    },
+    "ZORK": {
+        "id": "ZORK",
+        "longDescription": "You are in a large, featureless room. In the center is a pedestal, and on the pedestal is the final piece of the map. Congratulations! You have won!",
+        "shortDescription": "Zork",
+        "isLight": true,
+        "exits": [],
+        "objects": [],
+        "action": "WIN-GAME"
     }
 }
