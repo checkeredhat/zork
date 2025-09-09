@@ -278,6 +278,11 @@ class Game {
         }
 
         if (exit) {
+            if (exit.death) {
+                this.gameOver(exit.death);
+                return;
+            }
+
             if (exit.size && exit.size !== this.playerSize) {
                 this.ui.display(exit.message || "You are not the right size to go that way.");
                 return;
@@ -332,8 +337,14 @@ class Game {
 
             if (exit.roomId) {
                 this.player.room = this.rooms[exit.roomId];
-                if (this.player.room.action && window.gameActions && window.gameActions[this.player.room.action]) {
-                    window.gameActions[this.player.room.action](this, 'walk-in');
+                const newRoom = this.player.room;
+                if (newRoom.score) {
+                    this.player.score += newRoom.score;
+                    this.ui.display(`[Your score has just gone up by ${newRoom.score} points.]`);
+                    newRoom.score = 0; // Prevents re-awarding score
+                }
+                if (newRoom.action && window.gameActions && window.gameActions[newRoom.action]) {
+                    window.gameActions[newRoom.action](this, 'walk-in');
                 }
                 if (exit.roomId === 'CAGE') {
                     this.poisonGasTimer = 5; // 5 turns to solve the puzzle
@@ -362,6 +373,12 @@ class Game {
         if (!gameObject.flags.isTakeable) {
             this.ui.display("You can't take that.");
             return;
+        }
+
+        if (gameObject.value) {
+            this.player.score += gameObject.value;
+            this.ui.display(`[Your score has just gone up by ${gameObject.value} points.]`);
+            gameObject.value = 0; // Prevents re-awarding score
         }
 
         const room = this.player.room;
@@ -637,6 +654,15 @@ class Game {
         if (this.player.inventory.indexOf(directObject) === -1) {
             this.ui.display("You don't have that.");
             return;
+        }
+
+        // Special case for trophy case
+        if (indirectObject.id === 'TCASE') {
+            if (directObject.trophyValue) {
+                this.player.score += directObject.trophyValue;
+                this.ui.display(`[Your score has just gone up by ${directObject.trophyValue} points for placing the ${directObject.description} in the trophy case.]`);
+                directObject.trophyValue = 0; // Prevent re-scoring
+            }
         }
 
         // Special case for fuse and brick

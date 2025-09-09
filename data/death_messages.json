@@ -11,5 +11,8 @@
     "POISON": "Time passes...and you die from some obscure poisoning.",
     "TROLL": "The troll's axe removes your head.",
     "THIEF": "The thief's stilletto has found a home in your back.",
+    "FALL": "You have fallen from a great height and died.",
+    "MACHINE": "A booming voice says 'Wrong, cretin!' and you notice that you have turned into a pile of dust.",
+    "CYCLO": "The cyclops, enraged, picks you up and tears you limb from limb.",
     "DEFAULT": "You have died."
 }

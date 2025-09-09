@@ -1,6 +1,18 @@
 // js/actions.js
 
 const actions = {
+    'CMACH-ROOM': (game, verb, directObject) => {
+        if (verb === 'push') {
+            const button = directObject;
+            if (button.id === 'RNBUT') {
+                game.ui.display("Click. Nothing seems to happen.");
+            } else if (button.id === 'SQBUT' || button.id === 'TRBUT') {
+                game.gameOver('MACHINE');
+            }
+            return true;
+        }
+        return false;
+    },
     'WINDOW-FUNCTION': (game, verb) => {
         const kitchenWindow = game.objects['KITCHEN-WINDOW'];
         const wind1 = game.objects['WIND1'];
@@ -329,10 +341,7 @@ Warning:
 
     'READ-LISTS': (game, verb) => {
         if (verb === 'read') {
-            game.ui.display(`"<DEFINE FEEL-FREE (LOSER)
-<TELL \\"FEEL-FREE, CHOMPER!\\">>
-...
-The rest is, alas, unintelligible (as were the implementers)."`);
+            game.ui.display(`"The rest is, alas, unintelligible (as were the implementers)."`);
             return true;
         }
         return false;
@@ -357,10 +366,10 @@ Hello, Master!
 
 I am a late-model robot, trained at MIT Tech to perform various simple household functions.
 
-Instructions for use:
-To activate me, use the following formula:
->TELL ROBOT '<something to do>' <cr>
-The quotation marks are required!
+For activation, please ensure my power source is fully charged and correctly installed. A suitable charging station can be found nearby.
+
+Once I am activated and say \\"Ready\\", you may command me using the formula:
+>TELL ROBOT '<something to do>'
 
 Warranty:
 No warranty is expressed or implied.
@@ -418,6 +427,14 @@ At your service!"`);
 \\	     * 722 G.U.E. *       /
 \\				 /
 --------------------------"`);
+            return true;
+        }
+        return false;
+    },
+
+    'BLACK-BOOK': (game, verb) => {
+        if (verb === 'read') {
+            game.ui.display("The book is open to page 569. The page contains strange diagrams and runes you cannot comprehend.");
             return true;
         }
         return false;
@@ -668,11 +685,23 @@ At your service!"`);
         const cyclops = game.objects['CYCLO'];
         const player = game.player;
 
-        if (verb === 'attack') {
-            game.ui.display("The cyclops is much larger and stronger than you. Attacking it would be suicide.");
-            return true;
+        // If the Cyclops is not in the room, do nothing.
+        if (player.room.objects.indexOf(cyclops) === -1) {
+            return false;
         }
 
+        // Handle 'attack' verb
+        if (verb === 'attack') {
+            if (!cyclops.flags.isVillain) {
+                game.ui.display("There is no need to attack the sleeping cyclops.");
+                return true;
+            }
+            // Explicitly call the game's attack function
+            game.attack(cyclops);
+            return true; // The action is handled.
+        }
+
+        // Handle 'give' verb
         if (verb === 'give' && directObject) {
             if (!player.inventory.includes(directObject)) {
                 game.ui.display("You don't have that.");
@@ -693,7 +722,6 @@ At your service!"`);
                     cyclops.flags.isVillain = false;
                     cyclops.description = "The cyclops is sleeping peacefully, snoring loudly.";
                     cyclops.initialDescription = "The cyclops is sleeping peacefully, snoring loudly.";
-                    // Logic to remove water from bottle should be here or in the 'drink' action itself
                     const bottle = player.inventory.find(obj => obj.id === 'BOTTL');
                     if (bottle) {
                         bottle.contents = [];
@@ -708,7 +736,21 @@ At your service!"`);
             return true;
         }
 
-        return false;
+        // Handle 'throw' verb
+        if (verb === 'throw' && directObject) {
+            if (directObject.id === 'WATER' || directObject.id === 'FOOD') {
+                game.ui.display("The cyclops, who is evidently not hungry or thirsty, barely notices your offer.");
+                return true;
+            }
+        }
+
+        // Default message for just looking or other actions
+        if (cyclops.flags.isVillain) {
+            game.ui.display("The cyclops is a fearsome creature, but appears to be asleep.");
+        } else {
+            game.ui.display(cyclops.description);
+        }
+        return true;
     },
     'CHALICE': (game, verb, directObject, indirectObject) => {
         // The chalice has no special actions in the original game.
@@ -784,26 +826,7 @@ At your service!"`);
         }
 
         if (verb === 'rub') {
-            const currentRoomId = game.player.room.id;
-            const otherRoomId = currentRoomId === 'MIRR1' ? 'MIRR2' : 'MIRR1';
-            const currentRoom = game.rooms[currentRoomId];
-            const otherRoom = game.rooms[otherRoomId];
-
-            // Swap objects
-            const currentObjects = [...currentRoom.objects];
-            const otherObjects = [...otherRoom.objects];
-            currentRoom.objects = otherObjects;
-            otherRoom.objects = currentObjects;
-
-            // Update object's room reference
-            currentRoom.objects.forEach(obj => obj.room = currentRoom);
-            otherRoom.objects.forEach(obj => obj.room = otherRoom);
-
-            // Swap player
-            game.player.room = otherRoom;
-
             game.ui.display("There is a rumble from deep within the earth and the room shakes.");
-            game.look(); // Show the new room
             return true;
         }
 
@@ -986,6 +1009,22 @@ At your service!"`);
 
     'MATCH-FUNCTION': (game, verb) => {
         const matches = game.objects['MATCH'];
+        if (verb === 'read') {
+            game.ui.display(`"[close cover before striking BKD]
+You too can make BIG MONEY in the exciting field of
+PAPER SHUFFLING!
+Mr. TAA of Muddle, Mass. says: \\"Before I took
+this course I used to be a lowly bit twiddler.
+Now with what I learned at MIT Tech I feel really
+important and can obfuscate and confuse with the best.\\"
+Mr. MARC had this to say: \\"Ten short days ago all I could
+look forward to was a dead-end job as a doctor. Now
+I have a promising future and make really big Zorkmids.\\"
+MIT Tech can't promise these fantastic results to everyone.
+But when you earn your MDL degree from MIT Tech your future
+will be brighter. Send for our free brochure today."`);
+            return true;
+        }
         if (verb === 'light') {
             if (matches.light > 0) {
                 matches.light--; // Use one match
