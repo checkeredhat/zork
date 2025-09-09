@@ -16,20 +16,29 @@
 
         #terminal {
             width: 80ch;
+            height: calc(24 * 1.2em); /* 24 lines of text */
+            overflow: hidden;         /* no scroll bar */
+            background: #000;
+            color: #33ff33;
+            font-family: monospace;
+            font-size: 16px;
+            line-height: 1.2em;
+            user-select: none;
+            padding: 0.5em;
+            white-space: pre;          /* preserve spacing */
             margin: 2rem auto;
-            white-space: pre-wrap;
             text-shadow: 0 0 4px #33ff33, 0 0 8px #33ff33;
         }
 
-        .cursor {
-            display: inline-block;
-            width: 0.6em;
-            background: #33ff33;
+        /* blinking cursor after the input line */
+        .input-line::after {
+            content: "█";
             animation: blink 1s steps(1) infinite;
+            margin-left: 1px;
         }
 
         @keyframes blink {
-            50% { background: transparent; }
+            50% { opacity: 0; }
         }
 
         body::after {
@@ -49,31 +58,17 @@
             pointer-events: none;
         }
 
-        #input-container {
-            display: flex;
-        }
-
         #input {
-            background-color: transparent;
-            color: #33ff33;
-            border: none;
-            outline: none;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
-            width: calc(100% - 1em); /* Adjust width to leave space for cursor */
-            text-shadow: 0 0 4px #33ff33, 0 0 8px #33ff33;
+            /* Hide the actual input field */
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
         }
     </style>
 </head>
 <body>
-    <div id="terminal">
-        <div id="output"></div>
-        <div id="input-container">
-            <span class="prompt">></span>
-            <input type="text" id="input" autofocus />
-            <span class="cursor"></span>
-        </div>
-    </div>
+    <div id="terminal"></div>
+    <input type="text" id="input" autofocus />
 
     <!-- Core classes must be loaded before the main game logic -->
     <script src="js/ui.js"></script>

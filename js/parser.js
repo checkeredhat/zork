@@ -180,4 +180,6 @@ class Parser {
 }
 
 // Export the class for use in Node.js (for testing)
-module.exports = Parser;
+if (typeof module !== 'undefined') {
+    module.exports = Parser;
+}

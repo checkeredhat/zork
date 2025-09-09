@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const outputElement = document.getElementById('output');
+    const terminalElement = document.getElementById('terminal');
     const inputElement = document.getElementById('input');
 
-    const ui = new UI(outputElement, inputElement);
+    const ui = new UI(terminalElement, inputElement);
     const game = new Game(ui);
 
     ui.onInput((command) => {
