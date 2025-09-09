@@ -1,37 +1,26 @@
 // js/actions.js
 
 const actions = {
-    'WINDOW-FUNCTION': (game, verb, directObject) => {
-        // If called from a room action without a direct object, default to the main window
-        const windowObj = directObject || game.objects['WIND1'];
-        const kitchenWindowFlag = game.objects['KITCHEN-WINDOW'];
-
-        if (!windowObj || windowObj.id !== 'WIND1') {
-            // This function is only for the kitchen window
-            return false;
-        }
+    'WINDOW-FUNCTION': (game, verb) => {
+        const kitchenWindow = game.objects['KITCHEN-WINDOW'];
+        const wind1 = game.objects['WIND1'];
 
         if (verb === 'open') {
-            if (kitchenWindowFlag.flags.isOpen) {
+            if (kitchenWindow.flags.isOpen) {
                 game.ui.display("The window is already open.");
             } else {
-                kitchenWindowFlag.flags.isOpen = true;
-                windowObj.flags.isOpen = true;
-                game.ui.display("With great effort, you open the window far enough to allow entry.");
+                kitchenWindow.flags.isOpen = true;
+                wind1.flags.isOpen = true;
+                game.ui.display("With great effort, you open the window.");
             }
             return true;
         } else if (verb === 'close') {
-            if (!kitchenWindowFlag.flags.isOpen) {
+            if (!kitchenWindow.flags.isOpen) {
                 game.ui.display("The window is already closed.");
             } else {
-                // The QA guide says the player must be in the kitchen to close it.
-                if (game.player.room.id === 'KITCH') {
-                    kitchenWindowFlag.flags.isOpen = false;
-                    windowObj.flags.isOpen = false;
-                    game.ui.display("The door swings shut and closes.");
-                } else {
-                    game.ui.display("You can't reach it from here to close it.");
-                }
+                kitchenWindow.flags.isOpen = false;
+                wind1.flags.isOpen = false;
+                game.ui.display("The window closes.");
             }
             return true;
         }
@@ -42,7 +31,7 @@ const actions = {
         // This is a room-specific action to handle window operations without a direct object
         if (command && command.toLowerCase().includes('window')) {
             // The parser will give us the verb ('open' or 'close'). We can just call the main window function.
-            return actions['WINDOW-FUNCTION'](game, verb, game.objects['WIND1']);
+            return actions['WINDOW-FUNCTION'](game, verb);
         }
         return false;
     },
@@ -207,10 +196,6 @@ const actions = {
         }
         if (verb === 'move') {
             game.ui.display("The troll spits in your face, saying 'Better luck next time.'");
-            return true;
-        }
-        if (verb === 'mung') {
-            game.ui.display("The troll laughs at your puny gesture.");
             return true;
         }
         return false;
@@ -524,6 +509,35 @@ At your service!"`);
         }
     },
 
+    'WINDOW-FUNCTION': (game, verb, directObject) => {
+        const window = directObject;
+        const kitchenWindow = game.objects['KITCHEN-WINDOW'];
+        if (verb === 'open') {
+            if (window.flags.isOpen) {
+                game.ui.display("It's already open.");
+            } else {
+                window.flags.isOpen = true;
+                if (window.id === 'WIND1') {
+                    kitchenWindow.flags.isOpen = true;
+                }
+                game.ui.display("With great effort, you open the window.");
+            }
+            return true;
+        } else if (verb === 'close') {
+            if (!window.flags.isOpen) {
+                game.ui.display("It's already closed.");
+            } else {
+                window.flags.isOpen = false;
+                if (window.id === 'WIND1') {
+                    kitchenWindow.flags.isOpen = false;
+                }
+                game.ui.display("The window closes.");
+            }
+            return true;
+        }
+        return false;
+    },
+
     'BATS-ROOM': (game, verb) => {
         if (verb === 'walk-in') {
             if (!game.player.inventory.find(obj => obj.id === 'GARLI')) {
@@ -748,7 +762,6 @@ At your service!"`);
     },
 
     'MIRROR-MIRROR': (game, verb, directObject) => {
-        // directObject is the mirror object itself, REFL1 or REFL2
         if (verb === 'take') {
             game.ui.display("Nobody but a greedy surgeon would allow you to attempt that trick.");
             return true;
@@ -767,19 +780,31 @@ At your service!"`);
         if (verb === 'mung' || verb === 'throw' || verb === 'attack') {
             game.isMirrorBroken = true;
             game.ui.display("You have broken the mirror. I hope you have a seven years supply of good luck handy.");
-
-            // Remove the mirror from the room to "destroy" it
-            if (directObject && directObject.room) {
-                directObject.room.objects = directObject.room.objects.filter(obj => obj.id !== directObject.id);
-                directObject.room = null; // Dissociate from room
-            }
             return true;
         }
 
         if (verb === 'rub') {
-            // The QA guide implies nothing should happen.
-            // Returning false will let the default "I don't know how to do that" message show, which is appropriate.
-            return false;
+            const currentRoomId = game.player.room.id;
+            const otherRoomId = currentRoomId === 'MIRR1' ? 'MIRR2' : 'MIRR1';
+            const currentRoom = game.rooms[currentRoomId];
+            const otherRoom = game.rooms[otherRoomId];
+
+            // Swap objects
+            const currentObjects = [...currentRoom.objects];
+            const otherObjects = [...otherRoom.objects];
+            currentRoom.objects = otherObjects;
+            otherRoom.objects = currentObjects;
+
+            // Update object's room reference
+            currentRoom.objects.forEach(obj => obj.room = currentRoom);
+            otherRoom.objects.forEach(obj => obj.room = otherRoom);
+
+            // Swap player
+            game.player.room = otherRoom;
+
+            game.ui.display("There is a rumble from deep within the earth and the room shakes.");
+            game.look(); // Show the new room
+            return true;
         }
 
         return false;
