@@ -498,22 +498,46 @@ class Game {
         if (attackRoll < hitChance) {
             let damage = weapon.damage + Math.floor(Math.random() * 5); // Add some randomness
             defender.health -= damage;
-            this.ui.display(`You strike the ${defender.names[0]} with the ${weapon.names[0]}, dealing ${damage} damage.`);
+
+            if (defender.id === 'TROLL') {
+                this.ui.display("The troll parries your clumsy thrust.");
+            } else {
+                this.ui.display(`You strike the ${defender.names[0]} with the ${weapon.names[0]}, dealing ${damage} damage.`);
+            }
 
             if (defender.health <= 0) {
-                this.ui.display(`You have defeated the ${defender.names[0]}!`);
                 defender.flags.isVillain = false; // No longer a threat
-                defender.description = `The slain ${defender.names[0]} lies on the ground.`;
                 if (defender.id === 'TROLL') {
+                    this.ui.display("An unconscious troll is sprawled on the floor. All passages out of the room are open.");
+                    defender.description = "An unconscious troll is sprawled on the floor.";
                     this.trollDefeated = true;
+                    // Drop contents
+                    if (defender.contents && defender.contents.length > 0) {
+                        defender.contents.forEach(objId => {
+                            const obj = this.objects[objId];
+                            if (obj) {
+                                this.player.room.objects.push(obj);
+                                obj.room = this.player.room;
+                            }
+                        });
+                        defender.contents = [];
+                    }
+                } else {
+                    this.ui.display(`You have defeated the ${defender.names[0]}!`);
+                    defender.description = `The slain ${defender.names[0]} lies on the ground.`;
                 }
+
                 if (defender.id === 'THIEF') {
                     this.handleObjectAction('dead', defender);
                 }
                 return;
             }
         } else {
-            this.ui.display(`You swing at the ${defender.names[0]} but miss.`);
+            if (defender.id === 'TROLL') {
+                this.ui.display("The troll howls in rage and attacks!");
+            } else {
+                this.ui.display(`You swing at the ${defender.names[0]} but miss.`);
+            }
         }
 
         // Defender's turn

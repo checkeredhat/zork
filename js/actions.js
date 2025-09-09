@@ -209,6 +209,10 @@ const actions = {
             game.ui.display("The troll spits in your face, saying 'Better luck next time.'");
             return true;
         }
+        if (verb === 'mung') {
+            game.ui.display("The troll laughs at your puny gesture.");
+            return true;
+        }
         return false;
     },
 
