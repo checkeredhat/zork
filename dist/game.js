@@ -2222,29 +2222,76 @@ async function main() {
         vocabulary: vocabularyData,
         deathMessages: deathMessagesData
     };
-
     const game = new Game(data);
 
-    // Example of how you might handle input from a web page
+    const terminal = document.getElementById('terminal');
     const inputElement = document.getElementById('input');
-    const outputElement = document.getElementById('terminal');
+    const buffer = [];
+    const MAX_LINES = 24;
+
+    function render() {
+        while (buffer.length > MAX_LINES) {
+            buffer.shift();
+        }
+
+        let html = '';
+        for (let i = 0; i < buffer.length; i++) {
+            const line = buffer[i];
+            const sanitizedLine = line.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+            if (i === buffer.length - 1) {
+                html += `<span>${sanitizedLine}</span><span class="cursor"></span>`;
+            } else {
+                html += sanitizedLine;
+            }
+
+            if (i < buffer.length - 1) {
+                html += '\n';
+            }
+        }
+        terminal.innerHTML = html;
+    }
+
+    function appendToBuffer(text) {
+        const lines = text.split('\n');
+        for (const line of lines) {
+            buffer.push(line);
+        }
+    }
+
+    inputElement.addEventListener('input', () => {
+        // Update the last line of the buffer with the current input
+        buffer[buffer.length - 1] = `> ${inputElement.value}`;
+        render();
+    });
 
     inputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const command = inputElement.value;
-            inputElement.value = '';
+
+            // The `input` event has already updated the buffer with the full command.
+            // Now we just process it and add the output.
+
+            inputElement.value = ''; // Clear the hidden input for the next command
+
             const output = game.tick(command);
-            outputElement.innerHTML += `<p>> ${command}</p>`;
-            outputElement.innerHTML += `<p>${output.replace(/\n/g, '<br>')}</p>`;
-            outputElement.scrollTop = outputElement.scrollHeight; // Scroll to bottom
+            if (output) {
+                appendToBuffer(output);
+            }
+
+            // Add a new, empty prompt line for the next command
+            buffer.push('> ');
+
+            render();
         }
     });
 
-     // Initial room description
+    // Initial setup
     const initialOutput = game.look();
-    outputElement.innerHTML += `<p>${initialOutput.replace(/\n/g, '<br>')}</p>`;
-
+    appendToBuffer(initialOutput);
+    buffer.push('> ');
+    render();
+    inputElement.focus();
 }
 
-// Start the game when the DOM is ready
 document.addEventListener('DOMContentLoaded', main);
