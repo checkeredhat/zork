@@ -2222,12 +2222,6 @@ async function main() {
         vocabulary: vocabularyData,
         deathMessages: deathMessagesData
     };
-    const data = {
-        objects: objectsData,
-        rooms: roomsData,
-        vocabulary: vocabularyData,
-        deathMessages: deathMessagesData
-    };
 
     const game = new Game(data);
 
