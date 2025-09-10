@@ -2228,8 +2228,9 @@ async function main() {
     const inputElement = document.getElementById('input');
     const buffer = [];
     const MAX_LINES = 24;
+    let isProcessing = false;
 
-    function render() {
+    function render(showCursor = true) {
         while (buffer.length > MAX_LINES) {
             buffer.shift();
         }
@@ -2238,8 +2239,7 @@ async function main() {
         for (let i = 0; i < buffer.length; i++) {
             const line = buffer[i];
             const sanitizedLine = line.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-            if (i === buffer.length - 1) {
+            if (showCursor && i === buffer.length - 1) {
                 html += `<span>${sanitizedLine}</span><span class="cursor"></span>`;
             } else {
                 html += sanitizedLine;
