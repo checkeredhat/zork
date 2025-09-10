@@ -8,10 +8,10 @@ async function main() {
     const data = {};
     // Load all necessary data files
     const [objects, rooms, vocabulary, deathMessages] = await Promise.all([
-        fetch('../data/objects.json').then(res => res.json()),
-        fetch('../data/rooms.json').then(res => res.json()),
-        fetch('../data/vocabulary.json').then(res => res.json()),
-        fetch('../data/death_messages.json').then(res => res.json())
+        fetch('data/objects.json').then(res => res.json()),
+        fetch('data/rooms.json').then(res => res.json()),
+        fetch('data/vocabulary.json').then(res => res.json()),
+        fetch('data/death_messages.json').then(res => res.json())
     ]);
 
     data.objects = objects;
