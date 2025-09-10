@@ -418,7 +418,7 @@ const objectsData = [
       "isWeapon": true
     },
     "size": 30,
-    "damage": 10,
+    "damage": 10,<<<<<<< fix-blank-screen
     "longDescription": "Above the trophy case hangs an elvish sword of great antiquity."
   },
   {
@@ -543,7 +543,7 @@ const objectsData = [
   },
   {
     "id": "FRONT-DOOR",
-    "name": "door",
+    "name": "door",<<<<<<< fix-blank-screen
     "synonyms": ["front door", "boarded door"],
     "description": "The front door is boarded and you can't remove the boards.",
     "flags": {
@@ -1853,7 +1853,6 @@ function findWord(word, wordList) {
     );
 }
 
-
 function applyAction(action, dobj, iobj, game) {
     const handler = actionHandlers[action.verb];
     if (handler) {
@@ -2197,6 +2196,7 @@ class Game {
             return "You are in the attic. There is a large coil of rope here.";
         }
         let description = `\n[${room.name}]\n${room.description}\n`;
+1857
 
         const objectsInRoom = Array.from(this.objects.values()).filter(
             (obj) => obj.location === room.id &&
