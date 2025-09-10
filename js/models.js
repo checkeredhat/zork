@@ -6,6 +6,7 @@ class GameObject {
         this.name = data.name;
         this.description = data.description;
         this.longDescription = data.longDescription;
+        this.openDescription = data.openDescription;
         this.text = data.text; // Text for readable objects
         this.initialDescription = data.initialDescription || data.description;
         this.location = null; // Will be set by the game engine

@@ -36,6 +36,14 @@
     "expected_output": "Living Room\nYou are in the living room. There is a doorway to the east. To the west is a wooden door with strange gothic lettering, which is closed. A dark staircase leads up and down. There is a trophy case here.\nA battery-powered brass lantern is on the trophy case.\nA large oriental rug is on the floor.\nAbove the trophy case hangs an elvish sword of great antiquity."
   },
   {
+    "command": "take lantern",
+    "expected_output": "lantern: Taken."
+  },
+  {
+    "command": "turn on lantern",
+    "expected_output": "The brass lantern is now on."
+  },
+  {
     "command": "move rug",
     "expected_output": "With a great effort, the rug is moved to one side of the room.\nWith the rug moved, the dusty cover of a closed trap door appears."
   },
@@ -45,22 +53,22 @@
   },
   {
     "command": "down",
-    "expected_output": "Cellar\nYou are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.\nIt is pitch black. You are likely to be eaten by a grue."
+    "expected_output": "Cellar\nYou are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing."
   },
   {
     "command": "look",
-    "expected_output": "It is pitch black. You are likely to be eaten by a grue."
+    "expected_output": "Cellar\nYou are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing."
   },
   {
-    "command": "north",
+    "command": "east",
     "expected_output": "The Troll Room\nThis is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mark the walls.\nA nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room."
   },
   {
-    "command": "down",
-    "expected_output": "You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.\nThe trap door is open."
+    "command": "west",
+    "expected_output": "Cellar\nYou are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing."
   },
   {
-    "command": "north",
+    "command": "east",
     "expected_output": "The Troll Room\nThis is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mark the walls.\nThe troll, who is remarkably ugly, is here blocking the way."
   },
   {

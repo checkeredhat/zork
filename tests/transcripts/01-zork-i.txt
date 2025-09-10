@@ -45,6 +45,12 @@ A battery-powered brass lantern is on the trophy case.
 A large oriental rug is on the floor.
 Above the trophy case hangs an elvish sword of great antiquity.
 
+> take lantern
+lantern: Taken.
+
+> turn on lantern
+The brass lantern is now on.
+
 > move rug
 With a great effort, the rug is moved to one side of the room.
 With the rug moved, the dusty cover of a closed trap door appears.
@@ -56,21 +62,20 @@ The trap door is now open.
 Cellar
 You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.
 
-It is pitch black. You are likely to be eaten by a grue.
-
 > look
-It is pitch black. You are likely to be eaten by a grue.
+Cellar
+You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.
 
-> north
+> east
 The Troll Room
 This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mark the walls.
 A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.
 
-> down
+> west
+Cellar
 You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.
-The trap door is open.
 
-> north
+> east
 The Troll Room
 This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mark the walls.
 

@@ -2,7 +2,7 @@
   {
     "id": "WEST-OF-HOUSE",
     "name": "West of House",
-    "description": "This is an open field west of a white house, with a boarded front door.",
+    "description": "You are in an open field west of a big white house, with a boarded front door.",
     "exits": {
       "NORTH": "NORTH-OF-HOUSE",
       "SOUTH": "SOUTH-OF-HOUSE",
@@ -159,7 +159,7 @@
     "description": "You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.",
     "exits": {
       "WEST": "LIVING-ROOM",
-      "UP": "UP-KITCHEN-STAIRS",
+      "UP": "ATTIC",
       "DOWN": "CHIMNEY"
     },
     "flags": {
@@ -170,12 +170,23 @@
     "objects": ["SACK", "BOTTLE", "TRAP-DOOR"]
   },
   {
+    "id": "ATTIC",
+    "name": "Attic",
+    "description": "You are in the attic. There is a large coil of rope here.",
+    "exits": {
+      "DOWN": "KITCHEN"
+    },
+    "flags": {
+      "isLit": true
+    },
+    "objects": ["ROPE"]
+  },
+  {
     "id": "LIVING-ROOM",
     "name": "Living Room",
-    "description": "You are in the living room. There is a doorway to the east. To the west is a wooden door with strange gothic lettering, which is closed. A dark staircase leads up and down. There is a trophy case here.",
+    "description": "You are in the living room. There is a doorway to the east. A dark staircase leads up and down. There is a trophy case here. Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.",
     "exits": {
       "EAST": "KITCHEN",
-      "WEST": "STRANGE-DOOR-ROOM",
       "UP": "UP-STAIRS",
       "DOWN": "CELLAR"
     },
@@ -183,17 +194,12 @@
       "isOnLand": true,
       "isLit": true
     },
-    "objects": ["TROPHY-CASE", "SWORD", "LANTERN", "RUG", "TRAP-DOOR"]
-  },
-  {
-    "id": "STRANGE-DOOR-ROOM",
-    "name": "Living Room",
-    "description": "The door is closed."
+    "objects": ["TROPHY-CASE", "SWORD", "LANTERN", "RUG"]
   },
   {
     "id": "CELLAR",
     "name": "Cellar",
-    "description": "You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.",
+    "description": "You are in a dark and damp cellar with a narrow passage leading north.",
     "exits": {
       "UP": "LIVING-ROOM",
       "NORTH": "TROLL-ROOM"

@@ -22,7 +22,7 @@ const actionHandlers = {
         if (dobj.location !== game.player.location) return "You can't see that here.";
         if (hasFlag(dobj.oflags, OFLAGS.TAKEBIT)) {
             dobj.location = 'IN_INVENTORY';
-            return `${dobj.name}: Taken.`;
+            return `Taken.`;
         }
         return `You can't take the ${dobj.name}.`;
     },
@@ -104,7 +104,7 @@ const actionHandlers = {
 
             // Special response for the window
             if (dobj.id === 'WINDOW') {
-                return 'With a great effort, you open the window far enough to allow entry.';
+                return 'With great effort, you open the window far enough to allow entry.';
             }
 
             // Default response for other openable things
@@ -190,6 +190,24 @@ const actionHandlers = {
     WEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO WEST' }),
     UP: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO UP' }),
     DOWN: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO DOWN' }),
+    'TURN-ON': (dobj, iobj, game) => {
+        if (!dobj) return "Turn on what?";
+        if (dobj.id !== 'LANTERN') return "You can't turn that on.";
+        if (hasFlag(dobj.oflags, OFLAGS.LIGHTBIT)) {
+            return `The ${dobj.name} is already on.`;
+        }
+        dobj.oflags = setFlag(dobj.oflags, OFLAGS.LIGHTBIT);
+        return `The brass lantern is now on.`;
+    },
+    'TURN-OFF': (dobj, iobj, game) => {
+        if (!dobj) return "Turn off what?";
+        if (dobj.id !== 'LANTERN') return "You can't turn that off.";
+        if (!hasFlag(dobj.oflags, OFLAGS.LIGHTBIT)) {
+            return `The ${dobj.name} is already off.`;
+        }
+        dobj.oflags = clearFlag(dobj.oflags, OFLAGS.LIGHTBIT);
+        return `The ${dobj.name} is now off.`;
+    },
 };
 
 // Add a generic 'ENTER' handler that maps to GO

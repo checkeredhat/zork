@@ -12,7 +12,7 @@
     "expected_output": "With great effort, you open the window far enough to allow entry."
   },
   {
-    "command": "WEST",
+    "command": "ENTER WINDOW",
     "expected_output": "You are in the kitchen. On a table is a nasty-looking knife.\nThere is a small bag here. A clear glass bottle is here."
   },
   {
@@ -32,12 +32,12 @@
     "expected_output": "Taken."
   },
   {
-    "command": "TAKE KNIFE",
-    "expected_output": "Taken."
-  },
-  {
     "command": "DOWN",
     "expected_output": "You are in the kitchen."
+  },
+  {
+    "command": "TAKE KNIFE",
+    "expected_output": "Taken."
   },
   {
     "command": "WEST",

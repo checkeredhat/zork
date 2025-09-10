@@ -685,7 +685,7 @@
         {
             "id": "SACK",
             "name": "sack",
-            "synonyms": []
+    "synonyms": ["bag", "sack", "baggi"]
         },
         {
             "id": "SWORD",
