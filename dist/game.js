@@ -2228,7 +2228,6 @@ async function main() {
     const inputElement = document.getElementById('input');
     const buffer = [];
     const MAX_LINES = 24;
-
     let isProcessing = false;
 
     function render(showCursor = true) {
@@ -2240,7 +2239,6 @@ async function main() {
         for (let i = 0; i < buffer.length; i++) {
             const line = buffer[i];
             const sanitizedLine = line.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
             if (showCursor && i === buffer.length - 1) {
                 html += `<span>${sanitizedLine}</span><span class="cursor"></span>`;
             } else {
