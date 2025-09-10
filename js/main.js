@@ -22,8 +22,8 @@ async function main() {
     const game = new Game(data);
 
     // Example of how you might handle input from a web page
-    const inputElement = document.getElementById('command-input');
-    const outputElement = document.getElementById('game-output');
+    const inputElement = document.getElementById('input');
+    const outputElement = document.getElementById('terminal');
 
     inputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
@@ -43,6 +43,6 @@ async function main() {
 }
 
 // Start the game when the DOM is ready
-// document.addEventListener('DOMContentLoaded', main);
+document.addEventListener('DOMContentLoaded', main);
 // The above line is commented out to prevent execution in the testing environment.
 // We will call main() explicitly from the test runner if needed.
