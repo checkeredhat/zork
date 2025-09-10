@@ -2226,63 +2226,69 @@ async function main() {
 
     const terminal = document.getElementById('terminal');
     const inputElement = document.getElementById('input');
+    const buffer = [];
+    const MAX_LINES = 24;
 
-    const outputContainer = document.createElement('div');
-    outputContainer.style.flexGrow = '1';
-    outputContainer.style.overflowY = 'auto';
+    function render() {
+        const content = buffer
+            .map((line, i) =>
+                i === buffer.length - 1
+                    ? `<span class="input-line">${line.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span>`
+                    : line.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+            )
+            .join('\n');
+        terminal.innerHTML = content;
+    }
 
-    const promptSpan = document.createElement('span');
-    promptSpan.textContent = '> ';
-
-    const inputText = document.createElement('span');
-    const cursor = document.createElement('span');
-    cursor.className = 'cursor';
-
-    const commandLine = document.createElement('div');
-    commandLine.appendChild(promptSpan);
-    commandLine.appendChild(inputText);
-    commandLine.appendChild(cursor);
-
-    terminal.appendChild(outputContainer);
-    terminal.appendChild(commandLine);
-
-    const printToTerminal = (text, isCommand = false) => {
-        const p = document.createElement('p');
-        if (isCommand) {
-            p.textContent = `> ${text}`;
-        } else {
-            p.innerHTML = text.replace(/\n/g, '<br>');
+    function writeLine(text) {
+        const lines = text.split('\n');
+        for (const line of lines) {
+            buffer.splice(buffer.length - 1, 0, line);
+            if (buffer.length > MAX_LINES) {
+                buffer.shift();
+            }
         }
-        outputContainer.appendChild(p);
-        outputContainer.scrollTop = outputContainer.scrollHeight;
-    };
+        render();
+    }
 
-    terminal.addEventListener('click', () => {
-        inputElement.focus();
-    });
+    function updateInput(text) {
+        if (buffer.length === 0) {
+            buffer.push('');
+        }
+        buffer[buffer.length - 1] = `> ${text}`;
+        render();
+    }
 
     inputElement.addEventListener('input', () => {
-        inputText.textContent = inputElement.value;
+        updateInput(inputElement.value);
     });
 
     inputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const command = inputElement.value;
             inputElement.value = '';
-            inputText.textContent = '';
 
-            printToTerminal(command, true);
+            // The input is already on the screen, so just process it.
             const output = game.tick(command);
             if (output) {
-                printToTerminal(output);
+                writeLine(output);
             }
+
+            // Add a new empty input line
+            buffer.push('');
+            updateInput('');
         }
     });
 
+    // Initial setup
     const initialOutput = game.look();
-    printToTerminal(initialOutput);
+    const initialLines = initialOutput.split('\n');
+    for(const line of initialLines) {
+        buffer.push(line);
+    }
+    buffer.push(''); // for the first input line
+    updateInput('');
     inputElement.focus();
 }
 
-// Start the game when the DOM is ready
 document.addEventListener('DOMContentLoaded', main);
