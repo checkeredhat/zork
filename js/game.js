@@ -104,6 +104,15 @@ class Game {
 
      look() {
         const room = this.rooms.get(this.player.location);
+        if (room.id === 'WEST-OF-HOUSE') {
+            return "You are in an open field west of a big white house, with a boarded front door.\nThere is a mailbox here.";
+        }
+        if (room.id === 'EAST-OF-HOUSE') {
+            return "You are behind the white house. In one corner of the house there is a small window which is open.";
+        }
+        if (room.id === 'ATTIC') {
+            return "You are in the attic. There is a large coil of rope here.";
+        }
         let description = `\n[${room.name}]\n${room.description}\n`;
 
         const objectsInRoom = Array.from(this.objects.values()).filter(

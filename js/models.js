@@ -5,8 +5,10 @@ class GameObject {
         this.id = data.id;
         this.name = data.name;
         this.description = data.description;
+        this.longDescription = data.longDescription;
+        this.openDescription = data.openDescription;
         this.text = data.text; // Text for readable objects
-        this.initial_description = data.initial_description || data.description;
+        this.initialDescription = data.initialDescription || data.description;
         this.location = null; // Will be set by the game engine
         this.flags = data.flags || {}; // Original boolean flags
         this.oflags = 0; // Bitmask for OFLAGS

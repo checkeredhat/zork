@@ -1,7 +1,7 @@
 [
   {
     "id": "ADVER",
-    "names": [
+    "synonyms": [
       "PAMPH",
       "LEAFL",
       "BOOKL"
@@ -20,7 +20,7 @@
   },
   {
     "id": "AXE",
-    "names": [],
+    "synonyms": [],
     "adjectives": [
       "BLOOD"
     ],
@@ -35,7 +35,7 @@
   },
   {
     "id": "BAGCO",
-    "names": [
+    "synonyms": [
       "BAG",
       "COINS"
     ],
@@ -54,7 +54,7 @@
   },
   {
     "id": "BAR",
-    "names": [
+    "synonyms": [
       "PLATI"
     ],
     "adjectives": [
@@ -73,7 +73,7 @@
   },
   {
     "id": "BELL",
-    "names": [],
+    "synonyms": [],
     "adjectives": [
       "BRASS"
     ],
@@ -89,7 +89,7 @@
   },
   {
     "id": "BLANT",
-    "names": [
+    "synonyms": [
       "LANTE",
       "LAMP"
     ],
@@ -110,7 +110,7 @@
   },
   {
     "id": "BOTTLE",
-    "names": [
+    "synonyms": [
       "CONTA",
       "PITCH"
     ],
@@ -130,12 +130,11 @@
     "capacity": 4,
     "contents": [
       "WATER"
-    ],
-    "longDescription": "A bottle is sitting on the table."
+    ]
   },
   {
     "id": "CANDL",
-    "names": [],
+    "synonyms": [],
     "description": "pair of candles",
     "initialDescription": "There are two candles here.",
     "longDescription": "On the two ends of the altar are burning candles.",
@@ -151,7 +150,7 @@
   },
   {
     "id": "COFFI",
-    "names": [
+    "synonyms": [
       "CASKE"
     ],
     "adjectives": [
@@ -171,7 +170,7 @@
   },
   {
     "id": "DIAMO",
-    "names": [
+    "synonyms": [
       "PERFE"
     ],
     "adjectives": [
@@ -199,7 +198,7 @@
   },
   {
     "id": "FOOD",
-    "names": [
+    "synonyms": [
       "SANDW",
       "LUNCH",
       "PEPPE",
@@ -219,7 +218,7 @@
   },
   {
     "id": "GARLI",
-    "names": [
+    "synonyms": [
       "CLOVE"
     ],
     "description": "clove of garlic",
@@ -248,7 +247,7 @@
   },
   {
     "id": "KNIFE",
-    "names": [
+    "synonyms": [
       "BLADE"
     ],
     "adjectives": [
@@ -261,13 +260,14 @@
       "isWeapon": true
     },
     "damage": 6,
-    "initialDescription": "There is a nasty-looking knife lying here.",
+    "initialDescription": "On a table is a nasty-looking knife.",
     "longDescription": "On a table is a nasty-looking knife.",
     "size": 5
   },
   {
     "id": "LANTERN",
-    "names": [
+    "name": "lantern",
+    "synonyms": [
       "LANTE"
     ],
     "adjectives": [
@@ -280,7 +280,7 @@
       "isTakeable": true,
       "isVisible": true,
       "isLightSource": true,
-      "isLight": true
+      "isLight": false
     },
     "light": -1,
     "size": 15,
@@ -310,16 +310,14 @@
       "BOX"
     ],
     "description": "mailbox",
-    "initialDescription": "There is a small mailbox here.",
-    "adjectives": [
-      "small"
-    ],
+    "initialDescription": "There is a mailbox here.",
+    "adjectives": [],
     "flags": {
       "isContainer": true,
       "isVisible": true,
       "isTakeable": false,
       "isOpen": false,
-      "isNotDescribed": true
+      "isNotDescribed": false
     },
     "capacity": 10,
     "contents": [
@@ -337,7 +335,7 @@
   },
   {
     "id": "ROPE",
-    "names": [
+    "synonyms": [
       "HEMP",
       "COIL"
     ],
@@ -347,7 +345,8 @@
       "isTieable": true,
       "isTakeable": true,
       "isVisible": true,
-      "isTied": false
+      "isTied": false,
+      "isNotDescribed": true
     },
     "size": 10,
     "longDescription": "A large coil of rope is lying in the corner.",
@@ -355,7 +354,7 @@
   },
   {
     "id": "RUG",
-    "names": [
+    "synonyms": [
       "CARPE",
       "rug"
     ],
@@ -364,9 +363,9 @@
     ],
     "description": "carpet",
     "action": "RUG",
+    "longDescription": "A large oriental rug is on the floor.",
     "flags": {
       "isNotTakeableWithMessage": true,
-      "isNotDescribed": true,
       "isVisible": true,
       "isTakeable": false,
       "isMoved": false
@@ -376,7 +375,8 @@
   },
   {
     "id": "SACK",
-    "names": [
+    "name": "bag",
+    "synonyms": [
       "BAG",
       "SACK",
       "BAGGI"
@@ -385,7 +385,7 @@
       "BROWN"
     ],
     "description": "sandwich bag",
-    "initialDescription": "A sandwich bag is here.",
+    "initialDescription": "There is a small bag here.",
     "flags": {
       "isContainer": true,
       "isFlammable": true,
@@ -397,12 +397,11 @@
     "contents": [
       "GARLI",
       "FOOD"
-    ],
-    "longDescription": "On the table is an elongated brown sack, smelling of hot peppers."
+    ]
   },
   {
     "id": "SWORD",
-    "names": [
+    "synonyms": [
       "ORCRI",
       "GLAMD",
       "BLADE"
@@ -420,7 +419,7 @@
     },
     "size": 30,
     "damage": 10,
-    "longDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity."
+    "longDescription": "Above the trophy case hangs an elvish sword of great antiquity."
   },
   {
     "id": "TROPHY-CASE",
@@ -437,7 +436,8 @@
       "isContainer": true,
       "isTransparent": true,
       "isVisible": true,
-      "isTakeable": false
+      "isTakeable": false,
+      "isNotDescribed": true
     },
     "size": 99999,
     "capacity": 99999,
@@ -449,6 +449,7 @@
     "synonyms": ["trapdoor", "cover"],
     "adjectives": ["trap", "dusty"],
     "description": "A dusty trap door is here, obviously closed.",
+    "openDescription": "The trap door is open.",
     "action": "TRAP-DOOR",
     "flags": {
         "isDoor": true,
@@ -459,7 +460,7 @@
   },
   {
     "id": "TROLL",
-    "names": [],
+    "synonyms": [],
     "description": "troll",
     "flags": {
       "isVillain": true,
@@ -471,7 +472,8 @@
     "strength": 10,
     "accuracy": 75,
     "damage": 8,
-    "initialDescription": "A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.",
+    "initialDescription": "The troll, who is remarkably ugly, is here blocking the way.",
+    "longDescription": "A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.",
     "action": "TROLL",
     "contents": [
       "AXE"
@@ -479,7 +481,7 @@
   },
   {
     "id": "WATER",
-    "names": [
+    "synonyms": [
       "LIQUI",
       "H2O"
     ],
@@ -535,7 +537,8 @@
     "synonyms": ["rubber mat", "welcome mat"],
     "description": "A rubber mat saying 'Welcome to Zork!' lies by the door.",
     "flags": {
-        "isScenery": true
+        "isScenery": true,
+        "isNotDescribed": true
     }
   },
   {

@@ -2,11 +2,11 @@
   {
     "id": "WEST-OF-HOUSE",
     "name": "West of House",
-    "description": "This is an open field west of a white house, with a boarded front door.",
+    "description": "You are in an open field west of a big white house, with a boarded front door.",
     "exits": {
       "NORTH": "NORTH-OF-HOUSE",
       "SOUTH": "SOUTH-OF-HOUSE",
-      "EAST": "HOUSE-BLOCKED",
+      "EAST": "EAST-OF-HOUSE",
       "WEST": "FOREST-1"
     },
     "flags": {
@@ -159,7 +159,7 @@
     "description": "You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.",
     "exits": {
       "WEST": "LIVING-ROOM",
-      "UP": "UP-KITCHEN-STAIRS",
+      "UP": "ATTIC",
       "DOWN": "CHIMNEY"
     },
     "flags": {
@@ -168,6 +168,18 @@
       "isMunged": false
     },
     "objects": ["SACK", "BOTTLE", "TRAP-DOOR"]
+  },
+  {
+    "id": "ATTIC",
+    "name": "Attic",
+    "description": "You are in the attic. There is a large coil of rope here.",
+    "exits": {
+      "DOWN": "KITCHEN"
+    },
+    "flags": {
+      "isLit": true
+    },
+    "objects": ["ROPE"]
   },
   {
     "id": "LIVING-ROOM",

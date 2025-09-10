@@ -147,6 +147,12 @@
             ]
         },
         {
+            "id": "ENTER",
+            "synonyms": [
+                "in"
+            ]
+        },
+        {
             "id": "EXAMI",
             "synonyms": [
                 "descr",
@@ -679,7 +685,7 @@
         {
             "id": "SACK",
             "name": "sack",
-            "synonyms": []
+    "synonyms": ["bag", "sack", "baggi"]
         },
         {
             "id": "SWORD",
@@ -767,12 +773,6 @@
             "id": "EAST",
             "synonyms": [
                 "e"
-            ]
-        },
-        {
-            "id": "ENTER",
-            "synonyms": [
-                "in"
             ]
         },
         {
