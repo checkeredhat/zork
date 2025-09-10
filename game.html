@@ -31,18 +31,22 @@
             font-size: 16px;
             line-height: 1.2em;
             padding: 0.5em;
-            white-space: pre;          /* preserve spacing */
+            white-space: pre-wrap;     /* preserve spacing and wrap text */
             text-shadow: 0 0 4px #33ff33, 0 0 8px #33ff33;
+            user-select: none;
         }
 
-        .input-line::after {
-            content: "█";
+        .cursor {
+            display: inline-block;
+            width: 0.6em;
+            height: 1.2em;
+            background: #33ff33;
             animation: blink 1s steps(1) infinite;
-            margin-left: 1px;
+            vertical-align: bottom;
         }
 
         @keyframes blink {
-            50% { opacity: 0; }
+            50% { background: transparent; }
         }
 
         body::before {
