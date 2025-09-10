@@ -2229,7 +2229,9 @@ async function main() {
     const buffer = [];
     const MAX_LINES = 24;
 
-    function render() {
+    let isProcessing = false;
+
+    function render(showCursor = true) {
         while (buffer.length > MAX_LINES) {
             buffer.shift();
         }
@@ -2239,7 +2241,7 @@ async function main() {
             const line = buffer[i];
             const sanitizedLine = line.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-            if (i === buffer.length - 1) {
+            if (showCursor && i === buffer.length - 1) {
                 html += `<span>${sanitizedLine}</span><span class="cursor"></span>`;
             } else {
                 html += sanitizedLine;
