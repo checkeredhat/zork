@@ -2222,28 +2222,67 @@ async function main() {
         vocabulary: vocabularyData,
         deathMessages: deathMessagesData
     };
-
     const game = new Game(data);
 
-    // Example of how you might handle input from a web page
+    const terminal = document.getElementById('terminal');
     const inputElement = document.getElementById('input');
-    const outputElement = document.getElementById('terminal');
+
+    // Create the structure for a real terminal inside the #terminal div
+    const outputContainer = document.createElement('div');
+    outputContainer.style.flexGrow = '1';
+    outputContainer.style.overflowY = 'auto';
+
+    const promptSpan = document.createElement('span');
+    promptSpan.textContent = '> ';
+
+    const inputLine = document.createElement('span');
+    inputLine.className = 'input-line'; // For the blinking cursor
+
+    const commandLine = document.createElement('div');
+    commandLine.appendChild(promptSpan);
+    commandLine.appendChild(inputLine);
+
+    terminal.appendChild(outputContainer);
+    terminal.appendChild(commandLine);
+
+    const printToTerminal = (text, isCommand = false) => {
+        const p = document.createElement('p');
+        p.innerHTML = text.replace(/\n/g, '<br>');
+        if (isCommand) {
+            p.textContent = `> ${text}`;
+        }
+        outputContainer.appendChild(p);
+        outputContainer.scrollTop = outputContainer.scrollHeight;
+    };
+
+    // Focus the hidden input field when the terminal is clicked
+    terminal.addEventListener('click', () => {
+        inputElement.focus();
+    });
+
+    // Handle user input
+    inputElement.addEventListener('input', () => {
+        inputLine.textContent = inputElement.value;
+    });
 
     inputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const command = inputElement.value;
             inputElement.value = '';
+            inputLine.textContent = '';
+
+            printToTerminal(command, true); // Echo the command
             const output = game.tick(command);
-            outputElement.innerHTML += `<p>> ${command}</p>`;
-            outputElement.innerHTML += `<p>${output.replace(/\n/g, '<br>')}</p>`;
-            outputElement.scrollTop = outputElement.scrollHeight; // Scroll to bottom
+            if (output) {
+                printToTerminal(output);
+            }
         }
     });
 
-     // Initial room description
+    // Initial room description
     const initialOutput = game.look();
-    outputElement.innerHTML += `<p>${initialOutput.replace(/\n/g, '<br>')}</p>`;
-
+    printToTerminal(initialOutput);
+    inputElement.focus(); // Ensure input is focused on start
 }
 
 // Start the game when the DOM is ready
