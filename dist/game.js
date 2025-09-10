@@ -2230,64 +2230,67 @@ async function main() {
     const MAX_LINES = 24;
 
     function render() {
-        const content = buffer
-            .map((line, i) =>
-                i === buffer.length - 1
-                    ? `<span>${line.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span><span class="cursor"></span>`
-                    : line.replace(/</g, "&lt;").replace(/>/g, "&gt;")
-            )
-            .join('\n');
-        terminal.innerHTML = content;
-    }
+        while (buffer.length > MAX_LINES) {
+            buffer.shift();
+        }
 
-    function writeLine(text) {
-        const lines = text.split('\n');
-        for (const line of lines) {
-            buffer.splice(buffer.length - 1, 0, line);
-            if (buffer.length > MAX_LINES) {
-                buffer.shift();
+        let html = '';
+        for (let i = 0; i < buffer.length; i++) {
+            const line = buffer[i];
+            const sanitizedLine = line.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+            if (i === buffer.length - 1) {
+                html += `<span>${sanitizedLine}</span><span class="cursor"></span>`;
+            } else {
+                html += sanitizedLine;
+            }
+
+            if (i < buffer.length - 1) {
+                html += '\n';
             }
         }
-        render();
+        terminal.innerHTML = html;
     }
 
-    function updateInput(text) {
-        if (buffer.length === 0) {
-            buffer.push('');
+    function appendToBuffer(text) {
+        const lines = text.split('\n');
+        for (const line of lines) {
+            buffer.push(line);
         }
-        buffer[buffer.length - 1] = `> ${text}`;
-        render();
     }
 
     inputElement.addEventListener('input', () => {
-        updateInput(inputElement.value);
+        // Update the last line of the buffer with the current input
+        buffer[buffer.length - 1] = `> ${inputElement.value}`;
+        render();
     });
 
     inputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const command = inputElement.value;
-            inputElement.value = '';
 
-            // The input is already on the screen, so just process it.
+            // The `input` event has already updated the buffer with the full command.
+            // Now we just process it and add the output.
+
+            inputElement.value = ''; // Clear the hidden input for the next command
+
             const output = game.tick(command);
             if (output) {
-                writeLine(output);
+                appendToBuffer(output);
             }
 
-            // Add a new empty input line
-            buffer.push('');
-            updateInput('');
+            // Add a new, empty prompt line for the next command
+            buffer.push('> ');
+
+            render();
         }
     });
 
     // Initial setup
     const initialOutput = game.look();
-    const initialLines = initialOutput.split('\n');
-    for(const line of initialLines) {
-        buffer.push(line);
-    }
-    buffer.push(''); // for the first input line
-    updateInput('');
+    appendToBuffer(initialOutput);
+    buffer.push('> ');
+    render();
     inputElement.focus();
 }
 
