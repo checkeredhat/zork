@@ -49,7 +49,6 @@ modified_main_content=$(echo "${original_main_content}" |
     sed '/^import/d' | # Remove import
     sed '/const data = {};/d' | # Remove old data object
     sed '/\/\/ Load all necessary data files/,/data.deathMessages = deathMessages;/d' | # Remove fetch and data assignment
-    sed 's/async function main() {/async function main() {\n    const data = {\n        objects: objectsData,\n        rooms: roomsData,\n        vocabulary: vocabularyData,\n        deathMessages: deathMessagesData\n    };/' | # Add data object
     sed '/\/\/ The above line is commented out/,/if needed./d' # Remove the comment about test runner
 )
 echo "${modified_main_content}" >> dist/game.js
