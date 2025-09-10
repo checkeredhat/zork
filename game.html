@@ -73,19 +73,7 @@
     <div id="terminal"></div>
     <input type="text" id="input" autofocus />
 
-    <!-- Core classes must be loaded before the main game logic -->
-    <script src="js/ui.js"></script>
-    <script src="js/gameObject.js"></script>
-    <script src="js/room.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/exit.js"></script>
-    <script src="js/parser.js"></script>
-    <script src="js/actions.js"></script>
-
-    <!-- Game class uses the core classes -->
-    <script src="js/game.js"></script>
-
     <!-- Main entry point, must be last -->
-    <script src="js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
