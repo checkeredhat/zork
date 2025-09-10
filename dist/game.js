@@ -2226,64 +2226,69 @@ async function main() {
 
     const terminal = document.getElementById('terminal');
     const inputElement = document.getElementById('input');
+    const buffer = [];
+    const MAX_LINES = 24;
 
-    // Create the structure for a real terminal inside the #terminal div
-    const outputContainer = document.createElement('div');
-    outputContainer.style.flexGrow = '1';
-    outputContainer.style.overflowY = 'auto';
+    function render() {
+        const content = buffer
+            .map((line, i) =>
+                i === buffer.length - 1
+                    ? `<span class="input-line">${line.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span>`
+                    : line.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+            )
+            .join('\n');
+        terminal.innerHTML = content;
+    }
 
-    const promptSpan = document.createElement('span');
-    promptSpan.textContent = '> ';
-
-    const inputLine = document.createElement('span');
-    inputLine.className = 'input-line'; // For the blinking cursor
-
-    const commandLine = document.createElement('div');
-    commandLine.appendChild(promptSpan);
-    commandLine.appendChild(inputLine);
-
-    terminal.appendChild(outputContainer);
-    terminal.appendChild(commandLine);
-
-    const printToTerminal = (text, isCommand = false) => {
-        const p = document.createElement('p');
-        p.innerHTML = text.replace(/\n/g, '<br>');
-        if (isCommand) {
-            p.textContent = `> ${text}`;
+    function writeLine(text) {
+        const lines = text.split('\n');
+        for (const line of lines) {
+            buffer.splice(buffer.length - 1, 0, line);
+            if (buffer.length > MAX_LINES) {
+                buffer.shift();
+            }
         }
-        outputContainer.appendChild(p);
-        outputContainer.scrollTop = outputContainer.scrollHeight;
-    };
+        render();
+    }
 
-    // Focus the hidden input field when the terminal is clicked
-    terminal.addEventListener('click', () => {
-        inputElement.focus();
-    });
+    function updateInput(text) {
+        if (buffer.length === 0) {
+            buffer.push('');
+        }
+        buffer[buffer.length - 1] = `> ${text}`;
+        render();
+    }
 
-    // Handle user input
     inputElement.addEventListener('input', () => {
-        inputLine.textContent = inputElement.value;
+        updateInput(inputElement.value);
     });
 
     inputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const command = inputElement.value;
             inputElement.value = '';
-            inputLine.textContent = '';
 
-            printToTerminal(command, true); // Echo the command
+            // The input is already on the screen, so just process it.
             const output = game.tick(command);
             if (output) {
-                printToTerminal(output);
+                writeLine(output);
             }
+
+            // Add a new empty input line
+            buffer.push('');
+            updateInput('');
         }
     });
 
-    // Initial room description
+    // Initial setup
     const initialOutput = game.look();
-    printToTerminal(initialOutput);
-    inputElement.focus(); // Ensure input is focused on start
+    const initialLines = initialOutput.split('\n');
+    for(const line of initialLines) {
+        buffer.push(line);
+    }
+    buffer.push(''); // for the first input line
+    updateInput('');
+    inputElement.focus();
 }
 
-// Start the game when the DOM is ready
 document.addEventListener('DOMContentLoaded', main);
