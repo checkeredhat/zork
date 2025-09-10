@@ -68,10 +68,9 @@ class Game {
         // 4. Post-action logic (like handling LOOK after movement)
         const currentRoom = this.rooms.get(this.player.location);
         if ((currentRoom.rbits & RBITS.RDESCBIT) !== 0) {
-            result += this.look(); // Append room description
+            result += this.look(true); // Append room description, forced
             currentRoom.rbits &= ~RBITS.RDESCBIT; // Clear the flag
         }
-
 
         return result.trim();
     }
@@ -102,10 +101,22 @@ class Game {
         return null;
     }
 
-     look() {
+     look(force = false) {
         const room = this.rooms.get(this.player.location);
-        let description = `\n[${room.name}]\n${room.description}\n`;
 
+        const isRoomLit = (room.rbits & RBITS.RLIGHT) !== 0;
+        const playerHasLight = Array.from(this.objects.values()).some(obj =>
+            obj.location === 'IN_INVENTORY' && (obj.oflags & OFLAGS.LIGHTBIT) !== 0
+        );
+
+        if (!isRoomLit && !playerHasLight) {
+            if (force) {
+                return `\n${room.name}\n${room.description}\n\nIt is pitch black. You are likely to be eaten by a grue.`;
+            }
+            return "\nIt is pitch black. You are likely to be eaten by a grue.";
+        }
+
+        let description = `\n${room.name}\n${room.description}\n`;
         const objectsInRoom = Array.from(this.objects.values()).filter(
             (obj) => obj.location === room.id &&
                      !hasFlag(obj.oflags, OFLAGS.INVISIBLE) &&
@@ -113,7 +124,10 @@ class Game {
         );
 
         if (objectsInRoom.length > 0) {
-            description += '\n' + objectsInRoom.map((obj) => obj.description).join('\n');
+            const objectDescriptions = objectsInRoom.map((obj) => {
+                return obj.longDescription || obj.initialDescription || obj.description;
+            }).join('\n');
+            description += '\n' + objectDescriptions;
         }
         return description;
     }

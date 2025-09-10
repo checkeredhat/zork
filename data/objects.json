@@ -131,7 +131,7 @@
     "contents": [
       "WATER"
     ],
-    "longDescription": "A bottle is sitting on the table."
+    "longDescription": "A bottle of water is on the table."
   },
   {
     "id": "CANDL",
@@ -364,9 +364,9 @@
     ],
     "description": "carpet",
     "action": "RUG",
+    "longDescription": "A large oriental rug is on the floor.",
     "flags": {
       "isNotTakeableWithMessage": true,
-      "isNotDescribed": true,
       "isVisible": true,
       "isTakeable": false,
       "isMoved": false
@@ -398,7 +398,7 @@
       "GARLI",
       "FOOD"
     ],
-    "longDescription": "On the table is an elongated brown sack, smelling of hot peppers."
+    "longDescription": "A brown sack, smelling of hot peppers, is on the table."
   },
   {
     "id": "SWORD",
@@ -420,7 +420,7 @@
     },
     "size": 30,
     "damage": 10,
-    "longDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity."
+    "longDescription": "Above the trophy case hangs an elvish sword of great antiquity."
   },
   {
     "id": "TROPHY-CASE",
@@ -437,7 +437,8 @@
       "isContainer": true,
       "isTransparent": true,
       "isVisible": true,
-      "isTakeable": false
+      "isTakeable": false,
+      "isNotDescribed": true
     },
     "size": 99999,
     "capacity": 99999,

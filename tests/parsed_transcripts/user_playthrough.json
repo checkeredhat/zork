@@ -1,0 +1,1298 @@
+[
+  {
+    "command": "LOOK",
+    "expected_output": "You are in an open field west of a big white house, with a boarded front door.\nThere is a mailbox here."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are behind the white house. In one corner of the house there is a small window which is open."
+  },
+  {
+    "command": "OPEN WINDOW",
+    "expected_output": "With great effort, you open the window far enough to allow entry."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the kitchen. On a table is a nasty-looking knife.\nThere is a small bag here. A clear glass bottle is here."
+  },
+  {
+    "command": "TAKE BAG",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE BOTTLE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in the attic. There is a large coil of rope here."
+  },
+  {
+    "command": "TAKE ROPE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE KNIFE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in the kitchen."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the living room. The rug is too heavy to lift, but in trying to take it you have noticed an irregularity beneath it."
+  },
+  {
+    "command": "MOVE RUG",
+    "expected_output": "With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap-door appears."
+  },
+  {
+    "command": "OPEN TRAP DOOR",
+    "expected_output": "Opened."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in the cellar."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a small room with passages off in all directions. Bloodstains and deep scratches (perhaps made by an axe) mar the walls. A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room."
+  },
+  {
+    "command": "KILL TROLL WITH KNIFE",
+    "expected_output": "You strike the troll and it falls to the ground, unconscious. All passages out of the room are open."
+  },
+  {
+    "command": "TAKE AXE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a narrow east-west passageway. There is a narrow stairway leading down at the north end of the room."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a large circular room with passages off in eight directions. Your compass needle spins wildly, and you can't get your bearings."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a winding passage. It seems that there is only an exit on the east end although the whirring from the round room can be heard faintly to the north."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a circular room with passages off in eight directions. Your compass needle spins wildly, and you can't get your bearings."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a winding passage."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a cold and damp corridor where a long east-west passageway intersects with a northward path."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a small chamber, which appears to have been part of a coal mine. On the south wall of the chamber the letters \"Granite Wall\" are etched in the rock. To the east is a long passage and there is a steep metal slide twisting downward. From the appearance of the slide, an attempt to climb up it would be impossible. To the north is a small opening."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in the cellar."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a long passage. To the south is one entrance. On the east there is an old wooden door, with a large hole in it (about cyclops sized)."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a large room, whose north wall is solid granite. A number of discarded bags, which crumble at your touch, are scattered about on the floor. There is a silver chalice, intricately engraved, here."
+  },
+  {
+    "command": "TAKE CHALICE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a long passage."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the living room."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in the cellar."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a long passage. To the east is an old wooden door."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the art gallery. Most of the paintings which were here have been stolen by vandals with exceptional taste. The vandals left through either the north or south exits. A masterpiece by a neglected genius is here."
+  },
+  {
+    "command": "TAKE PAINTING",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a north-south crawlway. A passage goes to the east also."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in what appears to have been an artist's studio. The walls and floors are splattered with paints of 69 different colors. Strangely enough, nothing of value is hanging here. At the north and northwest of the room are open doors (also covered with paint). An extremely dark and narrow chimney leads up from a fireplace; although you might be able to get up it, it seems unlikely you could get back down."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a north-south crawlway."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Troll Room."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a narrow east-west passageway."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a small circular room with a pedestal. A set of stairs leads up, and passages leave to the east and west. There is an extremely valuable (perhaps original) grail here."
+  },
+  {
+    "command": "TAKE GRAIL",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in the west end of a large temple. On the south wall is an ancient inscription, probably a prayer in a long-forgotten language. The north wall is solid granite. The entrance at the west end of the room is through huge marble pillars."
+  },
+  {
+    "command": "TAKE BELL",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the east end of a large temple. In front of you is what appears to be an altar. There is an old trunk here, bulging with assorted jewels. There is a matchbook whose cover says 'Visit Beautiful FCD#3' here. There is a small leaflet here. There is a small mailbox here. There is an object which looks like a tube of toothpaste here. There is some gunk here. There is a wrench here. There is a screwdriver here. There is a small mailbox here."
+  },
+  {
+    "command": "TAKE MATCHBOOK",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE TUBE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE WRENCH",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE SCREWDRIVER",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE TRUNK",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE CANDLE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "LIGHT CANDLE WITH MATCHBOOK",
+    "expected_output": "The candles are now burning."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the west end of a large temple."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in the Grail Room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a circular room with passages off in eight directions."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a high north-south passage, which forks to the northeast."
+  },
+  {
+    "command": "NORTHEAST",
+    "expected_output": "You are in a large room with a ceiling which cannot be detected from the ground. There is a narrow passage from east to west and a stone stairway leading upward. The room is extremely noisy. In fact, it is difficult to hear yourself think."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a damp cave. Passages exit to the south and to the east, but the cave narrows to a crack to the west. The earth is particularly damp here."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Dam."
+  },
+  {
+    "command": "PLUG LEAK WITH PUTTY",
+    "expected_output": "By some miracle of elven technology, you have managed to stop the leak in the dam."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a stream. The stream travels to the north and the east."
+  },
+  {
+    "command": "TAKE FUSE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in the Glacier Room."
+  },
+  {
+    "command": "MELT GLACIER WITH TORCH",
+    "expected_output": "The glacier begins to melt."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the Ruby Room. On the floor lies a moby ruby."
+  },
+  {
+    "command": "TAKE MOBY RUBY",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a small room, whose walls are formed by an old lava flow."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are at the bottom of a large dormant volcano. High above you light may be seen entering from the cone of the volcano. The only exit here is to the north. There is a very large and extremely heavy wicker basket with a cloth bag here."
+  },
+  {
+    "command": "TAKE BALLOON",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "INFLATE BALLOON",
+    "expected_output": "The balloon inflates."
+  },
+  {
+    "command": "BOARD BALLOON",
+    "expected_output": "You are in the balloon."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are about one hundred feet above the bottom of the volcano. The top of the volcano is clearly visible here."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are about two hundred feet above the volcano floor. Looming above is the rim of the volcano. There is a small ledge on the west."
+  },
+  {
+    "command": "LAND WEST",
+    "expected_output": "You are on a narrow ledge overlooking the inside of an old dormant volcano. This ledge appears to be about in the middle between the floor below and the rim above. There is an exit here to the south. An engraved zorkmid coin is here."
+  },
+  {
+    "command": "TAKE ZORKMID",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "A volcano gnome seems to walk straight out of the wall and says 'I have a very busy appointment schedule and little time to waste on trespassers, but for a small fee, I'll show you the way out.' You notice the gnome nervously glancing at his watch. [act2.27, 372]"
+  },
+  {
+    "command": "GIVE ZORKMID TO GNOME",
+    "expected_output": "Thank you very much for the zorkmid. 'Follow me', he says, and a door appears on the west end of the ledge. Through the door, you can see a narrow chimney sloping steeply downward."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a room which must have been a large library, probably for the royal family. All of the shelves appear to have been gnawed to pieces by unfriendly gnomes. To the north is an exit. [dung.56, 390]"
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a room with a north wall of solid granite. There is a safe here."
+  },
+  {
+    "command": "OPEN SAFE",
+    "expected_output": "The safe creaks open, revealing a beautiful jeweled crown. There is a card with writing on it here."
+  },
+  {
+    "command": "TAKE CROWN",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a library."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are on a narrow ledge overlooking the inside of an old dormant volcano."
+  },
+  {
+    "command": "BOARD",
+    "expected_output": "You are in the balloon."
+  },
+  {
+    "command": "LAND",
+    "expected_output": "You are in an ancient room, long buried by the Reservoir. There are exits here to the southeast and upward. There is a large coral trident here."
+  },
+  {
+    "command": "TAKE TRIDENT",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a small cave with an entrance to the north and a stairway leading down."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a Mirror Room. A transparent reflection of yourself is here."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a steep and narrow crawlway. There are two exits nearby to the south and southwest."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a Mirror Room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a cold and damp corridor."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a damp cave."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a small cave whose exits are on the south and northwest. There is a hunk of bat guano here. There is a large shovel here."
+  },
+  {
+    "command": "TAKE SHOVEL",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a bat room. There is a jade necklace here. There is a large platinum bar here."
+  },
+  {
+    "command": "TAKE JADE NECKLACE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE PLATINUM BAR",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a small cave whose exits are on the south and northwest."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are on the west shore of the river. An entrance to a cave is to the northwest. The shore is very rocky here."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are on a large sandy beach at the shore of the river, which is flowing quickly by. A path runs beside the river to the south here. There is a beautiful statue here. There is a folded pile of plastic here which has a small valve attached. There is a small pump here. [dung.56, 393]"
+  },
+  {
+    "command": "TAKE STATUE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE INFLATABLE BOAT",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE PUMP",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "INFLATE BOAT WITH PUMP",
+    "expected_output": "The boat inflates."
+  },
+  {
+    "command": "BOARD BOAT",
+    "expected_output": "You are in the boat."
+  },
+  {
+    "command": "LAUNCH BOAT",
+    "expected_output": "You are on the Frigid River. A buoy bobs in the water."
+  },
+  {
+    "command": "LOOK BUOY",
+    "expected_output": "The buoy has an emerald attached to it."
+  },
+  {
+    "command": "TAKE EMERALD",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are on the Frigid River."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are at Aragain Falls."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are on top of a rainbow (I bet you never thought you would walk on a rainbow), with a magnificent view of the Falls. The rainbow travels east-west here. There is an NBC Commissary here. There is a pot of gold here."
+  },
+  {
+    "command": "TAKE POT OF GOLD",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are at Aragain Falls."
+  },
+  {
+    "command": "DISEMBARK",
+    "expected_output": "You are on your own feet again."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a narrow strip of beach which runs along the base of the White Cliffs."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are on a large sandy beach at the shore of the river, which is flowing quickly by. A path runs beside the river to the south here. There is a beautiful statue here. There is a folded pile of plastic here which has a small valve attached. There is a small pump here. [dung.56, 393]"
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are on the west shore of the river. An entrance to a cave is to the northwest. The shore is very rocky here."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a narrow strip of beach which runs along the base of the White Cliffs."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a clearing."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a forest."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a forest."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a forest."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a forest."
+  },
+  {
+    "command": "SOUTHEAST",
+    "expected_output": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a small room near the maze. There are twisty passages in the immediate vicinity. There is a bag of coins here. There are some keys here. There is a rusty knife here."
+  },
+  {
+    "command": "TAKE BAG OF COINS",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE KEYS",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE RUSTY KNIFE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a maze. There is a platinum bar here."
+  },
+  {
+    "command": "TAKE PLATINUM BAR",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "NORTHEAST",
+    "expected_output": "You are standing in a small circular room with a pedestal. A set of stairs leads up, and passages leave to the east and west. There is an extremely valuable (perhaps original) grail here."
+  },
+  {
+    "command": "TAKE GRAIL",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in the west end of a large temple."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the east end of a large temple. In front of you is what appears to be an altar. There is an old trunk here, bulging with assorted jewels. There is a matchbook whose cover says 'Visit Beautiful FCD#3' here. There is a small leaflet here. There is a small mailbox here. There is an object which looks like a tube of toothpaste here. There is some gunk here. There is a wrench here. There is a screwdriver here. There is a small mailbox here. There is a sapphire-encrusted bracelet here."
+  },
+  {
+    "command": "TAKE TRUNK",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE SAPPHIRE BRACELET",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the west end of a large temple."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in the Grail Room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a circular room with passages off in eight directions."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a deep ravine at a crossing with an east-west crawlway."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in the south end of a large cavernous room which was formerly a reservoir."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in the south end of a large cavernous room which was formerly a reservoir."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a room which looks like an Egyptian tomb. There is an ascending staircase in the room as well as doors, east and south."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are on a ledge in the middle of a large volcano. Below you the volcano bottom can be seen and above is the rim of the volcano. A couple of ledges can be seen on the other side of the volcano; it appears that this ledge is intermediate in elevation between those on the other side. The exit from this room is to the east. [dung.56, 390]"
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Egyptian Room."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in the Glacier Room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the Ruby Room."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Glacier Room."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Egyptian Room."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are on a ledge in the middle of a large volcano."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Egyptian Room."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are on a wide ledge."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a dusty room. There is a safe here."
+  },
+  {
+    "command": "OPEN SAFE",
+    "expected_output": "The safe creaks open, revealing a beautiful jeweled crown. There is a card with writing on it here."
+  },
+  {
+    "command": "TAKE CROWN",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a dusty room."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are on a wide ledge."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "A volcano gnome appears."
+  },
+  {
+    "command": "GIVE ZORKMID TO GNOME",
+    "expected_output": "Thank you very much for the zorkmid. 'Follow me', he says, and a door appears on the west end of the ledge. Through the door, you can see a narrow chimney sloping steeply downward."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a room which must have been a large library, probably for the royal family. All of the shelves appear to have been gnawed to pieces by unfriendly gnomes. To the north is an exit. [dung.56, 390]"
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are on a narrow ledge overlooking the inside of an old dormant volcano."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Egyptian Room."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in the Glacier Room."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a stream."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the Dam."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a damp cave."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a large room with a ceiling which cannot be detected from the ground."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a north-south passage."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a circular room with passages off in eight directions."
+  },
+  {
+    "command": "SOUTHWEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a dead end."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "NORTHEAST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTHEAST",
+    "expected_output": "You are in a dead end."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in the Grating Room."
+  },
+  {
+    "command": "UNLOCK GRATE WITH KEYS",
+    "expected_output": "The grating is unlocked."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a clearing."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a forest."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a forest."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are on a large sandy beach at the shore of the river, which is flowing quickly by. A path runs beside the river to the south here. There is a beautiful statue here. There is a folded pile of plastic here which has a small valve attached. There is a small pump here."
+  },
+  {
+    "command": "TAKE INFLATABLE BOAT",
+    "expected_output": "You are already carrying the inflatable boat."
+  },
+  {
+    "command": "TAKE PUMP",
+    "expected_output": "You are already carrying the pump."
+  },
+  {
+    "command": "INFLATE BOAT WITH PUMP",
+    "expected_output": "The boat is already inflated."
+  },
+  {
+    "command": "BOARD BOAT",
+    "expected_output": "You are already in the boat."
+  },
+  {
+    "command": "LAND",
+    "expected_output": "You are on a large sandy beach at the shore of the river, which is flowing quickly by. A path runs beside the river to the south here. There is a beautiful statue here. There is a folded pile of plastic here which has a small valve attached. There is a small pump here. [dung.56, 393]"
+  },
+  {
+    "command": "TAKE STATUE",
+    "expected_output": "You are already carrying the beautiful statue."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are on the west shore of the river. An entrance to a cave is to the northwest. The shore is very rocky here."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are on the west shore of the river. An entrance to a cave is to the northwest. The shore is very rocky here."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a small cave whose exits are on the south and northwest. There is a hunk of bat guano here. There is a large shovel here."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are on the west shore of the river. An entrance to a cave is to the northwest. The shore is very rocky here."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a small cave whose exits are on the south and northwest. There is a hunk of bat guano here. There is a large shovel here."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are on the west shore of the river. An entrance to a cave is to the northwest. The shore is very rocky here."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a small cave whose exits are on the south and northwest. There is a hunk of bat guano here. There is a large shovel here."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a bat room. There is a jade necklace here. There is a large platinum bar here."
+  },
+  {
+    "command": "TAKE JADE NECKLACE",
+    "expected_output": "You are already carrying the jade necklace."
+  },
+  {
+    "command": "TAKE PLATINUM BAR",
+    "expected_output": "You are already carrying the platinum bar."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a squeeze."
+  },
+  {
+    "command": "NORTHEAST",
+    "expected_output": "You are in a dingy closet adjacent to the machine room. On one wall is a small sticker which says Protected by FROBOZZ Magic Alarm Company (Hello, footpad!)"
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a machine room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a low room."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a small square room, in the center of which is a large oblong table, no doubt set for afternoon tea."
+  },
+  {
+    "command": "TAKE EAT ME CAKE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are at the top of the well. Well done. There are etchings on the side of the well. There is a small crack across the floor at the entrance to a room on the east, but it can be crossed easily."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "It's a long way down!"
+  },
+  {
+    "command": "CLIMB ROPE",
+    "expected_output": "You descend the rope."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a damp circular room, whose walls are made of brick and mortar. The roof of this room is not visible, but there appear to be some etchings on the walls. There is a passageway to the west. There is a wooden bucket here, 3 feet in diameter and 3 feet high."
+  },
+  {
+    "command": "TAKE BUCKET",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "This is a former broom closet. The exits are to the east and west. There is a pearl necklace here with hundreds of large pearls."
+  },
+  {
+    "command": "TAKE PEARL NECKLACE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "This is a room which is bare on all sides. There is an exit down. To the east is a great door made of stone. Above the stone, the following words are written: 'No man shall enter this room without solving this riddle: What is tall as a house, round as a cup, and all the king's horses can't draw it up?'"
+  },
+  {
+    "command": "ANSWER WELL",
+    "expected_output": "The stone door rumbles open."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "This is a former broom closet."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a damp circular room, whose walls are made of brick and mortar."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are at the top of the well."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in Alice's tea room. In the eastern corner of the room is a small hole."
+  },
+  {
+    "command": "EAT CAKE",
+    "expected_output": "You grow to enormous size."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in an enormous room. In the center of which are four wooden posts delineating a rectanular area, above which is what appears to be a wooden roof."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a large room, one half of which is depressed. There is a large leak in the ceiling through which brown colored goop is falling. A stoppered glass flask with a skull-and-crossbones marking is here. The flask is filled with some clear liquid. There is a tin of rare spices here."
+  },
+  {
+    "command": "TAKE FLASK",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "TAKE SPICE",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in an enormous room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in Alice's tea room."
+  },
+  {
+    "command": "EAT CAKE",
+    "expected_output": "You are now normal size."
+  },
+  {
+    "command": "NORTHWEST",
+    "expected_output": "You are in a low room."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a machine room. There is a dented iron box here. There is a Stradavarius here."
+  },
+  {
+    "command": "OPEN IRON BOX",
+    "expected_output": "The iron box is empty."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a machine room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a low room."
+  },
+  {
+    "command": "SOUTHEAST",
+    "expected_output": "You are in Alice's tea room."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in an enormous room."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the pool room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in an enormous room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in Alice's tea room."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are at the top of the well."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the Grating Room."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a dead end."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTHWEST",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping."
+  },
+  {
+    "command": "SOUTH",
+    "expected_output": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a large room, whose north wall is solid granite. A number of discarded bags, which crumble at your touch, are scattered about on the floor. There is a silver chalice, intricately engraved, here."
+  },
+  {
+    "command": "TAKE CHALICE",
+    "expected_output": "You are already carrying the silver chalice."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping."
+  },
+  {
+    "command": "GIVE EAT ME CAKE TO CYCLOPS",
+    "expected_output": "The cyclops eats the cake and falls into a deep sleep."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a large room, whose north wall is solid granite. A number of discarded bags, which crumble at your touch, are scattered about on the floor. There is a silver chalice, intricately engraved, here."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the Entrance to Hades. Some invisible force prevents you from passing through the gate. There is a ghost here."
+  },
+  {
+    "command": "GIVE TRIDENT TO GHOST",
+    "expected_output": "The ghost accepts the trident and fades away. The invisible force blocking the gate vanishes."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Land of the Living Dead."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Tomb of the Unknown Implementer. A hollow voice says: \"That's not a bug, it's a feature!\" Amid the desolation, you spot what appears to be your head, at the end of a long pole. [dung.56, 391, 392]"
+  },
+  {
+    "command": "TAKE HEAD",
+    "expected_output": "Taken."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the Land of the Living Dead."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the Entrance to Hades."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in a tiny cave with entrances west and north, and a dark, forbidding staircase leading down."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a Mirror Room. A transparent reflection of yourself is here."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a small cave with an entrance to the north and a stairway leading down."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a Mirror Room. A transparent reflection of yourself is here."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a tiny cave with entrances west and north, and a dark, forbidding staircase leading down."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are in a narrow crawlway. The crawlway leads from north to south. However the south passage divides to the south and southwest."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the Grating Room."
+  },
+  {
+    "command": "UP",
+    "expected_output": "You are in the west end of a large temple. On the south wall is an ancient inscription, probably a prayer in a long-forgotten language. The north wall is solid granite. The entrance at the west end of the room is through huge marble pillars."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in the east end of a large temple. In front of you is what appears to be an altar. There is an old trunk here, bulging with assorted jewels. There is a matchbook whose cover says 'Visit Beautiful FCD#3' here. There is a small leaflet here. There is a small mailbox here. There is an object which looks like a tube of toothpaste here. There is some gunk here. There is a wrench here. There is a screwdriver here. There is a small mailbox here."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the west end of a large temple."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a small circular room with a pedestal. A set of stairs leads up, and passages leave to the east and west. There is an extremely valuable (perhaps original) grail here."
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a maze."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a small room with passages off in all directions. Bloodstains and deep scratches (perhaps made by an axe) mar the walls. An unconscious troll is sprawled on the floor. All passages out of the room are open."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in the cellar."
+  },
+  {
+    "command": "WEST",
+    "expected_output": "You are in a small chamber, which appears to have been part of a coal mine. On the south wall of the chamber the letters \"Granite Wall\" are etched in the rock. To the east is a long passage and there is a steep metal slide twisting downward. From the appearance of the slide, an attempt to climb up it would be impossible. To the north is a small opening."
+  },
+  {
+    "command": "NORTH",
+    "expected_output": "You are standing at the entrance of what might have been a coal mine. To the north are exits from this room. Constructed over the top of the shaft is a metal framework to which a heavy iron chain is attached. [dung.56, 383]"
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a shaft room. Constructed over the top of the shaft is a metal framework to which a heavy iron chain is attached. [dung.56, 383]"
+  },
+  {
+    "command": "DOWN",
+    "expected_output": "You are in a small square room which is at the bottom of a long shaft. To the east is a passageway and to the northeast a very narrow passage. In the shaft can be seen a heavy iron chain."
+  },
+  {
+    "command": "EAST",
+    "expected_output": "You are in a machine room. There is a trophy case here."
+  },
+  {
+    "command": "OPEN TROPHY CASE",
+    "expected_output": "Opened."
+  },
+  {
+    "command": "PUT BAG OF COINS IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT PLATINUM BAR IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT PEARL NECKLACE IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT MOBY RUBY IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT ZORKMID IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT EMERALD IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT TRIDENT IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT CROWN IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT GRAIL IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT CHALICE IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT POT OF GOLD IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT SAPPHIRE BRACELET IN TRO ficha",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT JADE NECKLACE IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT STATUE IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT TRUNK IN TROPHY CASE",
+    "expected_output": "Placed."
+  },
+  {
+    "command": "PUT PAINTING IN TROPHY CASE",
+    "expected_output": "Placed."
+  }
+]

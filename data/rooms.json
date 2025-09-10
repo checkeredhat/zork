@@ -6,7 +6,7 @@
     "exits": {
       "NORTH": "NORTH-OF-HOUSE",
       "SOUTH": "SOUTH-OF-HOUSE",
-      "EAST": "HOUSE-BLOCKED",
+      "EAST": "EAST-OF-HOUSE",
       "WEST": "FOREST-1"
     },
     "flags": {
@@ -172,9 +172,10 @@
   {
     "id": "LIVING-ROOM",
     "name": "Living Room",
-    "description": "You are in the living room. There is a doorway to the east. A dark staircase leads up and down. There is a trophy case here. Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.",
+    "description": "You are in the living room. There is a doorway to the east. To the west is a wooden door with strange gothic lettering, which is closed. A dark staircase leads up and down. There is a trophy case here.",
     "exits": {
       "EAST": "KITCHEN",
+      "WEST": "STRANGE-DOOR-ROOM",
       "UP": "UP-STAIRS",
       "DOWN": "CELLAR"
     },
@@ -182,12 +183,17 @@
       "isOnLand": true,
       "isLit": true
     },
-    "objects": ["TROPHY-CASE", "SWORD", "LANTERN", "RUG"]
+    "objects": ["TROPHY-CASE", "SWORD", "LANTERN", "RUG", "TRAP-DOOR"]
+  },
+  {
+    "id": "STRANGE-DOOR-ROOM",
+    "name": "Living Room",
+    "description": "The door is closed."
   },
   {
     "id": "CELLAR",
     "name": "Cellar",
-    "description": "You are in a dark and damp cellar with a narrow passage leading north.",
+    "description": "You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.",
     "exits": {
       "UP": "LIVING-ROOM",
       "NORTH": "TROLL-ROOM"

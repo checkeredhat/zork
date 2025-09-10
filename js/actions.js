@@ -35,19 +35,7 @@ const actionHandlers = {
     },
 
     LOOK: (dobj, iobj, game) => {
-        const room = game.rooms.get(game.player.location);
-        let description = `\n[${room.name}]\n${room.description}\n`;
-
-        const objectsInRoom = Array.from(game.objects.values()).filter(
-            (obj) => obj.location === room.id &&
-                     !hasFlag(obj.oflags, OFLAGS.INVISIBLE) &&
-                     !hasFlag(obj.oflags, OFLAGS.NOTDESCBIT)
-        );
-
-        if (objectsInRoom.length > 0) {
-            description += '\n' + objectsInRoom.map((obj) => obj.description).join('\n');
-        }
-        return description;
+        return game.look();
     },
 
     GO: (dobj, iobj, game, action) => {
