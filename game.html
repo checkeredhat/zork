@@ -3,15 +3,23 @@
 <head>
     <title>Zork.js</title>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background: #000;
             color: #33ff33;
             font-family: "Courier New", Courier, monospace;
             font-size: 16px;
-            line-height: 1.2;
             -webkit-font-smoothing: none;
             -moz-osx-font-smoothing: none;
             margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #terminal {
@@ -19,29 +27,34 @@
             height: calc(24 * 1.2em); /* 24 lines of text */
             overflow: hidden;         /* no scroll bar */
             background: #000;
-            color: #33ff33;
             font-family: monospace;
             font-size: 16px;
             line-height: 1.2em;
             user-select: none;
             padding: 0.5em;
-            white-space: pre;          /* preserve spacing */
-            margin: 2rem auto;
+            white-space: pre-wrap;     /* preserve spacing and wrap text */
             text-shadow: 0 0 4px #33ff33, 0 0 8px #33ff33;
-            user-select: none;
-            padding: 0.5em;
-            display: flex;
-            flex-direction: column;
         }
-        /* blinking cursor after the input line */
-        .input-line::after {
-            content: "█";
+
+        .cursor {
+            display: inline-block;
+            width: 0.6em;
+            height: 1.2em;
+            background: #33ff33;
             animation: blink 1s steps(1) infinite;
-            margin-left: 1px;
+            vertical-align: bottom;
         }
 
         @keyframes blink {
-            50% { opacity: 0; }
+            50% { background: transparent; }
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 70%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
         }
 
         body::after {
@@ -53,16 +66,7 @@
             pointer-events: none;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 70%, rgba(0,0,0,0.6) 100%);
-            pointer-events: none;
-        }
-
         #input {
-            /* Hide the actual input field */
             position: absolute;
             left: -9999px;
             top: -9999px;
@@ -73,7 +77,6 @@
     <div id="terminal"></div>
     <input type="text" id="input" autofocus />
 
-    <!-- Main entry point, must be last -->
     <script src="dist/game.js"></script>
 </body>
 </html>
