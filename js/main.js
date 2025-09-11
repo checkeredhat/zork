@@ -1,36 +1,28 @@
-// This is a placeholder for the main entry point of the browser-based game.
-// It's not used by the test runner, but would be necessary for an interactive
-// version in a web page.
-
+// Main entry point for the browser-based game.
 async function main() {
-    const data = {
+    // Get references to the DOM elements
+    const terminalElement = document.getElementById('terminal');
+    const inputElement = document.getElementById('input');
+
+    // Instantiate the UI and Game
+    const ui = new UI(terminalElement, inputElement);
+    const game = new Game({
         objects: objectsData,
         rooms: roomsData,
         vocabulary: vocabularyData,
         deathMessages: deathMessagesData
-    };
-
-    const game = new Game(data);
-
-    // Example of how you might handle input from a web page
-    const inputElement = document.getElementById('input');
-    const outputElement = document.getElementById('terminal');
-
-    inputElement.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            const command = inputElement.value;
-            inputElement.value = '';
-            const output = game.tick(command);
-            outputElement.innerHTML += `<p>> ${command}</p>`;
-            outputElement.innerHTML += `<p>${output.replace(/\n/g, '<br>')}</p>`;
-            outputElement.scrollTop = outputElement.scrollHeight; // Scroll to bottom
-        }
     });
 
-     // Initial room description
-    const initialOutput = game.look();
-    outputElement.innerHTML += `<p>${initialOutput.replace(/\n/g, '<br>')}</p>`;
+    // Set up the input handler. The callback passed to onInput
+    // will be executed when the user enters a command. It passes
+    // the command to the game's tick function and returns the result.
+    ui.onInput((command) => {
+        return game.tick(command);
+    });
 
+    // Display the initial room description to start the game.
+    const initialOutput = game.look();
+    ui.start(initialOutput);
 }
 
 // Start the game when the DOM is ready
