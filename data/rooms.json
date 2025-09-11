@@ -593,8 +593,7 @@
             "SOUTH": "FORE2",
             "DOWN": {
                 "condition": "\"KEY-FLAG\"",
-                "destination": "MGRAT",
-                "message": "You can't go that way."
+                "destination": "MGRAT"
             }
         },
         "objects": [

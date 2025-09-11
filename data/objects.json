@@ -1278,5 +1278,65 @@
         "properties": {},
         "synonyms": ["grate"],
         "adjectives": []
+    },
+    "RAILI": {
+        "id": "RAILI",
+        "name": "railing",
+        "description": "There is a railing here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": ["rail"],
+        "adjectives": []
+    },
+    "SDOOR": {
+        "id": "SDOOR",
+        "name": "stone door",
+        "description": "There is a stone door here.",
+        "initialDescription": "",
+        "flags": 2,
+        "properties": {},
+        "synonyms": ["door"],
+        "adjectives": ["stone"]
+    },
+    "CORPS": {
+        "id": "CORPS",
+        "name": "corpses",
+        "description": "There are corpses here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": ["bodies"],
+        "adjectives": []
+    },
+    "GATES": {
+        "id": "GATES",
+        "name": "gates",
+        "description": "There are gates here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": ["gate"],
+        "adjectives": []
+    },
+    "RAINB": {
+        "id": "RAINB",
+        "name": "rainbow",
+        "description": "There is a rainbow here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": [],
+        "adjectives": []
+    },
+    "BARRE": {
+        "id": "BARRE",
+        "name": "barrel",
+        "description": "There is a barrel here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": [],
+        "adjectives": []
     }
 }
