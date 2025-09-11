@@ -1,0 +1,82 @@
+> NORTH
+You are facing the north side of a white house.  There is no door here,
+and all the windows are barred.
+
+> EAST
+There is a small window here.
+
+> OPEN WINDOW
+With great effort, you open the window far enough to allow entry.
+
+> ENTER
+On the table is an elongated brown sack, smelling of hot peppers.
+A bottle is sitting on the table.
+
+> WEST
+There is a trophy case here.
+A battery-powered brass lantern is on the trophy case.
+On hooks above the mantelpiece hangs an elvish sword of great
+antiquity.
+
+> TAKE SWORD
+Taken.
+
+> EAST
+On the table is an elongated brown sack, smelling of hot peppers.
+A bottle is sitting on the table.
+
+> EAST
+With great effort, you open the window far enough to allow entry.
+
+> DOWN
+You are in the cellar.
+The trap door is open.
+
+> EAST
+You are in a small room with passages off in all directions.
+Bloodstains and deep scratches (perhaps made by an axe) mar the
+walls.
+
+> ATTACK TROLL WITH SWORD
+The troll is knocked out!
+
+> SOUTH
+You are in a maze of twisty little passages, all alike.
+
+> SOUTH
+You are in a maze of twisty little passages, all alike.
+
+> EAST
+You are in a maze of twisty little passages, all alike.
+
+> UP
+You are in a maze of twisty little passages, all alike.
+There is a skeleton of a luckless adventurer here.
+There is a bag of coins here.
+There is a set of skeleton keys here.
+There is a burned-out lantern here.
+There is a rusty knife here.
+
+> TAKE KEYS
+Taken.
+
+> SW
+You are in a maze of twisty little passages, all alike.
+
+> UP
+You are in a maze of twisty little passages, all alike.
+
+> EAST
+You are in a maze of twisty little passages, all alike.
+
+> NE
+You are in the Grating Room.
+
+> UP
+The grating is locked.
+
+> UNLOCK GRATE WITH KEYS
+The grating is unlocked.
+
+> UP
+You are in a clearing.

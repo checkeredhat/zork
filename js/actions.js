@@ -40,21 +40,38 @@ const actionHandlers = {
 
     GO: (dobj, iobj, game, action) => {
         const room = game.rooms.get(game.player.location);
-        const direction = action.verb.replace('GO ', ''); // Assumes action.verb is like "GO NORTH"
-        const targetRoomId = room.exits[direction];
+        const direction = action.verb.replace('GO ', '');
+        const exit = room.exits[direction];
 
-        if (targetRoomId) {
-            // Handle "pseudo-rooms" which are just descriptions for failed movement
-            if (targetRoomId === 'HOUSE-BLOCKED') {
-                return game.rooms.get(targetRoomId).description;
-            }
-
-            // Handle actual movement
-            game.player.location = targetRoomId;
-            const targetRoom = game.rooms.get(targetRoomId);
-            targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT); // Force room description on next turn
-            return ''; // Movement actions in Zork don't print anything, they just trigger a LOOK
+        if (!exit) {
+            return "You can't go that way.";
         }
+
+        // Handle simple string-based exits
+        if (typeof exit === 'string') {
+            game.player.location = exit;
+            const targetRoom = game.rooms.get(exit);
+            targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
+            return '';
+        }
+
+        // Handle conditional exits (object-based)
+        if (typeof exit === 'object' && exit.destination) {
+            if (evaluateCondition(exit.condition, game)) {
+                game.player.location = exit.destination;
+                const targetRoom = game.rooms.get(exit.destination);
+                targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
+                return '';
+            } else {
+                return exit.message || "You can't go that way.";
+            }
+        }
+
+        // Handle blocked exits (object with 'blocked' message)
+        if (typeof exit === 'object' && exit.blocked) {
+            return exit.blocked;
+        }
+
         return "You can't go that way.";
     },
 
@@ -103,7 +120,7 @@ const actionHandlers = {
             }
 
             // Special response for the window
-            if (dobj.id === 'WINDOW') {
+            if (dobj.id === 'WIND1') {
                 return 'With great effort, you open the window far enough to allow entry.';
             }
 
@@ -164,13 +181,15 @@ const actionHandlers = {
             return "Attacking the troll with your bare hands is suicidal.";
         }
 
-        troll.trollState = troll.trollState || { unconscious: false, hits: 0 };
-
+        if (troll.trollState.hits === undefined) {
+            troll.trollState.hits = 0;
+        }
         troll.trollState.hits++;
 
         if (troll.trollState.hits >= 2) {
              troll.trollState.unconscious = true;
              troll.description = "The troll is lying on the ground, unconscious.";
+             game.globalFlags.set('TROLL-FLAG', true);
              return "The troll is knocked out!";
         } else {
              return "A furious but glancing blow is struck.\nThe troll's axe barely misses your ear.";
@@ -184,6 +203,10 @@ const actionHandlers = {
     WEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO WEST' }),
     UP: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO UP' }),
     DOWN: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO DOWN' }),
+    NORTHEAST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO NE' }),
+    NORTHWEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO NW' }),
+    SOUTHEAST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO SE' }),
+    SOUTHWEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO SW' }),
     'TURN-ON': (dobj, iobj, game) => {
         if (!dobj) return "Turn on what?";
         if (dobj.id !== 'LANTERN') return "You can't turn that on.";
@@ -202,6 +225,21 @@ const actionHandlers = {
         dobj.oflags = clearFlag(dobj.oflags, OFLAGS.LIGHTBIT);
         return `The ${dobj.name} is now off.`;
     },
+
+    UNLOCK: (dobj, iobj, game) => {
+        if (!dobj) return "Unlock what?";
+        if (!iobj) return "Unlock it with what?";
+
+        if (dobj.id === 'GRAT2' && iobj.id === 'KEYS') {
+            if (!hasFlag(dobj.oflags, OFLAGS.LOCKBIT)) {
+                return "The grating is already unlocked.";
+            }
+            dobj.oflags = clearFlag(dobj.oflags, OFLAGS.LOCKBIT);
+            return "The grating is unlocked.";
+        }
+
+        return "You can't unlock that.";
+    }
 };
 
 // Add a generic 'ENTER' handler that maps to GO
@@ -209,11 +247,20 @@ actionHandlers.ENTER = (dobj, iobj, game, action) => {
     // In Zork, "enter" is often a synonym for "go" but can be more contextual.
     const room = game.rooms.get(game.player.location);
 
+    // If no direct object, see if there's an obvious thing to enter.
+    if (!dobj) {
+        // Is there an open window in the room?
+        const window = Array.from(game.objects.values()).find(o => o.location === room.id && o.id === 'WIND1');
+        if (window && hasFlag(window.oflags, OFLAGS.OPENBIT)) {
+            dobj = window;
+        }
+    }
+
     // Special case for entering the window
-    if (dobj && dobj.id === 'WINDOW') {
+    if (dobj && dobj.id === 'WIND1') {
         if (hasFlag(dobj.oflags, OFLAGS.OPENBIT)) {
-            game.player.location = 'KITCHEN';
-            game.rooms.get('KITCHEN').rbits = setFlag(game.rooms.get('KITCHEN').rbits, RBITS.RDESCBIT);
+            game.player.location = 'KITCH';
+            game.rooms.get('KITCH').rbits = setFlag(game.rooms.get('KITCH').rbits, RBITS.RDESCBIT);
             return ''; // Success, triggers a look
         } else {
             return "The window is closed.";
@@ -231,6 +278,28 @@ actionHandlers.ENTER = (dobj, iobj, game, action) => {
 
     return "You can't enter that.";
 };
+
+function evaluateCondition(condition, game) {
+    if (!condition) return true; // No condition means the exit is always open
+
+    const flagName = condition.replace(/\"/g, '');
+
+    // Check for object-based conditions
+    switch (flagName) {
+        case 'TRAP-DOOR':
+            const trapDoor = game.objects.get('TRAP-DOOR');
+            return trapDoor && hasFlag(trapDoor.oflags, OFLAGS.OPENBIT);
+        case 'KITCHEN-WINDOW':
+            const window = game.objects.get('WIND1');
+            return window && hasFlag(window.oflags, OFLAGS.OPENBIT);
+        case 'GRATING-UNLOCKED': // This is a made-up flag for now
+            const grating = game.objects.get('GRAT2');
+            return grating && !hasFlag(grating.oflags, OFLAGS.LOCKBIT);
+    }
+
+    // Check for global flags
+    return game.globalFlags.get(flagName) === true;
+}
 
 
 export { applyAction };

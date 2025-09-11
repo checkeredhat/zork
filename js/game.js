@@ -8,31 +8,25 @@ class Game {
     constructor(data) {
         this.objects = new Map(Object.values(data.objects).map(o => [o.id, new GameObject(o)]));
         this.rooms = new Map(Object.values(data.rooms).map(r => [r.id, new Room(r)]));
-        this.player = new Player({ location: 'WEST-OF-HOUSE' }); // Starting location
+        this.player = new Player({ location: 'WHOUS' }); // Starting location
         this.vocabulary = data.vocabulary;
         this.deathMessages = data.deathMessages;
+        this.globalFlags = new Map();
 
-        this.initGameFlags();
         this.initObjectLocations();
     }
 
-    initGameFlags() {
-        // Initialize bitmask properties for all rooms and objects
-        for (const room of this.rooms.values()) {
-            room.initRFlags();
-        }
-        for (const obj of this.objects.values()) {
-            obj.initOFlags();
-        }
-    }
-
     initObjectLocations() {
+        console.log('Initializing object locations...');
         // Set initial locations for objects based on room data
         for (const room of this.rooms.values()) {
             if (room.objects) {
                 for (const objectId of room.objects) {
                     if (this.objects.has(objectId)) {
                         this.objects.get(objectId).location = room.id;
+                        console.log(`Set location of ${objectId} to ${room.id}`);
+                    } else {
+                        console.log(`Object ${objectId} in room ${room.id} not found in master object list.`);
                     }
                 }
             }
@@ -75,7 +69,7 @@ class Game {
         // 4. Post-action logic (like handling LOOK after movement)
         const currentRoom = this.rooms.get(this.player.location);
         if ((currentRoom.rbits & RBITS.RDESCBIT) !== 0) {
-            result += this.look(); // Append room description
+            result = this.look(); // Replace result with room description
             currentRoom.rbits &= ~RBITS.RDESCBIT; // Clear the flag
         }
 
@@ -88,7 +82,9 @@ class Game {
 
         // First, check player's inventory
         let obj = Array.from(this.objects.values()).find(o => o.id === objectId && o.location === 'IN_INVENTORY');
-        if (obj) return obj;
+        if (obj) {
+            return obj;
+        }
 
         // Then, check the player's current location
         obj = Array.from(this.objects.values()).find(o => o.id === objectId && o.location === this.player.location);
@@ -111,7 +107,7 @@ class Game {
 
      look() {
         const room = this.rooms.get(this.player.location);
-        let description = `${room.name}\n${room.description}`;
+        let description = room.description;
 
         const objectsInRoom = Array.from(this.objects.values()).filter(
             (obj) => obj.location === room.id &&
@@ -127,7 +123,14 @@ class Game {
         });
 
         if (objectsInRoom.length > 0) {
-            description += '\n' + objectsInRoom.map((obj) => obj.longDescription || obj.initialDescription).join('\n');
+            // Use initialDescription if available, otherwise description.
+            // This is a simplification of Zork's behavior.
+            const objectDescriptions = objectsInRoom.map((obj) => {
+                return obj.initialDescription || obj.description;
+            }).filter(desc => desc); // Filter out empty descriptions
+            if (objectDescriptions.length > 0) {
+                 description += '\n' + objectDescriptions.join('\n');
+            }
         }
         return description;
     }
