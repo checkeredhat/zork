@@ -15,10 +15,9 @@ const RBITS = {
     RART: 1 << 12,     // Room contains an artifact
     RCLIMB: 1 << 13,   // Room can be climbed
     RDIR: 1 << 14,     // Directional room
-    NONLAND: 1 << 15,  // Not on land (This appears to be inverted in JS based on MDL RLANDBIT)
-    RLAND: 1 << 16,    // Room is on land (MDL RLANDBIT, inverse of NONLAND in JS)
-    RHOUSE: 1 << 17,   // Room is part of the house (MDL RHOUSEBIT)
-    RDESCBIT: 1 << 18  // Force room description (internal VM flag)
+    RLAND: 1 << 15,    // Room is on land (MDL RLANDBIT)
+    RHOUSE: 1 << 16,   // Room is part of the house (MDL RHOUSEBIT)
+    RDESCBIT: 1 << 17  // Force room description (internal VM flag)
 };
 
 // OFLAGS: Object flags (Expanded based on MDL sources)
@@ -47,7 +46,9 @@ const OFLAGS = {
     INVISIBLE: 1 << 21,    // Object is invisible
     DISARMEDBIT: 1 << 22,  // Object is disarmed (e.g., a trap)
     NOTDESCBIT: 1 << 23,   // Object is not described separately (MDL NDESCBIT)
-    TRYTAKEBIT: 1 << 24    // Attempt to take object (MDL TRYTAKEBIT)
+    TRYTAKEBIT: 1 << 24,   // Attempt to take object (MDL TRYTAKEBIT)
+    FLAMEBIT: 1 << 25,     // Object is on fire
+    ACTORBIT: 1 << 26      // Object is an actor (e.g. robot)
 };
 
 

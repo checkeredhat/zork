@@ -431,7 +431,8 @@
             "GRAT2"
         ],
         "flags": 0,
-        "properties": []
+        "properties": [],
+        "roomAction": "MAZE-11"
     },
     "MAZ12": {
         "id": "MAZ12",
@@ -1333,7 +1334,8 @@
             "IRBOX"
         ],
         "flags": 0,
-        "properties": []
+        "properties": [],
+        "roomAction": "CAROUSEL-ROOM"
     },
     "PASS5": {
         "id": "PASS5",
@@ -2190,7 +2192,8 @@
             "TRBUT"
         ],
         "flags": 0,
-        "properties": []
+        "properties": [],
+        "roomAction": "CMACH-ROOM"
     },
     "CAGER": {
         "id": "CAGER",
@@ -2302,6 +2305,17 @@
             "POOL",
             "SAFFR"
         ],
+        "flags": 0,
+        "properties": []
+    },
+    "SECRE": {
+        "id": "SECRE",
+        "shortDesc": "Secret Room",
+        "longDesc": "This is a secret room! You found it!",
+        "exits": {
+            "WEST": "CMACH"
+        },
+        "objects": [],
         "flags": 0,
         "properties": []
     }

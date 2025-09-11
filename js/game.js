@@ -12,6 +12,7 @@ class Game {
         this.vocabulary = data.vocabulary;
         this.deathMessages = data.deathMessages;
         this.globalFlags = new Map();
+        this.stars = ['TROLL', 'CYCLO', 'THIEF']; // Important objects
 
         this.initObjectLocations();
     }
@@ -57,6 +58,10 @@ class Game {
         const dobj = action.dobj ? this.findObject(action.dobj) : null;
         const iobj = action.iobj ? this.findObject(action.iobj) : null;
 
+        if (dobj === 'AMBIGUOUS' || iobj === 'AMBIGUOUS') {
+            return `Which ${action.dobj || action.iobj} do you mean?`;
+        }
+
         // 3. Apply the action
         let result = '';
         if (action.verb) {
@@ -80,25 +85,40 @@ class Game {
     findObject(objectId) {
         if (!objectId) return null;
 
-        // First, check player's inventory
-        let obj = Array.from(this.objects.values()).find(o => o.id === objectId && o.location === 'IN_INVENTORY');
-        if (obj) {
-            return obj;
-        }
+        const foundObjects = [];
 
-        // Then, check the player's current location
-        obj = Array.from(this.objects.values()).find(o => o.id === objectId && o.location === this.player.location);
-        if (obj) return obj;
+        // Search order: STARS, inventory, room, open containers in room
+        const searchAreas = [
+            this.stars.map(id => this.objects.get(id)),
+            Array.from(this.objects.values()).filter(o => o.location === 'IN_INVENTORY'),
+            Array.from(this.objects.values()).filter(o => o.location === this.player.location),
+        ];
 
-        // Finally, check for objects inside OPEN containers in the current room
+        // Add objects from open containers in the room
         const containersInRoom = Array.from(this.objects.values()).filter(o =>
             o.location === this.player.location &&
             hasFlag(o.oflags, OFLAGS.CONTBIT) &&
             hasFlag(o.oflags, OFLAGS.OPENBIT) // Container must be open
         );
         for (const container of containersInRoom) {
-             obj = Array.from(this.objects.values()).find(o => o.id === objectId && o.location === container.id);
-             if (obj) return obj;
+            searchAreas.push(Array.from(this.objects.values()).filter(o => o.location === container.id));
+        }
+
+
+        for (const area of searchAreas) {
+            const matchingObjects = area.filter(o => o && o.id === objectId);
+            foundObjects.push(...matchingObjects);
+        }
+
+        if (foundObjects.length === 1) {
+            return foundObjects[0];
+        } else if (foundObjects.length > 1) {
+            // If we find the same object multiple times (e.g. in STARS and in room), it's not ambiguous.
+            const uniqueObjects = [...new Set(foundObjects)];
+            if (uniqueObjects.length === 1) {
+                return uniqueObjects[0];
+            }
+            return 'AMBIGUOUS';
         }
 
         // If the object is not in scope, it cannot be found.

@@ -11,6 +11,27 @@
         "synonyms": [],
         "adjectives": []
     },
+    "NEST": {
+        "id": "NEST",
+        "name": "nest",
+        "description": "A jewel-encrusted bird's nest is here.",
+        "initialDescription": "",
+        "flags": 17,
+        "properties": {},
+        "synonyms": [],
+        "adjectives": [],
+        "contents": ["EGG"]
+    },
+    "EGG": {
+        "id": "EGG",
+        "name": "egg",
+        "description": "A beautiful blue egg is here.",
+        "initialDescription": "",
+        "flags": 1,
+        "properties": {},
+        "synonyms": [],
+        "adjectives": ["blue"]
+    },
     "SBAG": {
         "id": "SBAG",
         "name": "sandwich bag",
@@ -464,10 +485,8 @@
         "name": "trunk with jewels",
         "description": "There is an old trunk here, bulging with assorted jewels.",
         "initialDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
-        "flags": 0,
-        "properties": {
-            "function": "TAKEBIT"
-        },
+        "flags": 17,
+        "properties": {},
         "synonyms": [],
         "adjectives": []
     },
@@ -944,7 +963,7 @@
         "name": "wire coil",
         "description": "There is a coil of thin shiny wire here.",
         "initialDescription": "",
-        "flags": 16417,
+        "flags": 33,
         "properties": {
             "function": "FUSE-FUNCTION"
         },
@@ -958,7 +977,7 @@
         "initialDescription": "",
         "flags": 81920,
         "properties": {
-            "function": "BIGFIX"
+            "function": "GNOME-FUNCTION"
         },
         "synonyms": [],
         "adjectives": []
@@ -1222,7 +1241,7 @@
         "name": "robot",
         "description": "There is a robot here.",
         "initialDescription": "",
-        "flags": 536953088,
+        "flags": 604061952,
         "properties": {
             "function": "ROBOT-FUNCTION"
         },

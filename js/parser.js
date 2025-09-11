@@ -63,6 +63,7 @@ function parseCommand(command, vocabulary) {
         verb: verb.id,
         dobj: dobj ? dobj.id : null,
         iobj: iobj ? iobj.id : null,
+        command: iobjString, // The rest of the command for TELL
         error: !dobj && dobjString ? `I can't see a "${dobjString.trim()}" here.` : null
     };
 }

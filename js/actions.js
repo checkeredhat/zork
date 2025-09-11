@@ -52,6 +52,9 @@ const actionHandlers = {
             game.player.location = exit;
             const targetRoom = game.rooms.get(exit);
             targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
+            if (targetRoom.roomAction) {
+                executeRoomAction(targetRoom.roomAction, game, targetRoom);
+            }
             return '';
         }
 
@@ -62,7 +65,10 @@ const actionHandlers = {
                 const targetRoom = game.rooms.get(exit.destination);
                 targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
                 if (exit.action) {
-                    executeRoomAction(exit.action, game);
+                    executeRoomAction(exit.action, game, targetRoom);
+                }
+                if (targetRoom.roomAction) {
+                    executeRoomAction(targetRoom.roomAction, game, targetRoom);
                 }
                 return '';
             } else {
@@ -242,6 +248,102 @@ const actionHandlers = {
         }
 
         return "You can't unlock that.";
+    },
+
+    PLUG: (dobj, iobj, game) => {
+        // Simplified version of the MDL LEAK-FUNCTION.
+        // The original also stopped a clock.
+        if (dobj.id === 'LEAK' && iobj.id === 'PUTTY') {
+            game.globalFlags.set('LEAK-FIXED', true);
+            return "By some miracle of elven technology, you have managed to stop the leak in the dam.";
+        }
+        return "You can't plug that.";
+    },
+
+    RUB: (dobj, iobj, game) => {
+        // The MDL implementation of RUB swaps the contents of the two mirror rooms.
+        // This is a complex puzzle that is not fully implemented here.
+        if (dobj.id === 'LAMP') {
+            return "Rubbing the brass lantern has no effect.";
+        }
+        return "You can't rub that.";
+    },
+
+    BURN: (dobj, iobj, game) => {
+        if (!dobj) return "Burn what?";
+        if (!iobj) return "Burn it with what?";
+
+        if (!hasFlag(dobj.oflags, OFLAGS.BURNBIT)) {
+            return "You can't burn that.";
+        }
+        if (!hasFlag(iobj.oflags, OFLAGS.FLAMEBIT)) {
+            return "You can't burn it with that.";
+        }
+
+        if (dobj.location === 'IN_INVENTORY') {
+            return `The ${dobj.name} catches fire. Unfortunately, you were holding it at the time.`;
+        }
+
+        if (dobj.id === 'FUSE') {
+            dobj.location = 'NOWHERE'; // The fuse is burned up
+            return "The fuse burns brightly and is gone.";
+        }
+
+        dobj.location = 'NOWHERE';
+        return `The ${dobj.name} catches fire and is consumed.`;
+    },
+
+    TELL: (dobj, iobj, game, action) => {
+        if (!dobj) return "Tell whom?";
+        if (!hasFlag(dobj.oflags, OFLAGS.ACTORBIT)) {
+            return "You can't talk to that.";
+        }
+
+        if (dobj.id === 'ROBOT') {
+            const command = action.command;
+            if (command && command.toLowerCase().includes('east')) {
+                const room = game.rooms.get(dobj.location);
+                const exit = room.exits['EAST'];
+                if (exit) {
+                    dobj.location = exit;
+                    return "The robot trundles east.";
+                } else {
+                    return "The robot can't go that way.";
+                }
+            }
+            return "The robot does not understand.";
+        }
+
+        if (dobj.id === 'GNOME') {
+            const trunk = Array.from(game.objects.values()).find(o => o.id === 'TRUNK' && o.location === 'IN_INVENTORY');
+            if(trunk) {
+                game.globalFlags.set('GNOME-PLEASED', true);
+                return "The gnome seems pleased.";
+            }
+        }
+
+        return "They don't seem to be listening.";
+    },
+
+    PUSH: (dobj, iobj, game) => {
+        if (!dobj) return "Push what?";
+
+        const machine = game.objects.get('MACHI');
+        if (!machine.machineState) {
+            machine.machineState = [];
+        }
+
+        if (dobj.id === 'SQBUT') {
+            machine.machineState.push('SQUARE');
+        } else if (dobj.id === 'RNBUT') {
+            machine.machineState.push('ROUND');
+        } else if (dobj.id === 'TRBUT') {
+            machine.machineState.push('TRIANGLE');
+        } else {
+            return "You can't push that.";
+        }
+
+        return "Click.";
     }
 };
 
@@ -282,10 +384,41 @@ actionHandlers.ENTER = (dobj, iobj, game, action) => {
     return "You can't enter that.";
 };
 
-function executeRoomAction(action, game) {
+function executeRoomAction(action, game, room) {
     switch (action) {
         case 'COFFIN-CURE':
             game.globalFlags.set('EGYPT-FLAG', false);
+            break;
+        case 'MAZE-11':
+            // Placeholder for MAZE-11 logic
+            console.log("MAZE-11 activated");
+            break;
+        case 'CAROUSEL-ROOM':
+            if (!room.carouselState) {
+                room.carouselState = 0;
+            }
+            room.carouselState = (room.carouselState + 1) % 8; // There are 8 directions
+            const exits = [
+                "NORTH", "SOUTH", "EAST", "WEST",
+                "NW", "NE", "SE", "SW"
+            ];
+            const destinations = [
+                "CAVE4", "CAVE4", "MGRAI", "PASS1",
+                "CANY1", "PASS5", "PASS4", "MAZE1"
+            ];
+            const newExits = {};
+            for (let i = 0; i < exits.length; i++) {
+                const newIndex = (i + room.carouselState) % exits.length;
+                newExits[exits[i]] = destinations[newIndex];
+            }
+            room.exits = newExits;
+            break;
+        case 'CMACH-ROOM':
+            const machine = game.objects.get('MACHI');
+            if (machine.machineState && machine.machineState.join(',') === 'SQUARE,ROUND,TRIANGLE') {
+                room.exits['EAST'] = 'SECRE';
+                console.log("Secret door revealed!");
+            }
             break;
         default:
             break;
@@ -308,6 +441,11 @@ function evaluateCondition(condition, game) {
         case 'GRATING-UNLOCKED': // This is a made-up flag for now
             const grating = game.objects.get('GRAT2');
             return grating && !hasFlag(grating.oflags, OFLAGS.LOCKBIT);
+        case 'GNOME-FUNCTION':
+            const gnome = game.objects.get('GNOME');
+            // The gnome blocks the way unless he is pleased.
+            // This is a placeholder for the real logic.
+            return game.globalFlags.get('GNOME-PLEASED');
     }
 
     // Check for global flags
