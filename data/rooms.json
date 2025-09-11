@@ -1,380 +1,286 @@
 {
-    "WEST-OF-HOUSE": {
-        "id": "WEST-OF-HOUSE",
-        "name": "West of House",
-        "description": "You are in an open field west of a big white house, with a boarded front door.",
+    "PASS1": {
+        "id": "PASS1",
+        "shortDesc": "East-West Passage",
+        "longDesc": "You are in a narrow east-west passageway.  There is a narrow stairway\nleading down at the north end of the room.",
         "exits": {
-            "NORTH": "NORTH-OF-HOUSE",
-            "SOUTH": "SOUTH-OF-HOUSE",
-            "EAST": "EAST-OF-HOUSE",
-            "WEST": "FOREST-1"
+            "EAST": "CAROU",
+            "WEST": "MTROL",
+            "DOWN": "RAVI1",
+            "NORTH": "RAVI1"
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        },
-        "objects": [
-            "MAILBOX",
-            "ADVER",
-            "MAT",
-            "FRONT-DOOR"
-        ]
+        "objects": [],
+        "properties": []
     },
-    "HOUSE-BLOCKED": {
-        "id": "HOUSE-BLOCKED",
-        "name": "West of House",
-        "description": "The door is boarded and you can't remove the boards."
-    },
-    "NORTH-OF-HOUSE": {
-        "id": "NORTH-OF-HOUSE",
-        "name": "North of House",
-        "description": "You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.",
+    "WHOUS": {
+        "id": "WHOUS",
+        "shortDesc": "West of House",
+        "longDesc": "You are in an open field west of a big white house, with a boarded\nfront door.",
         "exits": {
-            "WEST": "WEST-OF-HOUSE",
-            "EAST": "EAST-OF-HOUSE",
-            "NORTH": "PATH"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        },
-        "objects": [
-            "HOUSE"
-        ]
-    },
-    "EAST-OF-HOUSE": {
-        "id": "EAST-OF-HOUSE",
-        "name": "Behind House",
-        "description": "You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.",
-        "exits": {
-            "NORTH": "NORTH-OF-HOUSE",
-            "SOUTH": "SOUTH-OF-HOUSE",
-            "EAST": "CLEARING-BEHIND-HOUSE"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        },
-        "objects": [
-            "WINDOW"
-        ]
-    },
-    "SOUTH-OF-HOUSE": {
-        "id": "SOUTH-OF-HOUSE",
-        "name": "South of House",
-        "description": "You are on the south side of a white house. There is no door here, and all the windows are boarded.",
-        "exits": {
-            "WEST": "WEST-OF-HOUSE",
-            "EAST": "EAST-OF-HOUSE"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
-    },
-    "FOREST-1": {
-        "id": "FOREST-1",
-        "name": "Forest",
-        "description": "This is a forest, with trees in all directions. To the east, there is a large tree with some low branches. To the west, the forest continues.",
-        "exits": {
-            "EAST": "WEST-OF-HOUSE",
-            "WEST": "FOREST-2",
-            "UP": "UP-A-TREE"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
-    },
-    "UP-A-TREE": {
-        "id": "UP-A-TREE",
-        "name": "Up a Tree",
-        "description": "You are about 10 feet up in a big tree. You can see a nest with a large egg in it. The egg is covered with fine gold inlay. You can also see the roof of the house.",
-        "exits": {
-            "DOWN": "FOREST-1"
-        },
-        "flags": {
-            "isOnLand": false,
-            "isLit": true
-        },
-        "objects": [
-            "EGG",
-            "NEST"
-        ]
-    },
-    "FOREST-2": {
-        "id": "FOREST-2",
-        "name": "Forest",
-        "description": "This is a dimly lit forest, with trees all around. To the east, the forest appears to become clearer.",
-        "exits": {
-            "EAST": "FOREST-1",
-            "WEST": "FOREST-3"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
-    },
-    "FOREST-3": {
-        "id": "FOREST-3",
-        "name": "Forest",
-        "description": "This is a forest, with trees in all directions. There is a clearing to the west.",
-        "exits": {
-            "EAST": "FOREST-2",
-            "WEST": "CLEARING"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
-    },
-    "CLEARING": {
-        "id": "CLEARING",
-        "name": "Clearing",
-        "description": "You are in a small clearing in a forest. Piles of leaves can be seen here. There is a large grating, securely bolted to the ground, to the west.",
-        "exits": {
-            "EAST": "FOREST-3"
-        },
-        "conditionalExits": {
-            "WEST": {
-                "target": "MGRAT",
-                "conditionFlag": "KEY-FLAG",
-                "conditionValue": "CLEAR",
-                "message": "The grating is locked"
+            "NORTH": "NHOUS",
+            "SOUTH": "SHOUS",
+            "WEST": "FORE1",
+            "EAST": {
+                "blocked": "The door is locked, and there is evidently no key."
             }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        },
         "objects": [
-            "LEAVES",
-            "GRAT2"
+            "FDOOR",
+            "MAILB"
+        ],
+        "properties": [
+            "LIT"
         ]
     },
-    "PATH": {
-        "id": "PATH",
-        "name": "Path",
-        "description": "This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.",
+    "NHOUS": {
+        "id": "NHOUS",
+        "shortDesc": "North of House",
+        "longDesc": "You are facing the north side of a white house.  There is no door here,\nand all the windows are barred.",
         "exits": {
-            "SOUTH": "NORTH-OF-HOUSE"
+            "WEST": "WHOUS",
+            "EAST": "EHOUS",
+            "NORTH": "FORE3",
+            "SOUTH": {
+                "blocked": "The windows are all barred."
+            }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
     },
-    "CLEARING-BEHIND-HOUSE": {
-        "id": "CLEARING-BEHIND-HOUSE",
-        "name": "Clearing",
-        "description": "You are in a clearing, with a forest surrounding you on all sides. A path leads south.",
+    "SHOUS": {
+        "id": "SHOUS",
+        "shortDesc": "South of House",
+        "longDesc": "You are facing the south side of a white house. There is no door here,\nand all the windows are barred.",
         "exits": {
-            "WEST": "EAST-OF-HOUSE"
+            "WEST": "WHOUS",
+            "EAST": "EHOUS",
+            "SOUTH": "FORE2",
+            "NORTH": {
+                "blocked": "The windows are all barred."
+            }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
     },
-    "KITCHEN": {
-        "id": "KITCHEN",
-        "name": "Kitchen",
-        "description": "You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.",
+    "EHOUS": {
+        "id": "EHOUS",
+        "shortDesc": "Behind House",
+        "longDesc": "",
         "exits": {
-            "WEST": "LIVING-ROOM",
-            "UP": "ATTIC",
-            "DOWN": "CHIMNEY"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
+            "NORTH": "NHOUS",
+            "SOUTH": "SHOUS",
+            "EAST": "CLEAR",
+            "WEST": {
+                "condition": "\"KITCHEN-WINDOW\"",
+                "destination": "KITCH",
+                "message": "You can't go that way."
+            },
+            "ENTER": {
+                "condition": "\"KITCHEN-WINDOW\"",
+                "destination": "KITCH",
+                "message": "You can't go that way."
+            }
         },
         "objects": [
-            "BOTTLE",
-            "SACK"
+            "WIND1"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "KITCH": {
+        "id": "KITCH",
+        "shortDesc": "Kitchen",
+        "longDesc": "",
+        "exits": {
+            "EAST": {
+                "condition": "\"KITCHEN-WINDOW\"",
+                "destination": "EHOUS",
+                "message": "You can't go that way."
+            },
+            "WEST": "LROOM",
+            "EXIT": {
+                "condition": "\"KITCHEN-WINDOW\"",
+                "destination": "EHOUS",
+                "message": "You can't go that way."
+            },
+            "UP": "ATTIC",
+            "DOWN": {
+                "blocked": "Only Santa Claus climbs down chimneys."
+            }
+        },
+        "objects": [
+            "WIND2",
+            "SBAG",
+            "BOTTL"
+        ],
+        "properties": [
+            "LIT"
         ]
     },
     "ATTIC": {
         "id": "ATTIC",
-        "name": "Attic",
-        "description": "You are in the attic. There is a large coil of rope here.",
+        "shortDesc": "Attic",
+        "longDesc": "You are in the attic.  The only exit is stairs that lead down.",
         "exits": {
-            "DOWN": "KITCHEN"
-        },
-        "flags": {
-            "isLit": true
+            "DOWN": "KITCH"
         },
         "objects": [
-            "ROPE"
-        ]
+            "BRICK",
+            "ROPE",
+            "KNIFE"
+        ],
+        "properties": []
     },
-    "LIVING-ROOM": {
-        "id": "LIVING-ROOM",
-        "name": "Living Room",
-        "description": "You are in the living room. There is a doorway to the east. To the west is a wooden door with strange gothic lettering, which is closed. A dark staircase leads up and down. There is a trophy case here.",
+    "LROOM": {
+        "id": "LROOM",
+        "shortDesc": "Living Room",
+        "longDesc": "",
         "exits": {
-            "EAST": "KITCHEN",
-            "UP": "UP-STAIRS",
-            "DOWN": "CELLAR"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
+            "EAST": "KITCH",
+            "WEST": {
+                "condition": "\"MAGIC-FLAG\"",
+                "destination": "BLROO",
+                "message": "The door is nailed shut."
+            },
+            "DOWN": {
+                "condition": "\"TRAP-DOOR\"",
+                "destination": "CELLA",
+                "message": "You can't go that way."
+            }
         },
         "objects": [
-            "TROPHY-CASE",
-            "LANTERN",
+            "WDOOR",
+            "DOOR",
+            "TCASE",
+            "LAMP",
             "RUG",
+            "PAPER",
             "SWORD"
+        ],
+        "properties": [
+            "LIT"
         ]
     },
-    "CELLAR": {
-        "id": "CELLAR",
-        "name": "Cellar",
-        "description": "You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.",
+    "CELLA": {
+        "id": "CELLA",
+        "shortDesc": "Cellar",
+        "longDesc": "",
         "exits": {
-            "UP": "LIVING-ROOM",
-            "NORTH": "TROLL-ROOM"
+            "EAST": "MTROL",
+            "SOUTH": "CHAS2",
+            "UP": {
+                "condition": "\"TRAP-DOOR\"",
+                "destination": "LROOM",
+                "message": "The trap door has been barred from the other side."
+            },
+            "WEST": {
+                "blocked": "You try to ascend the ramp, but it is impossible, and you slide back down."
+            }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": false
-        }
+        "objects": [
+            "TDOOR"
+        ],
+        "properties": []
     },
-    "TROLL-ROOM": {
-        "id": "TROLL-ROOM",
-        "name": "The Troll Room",
-        "description": "This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mark the walls.",
+    "MTROL": {
+        "id": "MTROL",
+        "shortDesc": "The Troll Room",
+        "longDesc": "You are in a small room with passages off in all directions. \nBloodstains and deep scratches (perhaps made by an axe) mar the\nwalls.",
         "exits": {
-            "SOUTH": "CELLAR",
-            "EAST": "EAST-OF-CHASM",
-            "WEST": "CHASM-ROOM"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true,
-            "isMunged": false
+            "WEST": "CELLA",
+            "EAST": {
+                "condition": "\"TROLL-FLAG\"",
+                "destination": "CRAW4",
+                "message": "You can't go that way."
+            },
+            "NORTH": {
+                "condition": "\"TROLL-FLAG\"",
+                "destination": "PASS1",
+                "message": "You can't go that way."
+            },
+            "SOUTH": {
+                "condition": "\"TROLL-FLAG\"",
+                "destination": "MAZE1",
+                "message": "You can't go that way."
+            }
         },
         "objects": [
             "TROLL"
-        ]
-    },
-    "CHASM-ROOM": {
-        "id": "CHASM-ROOM",
-        "name": "Chasm",
-        "description": "A chasm extends to the east and west. A narrow ledge of rock runs along the southern wall of the chasm. You can hear the sound of rapidly flowing water from below.",
-        "exits": {
-            "EAST": "TROLL-ROOM"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
-    },
-    "EAST-OF-CHASM": {
-        "id": "EAST-OF-CHASM",
-        "name": "East of Chasm",
-        "description": "You are on the east edge of a chasm, the bottom of which is filled with water. A narrow passage goes north, and the path you are on continues to the west.",
-        "exits": {
-            "WEST": "TROLL-ROOM"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
+        ],
+        "properties": []
     },
     "MAZE1": {
         "id": "MAZE1",
-        "name": "Maze",
-        "description": "You are in a maze.",
-        "longDescription": "You are in a maze.",
+        "shortDesc": "",
+        "longDesc": "",
         "exits": {
             "WEST": "MTROL",
             "NORTH": "MAZE1",
             "SOUTH": "MAZE2",
             "EAST": "MAZE4"
         },
-        "flags": {
-            "isMaze": true,
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": []
     },
     "MAZE2": {
         "id": "MAZE2",
-        "name": "Maze",
-        "description": "You are in a maze.",
-        "longDescription": "You are in a maze.",
+        "shortDesc": "",
+        "longDesc": "",
         "exits": {
             "SOUTH": "MAZE1",
             "NORTH": "MAZE4",
             "EAST": "MAZE3"
         },
-        "flags": {
-            "isMaze": true,
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": []
     },
     "MAZE3": {
         "id": "MAZE3",
-        "name": "Maze",
-        "description": "You are in a maze.",
-        "longDescription": "You are in a maze.",
+        "shortDesc": "",
+        "longDesc": "",
         "exits": {
             "WEST": "MAZE2",
             "NORTH": "MAZE4",
             "UP": "MAZE5"
         },
-        "flags": {
-            "isMaze": true,
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": []
     },
     "MAZE4": {
         "id": "MAZE4",
-        "name": "Maze",
-        "description": "You are in a maze.",
-        "longDescription": "You are in a maze.",
+        "shortDesc": "",
+        "longDesc": "",
         "exits": {
             "WEST": "MAZE3",
             "NORTH": "MAZE1",
             "EAST": "DEAD1"
         },
-        "flags": {
-            "isMaze": true,
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": []
     },
     "DEAD1": {
         "id": "DEAD1",
-        "name": "Dead End",
-        "description": "You are in a dead end.",
-        "longDescription": "You are in a dead end.",
+        "shortDesc": "",
+        "longDesc": "",
         "exits": {
             "SOUTH": "MAZE4"
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": []
     },
     "MAZE5": {
         "id": "MAZE5",
-        "name": "Maze",
-        "description": "You are in a maze.",
-        "longDescription": "You are in a maze.",
+        "shortDesc": "",
+        "longDesc": "",
         "exits": {
             "EAST": "DEAD2",
             "NORTH": "MAZE3",
             "SW": "MAZE6"
-        },
-        "flags": {
-            "isMaze": true,
-            "isOnLand": true,
-            "isLit": true
         },
         "objects": [
             "BONES",
@@ -382,245 +288,1877 @@
             "KEYS",
             "BLANT",
             "RKNIF"
-        ]
+        ],
+        "properties": []
     },
     "DEAD2": {
         "id": "DEAD2",
-        "name": "Dead End",
-        "description": "You are in a dead end.",
-        "longDescription": "You are in a dead end.",
+        "shortDesc": "",
+        "longDesc": "",
         "exits": {
             "WEST": "MAZE5"
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": []
     },
     "MAZE6": {
         "id": "MAZE6",
-        "name": "Maze",
-        "description": "You are in a maze.",
-        "longDescription": "You are in a maze.",
+        "shortDesc": "",
+        "longDesc": "",
         "exits": {
             "DOWN": "MAZE5",
             "EAST": "MAZE7",
             "WEST": "MAZE6",
             "UP": "MAZE9"
         },
-        "flags": {
-            "isMaze": true,
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [],
+        "properties": []
+    },
+    "MAZE7": {
+        "id": "MAZE7",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "UP": "MAZ14",
+            "WEST": "MAZE6",
+            "NE": "DEAD1",
+            "EAST": "MAZE8",
+            "SOUTH": "MAZ15"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MAZE8": {
+        "id": "MAZE8",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NE": "MAZE7",
+            "WEST": "MAZE8",
+            "SE": "DEAD3"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "DEAD3": {
+        "id": "DEAD3",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "MAZE8"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MAZE9": {
+        "id": "MAZE9",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "MAZE6",
+            "EAST": "MAZ11",
+            "DOWN": "MAZ10",
+            "SOUTH": "MAZ13",
+            "WEST": "MAZ12",
+            "NW": "MAZE9"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MAZ10": {
+        "id": "MAZ10",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "EAST": "MAZE9",
+            "WEST": "MAZ13",
+            "UP": "MAZ11"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MAZ11": {
+        "id": "MAZ11",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NE": "MGRAT",
+            "DOWN": "MAZ10",
+            "NW": "MAZ13",
+            "SW": "MAZ12"
+        },
+        "objects": [],
+        "properties": []
     },
     "MGRAT": {
         "id": "MGRAT",
-        "name": "Grating Room",
-        "description": "You are in the Grating Room.",
-        "longDescription": "Grating Room",
+        "shortDesc": "Grating Room",
+        "longDesc": "",
         "exits": {
-            "SW": "MAZ11"
-        },
-        "conditionalExits": {
+            "SW": "MAZ11",
             "UP": {
-                "target": "CLEAR",
-                "conditionFlag": "KEY-FLAG",
-                "conditionValue": "CLEAR",
+                "condition": "\"KEY-FLAG\"",
+                "destination": "CLEAR",
                 "message": "The grating is locked"
             }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        },
         "objects": [
             "GRAT2"
+        ],
+        "properties": []
+    },
+    "MAZ12": {
+        "id": "MAZ12",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "WEST": "MAZE5",
+            "SW": "MAZ11",
+            "EAST": "MAZ13",
+            "UP": "MAZE9",
+            "NORTH": "DEAD4"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "DEAD4": {
+        "id": "DEAD4",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "SOUTH": "MAZ12"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MAZ13": {
+        "id": "MAZ13",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "EAST": "MAZE9",
+            "DOWN": "MAZ12",
+            "SOUTH": "MAZ10",
+            "WEST": "MAZ11"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MAZ14": {
+        "id": "MAZ14",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "WEST": "MAZ15",
+            "NW": "MAZ14",
+            "NE": "MAZE7",
+            "SOUTH": "MAZE7"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MAZ15": {
+        "id": "MAZ15",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "WEST": "MAZ14",
+            "SOUTH": "MAZE7",
+            "NE": "CYCLO"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "FORE1": {
+        "id": "FORE1",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "FORE1",
+            "EAST": "FORE3",
+            "SOUTH": "FORE2",
+            "WEST": "FORE1"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
         ]
+    },
+    "FORE4": {
+        "id": "FORE4",
+        "shortDesc": "",
+        "longDesc": "You are in a large forest, with trees obstructing all views except\nto the east, where a small clearing may be seen through the trees.",
+        "exits": {
+            "EAST": "CLTOP",
+            "NORTH": "FORE5",
+            "SOUTH": "FORE4",
+            "WEST": "FORE2"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "FORE5": {
+        "id": "FORE5",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "FORE5",
+            "SE": "CLTOP",
+            "SOUTH": "FORE4",
+            "WEST": "FORE2"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "FORE2": {
+        "id": "FORE2",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "SHOUS",
+            "EAST": "CLEAR",
+            "SOUTH": "FORE4",
+            "WEST": "FORE1"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "FORE3": {
+        "id": "FORE3",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "FORE2",
+            "EAST": "CLEAR",
+            "SOUTH": "CLEAR",
+            "WEST": "NHOUS"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "CLEAR": {
+        "id": "CLEAR",
+        "shortDesc": "Clearing",
+        "longDesc": "",
+        "exits": {
+            "SW": "EHOUS",
+            "SE": "FORE5",
+            "NORTH": "CLEAR",
+            "EAST": "CLEAR",
+            "WEST": "FORE3",
+            "SOUTH": "FORE2",
+            "DOWN": {
+                "condition": "\"KEY-FLAG\"",
+                "destination": "MGRAT",
+                "message": "You can't go that way."
+            }
+        },
+        "objects": [
+            "GRAT1",
+            "LEAVE"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "RAVI1": {
+        "id": "RAVI1",
+        "shortDesc": "Deep Ravine",
+        "longDesc": "You are in a deep ravine at a crossing with an east-west crawlway. \nSome stone steps are at the south of the ravine and a steep staircase\ndescends.",
+        "exits": {
+            "SOUTH": "PASS1",
+            "DOWN": "RESES",
+            "EAST": "CHAS1",
+            "WEST": "CRAW1"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CRAW1": {
+        "id": "CRAW1",
+        "shortDesc": "Rocky Crawl",
+        "longDesc": "You are in a crawlway with a three-foot high ceiling.  Your footing\nis very unsure here due to the assortment of rocks underfoot. \nPassages can be seen in the east, west, and northwest corners of the\npassage.",
+        "exits": {
+            "WEST": "RAVI1",
+            "EAST": "DOME",
+            "NW": "EGYPT"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "RESES": {
+        "id": "RESES",
+        "shortDesc": "Reservoir South",
+        "longDesc": "",
+        "exits": {
+            "SOUTH": {
+                "condition": "\"EGYPT-FLAG\"",
+                "destination": "RAVI1",
+                "message": "The coffin will not fit through this passage."
+            },
+            "WEST": "STREA",
+            "CROSS": {
+                "condition": "\"LOW-TIDE\"",
+                "destination": "RESEN",
+                "message": "You are not equipped for swimming."
+            },
+            "NORTH": {
+                "condition": "\"LOW-TIDE\"",
+                "destination": "RESEN",
+                "message": "You are not equipped for swimming."
+            },
+            "UP": {
+                "condition": "\"EGYPT-FLAG\"",
+                "destination": "CANY1",
+                "message": "The stairs are too steep for carrying the coffin."
+            }
+        },
+        "objects": [
+            "TRUNK"
+        ],
+        "properties": []
+    },
+    "RESEN": {
+        "id": "RESEN",
+        "shortDesc": "Reservoir North",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "ATLAN",
+            "CROSS": {
+                "condition": "\"LOW-TIDE\"",
+                "destination": "RESES",
+                "message": "You are not equipped for swimming."
+            },
+            "SOUTH": {
+                "condition": "\"LOW-TIDE\"",
+                "destination": "RESES",
+                "message": "You are not equipped for swimming."
+            }
+        },
+        "objects": [
+            "PUMP"
+        ],
+        "properties": []
     },
     "STREA": {
         "id": "STREA",
-        "name": "Stream",
-        "description": "You are in a stream. The stream travels to the north and the east.",
-        "longDescription": "Stream",
+        "shortDesc": "Stream",
+        "longDesc": "You are standing on a path beside a flowing stream.  The path\ntravels to the north and the east.",
         "exits": {
             "EAST": "RESES",
             "NORTH": "ICY"
         },
-        "flags": {
-            "isWater": true,
-            "isOnLand": true,
-            "isLit": true
-        },
         "objects": [
             "FUSE"
-        ]
+        ],
+        "properties": []
     },
     "EGYPT": {
         "id": "EGYPT",
-        "name": "Egyptian Room",
-        "description": "You are in a room which looks like an Egyptian tomb. There is an ascending staircase in the room as well as doors, east and south.",
-        "longDescription": "Egyptian Room",
+        "shortDesc": "Egyptian Room",
+        "longDesc": "You are in a room which looks like an Egyptian tomb.  There is an\nascending staircase in the room as well as doors, east and south.",
         "exits": {
             "UP": "ICY",
-            "SOUTH": "LEDG3"
-        },
-        "conditionalExits": {
+            "SOUTH": "LEDG3",
             "EAST": {
-                "target": "CRAW1",
-                "conditionFlag": "EGYPT-FLAG",
-                "conditionValue": "CRAW1",
+                "condition": "\"EGYPT-FLAG\"",
+                "destination": "CRAW1",
                 "message": "The passage is too narrow to accomodate coffins."
             }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        },
         "objects": [
             "COFFI"
-        ]
+        ],
+        "properties": []
     },
     "ICY": {
         "id": "ICY",
-        "name": "Glacier Room",
-        "description": "You are in the Glacier Room.",
-        "longDescription": "Glacier Room",
+        "shortDesc": "Glacier Room",
+        "longDesc": "",
         "exits": {
             "NORTH": "STREA",
-            "EAST": "EGYPT"
-        },
-        "conditionalExits": {
+            "EAST": "EGYPT",
             "WEST": {
-                "target": "RUBYR",
-                "conditionFlag": "GLACIER-FLAG",
-                "conditionValue": "RUBYR",
-                "message": "The glacier blocks the way."
+                "condition": "\"GLACIER-FLAG\"",
+                "destination": "RUBYR",
+                "message": "You can't go that way."
             }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        }
+        "objects": [
+            "ICE"
+        ],
+        "properties": []
+    },
+    "RUBYR": {
+        "id": "RUBYR",
+        "shortDesc": "Ruby Room",
+        "longDesc": "You are in a small chamber behind the remains of the Great Glacier.\nTo the south and west are small passageways.",
+        "exits": {
+            "WEST": "LAVA",
+            "SOUTH": "ICY"
+        },
+        "objects": [
+            "RUBY"
+        ],
+        "properties": []
+    },
+    "ATLAN": {
+        "id": "ATLAN",
+        "shortDesc": "Atlantis Room",
+        "longDesc": "You are in an ancient room, long buried by the Reservoir.  There are\nexits here to the southeast and upward.",
+        "exits": {
+            "SE": "RESEN",
+            "UP": "CAVE1"
+        },
+        "objects": [
+            "TRIDE"
+        ],
+        "properties": []
+    },
+    "CANY1": {
+        "id": "CANY1",
+        "shortDesc": "Deep Canyon",
+        "longDesc": "You are on the south edge of a deep canyon.  Passages lead off\nto the east, south, and northwest.  You can hear the sound of\nflowing water below.",
+        "exits": {
+            "NW": "RESES",
+            "EAST": "DAM",
+            "SOUTH": "CAROU"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "ECHO": {
+        "id": "ECHO",
+        "shortDesc": "Loud Room",
+        "longDesc": "You are in a large room with a ceiling which cannot be detected from\nthe ground. There is a narrow passage from east to west and a stone\nstairway leading upward.  The room is extremely noisy.  In fact, it is\ndifficult to hear yourself think.",
+        "exits": {
+            "EAST": "CHAS3",
+            "WEST": "PASS5",
+            "UP": "CAVE3"
+        },
+        "objects": [
+            "BAR"
+        ],
+        "properties": []
+    },
+    "MIRR1": {
+        "id": "MIRR1",
+        "shortDesc": "Mirror Room",
+        "longDesc": "",
+        "exits": {
+            "WEST": "PASS3",
+            "NORTH": "CRAW2",
+            "EAST": "CAVE1"
+        },
+        "objects": [
+            "REFL1"
+        ],
+        "properties": []
+    },
+    "MIRR2": {
+        "id": "MIRR2",
+        "shortDesc": "Mirror Room",
+        "longDesc": "",
+        "exits": {
+            "WEST": "PASS4",
+            "NORTH": "CRAW3",
+            "EAST": "CAVE2"
+        },
+        "objects": [
+            "REFL2"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "CAVE1": {
+        "id": "CAVE1",
+        "shortDesc": "Cave",
+        "longDesc": "You are in a small cave with an entrance to the north and a stairway\nleading down.",
+        "exits": {
+            "NORTH": "MIRR1",
+            "DOWN": "ATLAN"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CAVE2": {
+        "id": "CAVE2",
+        "shortDesc": "Cave",
+        "longDesc": "You are in a tiny cave with entrances west and north, and a dark,\nforbidding staircase leading down.",
+        "exits": {
+            "NORTH": "CRAW3",
+            "WEST": "MIRR2",
+            "DOWN": "LLD1"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CRAW2": {
+        "id": "CRAW2",
+        "shortDesc": "Steep Crawlway",
+        "longDesc": "You are in a steep and narrow crawlway.  There are two exits nearby to\nthe south and southwest.",
+        "exits": {
+            "SOUTH": "MIRR1",
+            "SW": "PASS3"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CRAW3": {
+        "id": "CRAW3",
+        "shortDesc": "Narrow Crawlway",
+        "longDesc": "You are in a narrow crawlway.  The crawlway leads from north to south.\nHowever the south passage divides to the south and southwest.",
+        "exits": {
+            "SOUTH": "CAVE2",
+            "SW": "MIRR2",
+            "NORTH": "MGRAI"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "PASS3": {
+        "id": "PASS3",
+        "shortDesc": "Cold Passage",
+        "longDesc": "You are in a cold and damp corridor where a long east-west passageway\nintersects with a northward path.",
+        "exits": {
+            "EAST": "MIRR1",
+            "WEST": "SLIDE",
+            "NORTH": "CRAW2"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "PASS4": {
+        "id": "PASS4",
+        "shortDesc": "Winding Passage",
+        "longDesc": "You are in a winding passage.  It seems that there is only an exit\non the east end although the whirring from the round room can be\nheard faintly to the north.",
+        "exits": {
+            "EAST": "MIRR2",
+            "NORTH": {
+                "blocked": "You hear the whir of the carousel room but can find no entrance."
+            }
+        },
+        "objects": [],
+        "properties": []
+    },
+    "SLIDE": {
+        "id": "SLIDE",
+        "shortDesc": "Slide Room",
+        "longDesc": "You are in a small chamber, which appears to have been part of a\ncoal mine. On the south wall of the chamber the letters \\Granite\nWall\\ are etched in the rock. To the east is a long passage and\nthere is a steep metal slide twisting downward. From the appearance\nof the slide, an attempt to climb up it would be impossible.  To the\nnorth is a small opening.",
+        "exits": {
+            "EAST": "PASS3",
+            "DOWN": "CELLA",
+            "NORTH": "ENTRA"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "ENTRA": {
+        "id": "ENTRA",
+        "shortDesc": "Mine Entrance",
+        "longDesc": "You are standing at the entrance of what might have been a coal\nmine. To the northeast and the northwest are entrances to the mine,\nand there is another exit on the south end of the room.",
+        "exits": {
+            "SOUTH": "SLIDE",
+            "NW": "SQUEE",
+            "NE": "TSHAF"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "SQUEE": {
+        "id": "SQUEE",
+        "shortDesc": "Squeaky Room",
+        "longDesc": "You are a small room.  Strange squeaky sounds may be heard coming from\nthe passage at the west end.  You may also escape to the south.",
+        "exits": {
+            "WEST": "BATS",
+            "SOUTH": "ENTRA"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "TSHAF": {
+        "id": "TSHAF",
+        "shortDesc": "Shaft Room",
+        "longDesc": "You are in a large room, in the middle of which is a small shaft\ndescending through the floor into darkness below.  To the west and\nthe north are exits from this room.  Constructed over the top of the\nshaft is a metal framework to which a heavy iron chain is attached.",
+        "exits": {
+            "DOWN": {
+                "blocked": "You wouldn't fit and would die if you could."
+            },
+            "WEST": "ENTRA",
+            "NORTH": "TUNNE"
+        },
+        "objects": [
+            "TBASK"
+        ],
+        "properties": []
+    },
+    "TUNNE": {
+        "id": "TUNNE",
+        "shortDesc": "Wooden Tunnel",
+        "longDesc": "You are in a narrow tunnel with large wooden beams running across\nthe ceiling and around the walls.  A path from the south splits into\npaths running west and northeast.",
+        "exits": {
+            "SOUTH": "TSHAF",
+            "WEST": "SMELL",
+            "NE": "MINE1"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "SMELL": {
+        "id": "SMELL",
+        "shortDesc": "Smelly Room",
+        "longDesc": "You are in a small non-descript room.  However, from the direction\nof a small descending staircase a foul odor can be detected.  To the\neast is a narrow path.",
+        "exits": {
+            "DOWN": "BOOM",
+            "EAST": "TUNNE"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "BOOM": {
+        "id": "BOOM",
+        "shortDesc": "Gas Room",
+        "longDesc": "You are in a small room which smells strongly of coal gas.",
+        "exits": {
+            "UP": "SMELL"
+        },
+        "objects": [
+            "BRACE"
+        ],
+        "properties": []
+    },
+    "TLADD": {
+        "id": "TLADD",
+        "shortDesc": "Ladder Top",
+        "longDesc": "You are in a very small room.  In the corner is a rickety wooden\nladder, leading downward.  It might be safe to descend.  There is\nalso a staircase leading upward.",
+        "exits": {
+            "DOWN": "BLADD",
+            "UP": "MINE7"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MINE1": {
+        "id": "MINE1",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "MINE4",
+            "SW": "MINE2",
+            "EAST": "TUNNE"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MINE2": {
+        "id": "MINE2",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "SOUTH": "MINE1",
+            "WEST": "MINE5",
+            "UP": "MINE3",
+            "NE": "MINE4"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MINE3": {
+        "id": "MINE3",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "WEST": "MINE2",
+            "NE": "MINE5",
+            "EAST": "MINE5"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MINE4": {
+        "id": "MINE4",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "UP": "MINE5",
+            "NE": "MINE6",
+            "SOUTH": "MINE1",
+            "WEST": "MINE2"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MINE5": {
+        "id": "MINE5",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "DOWN": "MINE6",
+            "NORTH": "MINE7",
+            "WEST": "MINE2",
+            "SOUTH": "MINE3",
+            "UP": "MINE3",
+            "EAST": "MINE4"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MINE6": {
+        "id": "MINE6",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "SE": "MINE4",
+            "UP": "MINE5",
+            "NW": "MINE7"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "MINE7": {
+        "id": "MINE7",
+        "shortDesc": "",
+        "longDesc": "",
+        "exits": {
+            "EAST": "MINE1",
+            "WEST": "MINE5",
+            "DOWN": "TLADD",
+            "SOUTH": "MINE6"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "BLADD": {
+        "id": "BLADD",
+        "shortDesc": "Ladder Bottom",
+        "longDesc": "You are in a rather wide room.  On one side is the bottom of a\nnarrow wooden ladder.  To the northeast and the south are passages\nleaving the room.",
+        "exits": {
+            "NE": "DEAD7",
+            "SOUTH": "TIMBE",
+            "UP": "TLADD"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "DEAD7": {
+        "id": "DEAD7",
+        "shortDesc": "Dead End",
+        "longDesc": "Dead End",
+        "exits": {
+            "SOUTH": "BLADD"
+        },
+        "objects": [
+            "COAL"
+        ],
+        "properties": []
+    },
+    "TIMBE": {
+        "id": "TIMBE",
+        "shortDesc": "Timber Room",
+        "longDesc": "You are in a long and narrow passage, which is cluttered with broken\ntimbers.  A wide passage comes from the north and turns at the \nsouthwest corner of the room into a very narrow passageway.",
+        "exits": {
+            "NORTH": "BLADD",
+            "SW": {
+                "condition": "\"EMPTY-HANDED\"",
+                "destination": "BSHAF",
+                "message": "You can't go that way."
+            }
+        },
+        "objects": [],
+        "properties": []
+    },
+    "BSHAF": {
+        "id": "BSHAF",
+        "shortDesc": "Lower Shaft",
+        "longDesc": "You are in a small square room which is at the bottom of a long\nshaft. To the east is a passageway and to the northeast a very narrow\npassage. In the shaft can be seen a heavy iron chain.",
+        "exits": {
+            "EAST": "MACHI",
+            "OUT": {
+                "condition": "\"EMPTY-HANDED\"",
+                "destination": "TIMBE",
+                "message": "You can't go that way."
+            },
+            "NE": {
+                "condition": "\"EMPTY-HANDED\"",
+                "destination": "TIMBE",
+                "message": "You can't go that way."
+            },
+            "UP": {
+                "blocked": "Not a chance."
+            },
+            "CLIMB": {
+                "blocked": "The chain is not climbable."
+            }
+        },
+        "objects": [
+            "FBASK"
+        ],
+        "properties": []
+    },
+    "MACHI": {
+        "id": "MACHI",
+        "shortDesc": "Machine Room",
+        "longDesc": "",
+        "exits": {
+            "NW": "BSHAF"
+        },
+        "objects": [
+            "MSWIT",
+            "MACHI"
+        ],
+        "properties": []
+    },
+    "BATS": {
+        "id": "BATS",
+        "shortDesc": "Bat Room",
+        "longDesc": "",
+        "exits": {
+            "EAST": "SQUEE"
+        },
+        "objects": [
+            "JADE",
+            "BAT"
+        ],
+        "properties": []
+    },
+    "DOME": {
+        "id": "DOME",
+        "shortDesc": "Dome Room",
+        "longDesc": "",
+        "exits": {
+            "EAST": "CRAW1",
+            "DOWN": {
+                "condition": "\"DOME-FLAG\"",
+                "destination": "MTORC",
+                "message": "You cannot go down without fracturing many bones."
+            },
+            "CLIMB": {
+                "condition": "\"DOME-FLAG\"",
+                "destination": "MTORC",
+                "message": "You cannot go down without fracturing many bones."
+            }
+        },
+        "objects": [
+            "RAILI"
+        ],
+        "properties": []
+    },
+    "MTORC": {
+        "id": "MTORC",
+        "shortDesc": "Torch Room",
+        "longDesc": "",
+        "exits": {
+            "UP": {
+                "blocked": "You cannot reach the rope."
+            },
+            "WEST": "MTORC",
+            "DOWN": "CRAW4"
+        },
+        "objects": [
+            "TORCH"
+        ],
+        "properties": []
+    },
+    "CRAW4": {
+        "id": "CRAW4",
+        "shortDesc": "North-South Crawlway",
+        "longDesc": "You are in a north-south crawlway; a passage goes to the east also.\nThere is a hole above, but it provides no opportunities for climbing.",
+        "exits": {
+            "NORTH": "CHAS2",
+            "SOUTH": "STUDI",
+            "EAST": "MTROL",
+            "UP": {
+                "blocked": "Not even a human fly could get up it."
+            }
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CHAS2": {
+        "id": "CHAS2",
+        "shortDesc": "West of Chasm",
+        "longDesc": "You are on the west edge of a chasm, the bottom of which cannot be\nseen. The east side is sheer rock, providing no exits.  A narrow\npassage goes west, and the path you are on continues to the north and\nsouth.",
+        "exits": {
+            "WEST": "CELLA",
+            "NORTH": "CRAW4",
+            "SOUTH": "GALLE",
+            "DOWN": {
+                "blocked": "The chasm probably leads straight to the infernal regions."
+            }
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CAROU": {
+        "id": "CAROU",
+        "shortDesc": "Round room",
+        "longDesc": "",
+        "exits": {
+            "NORTH": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "CAVE4",
+                "message": ""
+            },
+            "SOUTH": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "CAVE4",
+                "message": ""
+            },
+            "EAST": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "MGRAI",
+                "message": ""
+            },
+            "WEST": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "PASS1",
+                "message": ""
+            },
+            "NW": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "CANY1",
+                "message": ""
+            },
+            "NE": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "PASS5",
+                "message": ""
+            },
+            "SE": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "PASS4",
+                "message": ""
+            },
+            "SW": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "MAZE1",
+                "message": ""
+            },
+            "EXIT": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "PASS3",
+                "message": ""
+            }
+        },
+        "objects": [
+            "IRBOX"
+        ],
+        "properties": []
+    },
+    "PASS5": {
+        "id": "PASS5",
+        "shortDesc": "North-South Passage",
+        "longDesc": "You are in a high north-south passage, which forks to the northeast.",
+        "exits": {
+            "NORTH": "CHAS1",
+            "NE": "ECHO",
+            "SOUTH": "CAROU"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CHAS1": {
+        "id": "CHAS1",
+        "shortDesc": "Chasm",
+        "longDesc": "A chasm runs southwest to northeast.  You are on the south edge; the\npath exits to the south and to the east.",
+        "exits": {
+            "SOUTH": "RAVI1",
+            "EAST": "PASS5",
+            "DOWN": {
+                "blocked": "Are you out of your mind?"
+            }
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CAVE3": {
+        "id": "CAVE3",
+        "shortDesc": "Damp Cave",
+        "longDesc": "You are in a cave.  Passages exit to the south and to the east, but\nthe cave narrows to a crack to the west.  The earth is particularly\ndamp here.",
+        "exits": {
+            "SOUTH": "ECHO",
+            "EAST": "DAM",
+            "WEST": {
+                "blocked": "It is too narrow for most insects."
+            }
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CHAS3": {
+        "id": "CHAS3",
+        "shortDesc": "Ancient Chasm",
+        "longDesc": "A chasm, evidently produced by an ancient river, runs through the\ncave here.  Passages lead off in all directions.",
+        "exits": {
+            "SOUTH": "ECHO",
+            "EAST": "TCAVE",
+            "NORTH": "DEAD5",
+            "WEST": "DEAD6"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "DEAD5": {
+        "id": "DEAD5",
+        "shortDesc": "Dead end",
+        "longDesc": "Dead end",
+        "exits": {
+            "SW": "CHAS3"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "DEAD6": {
+        "id": "DEAD6",
+        "shortDesc": "Dead end",
+        "longDesc": "Dead end",
+        "exits": {
+            "EAST": "CHAS3"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "CAVE4": {
+        "id": "CAVE4",
+        "shortDesc": "Engravings Cave",
+        "longDesc": "You have entered a cave with passages leading north and southeast.",
+        "exits": {
+            "NORTH": "CAROU",
+            "SE": "RIDDL"
+        },
+        "objects": [
+            "ENGRA"
+        ],
+        "properties": []
+    },
+    "RIDDL": {
+        "id": "RIDDL",
+        "shortDesc": "Riddle Room",
+        "longDesc": "This is a room which is bare on all sides.  There is an exit down. \nTo the east is a great door made of stone.  Above the stone, the\nfollowing words are written: 'No man shall enter this room without\nsolving this riddle:\n  What is tall as a house,\n\t  round as a cup, \n\t  and all the king's horses can't draw it up?'",
+        "exits": {
+            "DOWN": "CAVE4",
+            "EAST": {
+                "condition": "\"RIDDLE-FLAG\"",
+                "destination": "MPEAR",
+                "message": "Your way is blocked by an invisible force."
+            }
+        },
+        "objects": [
+            "SDOOR"
+        ],
+        "properties": []
+    },
+    "MPEAR": {
+        "id": "MPEAR",
+        "shortDesc": "Pearl Room",
+        "longDesc": "This is a former broom closet.  The exits are to the east and west.",
+        "exits": {
+            "EAST": "BWELL",
+            "WEST": "RIDDL"
+        },
+        "objects": [
+            "PEARL"
+        ],
+        "properties": []
+    },
+    "LLD1": {
+        "id": "LLD1",
+        "shortDesc": "Entrance to Hades",
+        "longDesc": "",
+        "exits": {
+            "EAST": {
+                "condition": "\"LLD-FLAG\"",
+                "destination": "LLD2",
+                "message": "Some invisible force prevents you from passing through the gate."
+            },
+            "UP": "CAVE2",
+            "ENTER": {
+                "condition": "\"LLD-FLAG\"",
+                "destination": "LLD2",
+                "message": "Some invisible force prevents you from passing through the gate."
+            }
+        },
+        "objects": [
+            "CORPS",
+            "GATES",
+            "GHOST"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "LLD2": {
+        "id": "LLD2",
+        "shortDesc": "Land of the Living Dead",
+        "longDesc": "",
+        "exits": {
+            "EAST": "TOMB",
+            "EXIT": "LLD1",
+            "WEST": "LLD1"
+        },
+        "objects": [
+            "BODIE"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "MGRAI": {
+        "id": "MGRAI",
+        "shortDesc": "Grail Room",
+        "longDesc": "You are standing in a small circular room with a pedestal.  A set of\nstairs leads up, and passages leave to the east and west.",
+        "exits": {
+            "WEST": "CAROU",
+            "EAST": "CRAW3",
+            "UP": "TEMP1"
+        },
+        "objects": [
+            "GRAIL"
+        ],
+        "properties": []
     },
     "TEMP1": {
         "id": "TEMP1",
-        "name": "West Temple",
-        "description": "You are in the west end of a large temple. On the south wall is an ancient inscription, probably a prayer in a long-forgotten language. The north wall is solid granite. The entrance at the west end of the room is through huge marble pillars.",
-        "longDescription": "Temple",
+        "shortDesc": "Temple",
+        "longDesc": "You are in the west end of a large temple.  On the south wall is an \nancient inscription, probably a prayer in a long-forgotten language. \nThe north wall is solid granite.  The entrance at the west end of the\nroom is through huge marble pillars.",
         "exits": {
-            "WEST": "MGRAT",
+            "WEST": "MGRAI",
             "EAST": "TEMP2"
-        },
-        "flags": {
-            "isSacred": true,
-            "isLit": true,
-            "isOnLand": true
         },
         "objects": [
             "PRAYE",
             "BELL"
+        ],
+        "properties": [
+            "LIT"
         ]
     },
     "TEMP2": {
         "id": "TEMP2",
-        "name": "East Temple",
-        "description": "You are in the east end of a large temple. In front of you is what appears to be an altar.",
-        "longDescription": "Altar",
+        "shortDesc": "Altar",
+        "longDesc": "You are in the east end of a large temple.  In front of you is what\nappears to be an altar.",
         "exits": {
             "WEST": "TEMP1"
         },
-        "flags": {
-            "isSacred": true,
-            "isLit": true,
-            "isOnLand": true
-        },
         "objects": [
             "BOOK",
-            "CANDL",
-            "TRUNK"
+            "CANDL"
+        ],
+        "properties": [
+            "LIT"
         ]
+    },
+    "DAM": {
+        "id": "DAM",
+        "shortDesc": "Dam",
+        "longDesc": "",
+        "exits": {
+            "SOUTH": "CANY1",
+            "DOWN": "DOCK",
+            "EAST": "CAVE3",
+            "NORTH": "LOBBY"
+        },
+        "objects": [
+            "BOLT",
+            "DAM",
+            "BUBBL"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "LOBBY": {
+        "id": "LOBBY",
+        "shortDesc": "Dam Lobby",
+        "longDesc": "This room appears to have been the waiting room for groups touring\nthe dam.  There are exits here to the north and east marked\n'Private', though the doors are open, and an exit to the south.",
+        "exits": {
+            "SOUTH": "DAM",
+            "NORTH": "MAINT",
+            "EAST": "MAINT"
+        },
+        "objects": [
+            "MATCH",
+            "GUIDE"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "MAINT": {
+        "id": "MAINT",
+        "shortDesc": "Maintenance Room",
+        "longDesc": "You are in what appears to have been the maintenance room for Flood\nControl Dam #3, judging by the assortment of tool chests around the\nroom.  Apparently, this room has been ransacked recently, for most of\nthe valuable equipment is gone. On the wall in front of you is a\npanel of buttons, which are labelled in EBCDIC. However, they are of\ndifferent colors:  Blue, Yellow, Brown, and Red. The doors to this\nroom are in the west and south ends.",
+        "exits": {
+            "SOUTH": "LOBBY",
+            "WEST": "LOBBY"
+        },
+        "objects": [
+            "LEAK",
+            "TUBE",
+            "WRENC",
+            "BLBUT",
+            "RBUTT",
+            "BRBUT",
+            "YBUTT",
+            "SCREW"
+        ],
+        "properties": []
     },
     "CYCLO": {
         "id": "CYCLO",
-        "name": "Cyclops Room",
-        "description": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping.",
-        "longDescription": "Cyclops Room",
+        "shortDesc": "Cyclops Room",
+        "longDesc": "",
         "exits": {
-            "WEST": "MAZ15"
-        },
-        "conditionalExits": {
+            "WEST": "MAZ15",
             "NORTH": {
-                "target": "BLROO",
-                "conditionFlag": "MAGIC-FLAG",
+                "condition": "\"MAGIC-FLAG\"",
+                "destination": "BLROO",
                 "message": "The north wall is solid rock."
             },
             "UP": {
-                "target": "TREAS",
-                "conditionFlag": "CYCLOPS-FLAG",
+                "condition": "\"CYCLOPS-FLAG\"",
+                "destination": "TREAS",
                 "message": "The cyclops doesn't look like he'll let you past."
             }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
-        },
         "objects": [
             "CYCLO"
-        ]
+        ],
+        "properties": []
+    },
+    "BLROO": {
+        "id": "BLROO",
+        "shortDesc": "Strange Passage",
+        "longDesc": "You are in a long passage.  To the south is one entrance.  On the\neast there is an old wooden door, with a large hole in it (about\ncyclops sized).",
+        "exits": {
+            "SOUTH": "CYCLO",
+            "EAST": "LROOM"
+        },
+        "objects": [],
+        "properties": []
     },
     "TREAS": {
         "id": "TREAS",
-        "name": "Treasure Room",
-        "description": "This is a large room, whose north wall is solid granite. A number of discarded bags, which crumble at your touch, are scattered about on the floor.",
-        "longDescription": "Treasure Room",
+        "shortDesc": "Treasure Room",
+        "longDesc": "This is a large room, whose north wall is solid granite.  A number\nof discarded bags, which crumble at your touch, are scattered about\non the floor.",
         "exits": {
             "DOWN": "CYCLO"
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true,
-            "isSacred": true
-        },
         "objects": [
             "CHALI"
+        ],
+        "properties": []
+    },
+    "STUDI": {
+        "id": "STUDI",
+        "shortDesc": "Studio",
+        "longDesc": "You are in what appears to have been an artist's studio.  The walls\nand floors are splattered with paints of 69 different colors. \nStrangely enough, nothing of value is hanging here.  At the north and\nnorthwest of the room are open doors (also covered with paint).  An\nextremely dark and narrow chimney leads up from a fireplace; although\nyou might be able to get up it, it seems unlikely you could get back\ndown.",
+        "exits": {
+            "NORTH": "CRAW4",
+            "NW": "GALLE",
+            "UP": {
+                "condition": "\"LIGHT-LOAD\"",
+                "destination": "KITCH",
+                "message": "The chimney is too narrow for you and all of your baggage."
+            }
+        },
+        "objects": [],
+        "properties": []
+    },
+    "GALLE": {
+        "id": "GALLE",
+        "shortDesc": "Gallery",
+        "longDesc": "You are in an art gallery.  Most of the paintings which were here\nhave been stolen by vandals with exceptional taste.  The vandals\nleft through either the north or south exits.",
+        "exits": {
+            "NORTH": "CHAS2",
+            "SOUTH": "STUDI"
+        },
+        "objects": [
+            "PAINT"
+        ],
+        "properties": [
+            "LIT"
         ]
+    },
+    "DOCK": {
+        "id": "DOCK",
+        "shortDesc": "Dam Base",
+        "longDesc": "You are at the base of Flood Control Dam #3, which looms above you\nand to the north.  The river Frigid is flowing by here.  Across the\nriver are the White Cliffs which seem to form a giant wall stretching\nfrom north to south along the east shore of the river as it winds its\nway downstream.",
+        "exits": {
+            "NORTH": "DAM",
+            "UP": "DAM",
+            "LAUNC": "RIVR1"
+        },
+        "objects": [
+            "IBOAT",
+            "STICK"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "RIVR1": {
+        "id": "RIVR1",
+        "shortDesc": "",
+        "longDesc": "You are on the River Frigid in the vicinity of the Dam.  The river\nflows quietly here.  There is a landing on the west shore.",
+        "exits": {
+            "CURRENT": "WEST",
+            "DOCK": "DOWN",
+            "RIVR2": "EAST",
+            ",": "CLIFFS"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "RIVR2": {
+        "id": "RIVR2",
+        "shortDesc": "",
+        "longDesc": "The River turns a corner here making it impossible to see the\nDam.  The White Cliffs loom on the east bank and large rocks prevent\nlanding on the west.",
+        "exits": {
+            "CURRENT": "DOWN",
+            "RIVR3": "EAST",
+            ",": "CLIFFS"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "RIVR3": {
+        "id": "RIVR3",
+        "shortDesc": "",
+        "longDesc": "The river descends here into a valley.  There is a narrow beach on\nthe east below the cliffs and there is some shore on the west which\nmay be suitable.  In the distance a faint rumbling can be heard.",
+        "exits": {
+            "CURRENT": "DOWN",
+            "RIVR4": "EAST",
+            "WCLF1": "WEST",
+            "RCAVE": "LAND"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "WCLF1": {
+        "id": "WCLF1",
+        "shortDesc": "White Cliffs Beach",
+        "longDesc": "You are on a narrow strip of beach which runs along the base of the\nWhite Cliffs. The only path here is a narrow one, heading south\nalong the Cliffs.",
+        "exits": {
+            "SOUTH": {
+                "condition": "\"DEFLATE\"",
+                "destination": "WCLF2",
+                "message": "You can't go that way."
+            },
+            "LAUNC": "RIVR3"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "WCLF2": {
+        "id": "WCLF2",
+        "shortDesc": "White Cliffs Beach",
+        "longDesc": "You are on a rocky, narrow strip of beach beside the Cliffs.  A\nnarrow path leads north along the shore.",
+        "exits": {
+            "NORTH": {
+                "condition": "\"DEFLATE\"",
+                "destination": "WCLF1",
+                "message": "You can't go that way."
+            },
+            "LAUNC": "RIVR4"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "RIVR4": {
+        "id": "RIVR4",
+        "shortDesc": "",
+        "longDesc": "The river is running faster here and the sound ahead appears to be\nthat of rushing water.  On the west shore is a sandy beach.  A small\narea of beach can also be seen below the Cliffs.",
+        "exits": {
+            "CURRENT": "DOWN",
+            "RIVR5": "EAST",
+            "WCLF2": "WEST",
+            "BEACH": "LAND"
+        },
+        "objects": [
+            "BUOY"
+        ],
+        "properties": []
+    },
+    "RIVR5": {
+        "id": "RIVR5",
+        "shortDesc": "",
+        "longDesc": "The sound of rushing water is nearly unbearable here.  On the west\nshore is a large landing area.",
+        "exits": {
+            "CURRENT": "DOWN",
+            "FCHMP": "LAND"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "FCHMP": {
+        "id": "FCHMP",
+        "shortDesc": "Moby lossage",
+        "longDesc": "",
+        "exits": {
+            "NORTH": {
+                "blocked": ""
+            }
+        },
+        "objects": [],
+        "properties": []
+    },
+    "FANTE": {
+        "id": "FANTE",
+        "shortDesc": "Shore",
+        "longDesc": "You are on the shore of the River.  The river here seems somewhat\ntreacherous.  A path travels from north to south here, the south end\nquickly turning around a sharp corner.",
+        "exits": {
+            "LAUNC": "RIVR5",
+            "NORTH": "BEACH",
+            "SOUTH": "FALLS"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "BEACH": {
+        "id": "BEACH",
+        "shortDesc": "Sandy Beach",
+        "longDesc": "You are on a large sandy beach at the shore of the river, which is\nflowing quickly by.  A path runs beside the river to the south here.",
+        "exits": {
+            "LAUNC": "RIVR4",
+            "SOUTH": "FANTE"
+        },
+        "objects": [
+            "STATU"
+        ],
+        "properties": []
+    },
+    "RCAVE": {
+        "id": "RCAVE",
+        "shortDesc": "Rocky Shore",
+        "longDesc": "You are on the west shore of the river.  An entrance to a cave is\nto the northwest.  The shore is very rocky here.",
+        "exits": {
+            "LAUNC": "RIVR3",
+            "NW": "TCAVE"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "TCAVE": {
+        "id": "TCAVE",
+        "shortDesc": "Small Cave",
+        "longDesc": "You are in a small cave whose exits are on the south and northwest.",
+        "exits": {
+            "SOUTH": "RCAVE",
+            "NW": "CHAS3"
+        },
+        "objects": [
+            "GUANO",
+            "SHOVE"
+        ],
+        "properties": []
+    },
+    "BARRE": {
+        "id": "BARRE",
+        "shortDesc": "Barrel",
+        "longDesc": "You are in a barrel.  Congratulations.  Etched into the side of the\nbarrel is the word 'Geronimo!'.",
+        "exits": {
+            "EXIT": "FALLS"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "FALLS": {
+        "id": "FALLS",
+        "shortDesc": "Aragain Falls",
+        "longDesc": "",
+        "exits": {
+            "EAST": {
+                "condition": "\"RAINBOW\"",
+                "destination": "RAINB",
+                "message": "You can't go that way."
+            },
+            "DOWN": "FCHMP",
+            "NORTH": "FANTE",
+            "ENTER": "BARRE",
+            "UP": {
+                "condition": "\"RAINBOW\"",
+                "destination": "RAINB",
+                "message": "You can't go that way."
+            }
+        },
+        "objects": [
+            "RAINB",
+            "BARRE"
+        ],
+        "properties": []
+    },
+    "RAINB": {
+        "id": "RAINB",
+        "shortDesc": "Rainbow Room",
+        "longDesc": "You are on top of a rainbow (I bet you never thought you would walk\non a rainbow), with a magnificent view of the Falls.  The rainbow\ntravels east-west here.  There is an NBC Commissary here.",
+        "exits": {
+            "EAST": "POG",
+            "WEST": "FALLS"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "POG": {
+        "id": "POG",
+        "shortDesc": "End of Rainbow",
+        "longDesc": "You are on a small beach on the continuation of the Frigid River\npast the Falls.  The beach is narrow due to the presence of the White\nCliffs.  The river canyon opens here and sunlight shines in from\nabove. A rainbow crosses over the falls to the west and a narrow path\ncontinues to the southeast.",
+        "exits": {
+            "CRAIN": "SE",
+            ",": "CRAIN"
+        },
+        "objects": [
+            "RAINB",
+            "POT"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "CLBOT": {
+        "id": "CLBOT",
+        "shortDesc": "Canyon Bottom",
+        "longDesc": "You are beneath the walls of the river canyon which may be climbable\nhere.  There is a small stream here, which is the lesser part of the\nrunoff of Aragain Falls. To the north is a narrow path.",
+        "exits": {
+            "UP": "CLMID",
+            "CLIMB": "CLMID",
+            "NORTH": "POG"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "CLMID": {
+        "id": "CLMID",
+        "shortDesc": "Rocky Ledge",
+        "longDesc": "You are on a ledge about halfway up the wall of the river canyon.\nYou can see from here that the main flow from Aragain Falls twists\nalong a passage which it is impossible to enter.  Below you is the\ncanyon bottom.  Above you is more cliff, which still appears\nclimbable.",
+        "exits": {
+            "UP": "CLTOP",
+            "CLIMB": "CLTOP",
+            "DOWN": "CLBOT"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "CLTOP": {
+        "id": "CLTOP",
+        "shortDesc": "Canyon View",
+        "longDesc": "You are at the top of the Great Canyon on its south wall.  From here\nthere is a marvelous view of the Canyon and parts of the Frigid River\nupstream.  Across the canyon, the walls of the White Cliffs still\nappear to loom far above.  Following the Canyon upstream (north and\nnorthwest), Aragain Falls may be seen, complete with rainbow. \nFortunately, my vision is better than average and I can discern the\ntop of the Flood Control Dam #3 far to the distant north.  To the\nwest and south can be seen an immense forest, stretching for miles\naround.  It is possible to climb down into the canyon from here.",
+        "exits": {
+            "DOWN": "CLMID",
+            "CLIMB": "CLMID",
+            "SOUTH": "FORE4",
+            "WEST": "FORE5"
+        },
+        "objects": [],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "VLBOT": {
+        "id": "VLBOT",
+        "shortDesc": "Volcano Bottom",
+        "longDesc": "You are at the bottom of a large dormant volcano.  High above you\nlight may be seen entering from the cone of the volcano.  The only\nexit here is to the north.",
+        "exits": {
+            "NORTH": "LAVA"
+        },
+        "objects": [
+            "BALLO"
+        ],
+        "properties": []
+    },
+    "VAIR1": {
+        "id": "VAIR1",
+        "shortDesc": "",
+        "longDesc": "You are about one hundred feet above the bottom of the volcano.  The\ntop of the volcano is clearly visible here.",
+        "exits": {},
+        "objects": [],
+        "properties": []
+    },
+    "VAIR2": {
+        "id": "VAIR2",
+        "shortDesc": "",
+        "longDesc": "You are about two hundred feet above the volcano floor.  Looming\nabove is the rim of the volcano.  There is a small ledge on the west\nside.",
+        "exits": {
+            "WEST": "LEDG2",
+            "LAND": "LEDG2"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "VAIR3": {
+        "id": "VAIR3",
+        "shortDesc": "",
+        "longDesc": "You are high above the floor of the volcano.  From here the rim of\nthe volcano looks very narrow and you are very near it.  To the \neast is what appears to be a viewing ledge, too thin to land on.",
+        "exits": {},
+        "objects": [],
+        "properties": []
+    },
+    "VAIR4": {
+        "id": "VAIR4",
+        "shortDesc": "",
+        "longDesc": "You are near the rim of the volcano which is only about 15 feet\nacross.  To the west, there is a place to land on a wide ledge.",
+        "exits": {
+            "LAND": "LEDG4",
+            "EAST": "LEDG4"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "LEDG2": {
+        "id": "LEDG2",
+        "shortDesc": "Narrow Ledge",
+        "longDesc": "You are on a narrow ledge overlooking the inside of an old dormant\nvolcano.  This ledge appears to be about in the middle between the\nfloor below and the rim above. There is an exit here to the south.",
+        "exits": {
+            "DOWN": {
+                "blocked": "I wouldn't jump from here."
+            },
+            "LAUNC": "VAIR2",
+            "CXGNOME": "SOUTH"
+        },
+        "objects": [
+            "HOOK1",
+            "ZORKM"
+        ],
+        "properties": []
+    },
+    "LIBRA": {
+        "id": "LIBRA",
+        "shortDesc": "Library",
+        "longDesc": "You are in a room which must have been a large library, probably\nfor the royal family.  All of the shelves appear to have been gnawed\nto pieces by unfriendly gnomes.  To the north is an exit.",
+        "exits": {
+            "NORTH": "LEDG2",
+            "OUT": "LEDG2"
+        },
+        "objects": [
+            "BLBK",
+            "GRBK",
+            "PUBK",
+            "WHBK"
+        ],
+        "properties": []
+    },
+    "LEDG3": {
+        "id": "LEDG3",
+        "shortDesc": "Volcano View",
+        "longDesc": "You are on a ledge in the middle of a large volcano.  Below you\nthe volcano bottom can be seen and above is the rim of the volcano.\nA couple of ledges can be seen on the other side of the volcano;\nit appears that this ledge is intermediate in elevation between\nthose on the other side.  The exit from this room is to the east.",
+        "exits": {
+            "DOWN": {
+                "blocked": "I wouldn't try that."
+            },
+            "CROSS": {
+                "blocked": "It is impossible to cross this distance."
+            },
+            "EAST": "EGYPT"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "LEDG4": {
+        "id": "LEDG4",
+        "shortDesc": "Wide Ledge",
+        "longDesc": "",
+        "exits": {
+            "DOWN": {
+                "blocked": "It's a long way down."
+            },
+            "LAUNC": "VAIR4",
+            "CXGNOME": "SOUTH"
+        },
+        "objects": [
+            "HOOK2"
+        ],
+        "properties": []
+    },
+    "SAFE": {
+        "id": "SAFE",
+        "shortDesc": "Dusty Room",
+        "longDesc": "",
+        "exits": {
+            "NORTH": "LEDG4"
+        },
+        "objects": [
+            "SSLOT",
+            "SAFE"
+        ],
+        "properties": [
+            "LIT"
+        ]
+    },
+    "LAVA": {
+        "id": "LAVA",
+        "shortDesc": "Lava Room",
+        "longDesc": "You are in a small room, whose walls are formed by an old lava flow.\nThere are exits here to the west and the south.",
+        "exits": {
+            "SOUTH": "VLBOT",
+            "WEST": "RUBYR"
+        },
+        "objects": [],
+        "properties": []
+    },
+    "TOMB": {
+        "id": "TOMB",
+        "shortDesc": "Tomb of the Unknown Implementer",
+        "longDesc": "You are in the Tomb of the Unknown Implementer.\nA hollow voice says:  \\That's not a bug, it's a feature!\\",
+        "exits": {
+            "WEST": "LLD2"
+        },
+        "objects": [
+            "TOMB",
+            "HEADS",
+            "COKES",
+            "LISTS"
+        ],
+        "properties": []
+    },
+    "MAGNE": {
+        "id": "MAGNE",
+        "shortDesc": "Low Room",
+        "longDesc": "",
+        "exits": {
+            "MAGCMACH": "NE",
+            ",": "MAGCMACH",
+            "MAGALICE": "EAST"
+        },
+        "objects": [
+            "RBTLB",
+            "ROBOT"
+        ],
+        "properties": []
+    },
+    "CMACH": {
+        "id": "CMACH",
+        "shortDesc": "Machine Room",
+        "longDesc": "",
+        "exits": {
+            "WEST": "MAGNE",
+            "SOUTH": "CAGER"
+        },
+        "objects": [
+            "SQBUT",
+            "RNBUT",
+            "TRBUT"
+        ],
+        "properties": []
+    },
+    "CAGER": {
+        "id": "CAGER",
+        "shortDesc": "Dingy Closet",
+        "longDesc": "You are in a dingy closet adjacent to the machine room.  On one wall\nis a small sticker which says\n\t\tProtected by\n\t\t  FROBOZZ\n\t     Magic Alarm Company\n\t      (Hello, footpad!)\n",
+        "exits": {
+            "NORTH": "CMACH"
+        },
+        "objects": [
+            "SPHER"
+        ],
+        "properties": []
+    },
+    "CAGED": {
+        "id": "CAGED",
+        "shortDesc": "Cage",
+        "longDesc": "You are trapped inside an iron cage.",
+        "exits": {
+            "NORTH": {
+                "blocked": ""
+            }
+        },
+        "objects": [
+            "CAGE"
+        ],
+        "properties": []
     },
     "TWELL": {
         "id": "TWELL",
-        "name": "Top of Well",
-        "description": "You are at the top of the well. Well done. There are etchings on the side of the well. There is a small crack across the floor at the entrance to a room on the east, but it can be crossed easily.",
-        "longDescription": "Top of Well",
+        "shortDesc": "Top of Well",
+        "longDesc": "You are at the top of the well.  Well done.  There are etchings on\nthe side of the well. There is a small crack across the floor at the\nentrance to a room on the east, but it can be crossed easily.",
         "exits": {
-            "EAST": "ALICE"
-        },
-        "conditionalExits": {
+            "EAST": "ALICE",
             "DOWN": {
-                "target": "BWELL",
-                "message": "It's a long way down!"
+                "blocked": "It's a long way down!"
             }
         },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true,
-            "canFillBucket": true,
-            "isWater": false
-        }
+        "objects": [
+            "ETCH2"
+        ],
+        "properties": []
     },
     "BWELL": {
         "id": "BWELL",
-        "name": "Damp Circular Room",
-        "description": "You are in a damp circular room, whose walls are made of brick and mortar.",
-        "longDescription": "Damp Circular Room",
+        "shortDesc": "Circular Room",
+        "longDesc": "You are in a damp circular room, whose walls are made of brick and\nmortar.  The roof of this room is not visible, but there appear to be\nsome etchings on the walls.  There is a passageway to the west.",
         "exits": {
-            "UP": "TWELL"
-        },
-        "flags": {
-            "isOnLand": true,
-            "isLit": true
+            "WEST": "MPEAR",
+            "UP": {
+                "blocked": "The walls cannot be climbed."
+            }
         },
         "objects": [
-            "BRICK"
-        ]
+            "BUCKE",
+            "ETCH1"
+        ],
+        "properties": []
+    },
+    "ALICE": {
+        "id": "ALICE",
+        "shortDesc": "Tea Room",
+        "longDesc": "You are in a small square room, in the center of which is a large\noblong table, no doubt set for afternoon tea.  It is clear from the\nobjects on the table that the users were indeed mad.  In the eastern\ncorner of the room is a small hole (no more that four inches high). \nThere are passageways leading away to the west and the northwest.",
+        "exits": {
+            "EAST": {
+                "blocked": "Only a mouse could get in there."
+            },
+            "WEST": "TWELL",
+            "NW": "MAGNE"
+        },
+        "objects": [
+            "ATABL",
+            "ECAKE",
+            "ORICE",
+            "RDICE",
+            "BLICE"
+        ],
+        "properties": []
+    },
+    "ALISM": {
+        "id": "ALISM",
+        "shortDesc": "Posts Room",
+        "longDesc": "You are in an enormous room, in the center of which are four wooden\nposts delineating a rectanular area, above which is what appears to\nbe a wooden roof.  In fact, all objects in this room appear to be\nabnormally large. To the east is a passageway.  There is a large\nchasm on the west and the northwest.",
+        "exits": {
+            "SMDROP": "EAST",
+            "ALITR": "WEST",
+            ",": "SMDROP"
+        },
+        "objects": [
+            "POSTS"
+        ],
+        "properties": []
+    },
+    "ALITR": {
+        "id": "ALITR",
+        "shortDesc": "Pool Room",
+        "longDesc": "You are in a large room, one half of which is depressed.  There is a\nlarge leak in the ceiling through which brown colored goop is\nfalling.  The only exit to this room is to the west.",
+        "exits": {
+            "EXIT": "ALISM",
+            "WEST": "ALISM"
+        },
+        "objects": [
+            "FLASK",
+            "POOL",
+            "SAFFR"
+        ],
+        "properties": []
     }
 }
