@@ -1,52 +1,53 @@
-// Bitwise flags for game objects and rooms
-
-// RBITS: Room flags
+// RBITS: Room flags (Expanded based on MDL sources)
 const RBITS = {
-    RSEEN: 1 << 0, // Player has been in the room
-    RLIGHT: 1 << 1, // Room is lit
-    RDESC: 1 << 2, // Room has a long description
-    RMAZE: 1 << 3, // Room is part of a maze
-    RBUCK: 1 << 4, // Player can fill a bucket here
-    RWATER: 1 << 5, // Room is on/in water
-    RFILL: 1 << 6, // Room can be filled with water
-    RHERE: 1 << 7, // Something is here
-    RNWALL: 1 << 8, // No wall separating from another room
-    RSACRD: 1 << 9, // Sacred room
-    RWIN: 1 << 10, // Player has won
-    RSTRNG: 1 << 11, // Player is strengthened here
-    RART: 1 << 12, // Room contains an artifact
-    RCLIMB: 1 << 13, // Room can be climbed
-    RDIR: 1 << 14, // Directional room
-    NONLAND: 1 << 15, // Not on land
-    RDESCBIT: 1 << 16, // Force room description
+    RSEEN: 1 << 0,     // Player has been in the room
+    RLIGHT: 1 << 1,    // Room is lit (MDL RLIGHT?)
+    RDESC: 1 << 2,     // Room has a long description
+    RMAZE: 1 << 3,     // Room is part of a maze
+    RBUCK: 1 << 4,     // Player can fill a bucket here (MDL RBUCKBIT)
+    RWATER: 1 << 5,    // Room is on/in water
+    RFILL: 1 << 6,     // Room can be filled with water (MDL RFILLBIT)
+    RHERE: 1 << 7,     // Something is here
+    RNWALL: 1 << 8,    // No wall separating from another room
+    RSACRD: 1 << 9,    // Sacred room (MDL RSACREDBIT)
+    RWIN: 1 << 10,     // Player has won
+    RSTRNG: 1 << 11,   // Player is strengthened here
+    RART: 1 << 12,     // Room contains an artifact
+    RCLIMB: 1 << 13,   // Room can be climbed
+    RDIR: 1 << 14,     // Directional room
+    NONLAND: 1 << 15,  // Not on land (This appears to be inverted in JS based on MDL RLANDBIT)
+    RLAND: 1 << 16,    // Room is on land (MDL RLANDBIT, inverse of NONLAND in JS)
+    RHOUSE: 1 << 17,   // Room is part of the house (MDL RHOUSEBIT)
+    RDESCBIT: 1 << 18  // Force room description (internal VM flag)
 };
 
-// OFLAGS: Object flags
+// OFLAGS: Object flags (Expanded based on MDL sources)
 const OFLAGS = {
-    TAKEBIT: 1 << 0, // Object can be taken
-    DOORBIT: 1 << 1, // Object is a door
-    OPENBIT: 1 << 2, // Object is open
-    LOCKBIT: 1 << 3, // Object is locked
-    CONTBIT: 1 << 4, // Object is a container
-    DRINKBIT: 1 << 5, // Object is drinkable
-    FOODBIT: 1 << 6, // Object is edible
-    BURNBIT: 1 << 7, // Object is flammable
-    WEAPONBIT: 1 << 8, // Object is a weapon
-    FIGHTBIT: 1 << 9, // Object can be fought
-    READBIT: 1 << 10, // Object can be read
-    TRANSBIT: 1 << 11, // Object is a vehicle/transport
-    LIGHTBIT: 1 << 12, // Object provides light
-    ONBIT: 1 << 13, // Object is on
-    VICBIT: 1 << 14, // Object is a victim
-    FINDIM: 1 << 15, // Object is inside another object
-    SACREDBIT: 1 << 16, // Object is sacred
-    SLEEPBIT: 1 << 17, // Object can be slept on
-    SEARCHBIT: 1 << 18, // Object can be searched
-    CLIMBBIT: 1 << 19, // Object can be climbed
-    SCENERYBIT: 1 << 20, // Object is scenery
-    INVISIBLE: 1 << 21, // Object is invisible
-    DISARMEDBIT: 1 << 22, // Object is disarmed (e.g., a trap)
-    NOTDESCBIT: 1 << 23, // Object is not described separately
+    TAKEBIT: 1 << 0,       // Object can be taken
+    DOORBIT: 1 << 1,       // Object is a door
+    OPENBIT: 1 << 2,       // Object is open (MDL OOPEN?)
+    LOCKBIT: 1 << 3,       // Object is locked (Not directly in provided MDL, but implied for doors)
+    CONTBIT: 1 << 4,       // Object is a container
+    BURNBIT: 1 << 5,       // Object is flammable (MDL BURNBIT)
+    WEAPONBIT: 1 << 6,     // Object is a weapon
+    READBIT: 1 << 7,       // Object is readable
+    SACREDBIT: 1 << 8,     // Object is sacred
+    TOOLBIT: 1 << 9,       // Object is a tool
+    DRINKBIT: 1 << 10,     // Object is drinkable
+    FOODBIT: 1 << 11,      // Object is food (MDL FOODBIT)
+    TIEBIT: 1 << 12,       // Object can be tied (MDL TIEBIT)
+    VEHBIT: 1 << 13,       // Object is a vehicle
+    OVISON: 1 << 14,       // Object is visible (MDL OVISON)
+    VILLAIN: 1 << 15,      // Object is a villain (MDL VILLAIN)
+    VICBIT: 1 << 16,       // Object is a victim/can be attacked (MDL VICBIT)
+    SLEEPBIT: 1 << 17,     // Object can be slept on
+    SEARCHBIT: 1 << 18,    // Object can be searched
+    CLIMBBIT: 1 << 19,     // Object can be climbed
+    SCENERYBIT: 1 << 20,   // Object is scenery
+    INVISIBLE: 1 << 21,    // Object is invisible
+    DISARMEDBIT: 1 << 22,  // Object is disarmed (e.g., a trap)
+    NOTDESCBIT: 1 << 23,   // Object is not described separately (MDL NDESCBIT)
+    TRYTAKEBIT: 1 << 24    // Attempt to take object (MDL TRYTAKEBIT)
 };
 
 

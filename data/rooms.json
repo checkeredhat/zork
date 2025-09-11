@@ -1,252 +1,459 @@
 [
-  {
-    "id": "WEST-OF-HOUSE",
-    "name": "West of House",
-    "description": "You are in an open field west of a big white house, with a boarded front door.",
-    "exits": {
-      "NORTH": "NORTH-OF-HOUSE",
-      "SOUTH": "SOUTH-OF-HOUSE",
-      "EAST": "EAST-OF-HOUSE",
-      "WEST": "FOREST-1"
+    {
+        "id": "WEST-OF-HOUSE",
+        "name": "West of House",
+        "description": "You are in an open field west of a big white house, with a boarded front door.",
+        "exits": {
+            "NORTH": "NORTH-OF-HOUSE",
+            "SOUTH": "SOUTH-OF-HOUSE",
+            "EAST": "EAST-OF-HOUSE",
+            "WEST": "FOREST-1"
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["MAILBOX", "ADVER", "MAT", "FRONT-DOOR"]
     },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
+    {
+        "id": "HOUSE-BLOCKED",
+        "name": "West of House",
+        "description": "The door is boarded and you can't remove the boards."
     },
-    "objects": ["MAILBOX", "LEAFLET", "MAT", "FRONT-DOOR"]
-  },
-  {
-    "id": "HOUSE-BLOCKED",
-    "name": "West of House",
-    "description": "The door is boarded and you can't remove the boards."
-  },
-  {
-    "id": "NORTH-OF-HOUSE",
-    "name": "North of House",
-    "description": "You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.",
-    "exits": {
-      "WEST": "WEST-OF-HOUSE",
-      "EAST": "EAST-OF-HOUSE",
-      "NORTH": "PATH"
+    {
+        "id": "NORTH-OF-HOUSE",
+        "name": "North of House",
+        "description": "You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.",
+        "exits": {
+            "WEST": "WEST-OF-HOUSE",
+            "EAST": "EAST-OF-HOUSE",
+            "NORTH": "PATH"
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["HOUSE"]
     },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
+    {
+        "id": "EAST-OF-HOUSE",
+        "name": "Behind House",
+        "description": "You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.",
+        "exits": {
+            "NORTH": "NORTH-OF-HOUSE",
+            "SOUTH": "SOUTH-OF-HOUSE",
+            "EAST": "CLEARING-BEHIND-HOUSE"
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["WINDOW"]
     },
-    "objects": ["HOUSE"]
-  },
-  {
-    "id": "EAST-OF-HOUSE",
-    "name": "Behind House",
-    "description": "You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.",
-    "exits": {
-      "NORTH": "NORTH-OF-HOUSE",
-      "SOUTH": "SOUTH-OF-HOUSE",
-      "EAST": "CLEARING-BEHIND-HOUSE"
+    {
+        "id": "SOUTH-OF-HOUSE",
+        "name": "South of House",
+        "description": "You are on the south side of a white house. There is no door here, and all the windows are boarded.",
+        "exits": {
+            "WEST": "WEST-OF-HOUSE",
+            "EAST": "EAST-OF-HOUSE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
     },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
+    {
+        "id": "FOREST-1",
+        "name": "Forest",
+        "description": "This is a forest, with trees in all directions. To the east, there is a large tree with some low branches. To the west, the forest continues.",
+        "exits": {
+            "EAST": "WEST-OF-HOUSE",
+            "WEST": "FOREST-2",
+            "UP": "UP-A-TREE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
     },
-    "objects": ["WINDOW"]
-  },
-  {
-    "id": "SOUTH-OF-HOUSE",
-    "name": "South of House",
-    "description": "You are on the south side of a white house. There is no door here, and all the windows are boarded.",
-    "exits": {
-      "WEST": "WEST-OF-HOUSE",
-      "EAST": "EAST-OF-HOUSE"
+    {
+        "id": "UP-A-TREE",
+        "name": "Up a Tree",
+        "description": "You are about 10 feet up in a big tree. You can see a nest with a large egg in it. The egg is covered with fine gold inlay. You can also see the roof of the house.",
+        "exits": {
+            "DOWN": "FOREST-1"
+        },
+        "flags": {
+            "isOnLand": false,
+            "isLit": true
+        },
+        "objects": ["EGG", "NEST"]
     },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
+    {
+        "id": "FOREST-2",
+        "name": "Forest",
+        "description": "This is a dimly lit forest, with trees all around. To the east, the forest appears to become clearer.",
+        "exits": {
+            "EAST": "FOREST-1",
+            "WEST": "FOREST-3"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    {
+        "id": "FOREST-3",
+        "name": "Forest",
+        "description": "This is a forest, with trees in all directions. There is a clearing to the west.",
+        "exits": {
+            "EAST": "FOREST-2",
+            "WEST": "CLEARING"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    {
+        "id": "CLEARING",
+        "name": "Clearing",
+        "description": "You are in a small clearing in a forest. Piles of leaves can be seen here. There is a large grating, securely bolted to the ground, to the west.",
+        "exits": {
+            "EAST": "FOREST-3"
+        },
+        "conditionalExits": {
+            "WEST": { "target": "MGRAT", "conditionFlag": "KEY-FLAG", "conditionValue": "CLEAR", "message": "The grating is locked" }
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["LEAVES", "GRAT2"]
+    },
+    {
+        "id": "PATH",
+        "name": "Path",
+        "description": "This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.",
+        "exits": {
+            "SOUTH": "NORTH-OF-HOUSE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    {
+        "id": "CLEARING-BEHIND-HOUSE",
+        "name": "Clearing",
+        "description": "You are in a clearing, with a forest surrounding you on all sides. A path leads south.",
+        "exits": {
+            "WEST": "EAST-OF-HOUSE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    {
+        "id": "KITCHEN",
+        "name": "Kitchen",
+        "description": "You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.",
+        "exits": {
+            "WEST": "LIVING-ROOM",
+            "UP": "ATTIC",
+            "DOWN": "CHIMNEY"
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["BOTTLE", "SACK"]
+    },
+    {
+        "id": "ATTIC",
+        "name": "Attic",
+        "description": "You are in the attic. There is a large coil of rope here.",
+        "exits": {
+            "DOWN": "KITCHEN"
+        },
+        "flags": {
+            "isLit": true
+        },
+        "objects": ["ROPE"]
+    },
+    {
+        "id": "LIVING-ROOM",
+        "name": "Living Room",
+        "description": "You are in the living room. There is a doorway to the east. To the west is a wooden door with strange gothic lettering, which is closed. A dark staircase leads up and down. There is a trophy case here.",
+        "exits": {
+            "EAST": "KITCHEN",
+            "UP": "UP-STAIRS",
+            "DOWN": "CELLAR"
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["TROPHY-CASE", "LANTERN", "RUG", "SWORD"]
+    },
+    {
+        "id": "CELLAR",
+        "name": "Cellar",
+        "description": "You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.",
+        "exits": {
+            "UP": "LIVING-ROOM",
+            "NORTH": "TROLL-ROOM"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": false
+        }
+    },
+    {
+        "id": "TROLL-ROOM",
+        "name": "The Troll Room",
+        "description": "This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mark the walls.",
+        "exits": {
+            "SOUTH": "CELLAR",
+            "EAST": "EAST-OF-CHASM",
+            "WEST": "CHASM-ROOM"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true,
+            "isMunged": false
+        },
+        "objects": ["TROLL"]
+    },
+    {
+        "id": "CHASM-ROOM",
+        "name": "Chasm",
+        "description": "A chasm extends to the east and west. A narrow ledge of rock runs along the southern wall of the chasm. You can hear the sound of rapidly flowing water from below.",
+        "exits": {
+            "EAST": "TROLL-ROOM"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    {
+        "id": "EAST-OF-CHASM",
+        "name": "East of Chasm",
+        "description": "You are on the east edge of a chasm, the bottom of which is filled with water. A narrow passage goes north, and the path you are on continues to the west.",
+        "exits": {
+            "WEST": "TROLL-ROOM"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    {
+        "id": "MAZE1",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
+        "exits": {
+            "WEST": "MTROL",
+            "NORTH": "MAZE1",
+            "SOUTH": "MAZE2",
+            "EAST": "MAZE4"
+        },
+        "flags": { "isMaze": true, "isOnLand": true, "isLit": true }
+    },
+    {
+        "id": "MAZE2",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
+        "exits": {
+            "SOUTH": "MAZE1",
+            "NORTH": "MAZE4",
+            "EAST": "MAZE3"
+        },
+        "flags": { "isMaze": true, "isOnLand": true, "isLit": true }
+    },
+    {
+        "id": "MAZE3",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
+        "exits": {
+            "WEST": "MAZE2",
+            "NORTH": "MAZE4",
+            "UP": "MAZE5"
+        },
+        "flags": { "isMaze": true, "isOnLand": true, "isLit": true }
+    },
+    {
+        "id": "MAZE4",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
+        "exits": {
+            "WEST": "MAZE3",
+            "NORTH": "MAZE1",
+            "EAST": "DEAD1"
+        },
+        "flags": { "isMaze": true, "isOnLand": true, "isLit": true }
+    },
+    {
+        "id": "DEAD1",
+        "name": "Dead End",
+        "description": "You are in a dead end.",
+        "longDescription": "You are in a dead end.",
+        "exits": {
+            "SOUTH": "MAZE4"
+        },
+        "flags": { "isOnLand": true, "isLit": true }
+    },
+    {
+        "id": "MAZE5",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
+        "exits": {
+            "EAST": "DEAD2",
+            "NORTH": "MAZE3",
+            "SW": "MAZE6"
+        },
+        "flags": { "isMaze": true, "isOnLand": true, "isLit": true },
+        "objects": ["BONES", "BAGCO", "KEYS", "BLANT", "RKNIF"]
+    },
+    {
+        "id": "DEAD2",
+        "name": "Dead End",
+        "description": "You are in a dead end.",
+        "longDescription": "You are in a dead end.",
+        "exits": {
+            "WEST": "MAZE5"
+        },
+        "flags": { "isOnLand": true, "isLit": true }
+    },
+    {
+        "id": "MAZE6",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
+        "exits": {
+            "DOWN": "MAZE5",
+            "EAST": "MAZE7",
+            "WEST": "MAZE6",
+            "UP": "MAZE9"
+        },
+        "flags": { "isMaze": true, "isOnLand": true, "isLit": true }
+    },
+    {
+        "id": "MGRAT",
+        "name": "Grating Room",
+        "description": "You are in the Grating Room.",
+        "longDescription": "Grating Room",
+        "exits": {
+            "SW": "MAZ11"
+        },
+        "conditionalExits": {
+            "UP": { "target": "CLEAR", "conditionFlag": "KEY-FLAG", "conditionValue": "CLEAR", "message": "The grating is locked" }
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["GRAT2"]
+    },
+    {
+        "id": "STREA",
+        "name": "Stream",
+        "description": "You are in a stream. The stream travels to the north and the east.",
+        "longDescription": "Stream",
+        "exits": {
+            "EAST": "RESES",
+            "NORTH": "ICY"
+        },
+        "flags": { "isWater": true, "isOnLand": true, "isLit": true },
+        "objects": ["FUSE"]
+    },
+    {
+        "id": "EGYPT",
+        "name": "Egyptian Room",
+        "description": "You are in a room which looks like an Egyptian tomb. There is an ascending staircase in the room as well as doors, east and south.",
+        "longDescription": "Egyptian Room",
+        "exits": {
+            "UP": "ICY",
+            "SOUTH": "LEDG3"
+        },
+        "conditionalExits": {
+            "EAST": { "target": "CRAW1", "conditionFlag": "EGYPT-FLAG", "conditionValue": "CRAW1", "message": "The passage is too narrow to accomodate coffins." }
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["COFFI"]
+    },
+    {
+        "id": "ICY",
+        "name": "Glacier Room",
+        "description": "You are in the Glacier Room.",
+        "longDescription": "Glacier Room",
+        "exits": {
+            "NORTH": "STREA",
+            "EAST": "EGYPT"
+        },
+        "conditionalExits": {
+            "WEST": { "target": "RUBYR", "conditionFlag": "GLACIER-FLAG", "conditionValue": "RUBYR", "message": "The glacier blocks the way." }
+        },
+        "flags": { "isOnLand": true, "isLit": true }
+    },
+    {
+        "id": "TEMP1",
+        "name": "West Temple",
+        "description": "You are in the west end of a large temple. On the south wall is an ancient inscription, probably a prayer in a long-forgotten language. The north wall is solid granite. The entrance at the west end of the room is through huge marble pillars.",
+        "longDescription": "Temple",
+        "exits": {
+            "WEST": "MGRAT",
+            "EAST": "TEMP2"
+        },
+        "flags": { "isSacred": true, "isLit": true, "isOnLand": true },
+        "objects": ["PRAYE", "BELL"]
+    },
+    {
+        "id": "TEMP2",
+        "name": "East Temple",
+        "description": "You are in the east end of a large temple. In front of you is what appears to be an altar.",
+        "longDescription": "Altar",
+        "exits": {
+            "WEST": "TEMP1"
+        },
+        "flags": { "isSacred": true, "isLit": true, "isOnLand": true },
+        "objects": ["BOOK", "CANDL", "TRUNK"]
+    },
+    {
+        "id": "CYCLO",
+        "name": "Cyclops Room",
+        "description": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping.",
+        "longDescription": "Cyclops Room",
+        "exits": {
+            "WEST": "MAZ15"
+        },
+        "conditionalExits": {
+            "NORTH": { "target": "BLROO", "conditionFlag": "MAGIC-FLAG", "message": "The north wall is solid rock." },
+            "UP": { "target": "TREAS", "conditionFlag": "CYCLOPS-FLAG", "message": "The cyclops doesn't look like he'll let you past." }
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["CYCLO"]
+    },
+    {
+        "id": "TREAS",
+        "name": "Treasure Room",
+        "description": "This is a large room, whose north wall is solid granite. A number of discarded bags, which crumble at your touch, are scattered about on the floor.",
+        "longDescription": "Treasure Room",
+        "exits": {
+            "DOWN": "CYCLO"
+        },
+        "flags": { "isOnLand": true, "isLit": true, "isSacred": true },
+        "objects": ["CHALI"]
+    },
+    {
+        "id": "TWELL",
+        "name": "Top of Well",
+        "description": "You are at the top of the well. Well done. There are etchings on the side of the well. There is a small crack across the floor at the entrance to a room on the east, but it can be crossed easily.",
+        "longDescription": "Top of Well",
+        "exits": {
+            "EAST": "ALICE"
+        },
+        "conditionalExits": {
+            "DOWN": { "target": "BWELL", "message": "It's a long way down!" }
+        },
+        "flags": { "isOnLand": true, "isLit": true, "canFillBucket": true, "isWater": false }
+    },
+    {
+        "id": "BWELL",
+        "name": "Damp Circular Room",
+        "description": "You are in a damp circular room, whose walls are made of brick and mortar.",
+        "longDescription": "Damp Circular Room",
+        "exits": {
+            "UP": "TWELL"
+        },
+        "flags": { "isOnLand": true, "isLit": true },
+        "objects": ["BRICK"]
     }
-  },
-  {
-    "id": "FOREST-1",
-    "name": "Forest",
-    "description": "This is a forest, with trees in all directions. To the east, there is a large tree with some low branches. To the west, the forest continues.",
-    "exits": {
-      "EAST": "WEST-OF-HOUSE",
-      "WEST": "FOREST-2",
-      "UP": "UP-A-TREE"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    }
-  },
-  {
-    "id": "UP-A-TREE",
-    "name": "Up a Tree",
-    "description": "You are about 10 feet up in a big tree. You can see a nest with a large egg in it. The egg is covered with fine gold inlay. You can also see the roof of the house.",
-    "exits": {
-      "DOWN": "FOREST-1"
-    },
-    "flags": {
-      "isOnLand": false,
-      "isLit": true
-    },
-    "objects": ["EGG", "NEST"]
-  },
-  {
-    "id": "FOREST-2",
-    "name": "Forest",
-    "description": "This is a dimly lit forest, with trees all around. To the east, the forest appears to become clearer.",
-    "exits": {
-      "EAST": "FOREST-1",
-      "WEST": "FOREST-3"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    }
-  },
-  {
-    "id": "FOREST-3",
-    "name": "Forest",
-    "description": "This is a forest, with trees in all directions. There is a clearing to the west.",
-    "exits": {
-      "EAST": "FOREST-2",
-      "WEST": "CLEARING"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    }
-  },
-  {
-    "id": "CLEARING",
-    "name": "Clearing",
-    "description": "You are in a small clearing in a forest. Piles of leaves can be seen here. There is a large grating, securely bolted to the ground, to the west.",
-    "exits": {
-      "EAST": "FOREST-3"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    },
-    "objects": ["LEAVES", "GRATING"]
-  },
-  {
-    "id": "PATH",
-    "name": "Path",
-    "description": "This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.",
-    "exits": {
-      "SOUTH": "NORTH-OF-HOUSE"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    }
-  },
-  {
-    "id": "CLEARING-BEHIND-HOUSE",
-    "name": "Clearing",
-    "description": "You are in a clearing, with a forest surrounding you on all sides. A path leads south.",
-    "exits": {
-      "WEST": "EAST-OF-HOUSE"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    }
-  },
-  {
-    "id": "KITCHEN",
-    "name": "Kitchen",
-    "description": "You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.",
-    "exits": {
-      "WEST": "LIVING-ROOM",
-      "UP": "ATTIC",
-      "DOWN": "CHIMNEY"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true,
-      "isMunged": false
-    },
-    "objects": ["SACK", "BOTTLE", "TRAP-DOOR"]
-  },
-  {
-    "id": "ATTIC",
-    "name": "Attic",
-    "description": "You are in the attic. There is a large coil of rope here.",
-    "exits": {
-      "DOWN": "KITCHEN"
-    },
-    "flags": {
-      "isLit": true
-    },
-    "objects": ["ROPE"]
-  },
-  {
-    "id": "LIVING-ROOM",
-    "name": "Living Room",
-    "description": "You are in the living room. There is a doorway to the east. A dark staircase leads up and down. There is a trophy case here. Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.",
-    "exits": {
-      "EAST": "KITCHEN",
-      "UP": "UP-STAIRS",
-      "DOWN": "CELLAR"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    },
-    "objects": ["TROPHY-CASE", "SWORD", "LANTERN", "RUG"]
-  },
-  {
-    "id": "CELLAR",
-    "name": "Cellar",
-    "description": "You are in a dark and damp cellar with a narrow passage leading north.",
-    "exits": {
-      "UP": "LIVING-ROOM",
-      "NORTH": "TROLL-ROOM"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": false
-    }
-  },
-  {
-    "id": "TROLL-ROOM",
-    "name": "The Troll Room",
-    "description": "This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mark the walls.",
-    "exits": {
-      "SOUTH": "CELLAR",
-      "EAST": "EAST-OF-CHASM",
-      "WEST": "CHASM-ROOM"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true,
-      "isMunged": false
-    },
-    "objects": ["TROLL"]
-  },
-  {
-    "id": "CHASM-ROOM",
-    "name": "Chasm",
-    "description": "A chasm extends to the east and west. A narrow ledge of rock runs along the southern wall of the chasm. You can hear the sound of rapidly flowing water from below.",
-    "exits": {
-      "EAST": "TROLL-ROOM"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    }
-  },
-  {
-    "id": "EAST-OF-CHASM",
-    "name": "East of Chasm",
-    "description": "You are on the east edge of a chasm, the bottom of which is filled with water. A narrow passage goes north, and the path you are on continues to the west.",
-    "exits": {
-      "WEST": "TROLL-ROOM"
-    },
-    "flags": {
-      "isOnLand": true,
-      "isLit": true
-    }
-  }
 ]

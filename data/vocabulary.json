@@ -1,810 +1,118 @@
 {
     "adjectives": [
-        "brown",
-        "nasty",
-        "elvish",
-        "brassy",
-        "broken"
+        "brown", "nasty", "elvish", "brassy", "broken",
+        "bloody",
+        "leather",
+        "platinum",
+        "used", "burned", "dead", "useless",
+        "glass",
+        "rusty",
+        "dented", "iron",
+        "fancy",
+        "one-eyed", "monstrous",
+        "plastic", "with_hole",
+        "shiny", "thin",
+        "blue", "green", "purple", "white",
+        "large",
+        "crystal"
     ],
     "buzzwords": [
-        "by",
-        "is",
-        "one",
-        "it",
-        "a",
-        "the",
-        "an",
-        "this",
-        "over"
+        "by", "is", "one", "it", "a", "the", "an", "this", "over",
+        "of", "in", "on"
     ],
     "prepositions": [
-        "with",
-        "at",
-        "to",
-        "in",
-        "on",
-        "under",
-        "into",
-        "down",
-        "up"
+        "with", "at", "to", "in", "on", "under", "into", "down",
+        "out", "from", "up", "between", "behind", "through", "beside",
+        "onto", "from_within"
     ],
     "verbs": [
-        {
-            "id": "ATTAC",
-            "synonyms": [
-                "fight",
-                "mung",
-                "hack",
-                "frob",
-                "hurt",
-                "injur",
-                "damag",
-                "hit"
-            ]
-        },
-        {
-            "id": "BACK",
-            "synonyms": []
-        },
-        {
-            "id": "BLAST",
-            "synonyms": []
-        },
-        {
-            "id": "BOARD",
-            "synonyms": []
-        },
-        {
-            "id": "BRAND",
-            "synonyms": [
-                "flaun"
-            ]
-        },
-        {
-            "id": "BRIEF",
-            "synonyms": []
-        },
-        {
-            "id": "BRUSH",
-            "synonyms": [
-                "clean"
-            ]
-        },
-        {
-            "id": "BURN",
-            "synonyms": [
-                "incin",
-                "ignit"
-            ]
-        },
-        {
-            "id": "C-INT",
-            "synonyms": []
-        },
-        {
-            "id": "CHOMP",
-            "synonyms": [
-                "lose",
-                "barf"
-            ]
-        },
-        {
-            "id": "CLOSE",
-            "synonyms": []
-        },
-        {
-            "id": "CURSE",
-            "synonyms": [
-                "shit",
-                "fuck",
-                "damn"
-            ]
-        },
-        {
-            "id": "DEAD!",
-            "synonyms": []
-        },
-        {
-            "id": "DEFLA",
-            "synonyms": []
-        },
-        {
-            "id": "DIAGN",
-            "synonyms": []
-        },
-        {
-            "id": "DIG",
-            "synonyms": []
-        },
-        {
-            "id": "DISEM",
-            "synonyms": []
-        },
-        {
-            "id": "DRINK",
-            "synonyms": [
-                "imbib",
-                "swall"
-            ]
-        },
-        {
-            "id": "DROP",
-            "synonyms": [
-                "relea"
-            ]
-        },
-        {
-            "id": "DUNGE",
-            "synonyms": []
-        },
-        {
-            "id": "EAT",
-            "synonyms": [
-                "consu",
-                "gobbl",
-                "munch",
-                "taste"
-            ]
-        },
-        {
-            "id": "ENTER",
-            "synonyms": [
-                "in"
-            ]
-        },
-        {
-            "id": "EXAMI",
-            "synonyms": [
-                "descr",
-                "what",
-                "whats",
-                "what'"
-            ]
-        },
-        {
-            "id": "EXORC",
-            "synonyms": [
-                "xorci"
-            ]
-        },
-        {
-            "id": "EXTIN",
-            "synonyms": [
-                "douse"
-            ]
-        },
-        {
-            "id": "FILL",
-            "synonyms": []
-        },
-        {
-            "id": "FIND",
-            "synonyms": []
-        },
-        {
-            "id": "FIRST?",
-            "synonyms": []
-        },
-        {
-            "id": "FROBO",
-            "synonyms": []
-        },
-        {
-            "id": "GERON",
-            "synonyms": []
-        },
-        {
-            "id": "GIVE",
-            "synonyms": [
-                "hand",
-                "donat"
-            ]
-        },
-        {
-            "id": "GRANI",
-            "synonyms": []
-        },
-        {
-            "id": "HACK?",
-            "synonyms": []
-        },
-        {
-            "id": "HELLO",
-            "synonyms": [
-                "hi"
-            ]
-        },
-        {
-            "id": "HELP",
-            "synonyms": []
-        },
-        {
-            "id": "INFLA",
-            "synonyms": []
-        },
-        {
-            "id": "INFO",
-            "synonyms": []
-        },
-        {
-            "id": "INVEN",
-            "synonyms": [
-                "list"
-            ]
-        },
-        {
-            "id": "JARGON",
-            "synonyms": [
-                "foo",
-                "bletch"
-            ]
-        },
-        {
-            "id": "JUMP",
-            "synonyms": [
-                "leap",
-                "vault"
-            ]
-        },
-        {
-            "id": "KICK",
-            "synonyms": [
-                "bite",
-                "taunt"
-            ]
-        },
-        {
-            "id": "KILL",
-            "synonyms": [
-                "murde",
-                "slay",
-                "dispa"
-            ]
-        },
-        {
-            "id": "KNOCK",
-            "synonyms": []
-        },
-        {
-            "id": "LIGHT",
-            "synonyms": []
-        },
-        {
-            "id": "LOCK",
-            "synonyms": []
-        },
-        {
-            "id": "LOOK",
-            "synonyms": [
-                "l",
-                "stare",
-                "gaze"
-            ]
-        },
-        {
-            "id": "LOWER",
-            "synonyms": []
-        },
-        {
-            "id": "MELT",
-            "synonyms": [
-                "liqui"
-            ]
-        },
-        {
-            "id": "MOVE",
-            "synonyms": [
-                "pull",
-                "tug"
-            ]
-        },
-        {
-            "id": "MUMBL",
-            "synonyms": [
-                "sigh"
-            ]
-        },
-        {
-            "id": "ODYSS",
-            "synonyms": [
-                "ulyss"
-            ]
-        },
-        {
-            "id": "OPEN",
-            "synonyms": [
-                "squeeze"
-            ]
-        },
-        {
-            "id": "PICK",
-            "synonyms": []
-        },
-        {
-            "id": "PLUG",
-            "synonyms": [
-                "glue",
-                "patch"
-            ]
-        },
-        {
-            "id": "POKE",
-            "synonyms": [
-                "jab",
-                "break"
-            ]
-        },
-        {
-            "id": "POUR",
-            "synonyms": [
-                "spill"
-            ]
-        },
-        {
-            "id": "PRAY",
-            "synonyms": []
-        },
-        {
-            "id": "PUSH",
-            "synonyms": [
-                "press"
-            ]
-        },
-        {
-            "id": "PUT",
-            "synonyms": [
-                "stuff",
-                "place",
-                "inser"
-            ]
-        },
-        {
-            "id": "QUIT",
-            "synonyms": []
-        },
-        {
-            "id": "RAISE",
-            "synonyms": [
-                "lift"
-            ]
-        },
-        {
-            "id": "READ",
-            "synonyms": [
-                "skim",
-                "scan"
-            ]
-        },
-        {
-            "id": "REPEN",
-            "synonyms": []
-        },
-        {
-            "id": "RESTO",
-            "synonyms": []
-        },
-        {
-            "id": "RING",
-            "synonyms": [
-                "peal"
-            ]
-        },
-        {
-            "id": "RUB",
-            "synonyms": [
-                "cares",
-                "touch",
-                "fondl"
-            ]
-        },
-        {
-            "id": "SAVE",
-            "synonyms": []
-        },
-        {
-            "id": "SCORE",
-            "synonyms": []
-        },
-        {
-            "id": "SCRIP",
-            "synonyms": []
-        },
-        {
-            "id": "SKIP",
-            "synonyms": [
-                "hop"
-            ]
-        },
-        {
-            "id": "STRIK",
-            "synonyms": []
-        },
-        {
-            "id": "SUPER",
-            "synonyms": []
-        },
-        {
-            "id": "SWIM",
-            "synonyms": [
-                "bathe",
-                "wade"
-            ]
-        },
-        {
-            "id": "SWING",
-            "synonyms": [
-                "thrus"
-            ]
-        },
-        {
-            "id": "TAKE",
-            "synonyms": [
-                "get",
-                "hold",
-                "carry"
-            ]
-        },
-        {
-            "id": "TELL",
-            "synonyms": [
-                "comma",
-                "reque"
-            ]
-        },
-        {
-            "id": "TEMPL",
-            "synonyms": []
-        },
-        {
-            "id": "THROW",
-            "synonyms": [
-                "hurl",
-                "chuck"
-            ]
-        },
-        {
-            "id": "TIE",
-            "synonyms": [
-                "knot",
-                "faste"
-            ]
-        },
-        {
-            "id": "TIME",
-            "synonyms": []
-        },
-        {
-            "id": "TREAS",
-            "synonyms": []
-        },
-        {
-            "id": "TURN",
-            "synonyms": []
-        },
-        {
-            "id": "UNBRI",
-            "synonyms": []
-        },
-        {
-            "id": "UNLOCK",
-            "synonyms": []
-        },
-        {
-            "id": "UNSCR",
-            "synonyms": []
-        },
-        {
-            "id": "UNSUP",
-            "synonyms": []
-        },
-        {
-            "id": "UNTIE",
-            "synonyms": [
-                "relea",
-                "free"
-            ]
-        },
-        {
-            "id": "VERSI",
-            "synonyms": []
-        },
-        {
-            "id": "WAIT",
-            "synonyms": []
-        },
-        {
-            "id": "WAKE",
-            "synonyms": [
-                "awake",
-                "surpr",
-                "start"
-            ]
-        },
-        {
-            "id": "WALK",
-            "synonyms": []
-        },
-        {
-            "id": "WALK-IN",
-            "synonyms": []
-        },
-        {
-            "id": "WAVE",
-            "synonyms": []
-        },
-        {
-            "id": "WELL",
-            "synonyms": []
-        },
-        {
-            "id": "WHERE",
-            "synonyms": [
-                "find",
-                "seek",
-                "see"
-            ]
-        },
-        {
-            "id": "WIN",
-            "synonyms": [
-                "winna"
-            ]
-        },
-        {
-            "id": "YELL",
-            "synonyms": [
-                "screa",
-                "shout"
-            ]
-        },
-        {
-            "id": "ZORK",
-            "synonyms": []
-        }
+        {"id": "ATTACK", "synonyms": ["hit", "fight", "strike", "chop", "kill", "murde", "slay", "dispa"]},
+        {"id": "OPEN", "synonyms": ["open"]},
+        {"id": "READ", "synonyms": ["skim", "scan"]},
+        {"id": "TAKE", "synonyms": ["get", "carry", "pick", "grab"]},
+        {"id": "DROP", "synonyms": ["leave", "put", "place"]},
+        {"id": "LOOK", "synonyms": ["l", "stare", "gaze", "descr", "what", "whats", "what'"]},
+        {"id": "EXAMINE", "synonyms": ["exami", "inspect", "check"]},
+        {"id": "GO", "synonyms": ["walk", "run", "move"]},
+        {"id": "MOVE", "synonyms": ["push", "pull", "shove", "move"]},
+        {"id": "TURN-ON", "synonyms": ["on", "light", "ignit"]},
+        {"id": "TURN-OFF", "synonyms": ["off", "extin", "douse"]},
+        {"id": "GIVE", "synonyms": ["hand", "donat"]},
+        {"id": "PLUG", "synonyms": ["plug"]},
+        {"id": "RUB", "synonyms": ["cares", "touch", "fondl"]},
+        {"id": "BURN", "synonyms": ["burn", "light"]},
+        {"id": "CLOSE", "synonyms": ["close"]},
+        {"id": "UNLOCK", "synonyms": ["unloc"]},
+        {"id": "LOCK", "synonyms": ["lock"]},
+        {"id": "TIE", "synonyms": ["tie"]},
+        {"id": "RING", "synonyms": ["ring", "peal"]},
+        {"id": "EAT", "synonyms": ["eat"]},
+        {"id": "DRINK", "synonyms": ["drink"]},
+        {"id": "BRUSH", "synonyms": ["brush"]},
+        {"id": "UNTIE", "synonyms": ["untie"]},
+        {"id": "THROW", "synonyms": ["throw", "toss"]},
+        {"id": "MUNG", "synonyms": ["mung", "break"]},
+        {"id": "SAVE", "synonyms": ["save"]},
+        {"id": "RESTORE", "synonyms": ["resto"]},
+        {"id": "QUIT", "synonyms": ["quit"]},
+        {"id": "INVENTORY", "synonyms": ["inven", "list"]},
+        {"id": "SCORE", "synonyms": ["score"]},
+        {"id": "HELP", "synonyms": ["help", "info"]},
+        {"id": "JUMP", "synonyms": ["leap", "vault"]},
+        {"id": "ENTER", "synonyms": ["enter"]}
     ],
     "nouns": [
-        {
-            "id": "ADVER",
-            "name": "adver",
-            "synonyms": []
-        },
-        {
-            "id": "AXE",
-            "name": "axe",
-            "synonyms": []
-        },
-        {
-            "id": "BAGCO",
-            "name": "bagco",
-            "synonyms": []
-        },
-        {
-            "id": "BAR",
-            "name": "bar",
-            "synonyms": []
-        },
-        {
-            "id": "BELL",
-            "name": "bell",
-            "synonyms": []
-        },
-        {
-            "id": "BLANT",
-            "name": "blant",
-            "synonyms": []
-        },
-        {
-            "id": "BOTTLE",
-            "name": "bottle",
-            "synonyms": []
-        },
-        {
-            "id": "CANDL",
-            "name": "candl",
-            "synonyms": []
-        },
-        {
-            "id": "COFFI",
-            "name": "coffi",
-            "synonyms": []
-        },
-        {
-            "id": "DIAMO",
-            "name": "diamo",
-            "synonyms": []
-        },
-        {
-            "id": "EGG",
-            "name": "egg",
-            "synonyms": [
-                "egg"
-            ]
-        },
-        {
-            "id": "FOOD",
-            "name": "food",
-            "synonyms": []
-        },
-        {
-            "id": "GARLI",
-            "name": "garli",
-            "synonyms": []
-        },
-        {
-            "id": "GRATING",
-            "name": "grating",
-            "synonyms": [
-                "grating",
-                "grate"
-            ]
-        },
-        {
-            "id": "KNIFE",
-            "name": "knife",
-            "synonyms": []
-        },
-        {
-            "id": "LANTERN",
-            "name": "lantern",
-            "synonyms": []
-        },
-        {
-            "id": "LEAVES",
-            "name": "leaves",
-            "synonyms": [
-                "leaves",
-                "leaf",
-                "pile"
-            ]
-        },
-        {
-            "id": "MAILBOX",
-            "name": "mailbox",
-            "synonyms": [
-                "mailbox",
-                "box"
-            ]
-        },
-        {
-            "id": "NEST",
-            "name": "nest",
-            "synonyms": [
-                "nest"
-            ]
-        },
-        {
-            "id": "ROPE",
-            "name": "rope",
-            "synonyms": []
-        },
-        {
-            "id": "RUG",
-            "name": "rug",
-            "synonyms": []
-        },
-        {
-            "id": "SACK",
-            "name": "sack",
-    "synonyms": ["bag", "sack", "baggi"]
-        },
-        {
-            "id": "SWORD",
-            "name": "sword",
-            "synonyms": []
-        },
-        {
-            "id": "TROPHY-CASE",
-            "name": "trophy case",
-            "synonyms": [
-                "trophy case",
-                "case"
-            ]
-        },
-        {
-            "id": "TRAP-DOOR",
-            "name": "trap door",
-            "synonyms": [
-                "trap door",
-                "trapdoor",
-                "cover"
-            ]
-        },
-        {
-            "id": "TROLL",
-            "name": "troll",
-            "synonyms": []
-        },
-        {
-            "id": "WATER",
-            "name": "water",
-            "synonyms": []
-        },
-        {
-            "id": "WINDOW",
-            "name": "window",
-            "synonyms": [
-                "window",
-                "win"
-            ]
-        },
-        {
-            "id": "HOUSE",
-            "name": "house",
-            "synonyms": [
-                "house"
-            ]
-        },
-        {
-            "id": "LEAFLET",
-            "name": "leaflet",
-            "synonyms": [
-                "leaflet",
-                "pamphlet",
-                "booklet"
-            ]
-        },
-        {
-            "id": "MAT",
-            "name": "mat",
-            "synonyms": [
-                "mat",
-                "rubber mat",
-                "welcome mat"
-            ]
-        },
-        {
-            "id": "FRONT-DOOR",
-            "name": "door",
-            "synonyms": [
-                "door",
-                "front door",
-                "boarded door"
-            ]
-        }
+        {"id": "ADVER", "synonyms": ["pamphlet", "leaflet", "booklet"]},
+        {"id": "AXE", "synonyms": ["bloody axe"]},
+        {"id": "BAGCO", "synonyms": ["bag", "coins", "leather bag"]},
+        {"id": "BAR", "synonyms": ["plati", "platinum bar"]},
+        {"id": "BELL", "synonyms": ["brass bell"]},
+        {"id": "LANTERN", "synonyms": ["lantern", "lamp", "brass lantern"]},
+        {"id": "BLANT", "synonyms": ["lantern", "lamp", "burned-out lantern"]},
+        {"id": "BOTTLE", "synonyms": ["glass bottle", "conta", "pitch"]},
+        {"id": "KNIFE", "synonyms": ["nasty-looking knife"]},
+        {"id": "LEAVES", "synonyms": ["pile", "leaves"]},
+        {"id": "MAILBOX", "synonyms": ["mail", "box", "small mailbox"]},
+        {"id": "NEST", "synonyms": ["egg", "jewel-encrusted egg"]},
+        {"id": "ROPE", "synonyms": ["hemp", "coil", "large coil of rope"]},
+        {"id": "SACK", "synonyms": ["bag", "leather sack"]},
+        {"id": "SWORD", "synonyms": ["orcri", "glamd", "blade", "elvish sword"]},
+        {"id": "TROPHY-CASE", "synonyms": ["case", "trophy case"]},
+        {"id": "TRAP-DOOR", "synonyms": ["trapdoor", "cover", "trap", "dusty trap door"]},
+        {"id": "TROLL", "synonyms": ["nasty-looking troll", "volcano gnome"]},
+        {"id": "WATER", "synonyms": ["liqui", "h2o", "quantity of water"]},
+        {"id": "WINDOW", "synonyms": ["win", "window"]},
+        {"id": "HOUSE", "synonyms": ["white house"]},
+        {"id": "MAT", "synonyms": ["rubber mat", "welcome mat"]},
+        {"id": "FRONT-DOOR", "synonyms": ["door", "front door", "boarded door"]},
+        {"id": "RKNIF", "synonyms": ["knife", "rusty knife"]},
+        {"id": "GRAT2", "synonyms": ["grating", "grate"]},
+        {"id": "ZORKMID", "synonyms": ["zorkm", "coin", "gold coin"]},
+        {"id": "SAFE", "synonyms": ["box"]},
+        {"id": "CARD", "synonyms": ["note"]},
+        {"id": "FUSE", "synonyms": ["coil", "wire", "shiny wire"]},
+        {"id": "BALLO", "synonyms": ["basket", "wicker basket"]},
+        {"id": "PUMP", "synonyms": ["air-p", "airpu", "hand pump"]},
+        {"id": "RBOAT", "synonyms": ["boat", "inflated boat"]},
+        {"id": "CROWN", "synonyms": ["jeweled crown", "crown"]},
+        {"id": "GRAIL", "synonyms": ["valuable grail", "original grail", "grail"]},
+        {"id": "PLATINUM BAR", "synonyms": ["platinum bar"]},
+        {"id": "KEYS", "synonyms": ["keys"]},
+        {"id": "RUG", "synonyms": ["rug", "carpet"]}
     ],
     "directions": [
-        {
-            "id": "DOWN",
-            "synonyms": [
-                "d"
-            ]
-        },
-        {
-            "id": "EAST",
-            "synonyms": [
-                "e"
-            ]
-        },
-        {
-            "id": "EXIT",
-            "synonyms": [
-                "out",
-                "leave"
-            ]
-        },
-        {
-            "id": "NORTH",
-            "synonyms": [
-                "n"
-            ]
-        },
-        {
-            "id": "SOUTH",
-            "synonyms": [
-                "s"
-            ]
-        },
-        {
-            "id": "UP",
-            "synonyms": [
-                "u"
-            ]
-        },
-        {
-            "id": "WEST",
-            "synonyms": [
-                "w"
-            ]
-        }
+        {"id": "DOWN", "synonyms": ["d"]},
+        {"id": "EAST", "synonyms": ["e"]},
+        {"id": "EXIT", "synonyms": ["out", "leave"]},
+        {"id": "NORTH", "synonyms": ["n"]},
+        {"id": "SOUTH", "synonyms": ["s"]},
+        {"id": "UP", "synonyms": ["u"]},
+        {"id": "WEST", "synonyms": ["w"]},
+        {"id": "NORTHEAST", "synonyms": ["ne"]},
+        {"id": "NORTHWEST", "synonyms": ["nw"]},
+        {"id": "SOUTHEAST", "synonyms": ["se"]},
+        {"id": "SOUTHWEST", "synonyms": ["sw"]},
+        {"id": "CROSS", "synonyms": ["cross"]},
+        {"id": "CLIMB", "synonyms": ["climb"]}
     ]
 }
