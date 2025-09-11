@@ -13,6 +13,27 @@ const objectsData = {
         "synonyms": [],
         "adjectives": []
     },
+    "NEST": {
+        "id": "NEST",
+        "name": "nest",
+        "description": "A jewel-encrusted bird's nest is here.",
+        "initialDescription": "",
+        "flags": 17,
+        "properties": {},
+        "synonyms": [],
+        "adjectives": [],
+        "contents": ["EGG"]
+    },
+    "EGG": {
+        "id": "EGG",
+        "name": "egg",
+        "description": "A beautiful blue egg is here.",
+        "initialDescription": "",
+        "flags": 1,
+        "properties": {},
+        "synonyms": [],
+        "adjectives": ["blue"]
+    },
     "SBAG": {
         "id": "SBAG",
         "name": "sandwich bag",
@@ -285,7 +306,9 @@ const objectsData = {
         "description": "An old leather bag, bulging with coins, is here.",
         "initialDescription": "",
         "flags": 16385,
-        "properties": {},
+        "properties": {
+            "trophyValue": 10
+        },
         "synonyms": [],
         "adjectives": []
     },
@@ -466,9 +489,20 @@ const objectsData = {
         "name": "trunk with jewels",
         "description": "There is an old trunk here, bulging with assorted jewels.",
         "initialDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
-        "flags": 0,
+        "flags": 17,
+        "properties": {},
+        "synonyms": [],
+        "adjectives": [],
+        "contents": ["JEWELS"]
+    },
+    "JEWELS": {
+        "id": "JEWELS",
+        "name": "jewels",
+        "description": "A pile of jewels is here.",
+        "initialDescription": "",
+        "flags": 1,
         "properties": {
-            "function": "TAKEBIT"
+            "trophyValue": 15
         },
         "synonyms": [],
         "adjectives": []
@@ -946,7 +980,7 @@ const objectsData = {
         "name": "wire coil",
         "description": "There is a coil of thin shiny wire here.",
         "initialDescription": "",
-        "flags": 16417,
+        "flags": 33,
         "properties": {
             "function": "FUSE-FUNCTION"
         },
@@ -960,7 +994,7 @@ const objectsData = {
         "initialDescription": "",
         "flags": 81920,
         "properties": {
-            "function": "BIGFIX"
+            "function": "GNOME-FUNCTION"
         },
         "synonyms": [],
         "adjectives": []
@@ -1224,7 +1258,7 @@ const objectsData = {
         "name": "robot",
         "description": "There is a robot here.",
         "initialDescription": "",
-        "flags": 536953088,
+        "flags": 604061952,
         "properties": {
             "function": "ROBOT-FUNCTION"
         },
@@ -1775,7 +1809,8 @@ const roomsData = {
             "GRAT2"
         ],
         "flags": 0,
-        "properties": []
+        "properties": [],
+        "roomAction": "MAZE-11"
     },
     "MAZ12": {
         "id": "MAZ12",
@@ -2677,7 +2712,8 @@ const roomsData = {
             "IRBOX"
         ],
         "flags": 0,
-        "properties": []
+        "properties": [],
+        "roomAction": "CAROUSEL-ROOM"
     },
     "PASS5": {
         "id": "PASS5",
@@ -3400,7 +3436,12 @@ const roomsData = {
                 "blocked": "I wouldn't jump from here."
             },
             "LAUNC": "VAIR2",
-            "CXGNOME": "SOUTH"
+            "WEST": {
+                "condition": "\"GNOME-PLEASED\"",
+                "destination": "VLBOT",
+                "message": "The gnome is blocking your way."
+            },
+            "SOUTH": "LIBRA"
         },
         "objects": [
             "HOOK1",
@@ -3452,7 +3493,12 @@ const roomsData = {
                 "blocked": "It's a long way down."
             },
             "LAUNC": "VAIR4",
-            "CXGNOME": "SOUTH"
+            "WEST": {
+                "condition": "\"GNOME-PLEASED\"",
+                "destination": "VLBOT",
+                "message": "The gnome is blocking your way."
+            },
+            "SOUTH": "SAFE"
         },
         "objects": [
             "HOOK2"
@@ -3534,7 +3580,8 @@ const roomsData = {
             "TRBUT"
         ],
         "flags": 0,
-        "properties": []
+        "properties": [],
+        "roomAction": "CMACH-ROOM"
     },
     "CAGER": {
         "id": "CAGER",
@@ -3646,6 +3693,17 @@ const roomsData = {
             "POOL",
             "SAFFR"
         ],
+        "flags": 0,
+        "properties": []
+    },
+    "SECRE": {
+        "id": "SECRE",
+        "shortDesc": "Secret Room",
+        "longDesc": "This is a secret room! You found it!",
+        "exits": {
+            "WEST": "CMACH"
+        },
+        "objects": [],
         "flags": 0,
         "properties": []
     }
@@ -3804,10 +3862,9 @@ const RBITS = {
     RART: 1 << 12,     // Room contains an artifact
     RCLIMB: 1 << 13,   // Room can be climbed
     RDIR: 1 << 14,     // Directional room
-    NONLAND: 1 << 15,  // Not on land (This appears to be inverted in JS based on MDL RLANDBIT)
-    RLAND: 1 << 16,    // Room is on land (MDL RLANDBIT, inverse of NONLAND in JS)
-    RHOUSE: 1 << 17,   // Room is part of the house (MDL RHOUSEBIT)
-    RDESCBIT: 1 << 18  // Force room description (internal VM flag)
+    RLAND: 1 << 15,    // Room is on land (MDL RLANDBIT)
+    RHOUSE: 1 << 16,   // Room is part of the house (MDL RHOUSEBIT)
+    RDESCBIT: 1 << 17  // Force room description (internal VM flag)
 };
 
 // OFLAGS: Object flags (Expanded based on MDL sources)
@@ -3836,7 +3893,9 @@ const OFLAGS = {
     INVISIBLE: 1 << 21,    // Object is invisible
     DISARMEDBIT: 1 << 22,  // Object is disarmed (e.g., a trap)
     NOTDESCBIT: 1 << 23,   // Object is not described separately (MDL NDESCBIT)
-    TRYTAKEBIT: 1 << 24    // Attempt to take object (MDL TRYTAKEBIT)
+    TRYTAKEBIT: 1 << 24,   // Attempt to take object (MDL TRYTAKEBIT)
+    FLAMEBIT: 1 << 25,     // Object is on fire
+    ACTORBIT: 1 << 26      // Object is an actor (e.g. robot)
 };
 
 
@@ -3996,6 +4055,7 @@ function parseCommand(command, vocabulary) {
         verb: verb.id,
         dobj: dobj ? dobj.id : null,
         iobj: iobj ? iobj.id : null,
+        command: iobjString, // The rest of the command for TELL
         error: !dobj && dobjString ? `I can't see a "${dobjString.trim()}" here.` : null
     };
 }
@@ -4149,6 +4209,9 @@ const actionHandlers = {
             game.player.location = exit;
             const targetRoom = game.rooms.get(exit);
             targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
+            if (targetRoom.roomAction) {
+                executeRoomAction(targetRoom.roomAction, game, targetRoom);
+            }
             return '';
         }
 
@@ -4159,7 +4222,10 @@ const actionHandlers = {
                 const targetRoom = game.rooms.get(exit.destination);
                 targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
                 if (exit.action) {
-                    executeRoomAction(exit.action, game);
+                    executeRoomAction(exit.action, game, targetRoom);
+                }
+                if (targetRoom.roomAction) {
+                    executeRoomAction(targetRoom.roomAction, game, targetRoom);
                 }
                 return '';
             } else {
@@ -4339,6 +4405,149 @@ const actionHandlers = {
         }
 
         return "You can't unlock that.";
+    },
+
+    PLUG: (dobj, iobj, game) => {
+        // Simplified version of the MDL LEAK-FUNCTION.
+        // The original also stopped a clock.
+        if (dobj.id === 'LEAK' && iobj.id === 'PUTTY') {
+            game.globalFlags.set('LEAK-FIXED', true);
+            return "By some miracle of elven technology, you have managed to stop the leak in the dam.";
+        }
+        return "You can't plug that.";
+    },
+
+    RUB: (dobj, iobj, game) => {
+        if (!dobj) return "Rub what?";
+
+        if (dobj.id === 'REFL1' || dobj.id === 'REFL2') {
+            if (game.globalFlags.get('MIRROR_BROKEN')) {
+                return "The mirror is broken into many pieces.";
+            }
+
+            const room1Id = game.player.location;
+            const room2Id = room1Id === 'MIRR1' ? 'MIRR2' : 'MIRR1';
+
+            const room1 = game.rooms.get(room1Id);
+            const room2 = game.rooms.get(room2Id);
+
+            // Swap objects between rooms
+            const room1Objects = Array.from(game.objects.values()).filter(o => o.location === room1Id);
+            const room2Objects = Array.from(game.objects.values()).filter(o => o.location === room2Id);
+
+            room1Objects.forEach(o => { o.location = room2Id; });
+            room2Objects.forEach(o => { o.location = room1Id; });
+
+            // Move player
+            game.player.location = room2Id;
+            game.rooms.get(room2Id).rbits = setFlag(game.rooms.get(room2Id).rbits, RBITS.RDESCBIT);
+
+            return "There is a rumble from deep within the earth and the room shakes.";
+        }
+
+        if (dobj.id === 'LAMP') {
+            return "Rubbing the brass lantern has no effect.";
+        }
+        return "You can't rub that.";
+    },
+
+    BURN: (dobj, iobj, game) => {
+        if (!dobj) return "Burn what?";
+        if (!iobj) return "Burn it with what?";
+
+        if (!hasFlag(dobj.oflags, OFLAGS.BURNBIT)) {
+            return "You can't burn that.";
+        }
+        if (!hasFlag(iobj.oflags, OFLAGS.FLAMEBIT)) {
+            return "You can't burn it with that.";
+        }
+
+        if (dobj.location === 'IN_INVENTORY') {
+            return `DEATH: The ${dobj.name} catches fire. Unfortunately, you were holding it at the time.`;
+        }
+
+        if (dobj.id === 'FUSE') {
+            dobj.location = 'NOWHERE'; // The fuse is burned up
+            return "The fuse burns brightly and is gone.";
+        }
+
+        dobj.location = 'NOWHERE';
+        return `The ${dobj.name} catches fire and is consumed.`;
+    },
+
+    GIVE: (dobj, iobj, game) => {
+        if (!dobj) return "What do you want to give?";
+        if (!iobj) return "Who do you want to give it to?";
+
+        if (iobj.id === 'GNOME') {
+            if (dobj.trophyValue > 0) {
+                game.globalFlags.set('GNOME-PLEASED', true);
+                dobj.location = 'NOWHERE';
+                return `The gnome, delighted with the ${dobj.name}, shows you a secret passage to the south.`;
+            } else {
+                dobj.location = 'NOWHERE';
+                return `The gnome crunches the ${dobj.name} in his rock-hard hands.`;
+            }
+        }
+
+        return "You can't give that to them.";
+    },
+
+    TELL: (dobj, iobj, game, action) => {
+        if (!dobj) return "Tell whom?";
+        if (!hasFlag(dobj.oflags, OFLAGS.ACTORBIT)) {
+            return "You can't talk to that.";
+        }
+
+        if (dobj.id === 'ROBOT') {
+            const command = action.command;
+            if (command && command.toLowerCase().includes('east')) {
+                const room = game.rooms.get(dobj.location);
+                const exit = room.exits['EAST'];
+                if (exit) {
+                    dobj.location = exit;
+                    return "The robot trundles east.";
+                } else {
+                    return "The robot can't go that way.";
+                }
+            }
+            return "The robot does not understand.";
+        }
+
+        return "They don't seem to be listening.";
+    },
+
+    PUSH: (dobj, iobj, game) => {
+        if (!dobj) return "Push what?";
+
+        const machine = game.objects.get('MACHI');
+        if (!machine.machineState) {
+            machine.machineState = [];
+        }
+
+        let sound = "You can't push that.";
+        let buttonPressed = null;
+
+        if (dobj.id === 'SQBUT') {
+            buttonPressed = 'SQUARE';
+            sound = "A whirring sound may be heard from the machinery.";
+        } else if (dobj.id === 'RNBUT') {
+            buttonPressed = 'ROUND';
+            sound = "A clanking noise is heard.";
+        } else if (dobj.id === 'TRBUT') {
+            buttonPressed = 'TRIANGLE';
+            sound = "A humming sound is heard from the machine.";
+        }
+
+        if (buttonPressed) {
+            machine.machineState.push(buttonPressed);
+            if (machine.machineState.length > 3) {
+                machine.machineState.shift(); // Keep only the last 3 presses
+            }
+            return sound;
+        }
+
+        return sound;
     }
 };
 
@@ -4379,10 +4588,47 @@ actionHandlers.ENTER = (dobj, iobj, game, action) => {
     return "You can't enter that.";
 };
 
-function executeRoomAction(action, game) {
+function executeRoomAction(action, game, room) {
     switch (action) {
         case 'COFFIN-CURE':
             game.globalFlags.set('EGYPT-FLAG', false);
+            break;
+        case 'MAZE-11':
+            let grateDesc = "Above you is a grating locked with a skull-and-crossbones lock.";
+            if (game.globalFlags.get('GRATING-UNLOCKED')) {
+                grateDesc = "Above you is a grating.";
+            }
+            if (game.globalFlags.get('GRATING-OPEN')) {
+                grateDesc = "Above you is an open grating with sunlight pouring in.";
+            }
+            return `You are in a small room near the maze. There are twisty passages in the immediate vicinity.\n${grateDesc}`;
+        case 'CAROUSEL-ROOM':
+            if (!room.carouselState) {
+                room.carouselState = 0;
+            }
+            room.carouselState = (room.carouselState + 1) % 8; // There are 8 directions
+            const exits = [
+                "NORTH", "SOUTH", "EAST", "WEST",
+                "NW", "NE", "SE", "SW"
+            ];
+            const destinations = [
+                "CAVE4", "CAVE4", "MGRAI", "PASS1",
+                "CANY1", "PASS5", "PASS4", "MAZE1"
+            ];
+            const newExits = {};
+            for (let i = 0; i < exits.length; i++) {
+                const newIndex = (i + room.carouselState) % exits.length;
+                newExits[exits[i]] = destinations[newIndex];
+            }
+            room.exits = newExits;
+            break;
+        case 'CMACH-ROOM':
+            const machine = game.objects.get('MACHI');
+            if (machine.machineState && machine.machineState.join(',') === 'SQUARE,ROUND,TRIANGLE') {
+                room.exits['EAST'] = 'SECRE';
+                machine.machineState = []; // Reset the machine state
+                return "The eastern wall of the room slowly swings open, revealing a passage.";
+            }
             break;
         default:
             break;
@@ -4405,6 +4651,11 @@ function evaluateCondition(condition, game) {
         case 'GRATING-UNLOCKED': // This is a made-up flag for now
             const grating = game.objects.get('GRAT2');
             return grating && !hasFlag(grating.oflags, OFLAGS.LOCKBIT);
+        case 'GNOME-FUNCTION':
+            const gnome = game.objects.get('GNOME');
+            // The gnome blocks the way unless he is pleased.
+            // This is a placeholder for the real logic.
+            return game.globalFlags.get('GNOME-PLEASED');
     }
 
     // Check for global flags
@@ -4422,6 +4673,7 @@ class Game {
         this.vocabulary = data.vocabulary;
         this.deathMessages = data.deathMessages;
         this.globalFlags = new Map();
+        this.stars = ['TROLL', 'CYCLO', 'THIEF']; // Important objects
 
         this.initObjectLocations();
     }
@@ -4467,6 +4719,10 @@ class Game {
         const dobj = action.dobj ? this.findObject(action.dobj) : null;
         const iobj = action.iobj ? this.findObject(action.iobj) : null;
 
+        if (dobj === 'AMBIGUOUS' || iobj === 'AMBIGUOUS') {
+            return `Which ${action.dobj || action.iobj} do you mean?`;
+        }
+
         // 3. Apply the action
         let result = '';
         if (action.verb) {
@@ -4490,25 +4746,40 @@ class Game {
     findObject(objectId) {
         if (!objectId) return null;
 
-        // First, check player's inventory
-        let obj = Array.from(this.objects.values()).find(o => o.id === objectId && o.location === 'IN_INVENTORY');
-        if (obj) {
-            return obj;
-        }
+        const foundObjects = [];
 
-        // Then, check the player's current location
-        obj = Array.from(this.objects.values()).find(o => o.id === objectId && o.location === this.player.location);
-        if (obj) return obj;
+        // Search order: STARS, inventory, room, open containers in room
+        const searchAreas = [
+            this.stars.map(id => this.objects.get(id)),
+            Array.from(this.objects.values()).filter(o => o.location === 'IN_INVENTORY'),
+            Array.from(this.objects.values()).filter(o => o.location === this.player.location),
+        ];
 
-        // Finally, check for objects inside OPEN containers in the current room
+        // Add objects from open containers in the room
         const containersInRoom = Array.from(this.objects.values()).filter(o =>
             o.location === this.player.location &&
             hasFlag(o.oflags, OFLAGS.CONTBIT) &&
             hasFlag(o.oflags, OFLAGS.OPENBIT) // Container must be open
         );
         for (const container of containersInRoom) {
-             obj = Array.from(this.objects.values()).find(o => o.id === objectId && o.location === container.id);
-             if (obj) return obj;
+            searchAreas.push(Array.from(this.objects.values()).filter(o => o.location === container.id));
+        }
+
+
+        for (const area of searchAreas) {
+            const matchingObjects = area.filter(o => o && o.id === objectId);
+            foundObjects.push(...matchingObjects);
+        }
+
+        if (foundObjects.length === 1) {
+            return foundObjects[0];
+        } else if (foundObjects.length > 1) {
+            // If we find the same object multiple times (e.g. in STARS and in room), it's not ambiguous.
+            const uniqueObjects = [...new Set(foundObjects)];
+            if (uniqueObjects.length === 1) {
+                return uniqueObjects[0];
+            }
+            return 'AMBIGUOUS';
         }
 
         // If the object is not in scope, it cannot be found.
