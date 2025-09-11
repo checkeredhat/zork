@@ -22,7 +22,7 @@ const actionHandlers = {
         if (dobj.location !== game.player.location) return "You can't see that here.";
         if (hasFlag(dobj.oflags, OFLAGS.TAKEBIT)) {
             dobj.location = 'IN_INVENTORY';
-            return `Taken.`;
+            return `${dobj.name}: Taken.`;
         }
         return `You can't take the ${dobj.name}.`;
     },
@@ -64,7 +64,7 @@ const actionHandlers = {
             return "You can't see that here.";
         }
         let text = dobj.description || `You see nothing special about the ${dobj.name}.`;
-        if (hasFlag(dobj.oflags, OFLAGS.CONTAINBIT)) {
+        if (hasFlag(dobj.oflags, OFLAGS.CONTBIT)) {
              const contents = Array.from(game.objects.values()).filter(obj => obj.location === dobj.id);
              if (contents.length > 0) {
                  text += `\nThe ${dobj.name} contains:\n` + contents.map(c => `  ${c.name}`).join('\n');
@@ -93,7 +93,7 @@ const actionHandlers = {
 
             // Special response for the mailbox
             if (dobj.id === 'MAILBOX') {
-            const leaflet = game.objects.get('LEAFLET');
+            const leaflet = game.objects.get('ADVER');
                 // Check if leaflet is still inside
                 if (leaflet && leaflet.location === 'MAILBOX') {
                     return "Opening the small mailbox reveals a leaflet.";
@@ -148,6 +148,7 @@ const actionHandlers = {
             dobj.oflags = setFlag(dobj.oflags, OFLAGS.INVISIBLE); // Hide the rug
             const trapDoor = game.objects.get('TRAP-DOOR');
             trapDoor.oflags = clearFlag(trapDoor.oflags, OFLAGS.INVISIBLE); // Reveal the trap door
+            trapDoor.location = game.player.location;
             return "With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap door appears.";
         }
         return "You can't move that.";
@@ -163,23 +164,16 @@ const actionHandlers = {
             return "Attacking the troll with your bare hands is suicidal.";
         }
 
-        // Simple combat logic for now
         troll.trollState = troll.trollState || { unconscious: false, hits: 0 };
-
-        if (troll.trollState.unconscious) {
-            return "The troll is already unconscious.";
-        }
 
         troll.trollState.hits++;
 
         if (troll.trollState.hits >= 2) {
              troll.trollState.unconscious = true;
-             // You can add more state changes here, like making the troll 'dead'
-             // or changing its description.
              troll.description = "The troll is lying on the ground, unconscious.";
              return "The troll is knocked out!";
         } else {
-             return "A furious but glancing blow is struck.";
+             return "A furious but glancing blow is struck.\nThe troll's axe barely misses your ear.";
         }
     },
 

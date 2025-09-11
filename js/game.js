@@ -37,9 +37,16 @@ class Game {
                 }
             }
         }
-        // Special case for leaflet, initially in mailbox
-    if (this.objects.has('LEAFLET') && this.objects.has('MAILBOX')) {
-        this.objects.get('LEAFLET').location = 'MAILBOX';
+
+        // Set initial locations for objects contained within other objects
+        for (const container of this.objects.values()) {
+            if (container.contents && container.contents.length > 0) {
+                for (const objectId of container.contents) {
+                    if (this.objects.has(objectId)) {
+                        this.objects.get(objectId).location = container.id;
+                    }
+                }
+            }
         }
     }
 
@@ -104,16 +111,7 @@ class Game {
 
      look() {
         const room = this.rooms.get(this.player.location);
-        if (room.id === 'WEST-OF-HOUSE') {
-            return "You are in an open field west of a big white house, with a boarded front door.\nThere is a mailbox here.";
-        }
-        if (room.id === 'EAST-OF-HOUSE') {
-            return "You are behind the white house. In one corner of the house there is a small window which is open.";
-        }
-        if (room.id === 'ATTIC') {
-            return "You are in the attic. There is a large coil of rope here.";
-        }
-        let description = `\n[${room.name}]\n${room.description}\n`;
+        let description = `${room.name}\n${room.description}`;
 
         const objectsInRoom = Array.from(this.objects.values()).filter(
             (obj) => obj.location === room.id &&
@@ -121,8 +119,15 @@ class Game {
                      !hasFlag(obj.oflags, OFLAGS.NOTDESCBIT)
         );
 
+        // Sort objects based on the order in the room's object list
+        objectsInRoom.sort((a, b) => {
+            const aIndex = room.objects.indexOf(a.id);
+            const bIndex = room.objects.indexOf(b.id);
+            return aIndex - bIndex;
+        });
+
         if (objectsInRoom.length > 0) {
-            description += '\n' + objectsInRoom.map((obj) => obj.description).join('\n');
+            description += '\n' + objectsInRoom.map((obj) => obj.longDescription || obj.initialDescription).join('\n');
         }
         return description;
     }
