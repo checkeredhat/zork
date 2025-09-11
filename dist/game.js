@@ -306,7 +306,9 @@ const objectsData = {
         "description": "An old leather bag, bulging with coins, is here.",
         "initialDescription": "",
         "flags": 16385,
-        "properties": {},
+        "properties": {
+            "trophyValue": 10
+        },
         "synonyms": [],
         "adjectives": []
     },
@@ -489,6 +491,19 @@ const objectsData = {
         "initialDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
         "flags": 17,
         "properties": {},
+        "synonyms": [],
+        "adjectives": [],
+        "contents": ["JEWELS"]
+    },
+    "JEWELS": {
+        "id": "JEWELS",
+        "name": "jewels",
+        "description": "A pile of jewels is here.",
+        "initialDescription": "",
+        "flags": 1,
+        "properties": {
+            "trophyValue": 15
+        },
         "synonyms": [],
         "adjectives": []
     },
@@ -3421,7 +3436,12 @@ const roomsData = {
                 "blocked": "I wouldn't jump from here."
             },
             "LAUNC": "VAIR2",
-            "CXGNOME": "SOUTH"
+            "WEST": {
+                "condition": "\"GNOME-PLEASED\"",
+                "destination": "VLBOT",
+                "message": "The gnome is blocking your way."
+            },
+            "SOUTH": "LIBRA"
         },
         "objects": [
             "HOOK1",
@@ -3473,7 +3493,12 @@ const roomsData = {
                 "blocked": "It's a long way down."
             },
             "LAUNC": "VAIR4",
-            "CXGNOME": "SOUTH"
+            "WEST": {
+                "condition": "\"GNOME-PLEASED\"",
+                "destination": "VLBOT",
+                "message": "The gnome is blocking your way."
+            },
+            "SOUTH": "SAFE"
         },
         "objects": [
             "HOOK2"
@@ -4393,8 +4418,33 @@ const actionHandlers = {
     },
 
     RUB: (dobj, iobj, game) => {
-        // The MDL implementation of RUB swaps the contents of the two mirror rooms.
-        // This is a complex puzzle that is not fully implemented here.
+        if (!dobj) return "Rub what?";
+
+        if (dobj.id === 'REFL1' || dobj.id === 'REFL2') {
+            if (game.globalFlags.get('MIRROR_BROKEN')) {
+                return "The mirror is broken into many pieces.";
+            }
+
+            const room1Id = game.player.location;
+            const room2Id = room1Id === 'MIRR1' ? 'MIRR2' : 'MIRR1';
+
+            const room1 = game.rooms.get(room1Id);
+            const room2 = game.rooms.get(room2Id);
+
+            // Swap objects between rooms
+            const room1Objects = Array.from(game.objects.values()).filter(o => o.location === room1Id);
+            const room2Objects = Array.from(game.objects.values()).filter(o => o.location === room2Id);
+
+            room1Objects.forEach(o => { o.location = room2Id; });
+            room2Objects.forEach(o => { o.location = room1Id; });
+
+            // Move player
+            game.player.location = room2Id;
+            game.rooms.get(room2Id).rbits = setFlag(game.rooms.get(room2Id).rbits, RBITS.RDESCBIT);
+
+            return "There is a rumble from deep within the earth and the room shakes.";
+        }
+
         if (dobj.id === 'LAMP') {
             return "Rubbing the brass lantern has no effect.";
         }
@@ -4413,7 +4463,7 @@ const actionHandlers = {
         }
 
         if (dobj.location === 'IN_INVENTORY') {
-            return `The ${dobj.name} catches fire. Unfortunately, you were holding it at the time.`;
+            return `DEATH: The ${dobj.name} catches fire. Unfortunately, you were holding it at the time.`;
         }
 
         if (dobj.id === 'FUSE') {
@@ -4423,6 +4473,24 @@ const actionHandlers = {
 
         dobj.location = 'NOWHERE';
         return `The ${dobj.name} catches fire and is consumed.`;
+    },
+
+    GIVE: (dobj, iobj, game) => {
+        if (!dobj) return "What do you want to give?";
+        if (!iobj) return "Who do you want to give it to?";
+
+        if (iobj.id === 'GNOME') {
+            if (dobj.trophyValue > 0) {
+                game.globalFlags.set('GNOME-PLEASED', true);
+                dobj.location = 'NOWHERE';
+                return `The gnome, delighted with the ${dobj.name}, shows you a secret passage to the south.`;
+            } else {
+                dobj.location = 'NOWHERE';
+                return `The gnome crunches the ${dobj.name} in his rock-hard hands.`;
+            }
+        }
+
+        return "You can't give that to them.";
     },
 
     TELL: (dobj, iobj, game, action) => {
@@ -4446,14 +4514,6 @@ const actionHandlers = {
             return "The robot does not understand.";
         }
 
-        if (dobj.id === 'GNOME') {
-            const trunk = Array.from(game.objects.values()).find(o => o.id === 'TRUNK' && o.location === 'IN_INVENTORY');
-            if(trunk) {
-                game.globalFlags.set('GNOME-PLEASED', true);
-                return "The gnome seems pleased.";
-            }
-        }
-
         return "They don't seem to be listening.";
     },
 
@@ -4465,17 +4525,29 @@ const actionHandlers = {
             machine.machineState = [];
         }
 
+        let sound = "You can't push that.";
+        let buttonPressed = null;
+
         if (dobj.id === 'SQBUT') {
-            machine.machineState.push('SQUARE');
+            buttonPressed = 'SQUARE';
+            sound = "A whirring sound may be heard from the machinery.";
         } else if (dobj.id === 'RNBUT') {
-            machine.machineState.push('ROUND');
+            buttonPressed = 'ROUND';
+            sound = "A clanking noise is heard.";
         } else if (dobj.id === 'TRBUT') {
-            machine.machineState.push('TRIANGLE');
-        } else {
-            return "You can't push that.";
+            buttonPressed = 'TRIANGLE';
+            sound = "A humming sound is heard from the machine.";
         }
 
-        return "Click.";
+        if (buttonPressed) {
+            machine.machineState.push(buttonPressed);
+            if (machine.machineState.length > 3) {
+                machine.machineState.shift(); // Keep only the last 3 presses
+            }
+            return sound;
+        }
+
+        return sound;
     }
 };
 
@@ -4522,9 +4594,14 @@ function executeRoomAction(action, game, room) {
             game.globalFlags.set('EGYPT-FLAG', false);
             break;
         case 'MAZE-11':
-            // Placeholder for MAZE-11 logic
-            console.log("MAZE-11 activated");
-            break;
+            let grateDesc = "Above you is a grating locked with a skull-and-crossbones lock.";
+            if (game.globalFlags.get('GRATING-UNLOCKED')) {
+                grateDesc = "Above you is a grating.";
+            }
+            if (game.globalFlags.get('GRATING-OPEN')) {
+                grateDesc = "Above you is an open grating with sunlight pouring in.";
+            }
+            return `You are in a small room near the maze. There are twisty passages in the immediate vicinity.\n${grateDesc}`;
         case 'CAROUSEL-ROOM':
             if (!room.carouselState) {
                 room.carouselState = 0;
@@ -4549,7 +4626,8 @@ function executeRoomAction(action, game, room) {
             const machine = game.objects.get('MACHI');
             if (machine.machineState && machine.machineState.join(',') === 'SQUARE,ROUND,TRIANGLE') {
                 room.exits['EAST'] = 'SECRE';
-                console.log("Secret door revealed!");
+                machine.machineState = []; // Reset the machine state
+                return "The eastern wall of the room slowly swings open, revealing a passage.";
             }
             break;
         default:

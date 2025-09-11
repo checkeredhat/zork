@@ -2058,7 +2058,12 @@
                 "blocked": "I wouldn't jump from here."
             },
             "LAUNC": "VAIR2",
-            "CXGNOME": "SOUTH"
+            "WEST": {
+                "condition": "\"GNOME-PLEASED\"",
+                "destination": "VLBOT",
+                "message": "The gnome is blocking your way."
+            },
+            "SOUTH": "LIBRA"
         },
         "objects": [
             "HOOK1",
@@ -2110,7 +2115,12 @@
                 "blocked": "It's a long way down."
             },
             "LAUNC": "VAIR4",
-            "CXGNOME": "SOUTH"
+            "WEST": {
+                "condition": "\"GNOME-PLEASED\"",
+                "destination": "VLBOT",
+                "message": "The gnome is blocking your way."
+            },
+            "SOUTH": "SAFE"
         },
         "objects": [
             "HOOK2"

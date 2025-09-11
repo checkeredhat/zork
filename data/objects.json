@@ -304,7 +304,9 @@
         "description": "An old leather bag, bulging with coins, is here.",
         "initialDescription": "",
         "flags": 16385,
-        "properties": {},
+        "properties": {
+            "trophyValue": 10
+        },
         "synonyms": [],
         "adjectives": []
     },
@@ -487,6 +489,19 @@
         "initialDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
         "flags": 17,
         "properties": {},
+        "synonyms": [],
+        "adjectives": [],
+        "contents": ["JEWELS"]
+    },
+    "JEWELS": {
+        "id": "JEWELS",
+        "name": "jewels",
+        "description": "A pile of jewels is here.",
+        "initialDescription": "",
+        "flags": 1,
+        "properties": {
+            "trophyValue": 15
+        },
         "synonyms": [],
         "adjectives": []
     },
