@@ -1,93 +1,304 @@
-[
-    {
+{
+    "#####": {
+        "id": "#####",
+        "name": "#####",
+        "synonyms": [
+            "You are here"
+        ],
+        "initialDescription": "cretin",
+        "action": "(Not"
+    },
+    "ADVER": {
         "id": "ADVER",
-        "name": "leaflet",
-        "synonyms": ["PAMPH", "LEAFL", "BOOKL", "pamphlet", "booklet"],
-        "description": "a small leaflet",
+        "name": "ADVER",
+        "synonyms": [
+            "PAMPH",
+            "LEAFL",
+            "BOOKL"
+        ],
         "initialDescription": "There is a small leaflet here.",
-        "flags": {
-            "isBurnable": true,
-            "isTakeable": true,
-            "isVisible": true,
-            "isReadable": true
-        },
+        "description": "leaflet",
+        "action": "(Not",
+        "canBeContainedBy": "MAILB",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
         "size": 2,
-        "text": "\"WELCOME TO ZORK!\\n\\nZORK is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortals. No computer should be without one!\""
+        "capacity": 0
     },
-    {
+    "ATABL": {
+        "id": "ATABL",
+        "name": "ATABL",
+        "synonyms": [
+            "TABLE"
+        ],
+        "description": "large oblong table",
+        "action": "(Not",
+        "contents": [
+            "ECAKE",
+            "ORICE",
+            "RDICE",
+            "BLICE"
+        ],
+        "adjectives": [
+            "LARGE OBLON"
+        ]
+    },
+    "AXE": {
         "id": "AXE",
-        "synonyms": [],
-        "adjectives": ["BLOOD"],
-        "description": "bloody axe",
+        "name": "AXE",
         "initialDescription": "There is a bloody axe here.",
-        "flags": {
-            "isVisible": true,
-            "isWeapon": true,
-            "isTakeable": true
-        },
-        "damage": 12,
-        "size": 25
+        "description": "bloody axe",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 25,
+        "capacity": 0,
+        "adjectives": [
+            "BLOOD"
+        ]
     },
-    {
+    "BAGCO": {
         "id": "BAGCO",
-        "synonyms": ["BAG", "COINS"],
-        "adjectives": ["LEATH"],
-        "description": "bag of coins",
+        "name": "BAGCO",
+        "synonyms": [
+            "BAG",
+            "COINS"
+        ],
         "initialDescription": "An old leather bag, bulging with coins, is here.",
-        "flags": {
-            "isTakeable": true,
-            "isVisible": true
-        },
+        "description": "bag of coins",
+        "action": "(Not",
+        "light": 0,
         "value": 10,
+        "trophyValue": 5,
         "size": 15,
-        "trophyValue": 5
+        "capacity": 0,
+        "adjectives": [
+            "LEATH"
+        ]
     },
-    {
+    "BALLO": {
+        "id": "BALLO",
+        "name": "BALLO",
+        "synonyms": [
+            "BASKE"
+        ],
+        "initialDescription": "There is a very large and extremely heavy wicker basket with a cloth bag here. Inside the basket is a metal receptacle of some kind. Attached to the basket on the outside is a piece of wire.",
+        "description": "basket",
+        "action": "BALLOON",
+        "contents": [
+            "CBAG",
+            "BROPE",
+            "RECEP"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 70,
+        "capacity": 100,
+        "adjectives": [
+            "WICKE"
+        ]
+    },
+    "BAR": {
         "id": "BAR",
-        "synonyms": ["PLATI"],
-        "adjectives": ["plati"],
-        "description": "platinum bar",
+        "name": "BAR",
+        "synonyms": [
+            "PLATI"
+        ],
         "initialDescription": "There is a large platinum bar here.",
-        "flags": {
-            "isSacred": true,
-            "isTakeable": true,
-            "isVisible": true
-        },
+        "description": "platinum bar",
+        "action": "(Not",
+        "light": 0,
         "value": 12,
+        "trophyValue": 10,
         "size": 20,
-        "trophyValue": 10
+        "capacity": 0
     },
-    {
+    "BELL": {
         "id": "BELL",
-        "synonyms": [],
-        "adjectives": ["BRASS"],
-        "description": "bell",
+        "name": "BELL",
         "initialDescription": "There is a small brass bell here.",
+        "description": "bell",
         "longDescription": "Lying in a corner of the room is a small brass bell.",
-        "flags": {
-            "isTakeable": true,
-            "isVisible": true
-        },
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
         "size": 5,
-        "action": "READ-GUIDE"
+        "capacity": 0,
+        "adjectives": [
+            "BRASS"
+        ]
     },
-    {
+    "BLABE": {
+        "id": "BLABE",
+        "name": "BLABE",
+        "synonyms": [
+            "LABEL"
+        ],
+        "initialDescription": "There is a blue label here.",
+        "description": "blue label",
+        "action": "(Not",
+        "canBeContainedBy": "BALLO",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 1,
+        "capacity": 0,
+        "adjectives": [
+            "BLUE"
+        ],
+        "text": "!!!! FROBOZZ MAGIC BALLOON COMPANY !!!! Hello, Aviator! Instructions for use: To get into balloon, say 'Board' To leave balloon, say 'Disembark' To land, say 'Land' Warranty: No warranty is expressed or implied. You're on your own, sport! Good Luck."
+    },
+    "BLAMP": {
+        "id": "BLAMP",
+        "name": "BLAMP",
+        "synonyms": [
+            "LAMP",
+            "LANTE"
+        ],
+        "initialDescription": "There is a broken brass lantern here.",
+        "description": "broken lamp",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 0,
+        "capacity": 0,
+        "adjectives": [
+            "BROKE"
+        ]
+    },
+    "BLANT": {
         "id": "BLANT",
-        "synonyms": ["LANTE", "LAMP"],
-        "adjectives": ["USED", "BURNE", "DEAD", "USELE"],
-        "description": "burned-out lantern",
+        "name": "BLANT",
+        "synonyms": [
+            "LANTE",
+            "LAMP"
+        ],
         "initialDescription": "There is a burned-out lantern here.",
+        "description": "burned-out lantern",
         "longDescription": "The deceased adventurer's useless lantern is here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 20
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0,
+        "adjectives": [
+            "USED",
+            "BURNE",
+            "DEAD",
+            "USELE"
+        ]
     },
-    {
+    "BLBK": {
+        "id": "BLBK",
+        "name": "BLBK",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There is a blue book here.",
+        "description": "blue book",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 2,
+        "adjectives": [
+            "BLUE"
+        ]
+    },
+    "BLICE": {
+        "id": "BLICE",
+        "name": "BLICE",
+        "synonyms": [
+            "CAKE",
+            "ICING"
+        ],
+        "description": "blue icing",
+        "action": "(Not",
+        "canBeContainedBy": "ATABL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "BLUE",
+            "ECCH"
+        ]
+    },
+    "BONES": {
+        "id": "BONES",
+        "name": "BONES",
+        "synonyms": [
+            "SKELE",
+            "BODY"
+        ],
+        "initialDescription": "A skeleton, probably the remains of a luckless adventurer, lies here.",
+        "action": "SKELETON",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "BOOK": {
+        "id": "BOOK",
+        "name": "BOOK",
+        "synonyms": [
+            "PRAYE",
+            "BIBLE",
+            "GOODB"
+        ],
+        "initialDescription": "There is a large black book here.",
+        "description": "book",
+        "longDescription": "On the altar is a large black book, open to page 569.",
+        "action": "BLACK-BOOK",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "BLACK"
+        ]
+    },
+    "BOTTL": {
+        "id": "BOTTL",
+        "name": "BOTTL",
+        "synonyms": [
+            "CONTA",
+            "PITCH"
+        ],
+        "initialDescription": "A clear glass bottle is here.",
+        "description": "glass bottle",
+        "longDescription": "A bottle is sitting on the table.",
+        "action": "BOTTLE-FUNCTION",
+        "contents": [
+            "WATER"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 4,
+        "adjectives": [
+            "GLASS"
+        ]
+    },
+    "BOTTLE": {
         "id": "BOTTLE",
-        "synonyms": ["CONTA", "PITCH"],
-        "adjectives": ["GLASS"],
+        "synonyms": [
+            "CONTA",
+            "PITCH"
+        ],
+        "adjectives": [
+            "GLASS"
+        ],
         "description": "glass bottle",
         "initialDescription": "A clear glass bottle is here.",
         "action": "BOTTLE-FUNCTION",
@@ -99,776 +310,322 @@
         },
         "size": 5,
         "capacity": 4,
-        "contents": ["WATER"]
+        "contents": [
+            "WATER"
+        ]
     },
-    {
-        "id": "KNIFE",
-        "description": "nasty-looking knife",
-        "initialDescription": "On a table is a nasty-looking knife.",
-        "longDescription": "On a table is a nasty-looking knife.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 5
+    "BRICK": {
+        "id": "BRICK",
+        "name": "BRICK",
+        "synonyms": [
+            "BRICK"
+        ],
+        "initialDescription": "There is a square brick here which feels like clay.",
+        "description": "brick",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 9,
+        "capacity": 2,
+        "adjectives": [
+            "SQUAR CLAY"
+        ]
     },
-    {
-        "id": "LANTERN",
-        "name": "lantern",
-        "synonyms": ["LANTE"],
-        "adjectives": ["BRASS"],
-        "description": "lamp",
-        "initialDescription": "There is a brass lantern (battery-powered) here.",
-        "action": "LANTERN",
-        "flags": {
-            "isTakeable": true,
-            "isVisible": true,
-            "isLightSource": true,
-            "isLight": false
-        },
-        "light": -1,
-        "size": 15,
-        "longDescription": "A battery-powered brass lantern is on the trophy case."
+    "BROPE": {
+        "id": "BROPE",
+        "name": "BROPE",
+        "synonyms": [
+            "WIRE"
+        ],
+        "description": "braided wire",
+        "action": "WIRE-FUNCTION",
+        "canBeContainedBy": "BALLO",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0,
+        "adjectives": [
+            "BRAID"
+        ]
     },
-    {
-        "id": "MAILBOX",
-        "name": "mailbox",
-        "synonyms": ["MAIL", "BOX"],
-        "description": "A small mailbox",
-        "initialDescription": "There is a mailbox here.",
-        "flags": {
-            "isContainer": true,
-            "isVisible": true,
-            "isOpen": false,
-            "isTakeable": false
-        },
-        "capacity": 10,
-        "contents": ["ADVER"]
-    },
-    {
-        "id": "NEST",
-        "name": "nest",
-        "description": "There is a nest here, containing a jewel-encrusted egg.",
-        "flags": {
-            "isContainer": true,
-            "isVisible": true,
-            "isScenery": true
-        }
-    },
-    {
-        "id": "ROPE",
-        "synonyms": ["HEMP", "COIL"],
-        "description": "rope",
-        "initialDescription": "There is a large coil of rope here.",
-        "flags": {
-            "isTieable": true,
-            "isTakeable": true,
-            "isVisible": true,
-            "isTied": false,
-            "isNotDescribed": false
-        },
-        "size": 10,
-        "longDescription": "A large coil of rope is lying in the corner."
-    },
-    {
-        "id": "SACK",
-        "synonyms": ["BAG"],
-        "adjectives": ["LEATH"],
-        "description": "leather sack",
-        "initialDescription": "There is an old leather bag here.",
-        "flags": {
-            "isContainer": true,
-            "isFlammable": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 3,
-        "capacity": 15,
-        "contents": ["GARLI", "FOOD"]
-    },
-    {
-        "id": "SWORD",
-        "name": "sword",
-        "synonyms": ["ORCRI", "GLAMD", "BLADE"],
-        "adjectives": ["ELVIS"],
-        "description": "sword",
-        "initialDescription": "There is an elvish sword here.",
-        "action": "SWORD",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true,
-            "isWeapon": true
-        },
-        "size": 30,
-        "damage": 10,
-        "longDescription": "Above the trophy case hangs an elvish sword of great antiquity."
-    },
-    {
-        "id": "TROPHY-CASE",
-        "name": "trophy case",
-        "synonyms": ["CASE"],
-        "adjectives": ["TROPH"],
-        "description": "trophy case",
-        "action": "TROPHY-CASE",
-        "flags": {
-            "isContainer": true,
-            "isTransparent": true,
-            "isVisible": true,
-            "isTakeable": false,
-            "isNotDescribed": true
-        },
-        "size": 99999,
-        "capacity": 99999,
-        "initialDescription": "There is a trophy case here."
-    },
-    {
-        "id": "TRAP-DOOR",
-        "name": "trap door",
-        "synonyms": ["trapdoor", "cover", "TRAPD", "TRAP-"],
-        "adjectives": ["trap", "dusty"],
-        "description": "A dusty trap door is here, obviously closed.",
-        "openDescription": "The trap door is open.",
-        "action": "TRAP-DOOR",
-        "flags": {
-            "isDoor": true,
-            "isInvisible": true,
-            "isOpen": false,
-            "isTakeable": false
-        }
-    },
-    {
-        "id": "TROLL",
-        "synonyms": [],
-        "description": "troll",
-        "flags": {
-            "isVillain": true,
-            "isVisible": true,
-            "isActor": true,
-            "isTakeable": false,
-            "isVictim": true
-        },
-        "health": 50,
-        "strength": 10,
-        "accuracy": 75,
-        "damage": 8,
-        "initialDescription": "The troll, who is remarkably ugly, is here blocking the way.",
-        "longDescription": "A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.",
-        "action": "TROLL",
-        "contents": ["AXE"]
-    },
-    {
-        "id": "WATER",
-        "synonyms": ["LIQUI", "H2O"],
-        "description": "quantity of water",
-        "action": "WATER-FUNCTION",
-        "flags": {
-            "isDrinkable": true,
-            "isTakeable": true,
-            "isVisible": true
-        },
-        "size": 4,
-        "canContain": "BOTTLE",
-        "initialDescription": "Water",
-        "longDescription": "There is some water here"
-    },
-    {
-        "id": "WINDOW",
-        "name": "window",
-        "synonyms": ["win", "WINDO"],
-        "description": "A window is here.",
-        "action": "WINDOW-FUNCTION",
-        "flags": {
-            "isDoor": true,
-            "isVisible": true,
-            "isOpen": false,
-            "isTakeable": false,
-            "isNotDescribed": true
-        }
-    },
-    {
-        "id": "HOUSE",
-        "name": "house",
-        "description": "The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.",
-        "flags": {
-            "isScenery": true,
-            "isNotDescribed": true
-        }
-    },
-    {
-        "id": "MAT",
-        "name": "mat",
-        "synonyms": ["rubber mat", "welcome mat"],
-        "description": "A rubber mat saying 'Welcome to Zork!' lies by the door.",
-        "flags": {
-            "isScenery": true,
-            "isNotDescribed": true
-        }
-    },
-    {
-        "id": "FRONT-DOOR",
-        "name": "door",
-        "synonyms": ["door", "front door", "boarded door", "FRONT"],
-        "description": "The front door is boarded and you can't remove the boards.",
-        "flags": {
-            "isScenery": true,
-            "isNotDescribed": true,
-            "isDoor": true
-        }
-    },
-    {
-        "id": "RKNIF",
-        "name": "rusty knife",
-        "synonyms": ["KNIFE"],
-        "adjectives": ["RUSTY"],
-        "description": "rusty knife",
-        "initialDescription": "There is a rusty knife here.",
-        "longDescription": "Beside the skeleton is a rusty knife.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true,
-            "isWeapon": true
-        },
-        "size": 20,
-        "action": "KNIFE-MELEE"
-    },
-    {
-        "id": "PEARL",
-        "name": "pearl necklace",
-        "synonyms": ["NECKL"],
-        "description": "pearl necklace",
-        "initialDescription": "There is a pearl necklace here with hundreds of large pearls.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "value": 9,
-        "trophyValue": 5,
-        "size": 10
-    },
-    {
-        "id": "IRBOX",
-        "name": "iron box",
-        "synonyms": ["BOX"],
-        "adjectives": ["IRON", "DENTE"],
-        "description": "iron box",
-        "initialDescription": "There is a dented iron box here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true,
-            "isContainer": true
-        },
-        "size": 40,
-        "trophyValue": 20,
-        "contents": ["STRAD"]
-    },
-    {
-        "id": "STRAD",
-        "name": "Stradivarius",
-        "synonyms": ["VIOLI"],
-        "adjectives": ["FANCY"],
-        "description": "fancy violin",
-        "initialDescription": "There is a Stradivarius here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "value": 10,
-        "trophyValue": 10,
-        "size": 10,
-        "canBeContainedBy": "IRBOX"
-    },
-    {
-        "id": "TRUNK",
-        "name": "old trunk",
-        "description": "trunk with jewels",
-        "initialDescription": "There is an old trunk here, bulging with assorted jewels.",
-        "longDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true,
-            "isContainer": true
-        },
-        "value": 15,
-        "trophyValue": 8,
-        "size": 35
-    },
-    {
-        "id": "WRENCH",
-        "name": "wrench",
-        "synonyms": [],
-        "description": "wrench",
-        "initialDescription": "There is a wrench here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true,
-            "isTool": true
-        },
-        "size": 5
-    },
-    {
-        "id": "CYCLO",
-        "name": "cyclops",
-        "synonyms": [],
-        "adjectives": ["ONE-E", "MONST"],
-        "description": "cyclops",
-        "initialDescription": "The cyclops, perhaps affected by a drug in your drink, is sleeping.",
-        "flags": {
-            "isVillain": true,
-            "isVisible": true,
-            "isVictim": true,
-            "isTakeable": false
-        },
-        "health": 10000,
-        "action": "CYCLOPS-MELEE"
-    },
-    {
-        "id": "CHALI",
-        "name": "silver chalice",
-        "synonyms": [],
-        "description": "silver chalice",
-        "initialDescription": "There is a silver chalice, intricately engraved, here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "value": 10,
-        "trophyValue": 10,
-        "size": 15
-    },
-    {
-        "id": "DBOAT",
-        "name": "plastic boat",
-        "synonyms": ["BOAT", "PLAST", "PILE"],
-        "adjectives": ["PLAST", "HOLE"],
-        "description": "plastic boat (with hole)",
-        "initialDescription": "There is a pile of plastic here with a large hole in it.",
-        "flags": {
-            "isBurnable": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 20,
-        "action": "DBOAT-FUNCTION"
-    },
-    {
-        "id": "PUMP",
-        "name": "hand-held air pump",
-        "synonyms": ["AIR-P", "AIRPU"],
-        "description": "small pump",
-        "initialDescription": "There is a small pump here.",
-        "flags": {
-            "isTool": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 5
-    },
-    {
-        "id": "RBOAT",
-        "name": "magic boat",
-        "synonyms": ["BOAT"],
-        "adjectives": ["PLAST", "SEAWO"],
-        "description": "inflated boat",
-        "initialDescription": "There is an inflated boat here.",
-        "flags": {
-            "isVehicle": true,
-            "isBurnable": true,
-            "isVisible": true,
-            "isTakeable": true,
-            "isOpen": true,
-            "isWaterObject": true
-        },
-        "size": 20,
+    "BUCKE": {
+        "id": "BUCKE",
+        "name": "BUCKE",
+        "initialDescription": "There is a wooden bucket here, 3 feet in diameter and 3 feet high.",
+        "description": "wooden bucket",
+        "action": "BUCKET",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 100,
         "capacity": 100,
-        "contents": ["LABEL"],
-        "action": "RBOAT-FUNCTION"
+        "adjectives": [
+            "WOODE"
+        ]
     },
-    {
-        "id": "LABEL",
-        "name": "tan label",
-        "synonyms": ["FINEP"],
-        "adjectives": ["TAN"],
-        "description": "tan label",
-        "initialDescription": "There is a tan label here.",
-        "flags": {
-            "isBurnable": true,
-            "isVisible": true,
-            "isReadable": true,
-            "isTakeable": true
-        },
-        "size": 2,
-        "canBeContainedBy": "RBOAT",
-        "text": "!!!! FROBOZZ MAGIC BOAT COMPANY !!!!\\nHello, Sailor!\\nInstructions for use:..."
+    "BUOY": {
+        "id": "BUOY",
+        "name": "BUOY",
+        "initialDescription": "There is a red buoy here (probably a warning).",
+        "description": "red buoy",
+        "action": "(Not",
+        "contents": [
+            "EMERA"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 20,
+        "adjectives": [
+            "RED"
+        ]
     },
-    {
+    "CAGE": {
+        "id": "CAGE",
+        "name": "CAGE",
+        "initialDescription": "There is a mangled cage here.",
+        "description": "mangled cage",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 60,
+        "capacity": 0
+    },
+    "CANDL": {
+        "id": "CANDL",
+        "name": "CANDL",
+        "initialDescription": "There are two candles here.",
+        "description": "pair of candles",
+        "longDescription": "On the two ends of the altar are burning candles.",
+        "action": "CANDLES",
+        "light": 1,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0
+    },
+    "CARD": {
+        "id": "CARD",
+        "name": "CARD",
+        "synonyms": [
+            "NOTE"
+        ],
+        "initialDescription": "There is a card with writing on it here.",
+        "description": "card",
+        "action": "(Not",
+        "canBeContainedBy": "SAFE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 1,
+        "capacity": 0,
+        "text": "Warning: This room was constructed over very weak rock strata. Detonation of explosives in this room is strictly prohibited! Frobozz Magic Cave Company per M. Agrippa, foreman"
+    },
+    "CBAG": {
+        "id": "CBAG",
+        "name": "CBAG",
+        "synonyms": [
+            "BAG"
+        ],
+        "description": "cloth bag",
+        "action": "(Not",
+        "canBeContainedBy": "BALLO",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0,
+        "adjectives": [
+            "CLOTH"
+        ]
+    },
+    "CHALI": {
+        "id": "CHALI",
+        "name": "CHALI",
+        "synonyms": [
+            "CUP GOBLE"
+        ],
+        "initialDescription": "There is a silver chalice, intricately engraved, here.",
+        "description": "chalice",
+        "action": "CHALICE",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 10,
+        "size": 10,
+        "capacity": 5
+    },
+    "COAL": {
+        "id": "COAL",
+        "name": "COAL",
+        "synonyms": [
+            "HEAP",
+            "CHARC"
+        ],
+        "initialDescription": "There is a small heap of coal here.",
+        "description": "small pile of coal",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0
+    },
+    "COFFI": {
+        "id": "COFFI",
+        "name": "COFFI",
+        "synonyms": [
+            "CASKE"
+        ],
+        "initialDescription": "There is a solid-gold coffin, used for the burial of Ramses II, here.",
+        "description": "gold coffin",
+        "action": "(Not",
+        "light": 0,
+        "value": 3,
+        "trophyValue": 7,
+        "size": 55,
+        "capacity": 35,
+        "adjectives": [
+            "GOLD"
+        ]
+    },
+    "COKES": {
+        "id": "COKES",
+        "name": "COKES",
+        "synonyms": [
+            "BOTTL"
+        ],
+        "initialDescription": "Many empty Coke bottles are here. Alas, they can't hold water.",
+        "description": "bunch of Coke bottles",
+        "longDescription": "There is a large pile of empty Coke bottles here, evidently produced by the implementers during their long struggle to win totally.",
+        "action": "COKE-BOTTLES",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 15,
+        "adjectives": [
+            "COKE"
+        ]
+    },
+    "CROWN": {
+        "id": "CROWN",
+        "name": "CROWN",
+        "initialDescription": "Lord Dimwit's crown is here.",
+        "description": "crown",
+        "longDescription": "The excessively gaudy crown of Lord Dimwit Flathead is here.",
+        "action": "(Not",
+        "canBeContainedBy": "SAFE",
+        "light": 0,
+        "value": 15,
+        "trophyValue": 10,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "GAUDY"
+        ]
+    },
+    "CYCLO": {
+        "id": "CYCLO",
+        "name": "CYCLO",
+        "synonyms": [
+            "ONE-E MONST"
+        ],
+        "description": "cyclops",
+        "action": "CYCLOPS",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 10000
+    },
+    "DBALL": {
+        "id": "DBALL",
+        "name": "DBALL",
+        "synonyms": [
+            "BALLO BASKE"
+        ],
+        "initialDescription": "There is a balloon here, broken into pieces.",
+        "description": "broken balloon",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 40,
+        "capacity": 0,
+        "adjectives": [
+            "BROKE"
+        ]
+    },
+    "DBOAT": {
+        "id": "DBOAT",
+        "name": "DBOAT",
+        "synonyms": [
+            "BOAT PLAST PILE"
+        ],
+        "initialDescription": "There is a pile of plastic here with a large hole in it.",
+        "description": "plastic boat (with hole)",
+        "action": "DBOAT-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0
+    },
+    "DIAMO": {
+        "id": "DIAMO",
+        "name": "DIAMO",
+        "synonyms": [
+            "PERFE"
+        ],
+        "initialDescription": "There is an enormous diamond (perfectly cut) here.",
+        "description": "huge diamond",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 6,
+        "size": 5,
+        "capacity": 0
+    },
+    "ECAKE": {
+        "id": "ECAKE",
+        "name": "ECAKE",
+        "synonyms": [
+            "CAKE"
+        ],
+        "initialDescription": "There is a piece of cake here with the words 'Eat Me' on it.",
+        "description": "piece of 'Eat Me' cake",
+        "action": "EATME-FUNCTION",
+        "canBeContainedBy": "ATABL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "EATME",
+            "EAT-M"
+        ]
+    },
+    "EMERA": {
         "id": "EMERA",
-        "name": "emerald",
-        "description": "large emerald",
+        "name": "EMERA",
         "initialDescription": "There is an emerald here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true
-        },
+        "description": "large emerald",
+        "action": "(Not",
+        "canBeContainedBy": "BUOY",
+        "light": 0,
         "value": 5,
         "trophyValue": 10,
         "size": 5,
-        "canBeContainedBy": "BUOY"
+        "capacity": 0
     },
-    {
-        "id": "SHOVE",
-        "name": "shovel",
-        "description": "large shovel",
-        "initialDescription": "There is a large shovel here.",
-        "flags": {
-            "isTool": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 15
-    },
-    {
-        "id": "GUANO",
-        "name": "bat guano",
-        "synonyms": ["CRAP", "SHIT", "HUNK"],
-        "description": "hunk of bat guano",
-        "initialDescription": "There is a hunk of bat guano here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 20
-    },
-    {
-        "id": "GRUE",
-        "name": "grue",
-        "synonyms": [],
-        "adjectives": ["LURKI"],
-        "description": "lurking grue",
-        "flags": {
-            "isVisible": true,
-            "isVillain": true,
-            "isVictim": true,
-            "isInvisible": true
-        },
-        "action": "GRUE-FUNCTION"
-    },
-    {
-        "id": "BALLO",
-        "name": "wicker basket",
-        "synonyms": ["BASKE"],
-        "adjectives": ["WICKE"],
-        "description": "basket",
-        "initialDescription": "There is a very large and extremely heavy wicker basket with a cloth bag here. Inside the basket is a metal receptacle of some kind. Attached to the basket on the outside is a piece of wire.",
-        "flags": {
-            "isVehicle": true,
-            "isVisible": true,
-            "isOpen": true
-        },
-        "size": 70,
-        "capacity": 100,
-        "contents": ["CBAG", "BROPE", "RECEP"],
-        "action": "BALLOON"
-    },
-    {
-        "id": "RECEP",
-        "name": "receptacle",
-        "description": "metal receptacle",
-        "flags": {
-            "isContainer": true,
-            "isVisible": true,
-            "isSearchable": true
-        },
-        "size": 99999,
-        "canBeContainedBy": "BALLO"
-    },
-    {
-        "id": "CBAG",
-        "name": "cloth bag",
-        "synonyms": ["BAG"],
-        "adjectives": ["CLOTH"],
-        "description": "cloth bag",
-        "flags": {
-            "isVisible": true,
-            "isContainer": true,
-            "isTakeable": true
-        },
-        "size": 99999,
-        "canBeContainedBy": "BALLO"
-    },
-    {
-        "id": "BROPE",
-        "name": "braided wire",
-        "synonyms": ["WIRE"],
-        "adjectives": ["BRAID"],
-        "description": "braided wire",
-        "flags": {
-            "isTieable": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 99999,
-        "action": "WIRE-FUNCTION",
-        "canBeContainedBy": "BALLO"
-    },
-    {
-        "id": "HOOK1",
-        "name": "hook",
-        "synonyms": ["HOOK"],
-        "description": "small hook",
-        "initialDescription": "There is a small hook attached to the rock here.",
-        "flags": {
-            "isVisible": true,
-            "isScenery": true
-        }
-    },
-    {
-        "id": "HOOK2",
-        "name": "hook",
-        "synonyms": ["HOOK"],
-        "description": "small hook",
-        "initialDescription": "There is a small hook attached to the rock here.",
-        "flags": {
-            "isVisible": true,
-            "isScenery": true
-        }
-    },
-    {
-        "id": "ZORKM",
-        "name": "gold zorkmid coin",
-        "synonyms": ["COIN"],
-        "adjectives": ["GOLD"],
-        "description": "priceless zorkmid",
-        "initialDescription": "There is an engraved zorkmid coin here.",
-        "longDescription": "On the floor is a gold zorkmid coin (a valuable collector's item).",
-        "flags": {
-            "isReadable": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "value": 10,
-        "trophyValue": 12,
-        "size": 10,
-        "text": "--------------------------\\n/ Gold Zorkmid \\\\n/ T e n T h o u s a n d \\\\n/ Z O R K M I D S \\\\n/ \\\\n/ |||||||||||||||||| \\\\n/ !|||| ||||! \\\\n| ||| ^^ ^^ ||| |\\n| ||| OO OO ||| |\\n| In Frobs ||| << ||| We Trust |\\n| || (______) || |\\n| | | |\\n| |__________| |\\n\\\\ /\\\\ -- Lord Dimwit Flathead -- /\\\\ -- Beloved of Zorkers -- /\\\\ /\\\\ * 722 G.U.E. * /\\\\ /--------------------------"
-    },
-    {
-        "id": "SAFE",
-        "name": "safe",
-        "synonyms": ["BOX"],
-        "description": "box",
-        "flags": {
-            "isContainer": true,
-            "isVisible": true,
-            "isOpen": false
-        },
-        "size": 99999,
-        "contents": ["CROWN", "CARD"],
-        "action": "SAFE-FUNCTION"
-    },
-    {
-        "id": "CARD",
-        "name": "card",
-        "synonyms": ["NOTE"],
-        "description": "card",
-        "initialDescription": "There is a card with writing on it here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true,
-            "isReadable": true,
-            "isBurnable": true
-        },
-        "size": 1,
-        "canBeContainedBy": "SAFE",
-        "text": "Warning:\\nThis room was constructed over very weak rock strata. Detonation..."
-    },
-    {
-        "id": "FUSE",
-        "name": "fuse",
-        "synonyms": ["COIL", "WIRE"],
-        "adjectives": ["SHINY", "THIN"],
-        "description": "wire coil",
-        "initialDescription": "There is a coil of thin shiny wire here.",
-        "flags": {
-            "isBurnable": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 1,
-        "action": "FUSE-FUNCTION"
-    },
-    {
-        "id": "GNOME",
-        "name": "volcano gnome",
-        "synonyms": ["TROLL"],
-        "description": "nervous volcano gnome",
-        "initialDescription": "There is a nervous Volcano Gnome here.",
-        "flags": {
-            "isVillain": true,
-            "isVisible": true,
-            "isVictim": true,
-            "isTakeable": false
-        },
-        "action": "GNOME-FUNCTION"
-    },
-    {
-        "id": "BLABE",
-        "name": "blue label",
-        "synonyms": ["LABEL"],
-        "adjectives": ["BLUE"],
-        "description": "blue label",
-        "initialDescription": "There is a blue label here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true,
-            "isReadable": true,
-            "isBurnable": true
-        },
-        "size": 1,
-        "canBeContainedBy": "BALLO",
-        "text": "!!!! FROBOZZ MAGIC BALLOON COMPANY !!!!\\nHello, Aviator!\\nInstructions for use:..."
-    },
-    {
-        "id": "DBALL",
-        "name": "broken balloon",
-        "synonyms": ["BALLO", "BASKE"],
-        "adjectives": ["BROKE"],
-        "description": "broken balloon",
-        "initialDescription": "There is a balloon here, broken into pieces.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 40
-    },
-    {
-        "id": "BLBK",
-        "name": "blue book",
-        "synonyms": ["BOOK"],
-        "adjectives": ["BLUE"],
-        "description": "blue book",
-        "initialDescription": "There is a blue book here.",
-        "flags": {
-            "isContainer": true,
-            "isTakeable": true,
-            "isVisible": true,
-            "isReadable": true
-        },
-        "size": 10,
-        "trophyValue": 2
-    },
-    {
-        "id": "GRBK",
-        "name": "green book",
-        "synonyms": ["BOOK"],
-        "adjectives": ["GREEN"],
-        "description": "green book",
-        "initialDescription": "There is a green book here.",
-        "flags": {
-            "isContainer": true,
-            "isTakeable": true,
-            "isVisible": true,
-            "isReadable": true
-        },
-        "size": 10,
-        "trophyValue": 2
-    },
-    {
-        "id": "PUBK",
-        "name": "purple book",
-        "synonyms": ["BOOK"],
-        "adjectives": ["PURPL"],
-        "description": "purple book",
-        "initialDescription": "There is a purple book here.",
-        "flags": {
-            "isContainer": true,
-            "isTakeable": true,
-            "isVisible": true,
-            "isReadable": true
-        },
-        "size": 10,
-        "trophyValue": 2,
-        "contents": ["STAMP"]
-    },
-    {
-        "id": "WHBK",
-        "name": "white book",
-        "synonyms": ["BOOK"],
-        "adjectives": ["WHITE"],
-        "description": "white book",
-        "initialDescription": "There is a white book here.",
-        "flags": {
-            "isContainer": true,
-            "isTakeable": true,
-            "isVisible": true,
-            "isReadable": true
-        },
-        "size": 10,
-        "trophyValue": 2
-    },
-    {
-        "id": "STAMP",
-        "name": "stamp",
-        "description": "stamp",
-        "initialDescription": "There is a stamp here.",
-        "flags": {
-            "isVisible": true,
-            "isTakeable": true,
-            "isReadable": true
-        },
-        "size": 1,
-        "canBeContainedBy": "PUBK",
-        "text": "...G.U.E. POSTAGE 3 Zorkmids..."
-    },
-    {
-        "id": "LISTS",
-        "name": "pile of printouts",
-        "synonyms": ["PAPER", "LIST", "PRINT", "LISTI", "STACK"],
-        "description": "pile of printouts",
-        "initialDescription": "A pile of old printouts lies here.",
-        "flags": {
-            "isReadable": true,
-            "isBurnable": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "size": 70,
-        "text": "...The rest is, alas, unintelligible (as were the implementers)."
-    },
-    {
-        "id": "LCASE",
-        "name": "large case",
-        "synonyms": ["CASE"],
-        "adjectives": ["LARGE"],
-        "description": "large case",
-        "initialDescription": "There is a large case here.",
-        "flags": {
-            "isVisible": true,
-            "isTransparent": true,
-            "isContainer": true
-        }
-    },
-    {
-        "id": "SPHER",
-        "name": "crystal sphere",
-        "synonyms": ["BALL"],
-        "adjectives": ["CRYST", "GLASS"],
-        "description": "crystal sphere",
-        "initialDescription": "There is a beautiful crystal sphere here.",
-        "flags": {
-            "isTryTakeable": true,
-            "isSacred": true,
-            "isVisible": true,
-            "isTakeable": true
-        },
-        "value": 6,
-        "trophyValue": 6,
-        "size": 10,
-        "action": "SPHERE-FUNCTION"
-    },
-    {
+    "FLASK": {
         "id": "FLASK",
         "name": "glass flask",
         "synonyms": [],
-        "adjectives": ["GLASS"],
+        "adjectives": [
+            "GLASS"
+        ],
         "description": "glass flask filled with liquid",
         "initialDescription": "A stoppered glass flask with a skull-and-crossbones marking is here. The flask is filled with some clear liquid.",
         "flags": {
@@ -882,11 +639,618 @@
         "size": 10,
         "action": "FLASK-FUNCTION"
     },
-    {
+    "FOOD": {
+        "id": "FOOD",
+        "name": "FOOD",
+        "synonyms": [
+            "SANDW",
+            "LUNCH",
+            "PEPPE",
+            "DINNE",
+            "SNACK"
+        ],
+        "initialDescription": "A hot pepper sandwich is here.",
+        "description": ".lunch",
+        "action": "(Not",
+        "canBeContainedBy": "SBAG",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0
+    },
+    "FRONT-DOOR": {
+        "id": "FRONT-DOOR",
+        "name": "door",
+        "synonyms": [
+            "door",
+            "front door",
+            "boarded door",
+            "FRONT"
+        ],
+        "description": "The front door is boarded and you can't remove the boards.",
+        "flags": {
+            "isScenery": true,
+            "isNotDescribed": true,
+            "isDoor": true
+        }
+    },
+    "FUSE": {
+        "id": "FUSE",
+        "name": "FUSE",
+        "synonyms": [
+            "COIL WIRE"
+        ],
+        "initialDescription": "There is a coil of thin shiny wire here.",
+        "description": "wire coil",
+        "action": "FUSE-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 1,
+        "capacity": 0,
+        "adjectives": [
+            "SHINY THIN"
+        ]
+    },
+    "GARLI": {
+        "id": "GARLI",
+        "name": "GARLI",
+        "synonyms": [
+            "CLOVE"
+        ],
+        "initialDescription": "There is a clove of garlic here.",
+        "description": "clove of garlic",
+        "action": "(Not",
+        "canBeContainedBy": "SBAG",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0
+    },
+    "GHOST": {
+        "id": "GHOST",
+        "name": "GHOST",
+        "synonyms": [
+            "SPIRI",
+            "FIEND"
+        ],
+        "action": "GHOST-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "GNOME": {
+        "id": "GNOME",
+        "name": "GNOME",
+        "synonyms": [
+            "TROLL"
+        ],
+        "initialDescription": "There is a nervous Volcano Gnome here.",
+        "description": "Volcano Gnome",
+        "action": "GNOME-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "GRAIL": {
+        "id": "GRAIL",
+        "name": "GRAIL",
+        "synonyms": [
+            "CUP",
+            "GOBLE"
+        ],
+        "initialDescription": "There is an extremely valuable (perhaps original) grail here.",
+        "description": "grail",
+        "action": "(Not",
+        "light": 0,
+        "value": 2,
+        "trophyValue": 5,
+        "size": 10,
+        "capacity": 5
+    },
+    "GRBK": {
+        "id": "GRBK",
+        "name": "GRBK",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There is a green book here.",
+        "description": "green book",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 2,
+        "adjectives": [
+            "GREEN"
+        ]
+    },
+    "GRUE": {
+        "id": "GRUE",
+        "name": "GRUE",
+        "description": "lurking grue",
+        "action": "GRUE-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 0,
+        "capacity": 0,
+        "adjectives": [
+            "LURKI"
+        ]
+    },
+    "GUANO": {
+        "id": "GUANO",
+        "name": "GUANO",
+        "synonyms": [
+            "CRAP SHIT HUNK"
+        ],
+        "initialDescription": "There is a hunk of bat guano here.",
+        "description": "hunk of bat guano",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0
+    },
+    "GUIDE": {
+        "id": "GUIDE",
+        "name": "GUIDE",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There are tour guidebooks here.",
+        "description": "tour guidebook",
+        "longDescription": "Some guidebooks entitled 'Flood Control Dam #3' are on the reception desk.",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "TOUR"
+        ]
+    },
+    "GUNK": {
+        "id": "GUNK",
+        "name": "GUNK",
+        "synonyms": [
+            "MESS",
+            "SLAG"
+        ],
+        "initialDescription": "There is a small piece of vitreous slag here.",
+        "description": "piece of vitreous slag",
+        "action": "GUNK-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "VITRE"
+        ]
+    },
+    "HEADS": {
+        "id": "HEADS",
+        "name": "HEADS",
+        "synonyms": [
+            "HEAD POLE POLES PDL BKD TAA MARC IMPLE LOSER"
+        ],
+        "initialDescription": "There are four heads here, mounted securely on poles.",
+        "description": "set of poled heads",
+        "action": "HEAD-FUNCTION"
+    },
+    "HOOK1": {
+        "id": "HOOK1",
+        "name": "HOOK1",
+        "synonyms": [
+            "HOOK"
+        ],
+        "initialDescription": "There is a small hook attached to the rock here.",
+        "description": "hook",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "HOOK2": {
+        "id": "HOOK2",
+        "name": "HOOK2",
+        "synonyms": [
+            "HOOK"
+        ],
+        "initialDescription": "There is a small hook attached to the rock here.",
+        "description": "hook",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "HOUSE": {
+        "id": "HOUSE",
+        "name": "house",
+        "description": "The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.",
+        "flags": {
+            "isScenery": true,
+            "isNotDescribed": true
+        }
+    },
+    "IBOAT": {
+        "id": "IBOAT",
+        "name": "IBOAT",
+        "synonyms": [
+            "BOAT PLAST PILE"
+        ],
+        "initialDescription": "There is a folded pile of plastic here which has a small valve attached.",
+        "description": "plastic inflatable boat",
+        "action": "IBOAT-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0
+    },
+    "ICE": {
+        "id": "ICE",
+        "name": "ICE",
+        "synonyms": [
+            "GLACI"
+        ],
+        "initialDescription": "A mass of ice fills the western half of the room.",
+        "description": "glacier",
+        "action": "GLACIER",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "IRBOX": {
+        "id": "IRBOX",
+        "name": "iron box",
+        "synonyms": [
+            "BOX"
+        ],
+        "adjectives": [
+            "IRON",
+            "DENTE"
+        ],
+        "description": "iron box",
+        "initialDescription": "There is a dented iron box here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": true,
+            "isContainer": true
+        },
+        "size": 40,
+        "trophyValue": 20,
+        "contents": [
+            "STRAD"
+        ]
+    },
+    "JADE": {
+        "id": "JADE",
+        "name": "JADE",
+        "synonyms": [
+            "FIGUR"
+        ],
+        "initialDescription": "There is an exquisite jade figurine here.",
+        "description": "jade figurine",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 5,
+        "size": 10,
+        "capacity": 0
+    },
+    "KEYS": {
+        "id": "KEYS",
+        "name": "KEYS",
+        "initialDescription": "There is a set of skeleton keys here.",
+        "description": "set of skeleton keys",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0
+    },
+    "KNIFE": {
+        "id": "KNIFE",
+        "name": "KNIFE",
+        "synonyms": [
+            "BLADE"
+        ],
+        "initialDescription": "There is a nasty-looking knife lying here.",
+        "description": "knife",
+        "longDescription": "On a table is a nasty-looking knife.",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "NASTY"
+        ]
+    },
+    "LABEL": {
+        "id": "LABEL",
+        "name": "LABEL",
+        "synonyms": [
+            "FINEP"
+        ],
+        "initialDescription": "There is a tan label here.",
+        "description": "tan label",
+        "action": "(Not",
+        "canBeContainedBy": "RBOAT",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 2,
+        "capacity": 0,
+        "adjectives": [
+            "TAN"
+        ]
+    },
+    "LAMP": {
+        "id": "LAMP",
+        "name": "LAMP",
+        "synonyms": [
+            "LANTE"
+        ],
+        "initialDescription": "There is a brass lantern (battery-powered) here.",
+        "description": "lamp",
+        "longDescription": "A battery-powered brass lantern is on the trophy case.",
+        "action": "LANTERN",
+        "light": -1,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 15,
+        "capacity": 0,
+        "adjectives": [
+            "BRASS"
+        ]
+    },
+    "LANTERN": {
+        "id": "LANTERN",
+        "name": "lantern",
+        "synonyms": [
+            "LANTE"
+        ],
+        "adjectives": [
+            "BRASS"
+        ],
+        "description": "lamp",
+        "initialDescription": "There is a brass lantern (battery-powered) here.",
+        "action": "LANTERN",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true,
+            "isLightSource": true,
+            "isLight": false
+        },
+        "light": -1,
+        "size": 15,
+        "longDescription": "A battery-powered brass lantern is on the trophy case."
+    },
+    "LCASE": {
+        "id": "LCASE",
+        "name": "LCASE",
+        "synonyms": [
+            "CASE"
+        ],
+        "initialDescription": "There is a large case here, containing objects which you used to possess.",
+        "description": "large case",
+        "action": "(Not",
+        "adjectives": [
+            "LARGE"
+        ]
+    },
+    "LEAVE": {
+        "id": "LEAVE",
+        "name": "LEAVE",
+        "synonyms": [
+            "LEAF",
+            "PILE"
+        ],
+        "initialDescription": "There is a pile of leaves on the ground.",
+        "description": "pile of leaves",
+        "action": "LEAF-PILE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 25,
+        "capacity": 0
+    },
+    "LISTS": {
+        "id": "LISTS",
+        "name": "LISTS",
+        "synonyms": [
+            "PAPER LIST PRINT LISTI STACK"
+        ],
+        "initialDescription": "There is an enormous stack of line-printer paper here. It is barely readable.",
+        "description": "stack of listings",
+        "longDescription": "There is a gigantic pile of line-printer output here. Although the paper once contained useful information, almost nothing can be distinguished now.",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 70,
+        "text": "The rest is, alas, unintelligible (as were the implementers)."
+    },
+    "MACHI": {
+        "id": "MACHI",
+        "name": "MACHI",
+        "synonyms": [
+            "PDP10",
+            "DRYER",
+            "LID"
+        ],
+        "description": "machine",
+        "action": "MACHINE-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 50
+    },
+    "MAILB": {
+        "id": "MAILB",
+        "name": "MAILB",
+        "synonyms": [
+            "BOX"
+        ],
+        "initialDescription": "There is a small mailbox here.",
+        "description": "mailbox",
+        "action": "(Not",
+        "contents": [
+            "ADVER"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 10
+    },
+    "MAILBOX": {
+        "id": "MAILBOX",
+        "name": "mailbox",
+        "synonyms": [
+            "MAIL",
+            "BOX"
+        ],
+        "description": "A small mailbox",
+        "initialDescription": "There is a mailbox here.",
+        "flags": {
+            "isContainer": true,
+            "isVisible": true,
+            "isOpen": false,
+            "isTakeable": false
+        },
+        "capacity": 10,
+        "contents": [
+            "ADVER"
+        ]
+    },
+    "MAT": {
+        "id": "MAT",
+        "name": "mat",
+        "synonyms": [
+            "rubber mat",
+            "welcome mat"
+        ],
+        "description": "A rubber mat saying 'Welcome to Zork!' lies by the door.",
+        "flags": {
+            "isScenery": true,
+            "isNotDescribed": true
+        }
+    },
+    "MATCH": {
+        "id": "MATCH",
+        "name": "MATCH",
+        "synonyms": [
+            "FLINT"
+        ],
+        "initialDescription": "There is a matchbook whose cover says 'Visit Beautiful FCD#3' here.",
+        "description": "matchbook",
+        "action": "MATCH-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 2,
+        "capacity": 0
+    },
+    "NEST": {
+        "id": "NEST",
+        "name": "nest",
+        "description": "There is a nest here, containing a jewel-encrusted egg.",
+        "flags": {
+            "isContainer": true,
+            "isVisible": true,
+            "isScenery": true
+        }
+    },
+    "ORICE": {
+        "id": "ORICE",
+        "name": "ORICE",
+        "description": "orange icing",
+        "action": "(Not",
+        "canBeContainedBy": "ATABL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "ORANG",
+            "ECCH"
+        ]
+    },
+    "PAINT": {
+        "id": "PAINT",
+        "name": "PAINT",
+        "synonyms": [
+            "ART CANVA MASTE"
+        ],
+        "initialDescription": "A masterpiece by a neglected genius is here.",
+        "description": "painting",
+        "longDescription": "Fortunately, there is still one chance for you to be a vandal, for on the far wall is a work of unparalleled beauty.",
+        "action": "PAINTING",
+        "light": 0,
+        "value": 4,
+        "trophyValue": 7,
+        "size": 15,
+        "capacity": 0
+    },
+    "PAPER": {
+        "id": "PAPER",
+        "name": "PAPER",
+        "synonyms": [
+            "NEWSP",
+            "ISSUE",
+            "REPOR",
+            "MAGAZ",
+            "NEWS"
+        ],
+        "description": "newspaper",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 2,
+        "capacity": 0
+    },
+    "PEARL": {
+        "id": "PEARL",
+        "name": "PEARL",
+        "synonyms": [
+            "NECKL"
+        ],
+        "initialDescription": "There is a pearl necklace here with hundreds of large pearls.",
+        "description": "pearl necklace",
+        "action": "(Not",
+        "light": 0,
+        "value": 9,
+        "trophyValue": 5,
+        "size": 10,
+        "capacity": 0
+    },
+    "POOL": {
         "id": "POOL",
         "name": "pool of sewage",
-        "synonyms": ["SEWAG"],
-        "adjectives": ["LARGE"],
+        "synonyms": [
+            "SEWAG"
+        ],
+        "adjectives": [
+            "LARGE"
+        ],
         "description": "pool of sewage",
         "initialDescription": "The leak has submerged the depressed area in a pool of sewage.",
         "flags": {
@@ -896,11 +1260,325 @@
             "isScenery": true
         }
     },
-    {
+    "POT": {
+        "id": "POT",
+        "name": "POT",
+        "initialDescription": "There is a pot of gold here.",
+        "description": "pot filled with gold",
+        "longDescription": "At the end of the rainbow is a pot of gold.",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 10,
+        "size": 15,
+        "capacity": 0,
+        "adjectives": [
+            "GOLD"
+        ]
+    },
+    "PUBK": {
+        "id": "PUBK",
+        "name": "PUBK",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There is a purple book here.",
+        "description": "purple book",
+        "action": "(Not",
+        "contents": [
+            "STAMP"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 2,
+        "adjectives": [
+            "PURPL"
+        ]
+    },
+    "PUMP": {
+        "id": "PUMP",
+        "name": "PUMP",
+        "synonyms": [
+            "AIR-P AIRPU"
+        ],
+        "initialDescription": "There is a small pump here.",
+        "description": "hand-held air pump",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0
+    },
+    "PUTTY": {
+        "id": "PUTTY",
+        "name": "PUTTY",
+        "synonyms": [
+            "MATER",
+            "GUNK",
+            "GLUE"
+        ],
+        "initialDescription": "There is some gunk here",
+        "description": "viscous material",
+        "action": "(Not",
+        "canBeContainedBy": "TUBE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 6,
+        "capacity": 0,
+        "adjectives": [
+            "VISCO"
+        ]
+    },
+    "RBOAT": {
+        "id": "RBOAT",
+        "name": "RBOAT",
+        "synonyms": [
+            "BOAT"
+        ],
+        "initialDescription": "There is an inflated boat here.",
+        "description": "magic boat",
+        "action": "RBOAT-FUNCTION",
+        "contents": [
+            "LABEL"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 100,
+        "adjectives": [
+            "PLAST SEAWO"
+        ]
+    },
+    "RBTLB": {
+        "id": "RBTLB",
+        "name": "RBTLB",
+        "synonyms": [
+            "PAPER"
+        ],
+        "initialDescription": "There is a green piece of paper here.",
+        "description": "green piece of paper",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 3,
+        "capacity": 0,
+        "adjectives": [
+            "GREEN"
+        ],
+        "text": "!!!! FROBOZZ MAGIC ROBOT COMPANY !!!! Hello, Master! I am a late-model robot, trained at MIT Tech to perform various simple household functions. Instructions for use: To activate me, use the following formula: >TELL ROBOT '' The quotation marks are required! Warranty: No warranty is expressed or implied. At your service!"
+    },
+    "RCAGE": {
+        "id": "RCAGE",
+        "name": "RCAGE",
+        "synonyms": [
+            "CAGE"
+        ],
+        "initialDescription": "There is an iron cage in the middle of the room.",
+        "description": "iron cage",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 0,
+        "capacity": 0,
+        "adjectives": [
+            "IRON"
+        ]
+    },
+    "RDICE": {
+        "id": "RDICE",
+        "name": "RDICE",
+        "synonyms": [
+            "ICING"
+        ],
+        "description": "red icing",
+        "action": "(Not",
+        "canBeContainedBy": "ATABL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "RED",
+            "ECCH"
+        ]
+    },
+    "RECEP": {
+        "id": "RECEP",
+        "name": "RECEP",
+        "description": "receptacle",
+        "action": "(Not",
+        "canBeContainedBy": "BALLO",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 6
+    },
+    "REFL1": {
+        "id": "REFL1",
+        "name": "REFL1",
+        "synonyms": [
+            "MIRRO"
+        ],
+        "description": "mirror",
+        "action": "MIRROR-MIRROR",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "REFL2": {
+        "id": "REFL2",
+        "name": "REFL2",
+        "synonyms": [
+            "MIRRO"
+        ],
+        "description": "mirror",
+        "action": "MIRROR-MIRROR",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "RKNIF": {
+        "id": "RKNIF",
+        "name": "RKNIF",
+        "synonyms": [
+            "KNIFE"
+        ],
+        "initialDescription": "There is a rusty knife here.",
+        "description": "rusty knife",
+        "longDescription": "Beside the skeleton is a rusty knife.",
+        "action": "RUSTY-KNIFE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0,
+        "adjectives": [
+            "RUSTY"
+        ]
+    },
+    "ROBOT": {
+        "id": "ROBOT",
+        "name": "ROBOT",
+        "synonyms": [
+            "R2D2 C3PO ROBBY"
+        ],
+        "initialDescription": "There is a robot here.",
+        "description": "robot",
+        "action": "ROBOT-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 0,
+        "capacity": 0
+    },
+    "ROPE": {
+        "id": "ROPE",
+        "name": "ROPE",
+        "synonyms": [
+            "HEMP",
+            "COIL"
+        ],
+        "initialDescription": "There is a large coil of rope here.",
+        "description": "rope",
+        "longDescription": "A large coil of rope is lying in the corner.",
+        "action": "ROPE-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0
+    },
+    "RUBY": {
+        "id": "RUBY",
+        "name": "RUBY",
+        "synonyms": [
+            "RUBY"
+        ],
+        "initialDescription": "There is a moby ruby lying here.",
+        "description": "ruby",
+        "longDescription": "On the floor lies a moby ruby.",
+        "action": "(Not",
+        "light": 0,
+        "value": 15,
+        "trophyValue": 8,
+        "size": 5,
+        "capacity": 0
+    },
+    "RUG": {
+        "id": "RUG",
+        "name": "RUG",
+        "synonyms": [
+            "CARPE"
+        ],
+        "description": "carpet",
+        "action": "RUG",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0,
+        "adjectives": [
+            "ORIEN"
+        ]
+    },
+    "SACK": {
+        "id": "SACK",
+        "synonyms": [
+            "BAG"
+        ],
+        "adjectives": [
+            "LEATH"
+        ],
+        "description": "leather sack",
+        "initialDescription": "There is an old leather bag here.",
+        "flags": {
+            "isContainer": true,
+            "isFlammable": true,
+            "isVisible": true,
+            "isTakeable": true
+        },
+        "size": 3,
+        "capacity": 15,
+        "contents": [
+            "GARLI",
+            "FOOD"
+        ]
+    },
+    "SAFE": {
+        "id": "SAFE",
+        "name": "SAFE",
+        "synonyms": [
+            "BOX"
+        ],
+        "description": "box",
+        "action": "SAFE-FUNCTION",
+        "contents": [
+            "CROWN",
+            "CARD"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 15
+    },
+    "SAFFR": {
         "id": "SAFFR",
         "name": "tin of rare spices",
-        "synonyms": ["TIN"],
-        "adjectives": ["RARE"],
+        "synonyms": [
+            "TIN"
+        ],
+        "adjectives": [
+            "RARE"
+        ],
         "description": "tin of rare spices",
         "initialDescription": "There is a tin of rare spices here.",
         "flags": {
@@ -912,26 +1590,449 @@
         "trophyValue": 5,
         "size": 5
     },
-    {
-        "id": "RUG",
+    "SBAG": {
+        "id": "SBAG",
+        "name": "SBAG",
         "synonyms": [
-            "CARPE",
-            "rug"
+            "BAG",
+            "SACK",
+            "BAGGI"
+        ],
+        "initialDescription": "A sandwich bag is here.",
+        "description": "sandwich bag",
+        "longDescription": "On the table is an elongated brown sack, smelling of hot peppers.",
+        "action": "(Not",
+        "contents": [
+            "GARLI",
+            "FOOD"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 3,
+        "capacity": 15,
+        "adjectives": [
+            "BROWN"
+        ]
+    },
+    "SCREW": {
+        "id": "SCREW",
+        "name": "SCREW",
+        "initialDescription": "There is a screwdriver here.",
+        "description": "screwdriver",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0
+    },
+    "SHOVE": {
+        "id": "SHOVE",
+        "name": "SHOVE",
+        "initialDescription": "There is a large shovel here.",
+        "description": "shovel",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 15,
+        "capacity": 0
+    },
+    "SPHER": {
+        "id": "SPHER",
+        "name": "SPHER",
+        "synonyms": [
+            "BALL"
+        ],
+        "initialDescription": "There is a beautiful crystal sphere here.",
+        "description": "crystal sphere",
+        "action": "SPHERE-FUNCTION",
+        "light": 0,
+        "value": 6,
+        "trophyValue": 6,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "CRYST",
+            "GLASS"
+        ]
+    },
+    "SSLOT": {
+        "id": "SSLOT",
+        "name": "SSLOT",
+        "synonyms": [
+            "SLOT HOLE"
+        ],
+        "description": "hole",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 10
+    },
+    "STAMP": {
+        "id": "STAMP",
+        "name": "STAMP",
+        "initialDescription": "There is a Flathead Commemorative stamp here.",
+        "description": "stamp",
+        "action": "(Not",
+        "canBeContainedBy": "PUBK",
+        "light": 0,
+        "value": 4,
+        "trophyValue": 10,
+        "size": 1,
+        "capacity": 0
+    },
+    "STATU": {
+        "id": "STATU",
+        "name": "STATU",
+        "synonyms": [
+            "SCULP ROCK"
+        ],
+        "initialDescription": "There is a beautiful statue here.",
+        "description": "statue",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 13,
+        "size": 8,
+        "capacity": 0
+    },
+    "STICK": {
+        "id": "STICK",
+        "name": "STICK",
+        "initialDescription": "There is a broken sharp stick here.",
+        "description": "broken sharp stick",
+        "longDescription": "A sharp stick, which appears to have been broken at one end, is here.",
+        "action": "STICK-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 3,
+        "capacity": 0,
+        "adjectives": [
+            "SHARP BROKE"
+        ]
+    },
+    "STILL": {
+        "id": "STILL",
+        "name": "STILL",
+        "initialDescription": "There is a vicious-looking stilletto here.",
+        "description": "stilletto",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "VICIO"
+        ]
+    },
+    "STRAD": {
+        "id": "STRAD",
+        "name": "Stradivarius",
+        "synonyms": [
+            "VIOLI"
         ],
         "adjectives": [
-            "ORIEN"
+            "FANCY"
         ],
-        "description": "A large oriental rug is on the floor.",
-        "action": "RUG",
-        "longDescription": "A large oriental rug is on the floor.",
+        "description": "fancy violin",
+        "initialDescription": "There is a Stradivarius here.",
         "flags": {
-            "isNotTakeableWithMessage": true,
+            "isVisible": true,
+            "isTakeable": true
+        },
+        "value": 10,
+        "trophyValue": 10,
+        "size": 10,
+        "canBeContainedBy": "IRBOX"
+    },
+    "SWORD": {
+        "id": "SWORD",
+        "name": "SWORD",
+        "synonyms": [
+            "ORCRI",
+            "GLAMD",
+            "BLADE"
+        ],
+        "initialDescription": "There is an elvish sword here.",
+        "description": "sword",
+        "longDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity.",
+        "action": "SWORD",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 30,
+        "capacity": 0,
+        "adjectives": [
+            "ELVIS"
+        ]
+    },
+    "TCASE": {
+        "id": "TCASE",
+        "name": "TCASE",
+        "synonyms": [
+            "CASE"
+        ],
+        "initialDescription": "There is a trophy case here.",
+        "description": "trophy case",
+        "action": "TROPHY-CASE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "adjectives": [
+            "TROPH"
+        ]
+    },
+    "THIEF": {
+        "id": "THIEF",
+        "name": "THIEF",
+        "synonyms": [
+            "ROBBE CROOK CRIME CRIMI BANDI GENT GENTL MAN SHADY THUG BAGMA MAFIA"
+        ],
+        "description": "thief",
+        "action": "ROBBER-FUNCTION",
+        "contents": [
+            "STILL"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 4
+    },
+    "TOMB": {
+        "id": "TOMB",
+        "name": "TOMB",
+        "synonyms": [
+            "GRAVE"
+        ],
+        "initialDescription": "There is a tomb here, made of the finest marble, and large enough for four headless corpses. On one end is the cryptic inscription:",
+        "description": "tomb",
+        "action": "HEAD-FUNCTION",
+        "text": "Here lie the implementers, whose heads were placed on poles by the Keeper of the Dungeon for amazing untastefulness."
+    },
+    "TORCH": {
+        "id": "TORCH",
+        "name": "TORCH",
+        "initialDescription": "There is an ivory torch here.",
+        "description": "torch",
+        "longDescription": "Sitting on the pedestal is a flaming torch, made of ivory.",
+        "action": "(Not",
+        "light": 1,
+        "value": 14,
+        "trophyValue": 6,
+        "size": 20,
+        "capacity": 0,
+        "adjectives": [
+            "IVORY"
+        ]
+    },
+    "TRAP-DOOR": {
+        "id": "TRAP-DOOR",
+        "name": "trap door",
+        "synonyms": [
+            "trapdoor",
+            "cover",
+            "TRAPD",
+            "TRAP-"
+        ],
+        "adjectives": [
+            "trap",
+            "dusty"
+        ],
+        "description": "A dusty trap door is here, obviously closed.",
+        "openDescription": "The trap door is open.",
+        "action": "TRAP-DOOR",
+        "flags": {
+            "isDoor": true,
+            "isInvisible": true,
+            "isOpen": false,
+            "isTakeable": false
+        }
+    },
+    "TRIDE": {
+        "id": "TRIDE",
+        "name": "TRIDE",
+        "synonyms": [
+            "FORK"
+        ],
+        "initialDescription": "Neptune's own crystal trident is here.",
+        "description": "crystal trident",
+        "longDescription": "On the shore lies Neptune's own crystal trident.",
+        "action": "(Not",
+        "light": 0,
+        "value": 4,
+        "trophyValue": 11,
+        "size": 20,
+        "capacity": 0,
+        "adjectives": [
+            "CRYST"
+        ]
+    },
+    "TROLL": {
+        "id": "TROLL",
+        "name": "TROLL",
+        "description": "troll",
+        "action": "TROLL",
+        "contents": [
+            "AXE"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 2
+    },
+    "TROPHY-CASE": {
+        "id": "TROPHY-CASE",
+        "name": "trophy case",
+        "synonyms": [
+            "CASE"
+        ],
+        "adjectives": [
+            "TROPH"
+        ],
+        "description": "trophy case",
+        "action": "TROPHY-CASE",
+        "flags": {
+            "isContainer": true,
+            "isTransparent": true,
             "isVisible": true,
             "isTakeable": false,
-            "isMoved": false,
-            "isNotDescribed": false
+            "isNotDescribed": true
         },
         "size": 99999,
-        "initialDescription": "A large oriental rug is on the floor."
+        "capacity": 99999,
+        "initialDescription": "There is a trophy case here."
+    },
+    "TRUNK": {
+        "id": "TRUNK",
+        "name": "TRUNK",
+        "synonyms": [
+            "CHEST"
+        ],
+        "initialDescription": "There is an old trunk here, bulging with assorted jewels.",
+        "description": "trunk with jewels",
+        "longDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
+        "action": "(Not",
+        "light": 0,
+        "value": 15,
+        "trophyValue": 8,
+        "size": 35,
+        "capacity": 0
+    },
+    "TUBE": {
+        "id": "TUBE",
+        "name": "TUBE",
+        "initialDescription": "There is an object which looks like a tube of toothpaste here.",
+        "description": "tube",
+        "action": "TUBE-FUNCTION",
+        "contents": [
+            "PUTTY"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 7
+    },
+    "WATER": {
+        "id": "WATER",
+        "name": "WATER",
+        "synonyms": [
+            "LIQUI",
+            "H2O"
+        ],
+        "initialDescription": "Water",
+        "description": "quantity of water",
+        "longDescription": "There is some water here",
+        "action": "WATER-FUNCTION",
+        "canBeContainedBy": "BOTTL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 4,
+        "capacity": 0
+    },
+    "WHBK": {
+        "id": "WHBK",
+        "name": "WHBK",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There is a white book here.",
+        "description": "white book",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 2,
+        "adjectives": [
+            "WHITE"
+        ]
+    },
+    "WINDOW": {
+        "id": "WINDOW",
+        "name": "window",
+        "synonyms": [
+            "win",
+            "WINDO"
+        ],
+        "description": "A window is here.",
+        "action": "WINDOW-FUNCTION",
+        "flags": {
+            "isDoor": true,
+            "isVisible": true,
+            "isOpen": false,
+            "isTakeable": false,
+            "isNotDescribed": true
+        }
+    },
+    "WRENC": {
+        "id": "WRENC",
+        "name": "WRENC",
+        "initialDescription": "There is a wrench here.",
+        "description": "wrench",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0
+    },
+    "WRENCH": {
+        "id": "WRENCH",
+        "name": "wrench",
+        "synonyms": [],
+        "description": "wrench",
+        "initialDescription": "There is a wrench here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": true,
+            "isTool": true
+        },
+        "size": 5
+    },
+    "ZORKM": {
+        "id": "ZORKM",
+        "name": "ZORKM",
+        "synonyms": [
+            "COIN"
+        ],
+        "initialDescription": "There is an engraved zorkmid coin here.",
+        "description": "priceless zorkmid",
+        "longDescription": "On the floor is a gold zorkmid coin (a valuable collector's item).",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 12,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "GOLD"
+        ]
     }
-]
+}
