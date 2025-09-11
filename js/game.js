@@ -11,6 +11,8 @@ class Game {
         this.player = new Player({ location: 'WEST-OF-HOUSE' }); // Starting location
         this.vocabulary = data.vocabulary;
         this.deathMessages = data.deathMessages;
+        this.flags = new Map(); // For global game flags
+        this.trollState = { unconscious: false, hits: 0 };
 
         this.initGameFlags();
         this.initObjectLocations();
@@ -48,6 +50,14 @@ class Game {
                 }
             }
         }
+    }
+
+    setGameFlag(flag, value) {
+        this.flags.set(flag, value);
+    }
+
+    getGameFlag(flag) {
+        return this.flags.get(flag);
     }
 
     run() {

@@ -33,7 +33,7 @@
         {"id": "DROP", "synonyms": ["leave", "put", "place"]},
         {"id": "LOOK", "synonyms": ["l", "stare", "gaze", "descr", "what", "whats", "what'"]},
         {"id": "EXAMINE", "synonyms": ["exami", "inspect", "check"]},
-        {"id": "GO", "synonyms": ["walk", "run", "move"]},
+        {"id": "GO", "synonyms": ["walk", "run"]},
         {"id": "MOVE", "synonyms": ["push", "pull", "shove", "move"]},
         {"id": "TURN-ON", "synonyms": ["on", "light", "ignit"]},
         {"id": "TURN-OFF", "synonyms": ["off", "extin", "douse"]},

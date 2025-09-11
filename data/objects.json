@@ -137,7 +137,10 @@
         "initialDescription": "On a table is a nasty-looking knife.",
         "properties": {},
         "synonyms": [],
-        "adjectives": []
+        "adjectives": [],
+        "flags": {
+            "isWeapon": true
+        }
     },
     "SWORD": {
         "id": "SWORD",
@@ -148,7 +151,10 @@
             "function": "SWORD"
         },
         "synonyms": [],
-        "adjectives": []
+        "adjectives": [],
+        "flags": {
+            "isWeapon": true
+        }
     },
     "LAMP": {
         "id": "LAMP",
@@ -159,7 +165,11 @@
             "function": "LANTERN"
         },
         "synonyms": [],
-        "adjectives": []
+        "adjectives": [],
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true
+        }
     },
     "BLAMP": {
         "id": "BLAMP",
@@ -179,12 +189,50 @@
             "function": "RUG"
         },
         "synonyms": [],
-        "adjectives": []
+        "adjectives": [],
+        "flags": {
+            "isNotDescribed": true,
+            "isTryTakeable": true
+        }
+    },
+    "DOOR": {
+        "id": "DOOR",
+        "name": "trap door",
+        "description": "There is a trap door here.",
+        "longDescription": "There is a trap door here.",
+        "initialDescription": "",
+        "properties": {
+            "function": "TRAP-DOOR"
+        },
+        "synonyms": ["TRAPD", "TRAP-"],
+        "adjectives": ["TRAP"],
+        "flags": {
+            "isDoor": true,
+            "isNotDescribed": true,
+            "isInvisible": true
+        }
+    },
+    "GRAT1": {
+        "id": "GRAT1",
+        "name": "grating",
+        "description": "There is a grating on the ground.",
+        "longDescription": "There is a grating on the ground.",
+        "initialDescription": "",
+        "properties": {
+            "function": "GRAT1-FUNCTION"
+        },
+        "synonyms": ["GRATI", "GRATE"],
+        "adjectives": [],
+        "flags": {
+            "isDoor": true,
+            "isNotDescribed": true
+        }
     },
     "LEAVE": {
         "id": "LEAVE",
         "name": "pile of leaves",
         "description": "There is a pile of leaves on the ground.",
+        "longDescription": "A pile of leaves is here.",
         "initialDescription": "",
         "properties": {
             "function": "LEAF-PILE"
@@ -201,7 +249,12 @@
             "function": "TROLL"
         },
         "synonyms": [],
-        "adjectives": []
+        "adjectives": [],
+        "flags": {
+            "isVictim": true,
+            "isVisible": true,
+            "isVillain": true
+        }
     },
     "AXE": {
         "id": "AXE",

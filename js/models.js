@@ -65,19 +65,37 @@ class GameObject {
 class Room {
     constructor(data) {
         this.id = data.id;
-        this.name = data.name;
-        this.description = data.description;
-        this.exits = data.exits || {};     // Standard exits
-        this.conditionalExits = data.conditionalExits || {}; // For MDL #CEXIT
-        this.objects = data.objects || []; // IDs of objects initially in the room
-        this.flags = data.flags || {};     // Original boolean flags
-        this.rbits = 0;                    // Bitmask for RBITS
+        this.name = data.shortDesc;
+        this.description = data.longDesc;
+        this.objects = data.objects || [];
+        this.flags = data.flags || {};
+        this.rbits = 0;
 
-        // Additional properties derived from MDL
-        this.longDescription = data.longDescription || data.description; // MDL RDESC1
-        this.shortDescription = data.shortDescription || data.name; // MDL RDESC2
-        this.action = data.action || null; // MDL RACTION
-        this.value = data.value || 0;      // MDL RVAL
+        this.longDescription = data.longDesc || data.description;
+        this.shortDescription = data.shortDesc || data.name;
+        this.action = data.action || null;
+        this.value = data.value || 0;
+
+        this.exits = {};
+        this.conditionalExits = {};
+        this.blockedExits = {};
+
+        const rawExits = data.exits || {};
+        for (const dir in rawExits) {
+            const exit = rawExits[dir];
+            if (typeof exit === 'string') {
+                this.exits[dir] = exit;
+            } else if (exit.destination) {
+                this.conditionalExits[dir] = {
+                    roomId: exit.destination,
+                    flag: exit.condition.replace(/"/g, ''), // Remove quotes from flag name
+                    value: 'CLEAR', // Assuming 'CLEAR' is the success state for now
+                    message: exit.message
+                };
+            } else if (exit.blocked) {
+                this.blockedExits[dir] = exit.blocked;
+            }
+        }
 
         this.initRFlags();
     }

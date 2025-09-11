@@ -201,6 +201,7 @@ const objectsData = {
         "id": "DOOR",
         "name": "trap door",
         "description": "There is a trap door here.",
+        "longDescription": "There is a trap door here.",
         "initialDescription": "",
         "properties": {
             "function": "TRAP-DOOR"
@@ -213,10 +214,27 @@ const objectsData = {
             "isInvisible": true
         }
     },
+    "GRAT1": {
+        "id": "GRAT1",
+        "name": "grating",
+        "description": "There is a grating on the ground.",
+        "longDescription": "There is a grating on the ground.",
+        "initialDescription": "",
+        "properties": {
+            "function": "GRAT1-FUNCTION"
+        },
+        "synonyms": ["GRATI", "GRATE"],
+        "adjectives": [],
+        "flags": {
+            "isDoor": true,
+            "isNotDescribed": true
+        }
+    },
     "LEAVE": {
         "id": "LEAVE",
         "name": "pile of leaves",
         "description": "There is a pile of leaves on the ground.",
+        "longDescription": "A pile of leaves is here.",
         "initialDescription": "",
         "properties": {
             "function": "LEAF-PILE"
@@ -1710,7 +1728,7 @@ const roomsData = {
     "CLEAR": {
         "id": "CLEAR",
         "shortDesc": "Clearing",
-        "longDesc": "",
+        "longDesc": "You are in a clearing, with a forest surrounding you on all sides. A path leads south.\nThere is a grating on the ground.",
         "exits": {
             "SW": "EHOUS",
             "SE": "FORE5",
@@ -3387,7 +3405,7 @@ const vocabularyData = {
         {"id": "DROP", "synonyms": ["leave", "put", "place"]},
         {"id": "LOOK", "synonyms": ["l", "stare", "gaze", "descr", "what", "whats", "what'"]},
         {"id": "EXAMINE", "synonyms": ["exami", "inspect", "check"]},
-        {"id": "GO", "synonyms": ["walk", "run", "move"]},
+        {"id": "GO", "synonyms": ["walk", "run"]},
         {"id": "MOVE", "synonyms": ["push", "pull", "shove", "move"]},
         {"id": "TURN-ON", "synonyms": ["on", "light", "ignit"]},
         {"id": "TURN-OFF", "synonyms": ["off", "extin", "douse"]},
@@ -3646,14 +3664,14 @@ class GameObject {
 class Room {
     constructor(data) {
         this.id = data.id;
-        this.name = data.name;
-        this.description = data.description;
+        this.name = data.shortDesc;
+        this.description = data.longDesc;
         this.objects = data.objects || [];
         this.flags = data.flags || {};
         this.rbits = 0;
 
-        this.longDescription = data.longDescription || data.description;
-        this.shortDescription = data.shortDescription || data.name;
+        this.longDescription = data.longDesc || data.description;
+        this.shortDescription = data.shortDesc || data.name;
         this.action = data.action || null;
         this.value = data.value || 0;
 
@@ -3790,96 +3808,6 @@ class Exit {
         this.condition = condition;
         this.message = message;
     }
-}
-class UI {
-    constructor(terminalElement, inputElement) {
-        this.terminalElement = terminalElement;
-        this.inputElement = inputElement;
-        this.buffer = [];
-        this.MAX_LINES = 24;
-        this.prompt = '> ';
-        this.onInputCallback = null;
-
-        window.addEventListener('click', () => {
-            this.inputElement.focus();
-        });
-        this.terminalElement.addEventListener('wheel', (e) => e.preventDefault());
-    }
-
-    render() {
-        const displayBuffer = this.buffer.slice(-this.MAX_LINES);
-
-        // Add cursor to the last line for rendering
-        if (displayBuffer.length > 0) {
-            const lastLineIndex = displayBuffer.length - 1;
-            // Create a temporary copy to modify for rendering
-            const tempLine = displayBuffer[lastLineIndex];
-            displayBuffer[lastLineIndex] = tempLine + '<span class="cursor"></span>';
-        }
-
-        this.terminalElement.innerHTML = displayBuffer.join('\n');
-        this.terminalElement.scrollTop = this.terminalElement.scrollHeight;
-    }
-
-    // For initial game output
-    start(initialText) {
-        const lines = initialText.split('\n');
-        this.buffer.push(...lines);
-        this.buffer.push(this.prompt);
-        this.render();
-    }
-
-    updateInput(text) {
-        if (this.buffer.length > 0) {
-            // The last line is always the input line
-            this.buffer[this.buffer.length - 1] = this.prompt + text;
-            this.render();
-        }
-    }
-
-    onInput(callback) {
-        this.onInputCallback = callback;
-
-        this.inputElement.addEventListener('input', () => {
-            this.updateInput(this.inputElement.value);
-        });
-
-        this.inputElement.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                const command = this.inputElement.value;
-                this.inputElement.value = '';
-
-                // 1. Lock the input line into history
-                this.buffer[this.buffer.length - 1] = this.prompt + command;
-
-                // 2. Send input to game engine and get output
-                const gameOutput = this.onInputCallback(command);
-
-                // 3. Append game response
-                if (gameOutput) {
-                    const lines = gameOutput.split('\n');
-                    // If the last line of output is empty, remove it, as we add our own prompt
-                    if (lines.length > 0 && lines[lines.length - 1].trim() === '') {
-                        lines.pop();
-                    }
-                    this.buffer.push(...lines);
-                }
-
-                // 4. Finally, append the new prompt for the next input
-                this.buffer.push(this.prompt);
-
-                // Trim buffer
-                while (this.buffer.length > this.MAX_LINES) {
-                    this.buffer.shift();
-                }
-
-                this.render();
-            }
-        });
-    }
-
-    // This method is not needed if the logic is handled in onInput
-    display() {}
 }
 
 function applyAction(action, dobj, iobj, game) {
@@ -4053,12 +3981,10 @@ const actionHandlers = {
             return "Attacking the troll with your bare hands is suicidal.";
         }
 
-        troll.trollState = troll.trollState || { unconscious: false, hits: 0 };
+        game.trollState.hits++;
 
-        troll.trollState.hits++;
-
-        if (troll.trollState.hits >= 2) {
-             troll.trollState.unconscious = true;
+        if (game.trollState.hits >= 2) {
+             game.trollState.unconscious = true;
              troll.description = "The troll is lying on the ground, unconscious.";
              return "The troll is knocked out!";
         } else {
@@ -4132,6 +4058,7 @@ class Game {
         this.vocabulary = data.vocabulary;
         this.deathMessages = data.deathMessages;
         this.flags = new Map(); // For global game flags
+        this.trollState = { unconscious: false, hits: 0 };
 
         this.initGameFlags();
         this.initObjectLocations();
@@ -4262,32 +4189,4 @@ class Game {
     }
 }
 
-// Main entry point for the browser-based game.
-async function main() {
-    // Get references to the DOM elements
-    const terminalElement = document.getElementById('terminal');
-    const inputElement = document.getElementById('input');
-
-    // Instantiate the UI and Game
-    const ui = new UI(terminalElement, inputElement);
-    const game = new Game({
-        objects: objectsData,
-        rooms: roomsData,
-        vocabulary: vocabularyData,
-        deathMessages: deathMessagesData
-    });
-
-    // Set up the input handler. The callback passed to onInput
-    // will be executed when the user enters a command. It passes
-    // the command to the game's tick function and returns the result.
-    ui.onInput((command) => {
-        return game.tick(command);
-    });
-
-    // Display the initial room description to start the game.
-    const initialOutput = game.look();
-    ui.start(initialOutput);
-}
-
-// Start the game when the DOM is ready
-document.addEventListener('DOMContentLoaded', main);
+module.exports = { Game, OFLAGS, RBITS, hasFlag };

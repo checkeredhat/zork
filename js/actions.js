@@ -40,21 +40,36 @@ const actionHandlers = {
 
     GO: (dobj, iobj, game, action) => {
         const room = game.rooms.get(game.player.location);
-        const direction = action.verb.replace('GO ', ''); // Assumes action.verb is like "GO NORTH"
-        const targetRoomId = room.exits[direction];
+        const direction = action.verb.replace('GO ', '');
 
-        if (targetRoomId) {
-            // Handle "pseudo-rooms" which are just descriptions for failed movement
-            if (targetRoomId === 'HOUSE-BLOCKED') {
-                return game.rooms.get(targetRoomId).description;
-            }
-
-            // Handle actual movement
+        // Check for standard exits
+        if (room.exits[direction]) {
+            const targetRoomId = room.exits[direction];
             game.player.location = targetRoomId;
             const targetRoom = game.rooms.get(targetRoomId);
-            targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT); // Force room description on next turn
-            return ''; // Movement actions in Zork don't print anything, they just trigger a LOOK
+            targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
+            return '';
         }
+
+        // Check for conditional exits
+        if (room.conditionalExits[direction]) {
+            const ce = room.conditionalExits[direction];
+            const flagValue = game.getGameFlag(ce.flag);
+            if (flagValue === ce.value) {
+                game.player.location = ce.roomId;
+                const targetRoom = game.rooms.get(ce.roomId);
+                targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
+                return '';
+            } else {
+                return ce.message;
+            }
+        }
+
+        // Check for blocked exits
+        if (room.blockedExits[direction]) {
+            return room.blockedExits[direction];
+        }
+
         return "You can't go that way.";
     },
 
@@ -146,7 +161,7 @@ const actionHandlers = {
                  return "The rug is already moved.";
             }
             dobj.oflags = setFlag(dobj.oflags, OFLAGS.INVISIBLE); // Hide the rug
-            const trapDoor = game.objects.get('TRAP-DOOR');
+            const trapDoor = game.objects.get('DOOR');
             trapDoor.oflags = clearFlag(trapDoor.oflags, OFLAGS.INVISIBLE); // Reveal the trap door
             trapDoor.location = game.player.location;
             return "With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap door appears.";
@@ -164,12 +179,10 @@ const actionHandlers = {
             return "Attacking the troll with your bare hands is suicidal.";
         }
 
-        troll.trollState = troll.trollState || { unconscious: false, hits: 0 };
+        game.trollState.hits++;
 
-        troll.trollState.hits++;
-
-        if (troll.trollState.hits >= 2) {
-             troll.trollState.unconscious = true;
+        if (game.trollState.hits >= 2) {
+             game.trollState.unconscious = true;
              troll.description = "The troll is lying on the ground, unconscious.";
              return "The troll is knocked out!";
         } else {
