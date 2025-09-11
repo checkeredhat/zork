@@ -57,45 +57,7 @@ const actionHandlers = {
 
         // Handle conditional exits (object-based)
         if (typeof exit === 'object' && exit.destination) {
-            let conditionMet = false;
-            // TODO: This is a hack. The parser should provide better conditional information.
-            // We are hardcoding the logic for specific puzzles for now.
-            switch (room.id) {
-                case 'LROOM':
-                    if (direction === 'DOWN') {
-                        const trapDoor = game.objects.get('TRAP-DOOR');
-                        conditionMet = trapDoor && hasFlag(trapDoor.oflags, OFLAGS.OPENBIT);
-                    }
-                    break;
-                case 'MGRAT':
-                     if (direction === 'UP') {
-                        const grating = game.objects.get('GRAT2');
-                        conditionMet = grating && !hasFlag(grating.oflags, OFLAGS.LOCKBIT);
-                    }
-                    break;
-                case 'MTROL':
-                    if (direction === 'SOUTH' || direction === 'EAST' || direction === 'NORTH') {
-                        const troll = game.objects.get('TROLL');
-                        conditionMet = troll && troll.trollState.unconscious;
-                    }
-                    break;
-                case 'CYCLO':
-                    if (direction === 'UP') {
-                        const cyclops = game.objects.get('CYCLOPS');
-                        // In the original game, this is more complex (e.g., Ulysses).
-                        // For now, we'll say if the cyclops is "disarmed" (e.g. fled), you can pass.
-                        conditionMet = cyclops && hasFlag(cyclops.oflags, OFLAGS.DISARMEDBIT);
-                    }
-                    break;
-                 case 'EHOUS':
-                    if (direction === 'WEST' || direction === 'ENTER') {
-                        const window = game.objects.get('WINDOW');
-                        conditionMet = window && hasFlag(window.oflags, OFLAGS.OPENBIT);
-                    }
-                    break;
-            }
-
-            if (conditionMet) {
+            if (evaluateCondition(exit.condition, game)) {
                 game.player.location = exit.destination;
                 const targetRoom = game.rooms.get(exit.destination);
                 targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
@@ -227,6 +189,7 @@ const actionHandlers = {
         if (troll.trollState.hits >= 2) {
              troll.trollState.unconscious = true;
              troll.description = "The troll is lying on the ground, unconscious.";
+             game.globalFlags.set('TROLL-FLAG', true);
              return "The troll is knocked out!";
         } else {
              return "A furious but glancing blow is struck.\nThe troll's axe barely misses your ear.";
@@ -315,6 +278,28 @@ actionHandlers.ENTER = (dobj, iobj, game, action) => {
 
     return "You can't enter that.";
 };
+
+function evaluateCondition(condition, game) {
+    if (!condition) return true; // No condition means the exit is always open
+
+    const flagName = condition.replace(/\"/g, '');
+
+    // Check for object-based conditions
+    switch (flagName) {
+        case 'TRAP-DOOR':
+            const trapDoor = game.objects.get('TRAP-DOOR');
+            return trapDoor && hasFlag(trapDoor.oflags, OFLAGS.OPENBIT);
+        case 'KITCHEN-WINDOW':
+            const window = game.objects.get('WIND1');
+            return window && hasFlag(window.oflags, OFLAGS.OPENBIT);
+        case 'GRATING-UNLOCKED': // This is a made-up flag for now
+            const grating = game.objects.get('GRAT2');
+            return grating && !hasFlag(grating.oflags, OFLAGS.LOCKBIT);
+    }
+
+    // Check for global flags
+    return game.globalFlags.get(flagName) === true;
+}
 
 
 export { applyAction };

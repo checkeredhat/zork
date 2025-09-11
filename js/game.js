@@ -11,6 +11,7 @@ class Game {
         this.player = new Player({ location: 'WHOUS' }); // Starting location
         this.vocabulary = data.vocabulary;
         this.deathMessages = data.deathMessages;
+        this.globalFlags = new Map();
 
         this.initObjectLocations();
     }

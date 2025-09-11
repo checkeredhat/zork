@@ -206,17 +206,17 @@
             "EAST": {
                 "condition": "\"TROLL-FLAG\"",
                 "destination": "CRAW4",
-                "message": "You can't go that way."
+                "message": "The troll is blocking your way."
             },
             "NORTH": {
                 "condition": "\"TROLL-FLAG\"",
                 "destination": "PASS1",
-                "message": "You can't go that way."
+                "message": "The troll is blocking your way."
             },
             "SOUTH": {
                 "condition": "\"TROLL-FLAG\"",
                 "destination": "MAZE1",
-                "message": "You can't go that way."
+                "message": "The troll is blocking your way."
             }
         },
         "objects": [
@@ -422,7 +422,7 @@
         "exits": {
             "SW": "MAZ11",
             "UP": {
-                "condition": "\"KEY-FLAG\"",
+                "condition": "\"GRATING-UNLOCKED\"",
                 "destination": "CLEAR",
                 "message": "The grating is locked"
             }
