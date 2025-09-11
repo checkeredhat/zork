@@ -15,10 +15,10 @@ function tokenize(mdlData) {
     const tokenSpecs = [
         { type: 'COMMENT', regex: /^;.*/ },
         { type: 'WHITESPACE', regex: /^\s+/ },
-        { type: 'STRING', regex: /^"([^"\\]|\\.)*"/ },
-        { type: 'ATOM', regex: /^[a-zA-Z\-!][a-zA-Z0-9\->!'?]*/ },
-        { type: 'NUMBER', regex: /^[0-9]+/ },
-        { type: 'SPECIAL', regex: /^[()\[\]{}#%,'./\\=<>\?+]/ },
+        { type: 'STRING', regex: /^"([^"\\]|\\.)*"/s },
+        { type: 'ATOM', regex: /^[a-zA-Z\-.!][a-zA-Z0-9\-.'!?]*/ },
+        { type: 'NUMBER', regex: /^-?[0-9]+/ },
+        { type: 'SPECIAL', regex: /^[()\[\]{}#%,'\/\\=<>\?+*:&]/ },
     ];
 
     while (current < mdlData.length) {
@@ -75,7 +75,15 @@ function walk() {
 
     if (token.type === 'SPECIAL' && token.value === '%') {
         current++; // consume '%'
-        return walk(); // For our purpose, we just return the expression inside the macro
+        const nextToken = tokens[current];
+        if (nextToken && nextToken.value === '<') {
+            const list = walk(); // This will parse the <...> block
+            return {
+                type: 'FlagMacro',
+                flags: list
+            };
+        }
+        return walk(); // For other % macros, just return the expression
     }
 
     if (token.type === 'SPECIAL' && token.value === '#') {
@@ -116,7 +124,7 @@ function walk() {
     return token;
 }
 
-function extractRoomData(node) {
+function extractRoomData(node, flags) {
     if (node.name !== 'ROOM') return null;
 
     const room = {
@@ -125,6 +133,7 @@ function extractRoomData(node) {
         longDesc: '',
         exits: {},
         objects: [],
+        flags: 0,
         properties: []
     };
 
@@ -155,7 +164,9 @@ function extractRoomData(node) {
     for (; argIndex < args.length; argIndex++) {
         const arg = args[argIndex];
         if (!arg) continue;
-        if (arg.type === 'ATOM' && arg.value === 'T') {
+        if (arg.type === 'FlagMacro') {
+            room.flags = calculateBitmask(arg, flags, 'RBITS');
+        } else if (arg.type === 'ATOM' && arg.value === 'T') {
             room.properties.push('LIT');
         } else if (arg.type === 'SpecialForm') {
             switch(arg.name) {
@@ -195,7 +206,24 @@ function extractRoomData(node) {
     return room;
 }
 
-function extractObjectData(node) {
+function calculateBitmask(macroNode, flags, flagType) {
+    let bitmask = 0;
+    if (macroNode.type !== 'FlagMacro') return 0;
+
+    const flagList = macroNode.flags;
+    for (let i = 0; i < flagList.length; i++) {
+        const token = flagList[i];
+        if (token.type === 'ATOM' && i > 0 && flagList[i-1].type === 'SPECIAL' && flagList[i-1].value === ',') {
+            const flagName = token.value.toUpperCase();
+            if (flags[flagType][flagName]) {
+                bitmask |= flags[flagType][flagName];
+            }
+        }
+    }
+    return bitmask;
+}
+
+function extractObjectData(node, flags) {
     if (node.name !== 'OBJECT') return null;
 
     const object = {
@@ -203,6 +231,7 @@ function extractObjectData(node) {
         name: '',
         description: '',
         initialDescription: '',
+        flags: 0,
         properties: {},
         synonyms: [],
         adjectives: []
@@ -227,7 +256,9 @@ function extractObjectData(node) {
     for (; argIndex < args.length; argIndex++) {
         const arg = args[argIndex];
         if (!arg) continue;
-        if (arg.type === 'ATOM') {
+        if (arg.type === 'FlagMacro') {
+            object.flags = calculateBitmask(arg, flags, 'OFLAGS');
+        } else if (arg.type === 'ATOM') {
             object.properties.function = arg.value;
         } else if (Array.isArray(arg)) {
              let isStringList = true;
@@ -250,6 +281,10 @@ function extractObjectData(node) {
  * The main function to run the MDL parsing.
  */
 function main() {
+    console.log('Loading flags...');
+    const flags = JSON.parse(fs.readFileSync('data/flags.json', 'utf8'));
+    console.log('Flags loaded.');
+
     console.log('Starting MDL parsing...');
     const mdlData = fs.readFileSync('zork/dung.56', 'utf8');
 
@@ -261,30 +296,30 @@ function main() {
     const rooms = {};
     const objects = {};
 
-    function findAndExtract(nodes) {
+    function findAndExtract(nodes, flags) {
         if(!nodes) return;
         for (const node of nodes) {
             if(!node) continue;
             if (node.type === 'SpecialForm') {
                 if (node.name === 'ROOM') {
-                    const room = extractRoomData(node);
+                    const room = extractRoomData(node, flags);
                     if (room && room.id) {
                         rooms[room.id] = room;
                     }
                 } else if (node.name === 'OBJECT') {
-                    const obj = extractObjectData(node);
+                    const obj = extractObjectData(node, flags);
                     if (obj && obj.id) {
                         objects[obj.id] = obj;
                     }
                 }
-                findAndExtract(node.arguments);
+                findAndExtract(node.arguments, flags);
             } else if (Array.isArray(node)) {
-                findAndExtract(node);
+                findAndExtract(node, flags);
             }
         }
     }
 
-    findAndExtract(ast);
+    findAndExtract(ast, flags);
 
     fs.writeFileSync('data/rooms.json.new', JSON.stringify(rooms, null, 4));
     console.log(`Extracted ${Object.keys(rooms).length} rooms.`);

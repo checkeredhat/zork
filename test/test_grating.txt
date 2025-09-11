@@ -1,0 +1,86 @@
+> NORTH
+You are facing the north side of a white house.  There is no door here,
+and all the windows are barred.
+
+> EAST
+There is a small window here.
+
+> OPEN WINDOW
+With great effort, you open the window far enough to allow entry.
+
+> ENTER
+On the table is an elongated brown sack, smelling of hot peppers.
+A bottle is sitting on the table.
+
+> WEST
+There is a trophy case here.
+A battery-powered brass lantern is on the trophy case.
+On hooks above the mantelpiece hangs an elvish sword of great
+antiquity.
+
+> TAKE SWORD
+sword: Taken.
+
+> MOVE RUG
+With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap door appears.
+
+> OPEN TRAP-DOOR
+The trap door is now open.
+
+> DOWN
+You are in the cellar.
+The trap door is open.
+
+> EAST
+You are in a small room with passages off in all directions.
+Bloodstains and deep scratches (perhaps made by an axe) mar the
+walls.
+
+> ATTACK TROLL WITH SWORD
+A furious but glancing blow is struck.
+The troll's axe barely misses your ear.
+
+> ATTACK TROLL WITH SWORD
+The troll is knocked out!
+
+> SOUTH
+You are in a maze of twisty little passages, all alike.
+
+> SOUTH
+You are in a maze of twisty little passages, all alike.
+
+> EAST
+You are in a maze of twisty little passages, all alike.
+
+> UP
+You are in a maze of twisty little passages, all alike.
+A skeleton, probably the remains of a luckless adventurer, lies here.
+An old leather bag, bulging with coins, is here.
+There is a set of skeleton keys here.
+The deceased adventurer's useless lantern is here.
+Beside the skeleton is a rusty knife.
+
+> TAKE KEYS
+set of skeleton keys: Taken.
+
+> SW
+You are in a maze of twisty little passages, all alike.
+
+> UP
+You are in a maze of twisty little passages, all alike.
+
+> EAST
+You are in a maze of twisty little passages, all alike.
+
+> NE
+You are in the Grating Room.
+There is a grating here.
+
+> UP
+The grating is locked
+
+> UNLOCK GRATE WITH KEYS
+The grating is unlocked.
+
+> UP
+There is a pile of leaves on the ground.

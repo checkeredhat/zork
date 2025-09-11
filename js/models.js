@@ -5,13 +5,10 @@ class GameObject {
         this.id = data.id;
         this.name = data.name;
         this.description = data.description;
-        this.longDescription = data.longDescription;
-        this.openDescription = data.openDescription;
+        this.initialDescription = data.initialDescription;
         this.text = data.text; // Text for readable objects
-        this.initialDescription = data.initialDescription || data.description;
         this.location = null; // Will be set by the game engine
-        this.flags = data.flags || {}; // Original boolean flags
-        this.oflags = 0; // Bitmask for OFLAGS
+        this.oflags = data.flags || 0; // Bitmask for OFLAGS, parser uses 'flags'
 
         // Additional properties from MDL
         this.synonyms = data.synonyms || [];
@@ -26,102 +23,23 @@ class GameObject {
         this.canBeContainedBy = data.canBeContainedBy || null; // What can contain this object (MDL OCAN)
         this.action = data.action || null;    // MDL OACTION
         this.trollState = {}; // For troll-specific logic
-
-        this.initOFlags();
-    }
-
-    initOFlags() {
-        this.oflags = 0;
-        // Map boolean flags to bitmask
-        if (this.flags.isTakeable) this.oflags |= OFLAGS.TAKEBIT;
-        if (this.flags.isDoor) this.oflags |= OFLAGS.DOORBIT;
-        if (this.flags.isOpen) this.oflags |= OFLAGS.OPENBIT;
-        if (this.flags.isLocked) this.oflags |= OFLAGS.LOCKBIT;
-        if (this.flags.isContainer) this.oflags |= OFLAGS.CONTBIT;
-        if (this.flags.isFlammable) this.oflags |= OFLAGS.BURNBIT;
-        if (this.flags.isWeapon) this.oflags |= OFLAGS.WEAPONBIT;
-        if (this.flags.isReadable) this.oflags |= OFLAGS.READBIT;
-        if (this.flags.isSacred) this.oflags |= OFLAGS.SACREDBIT;
-        if (this.flags.isTool) this.oflags |= OFLAGS.TOOLBIT;
-        if (this.flags.isDrinkable) this.oflags |= OFLAGS.DRINKBIT;
-        if (this.flags.isFood) this.oflags |= OFLAGS.FOODBIT;
-        if (this.flags.isTieable) this.oflags |= OFLAGS.TIEBIT;
-        if (this.flags.isVehicle) this.oflags |= OFLAGS.VEHBIT;
-        if (this.flags.isVisible) this.oflags |= OFLAGS.OVISON;
-        if (this.flags.isVillain) this.oflags |= OFLAGS.VILLAIN;
-        if (this.flags.isVictim) this.oflags |= OFLAGS.VICBIT; // Can be attacked
-        if (this.flags.isSleptOn) this.oflags |= OFLAGS.SLEEPBIT;
-        if (this.flags.isSearchable) this.oflags |= OFLAGS.SEARCHBIT;
-        if (this.flags.isClimbable) this.oflags |= OFLAGS.CLIMBBIT;
-        if (this.flags.isScenery) this.oflags |= OFLAGS.SCENERYBIT;
-        if (this.flags.isInvisible) this.oflags |= OFLAGS.INVISIBLE;
-        if (this.flags.isDisarmed) this.oflags |= OFLAGS.DISARMEDBIT;
-        if (this.flags.isNotDescribed) this.oflags |= OFLAGS.NOTDESCBIT;
-        if (this.flags.isTryTakeable) this.oflags |= OFLAGS.TRYTAKEBIT;
-        // Keep isLight for dynamic state rather than static flag
     }
 }
 
 class Room {
     constructor(data) {
         this.id = data.id;
-        this.name = data.shortDesc;
-        this.description = data.longDesc;
-        this.objects = data.objects || [];
-        this.flags = data.flags || {};
-        this.rbits = 0;
+        this.name = data.shortDesc; // Was data.name
+        this.description = data.longDesc; // Was data.description
+        this.exits = data.exits || {};     // Standard exits
+        this.objects = data.objects || []; // IDs of objects initially in the room
+        this.rbits = data.rbits || 0;      // Bitmask for RBITS
 
-        this.longDescription = data.longDesc || data.description;
-        this.shortDescription = data.shortDesc || data.name;
-        this.action = data.action || null;
-        this.value = data.value || 0;
-
-        this.exits = {};
-        this.conditionalExits = {};
-        this.blockedExits = {};
-
-        const rawExits = data.exits || {};
-        for (const dir in rawExits) {
-            const exit = rawExits[dir];
-            if (typeof exit === 'string') {
-                this.exits[dir] = exit;
-            } else if (exit.destination) {
-                this.conditionalExits[dir] = {
-                    roomId: exit.destination,
-                    flag: exit.condition.replace(/"/g, ''), // Remove quotes from flag name
-                    value: 'CLEAR', // Assuming 'CLEAR' is the success state for now
-                    message: exit.message
-                };
-            } else if (exit.blocked) {
-                this.blockedExits[dir] = exit.blocked;
-            }
-        }
-
-        this.initRFlags();
-    }
-
-    initRFlags() {
-        this.rbits = 0;
-        // Map boolean flags to bitmask
-        if (this.flags.isSeen) this.rbits |= RBITS.RSEEN;
-        if (this.flags.isLit) this.rbits |= RBITS.RLIGHT;
-        if (this.flags.hasLongDescription) this.rbits |= RBITS.RDESC;
-        if (this.flags.isMaze) this.rbits |= RBITS.RMAZE;
-        if (this.flags.canFillBucket) this.rbits |= RBITS.RBUCK;
-        if (this.flags.isWater) this.rbits |= RBITS.RWATER;
-        if (this.flags.canBeFilled) this.rbits |= RBITS.RFILL;
-        if (this.flags.somethingIsHere) this.rbits |= RBITS.RHERE;
-        if (this.flags.noNorthWall) this.rbits |= RBITS.RNWALL;
-        if (this.flags.isSacred) this.rbits |= RBITS.RSACRD;
-        if (this.flags.playerWon) this.rbits |= RBITS.RWIN;
-        if (this.flags.playerStrengthened) this.rbits |= RBITS.RSTRNG;
-        if (this.flags.containsArtifact) this.rbits |= RBITS.RART;
-        if (this.flags.isClimbable) this.rbits |= RBITS.RCLIMB;
-        if (this.flags.isDirectional) this.rbits |= RBITS.RDIR;
-        if (this.flags.isNonLand) this.rbits |= RBITS.NONLAND; // MDL inverted mapping
-        if (this.flags.isOnLand) this.rbits |= RBITS.RLAND; // Direct mapping for clarity
-        if (this.flags.isHouse) this.rbits |= RBITS.RHOUSE;
-        // RDESCBIT is a dynamic flag, not static room property
+        // Additional properties derived from MDL, keeping original names for clarity
+        this.longDescription = data.longDesc;
+        this.shortDescription = data.shortDesc;
+        this.action = data.action || null; // MDL RACTION
+        this.value = data.value || 0;      // MDL RVAL
     }
 }
 

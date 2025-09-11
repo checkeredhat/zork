@@ -3,1447 +3,2418 @@
 const objectsData = {
     "#####": {
         "id": "#####",
-        "name": "cretin",
-        "description": "You are here",
-        "initialDescription": "",
-        "properties": {
-            "function": "OVISON"
-        },
-        "synonyms": [],
-        "adjectives": []
+        "name": "#####",
+        "synonyms": [
+            "You are here"
+        ],
+        "initialDescription": "cretin",
+        "action": "(Not"
     },
-    "SBAG": {
-        "id": "SBAG",
-        "name": "sandwich bag",
-        "description": "A sandwich bag is here.",
-        "initialDescription": "On the table is an elongated brown sack, smelling of hot peppers.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+    "ADVER": {
+        "id": "ADVER",
+        "name": "ADVER",
+        "synonyms": [
+            "PAMPH",
+            "LEAFL",
+            "BOOKL"
+        ],
+        "initialDescription": "There is a small leaflet here.",
+        "description": "leaflet",
+        "action": "(Not",
+        "canBeContainedBy": "MAILB",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 2,
+        "capacity": 0
     },
-    "GARLI": {
-        "id": "GARLI",
-        "name": "clove of garlic",
-        "description": "There is a clove of garlic here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "FOOD": {
-        "id": "FOOD",
-        "name": "\\.lunch",
-        "description": "A hot pepper sandwich is here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "GUNK": {
-        "id": "GUNK",
-        "name": "piece of vitreous slag",
-        "description": "There is a small piece of vitreous slag here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "GUNK-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "COAL": {
-        "id": "COAL",
-        "name": "small pile of coal",
-        "description": "There is a small heap of coal here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "JADE": {
-        "id": "JADE",
-        "name": "jade figurine",
-        "description": "There is an exquisite jade figurine here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "MACHI": {
-        "id": "MACHI",
-        "name": "machine",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "MACHINE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "DIAMO": {
-        "id": "DIAMO",
-        "name": "huge diamond",
-        "description": "There is an enormous diamond (perfectly cut) here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "TCASE": {
-        "id": "TCASE",
-        "name": "trophy case",
-        "description": "There is a trophy case here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "TROPHY-CASE"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BOTTL": {
-        "id": "BOTTL",
-        "name": "glass bottle",
-        "description": "A clear glass bottle is here.",
-        "initialDescription": "A bottle is sitting on the table.",
-        "properties": {
-            "function": "BOTTLE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "WATER": {
-        "id": "WATER",
-        "name": "quantity of water",
-        "description": "Water",
-        "initialDescription": "There is some water here",
-        "properties": {
-            "function": "WATER-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "ROPE": {
-        "id": "ROPE",
-        "name": "rope",
-        "description": "There is a large coil of rope here.",
-        "initialDescription": "A large coil of rope is lying in the corner.",
-        "properties": {
-            "function": "ROPE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "KNIFE": {
-        "id": "KNIFE",
-        "name": "knife",
-        "description": "There is a nasty-looking knife lying here.",
-        "initialDescription": "On a table is a nasty-looking knife.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isWeapon": true
-        }
-    },
-    "SWORD": {
-        "id": "SWORD",
-        "name": "sword",
-        "description": "There is an elvish sword here.",
-        "initialDescription": "On hooks above the mantelpiece hangs an elvish sword of great\nantiquity.",
-        "properties": {
-            "function": "SWORD"
-        },
-        "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isWeapon": true
-        }
-    },
-    "LAMP": {
-        "id": "LAMP",
-        "name": "lamp",
-        "description": "There is a brass lantern (battery-powered) here.",
-        "initialDescription": "A battery-powered brass lantern is on the trophy case.",
-        "properties": {
-            "function": "LANTERN"
-        },
-        "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isTakeable": true,
-            "isVisible": true
-        }
-    },
-    "BLAMP": {
-        "id": "BLAMP",
-        "name": "broken lamp",
-        "description": "There is a broken brass lantern here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "RUG": {
-        "id": "RUG",
-        "name": "carpet",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "RUG"
-        },
-        "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isNotDescribed": true,
-            "isTryTakeable": true
-        }
-    },
-    "DOOR": {
-        "id": "DOOR",
-        "name": "trap door",
-        "description": "There is a trap door here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "TRAP-DOOR"
-        },
-        "synonyms": ["TRAPD", "TRAP-"],
-        "adjectives": ["TRAP"],
-        "flags": {
-            "isDoor": true,
-            "isNotDescribed": true,
-            "isInvisible": true
-        }
-    },
-    "LEAVE": {
-        "id": "LEAVE",
-        "name": "pile of leaves",
-        "description": "There is a pile of leaves on the ground.",
-        "initialDescription": "",
-        "properties": {
-            "function": "LEAF-PILE"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "TROLL": {
-        "id": "TROLL",
-        "name": "",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "TROLL"
-        },
-        "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isVictim": true,
-            "isVisible": true,
-            "isVillain": true
-        }
+    "ATABL": {
+        "id": "ATABL",
+        "name": "ATABL",
+        "synonyms": [
+            "TABLE"
+        ],
+        "description": "large oblong table",
+        "action": "(Not",
+        "contents": [
+            "ECAKE",
+            "ORICE",
+            "RDICE",
+            "BLICE"
+        ],
+        "adjectives": [
+            "LARGE OBLON"
+        ]
     },
     "AXE": {
         "id": "AXE",
-        "name": "bloody axe",
-        "description": "There is a bloody axe here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "RKNIF": {
-        "id": "RKNIF",
-        "name": "rusty knife",
-        "description": "There is a rusty knife here.",
-        "initialDescription": "Beside the skeleton is a rusty knife.",
-        "properties": {
-            "function": "RUSTY-KNIFE"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BLANT": {
-        "id": "BLANT",
-        "name": "burned-out lantern",
-        "description": "There is a burned-out lantern here.",
-        "initialDescription": "The deceased adventurer's useless lantern is here.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "KEYS": {
-        "id": "KEYS",
-        "name": "set of skeleton keys",
-        "description": "There is a set of skeleton keys here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BONES": {
-        "id": "BONES",
-        "name": "",
-        "description": "A skeleton, probably the remains of a luckless adventurer, lies here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "SKELETON"
-        },
-        "synonyms": [],
-        "adjectives": []
+        "name": "AXE",
+        "initialDescription": "There is a bloody axe here.",
+        "description": "bloody axe",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 25,
+        "capacity": 0,
+        "adjectives": [
+            "BLOOD"
+        ]
     },
     "BAGCO": {
         "id": "BAGCO",
-        "name": "bag of coins",
-        "description": "An old leather bag, bulging with coins, is here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+        "name": "BAGCO",
+        "synonyms": [
+            "BAG",
+            "COINS"
+        ],
+        "initialDescription": "An old leather bag, bulging with coins, is here.",
+        "description": "bag of coins",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 5,
+        "size": 15,
+        "capacity": 0,
+        "adjectives": [
+            "LEATH"
+        ]
+    },
+    "BALLO": {
+        "id": "BALLO",
+        "name": "BALLO",
+        "synonyms": [
+            "BASKE"
+        ],
+        "initialDescription": "There is a very large and extremely heavy wicker basket with a cloth bag here. Inside the basket is a metal receptacle of some kind. Attached to the basket on the outside is a piece of wire.",
+        "description": "basket",
+        "action": "BALLOON",
+        "contents": [
+            "CBAG",
+            "BROPE",
+            "RECEP"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 70,
+        "capacity": 100,
+        "adjectives": [
+            "WICKE"
+        ]
     },
     "BAR": {
         "id": "BAR",
-        "name": "platinum bar",
-        "description": "There is a large platinum bar here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+        "name": "BAR",
+        "synonyms": [
+            "PLATI"
+        ],
+        "initialDescription": "There is a large platinum bar here.",
+        "description": "platinum bar",
+        "action": "(Not",
+        "light": 0,
+        "value": 12,
+        "trophyValue": 10,
+        "size": 20,
+        "capacity": 0
     },
-    "PEARL": {
-        "id": "PEARL",
-        "name": "pearl necklace",
-        "description": "There is a pearl necklace here with hundreds of large pearls.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+    "BELL": {
+        "id": "BELL",
+        "name": "BELL",
+        "initialDescription": "There is a small brass bell here.",
+        "description": "bell",
+        "longDescription": "Lying in a corner of the room is a small brass bell.",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "BRASS"
+        ]
     },
-    "REFL1": {
-        "id": "REFL1",
-        "name": "mirror",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "MIRROR-MIRROR"
+    "BLABE": {
+        "id": "BLABE",
+        "name": "BLABE",
+        "synonyms": [
+            "LABEL"
+        ],
+        "initialDescription": "There is a blue label here.",
+        "description": "blue label",
+        "action": "(Not",
+        "canBeContainedBy": "BALLO",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 1,
+        "capacity": 0,
+        "adjectives": [
+            "BLUE"
+        ],
+        "text": "!!!! FROBOZZ MAGIC BALLOON COMPANY !!!! Hello, Aviator! Instructions for use: To get into balloon, say 'Board' To leave balloon, say 'Disembark' To land, say 'Land' Warranty: No warranty is expressed or implied. You're on your own, sport! Good Luck."
+    },
+    "BLAMP": {
+        "id": "BLAMP",
+        "name": "BLAMP",
+        "synonyms": [
+            "LAMP",
+            "LANTE"
+        ],
+        "initialDescription": "There is a broken brass lantern here.",
+        "description": "broken lamp",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 0,
+        "capacity": 0,
+        "adjectives": [
+            "BROKE"
+        ]
+    },
+    "BLANT": {
+        "id": "BLANT",
+        "name": "BLANT",
+        "synonyms": [
+            "LANTE",
+            "LAMP"
+        ],
+        "initialDescription": "There is a burned-out lantern here.",
+        "description": "burned-out lantern",
+        "longDescription": "The deceased adventurer's useless lantern is here.",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0,
+        "adjectives": [
+            "USED",
+            "BURNE",
+            "DEAD",
+            "USELE"
+        ]
+    },
+    "BLBK": {
+        "id": "BLBK",
+        "name": "BLBK",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There is a blue book here.",
+        "description": "blue book",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 2,
+        "adjectives": [
+            "BLUE"
+        ]
+    },
+    "BLICE": {
+        "id": "BLICE",
+        "name": "BLICE",
+        "synonyms": [
+            "CAKE",
+            "ICING"
+        ],
+        "description": "blue icing",
+        "action": "(Not",
+        "canBeContainedBy": "ATABL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "BLUE",
+            "ECCH"
+        ]
+    },
+    "BONES": {
+        "id": "BONES",
+        "name": "BONES",
+        "synonyms": [
+            "SKELE",
+            "BODY"
+        ],
+        "initialDescription": "A skeleton, probably the remains of a luckless adventurer, lies here.",
+        "action": "SKELETON",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "BOOK": {
+        "id": "BOOK",
+        "name": "BOOK",
+        "synonyms": [
+            "PRAYE",
+            "BIBLE",
+            "GOODB"
+        ],
+        "initialDescription": "There is a large black book here.",
+        "description": "book",
+        "longDescription": "On the altar is a large black book, open to page 569.",
+        "action": "BLACK-BOOK",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "BLACK"
+        ]
+    },
+    "BOTTL": {
+        "id": "BOTTL",
+        "name": "BOTTL",
+        "synonyms": [
+            "CONTA",
+            "PITCH"
+        ],
+        "initialDescription": "A clear glass bottle is here.",
+        "description": "glass bottle",
+        "longDescription": "A bottle is sitting on the table.",
+        "action": "BOTTLE-FUNCTION",
+        "contents": [
+            "WATER"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 4,
+        "adjectives": [
+            "GLASS"
+        ]
+    },
+    "BOTTLE": {
+        "id": "BOTTLE",
+        "synonyms": [
+            "CONTA",
+            "PITCH"
+        ],
+        "adjectives": [
+            "GLASS"
+        ],
+        "description": "glass bottle",
+        "initialDescription": "A clear glass bottle is here.",
+        "action": "BOTTLE-FUNCTION",
+        "flags": {
+            "isContainer": true,
+            "isTransparent": true,
+            "isTakeable": true,
+            "isVisible": true
         },
-        "synonyms": [],
-        "adjectives": []
+        "size": 5,
+        "capacity": 4,
+        "contents": [
+            "WATER"
+        ]
     },
-    "REFL2": {
-        "id": "REFL2",
-        "name": "mirror",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "MIRROR-MIRROR"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "BRICK": {
+        "id": "BRICK",
+        "name": "BRICK",
+        "synonyms": [
+            "BRICK"
+        ],
+        "initialDescription": "There is a square brick here which feels like clay.",
+        "description": "brick",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 9,
+        "capacity": 2,
+        "adjectives": [
+            "SQUAR CLAY"
+        ]
     },
-    "ICE": {
-        "id": "ICE",
-        "name": "glacier",
-        "description": "A mass of ice fills the western half of the room.",
-        "initialDescription": "",
-        "properties": {
-            "function": "GLACIER"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "BROPE": {
+        "id": "BROPE",
+        "name": "BROPE",
+        "synonyms": [
+            "WIRE"
+        ],
+        "description": "braided wire",
+        "action": "WIRE-FUNCTION",
+        "canBeContainedBy": "BALLO",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0,
+        "adjectives": [
+            "BRAID"
+        ]
     },
-    "RUBY": {
-        "id": "RUBY",
-        "name": "ruby",
-        "description": "There is a moby ruby lying here.",
-        "initialDescription": "On the floor lies a moby ruby.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+    "BUCKE": {
+        "id": "BUCKE",
+        "name": "BUCKE",
+        "initialDescription": "There is a wooden bucket here, 3 feet in diameter and 3 feet high.",
+        "description": "wooden bucket",
+        "action": "BUCKET",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 100,
+        "capacity": 100,
+        "adjectives": [
+            "WOODE"
+        ]
     },
-    "TRIDE": {
-        "id": "TRIDE",
-        "name": "crystal trident",
-        "description": "Neptune's own crystal trident is here.",
-        "initialDescription": "On the shore lies Neptune's own crystal trident.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+    "BUOY": {
+        "id": "BUOY",
+        "name": "BUOY",
+        "initialDescription": "There is a red buoy here (probably a warning).",
+        "description": "red buoy",
+        "action": "(Not",
+        "contents": [
+            "EMERA"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 20,
+        "adjectives": [
+            "RED"
+        ]
+    },
+    "CAGE": {
+        "id": "CAGE",
+        "name": "CAGE",
+        "initialDescription": "There is a mangled cage here.",
+        "description": "mangled cage",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 60,
+        "capacity": 0
+    },
+    "CANDL": {
+        "id": "CANDL",
+        "name": "CANDL",
+        "initialDescription": "There are two candles here.",
+        "description": "pair of candles",
+        "longDescription": "On the two ends of the altar are burning candles.",
+        "action": "CANDLES",
+        "light": 1,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0
+    },
+    "CARD": {
+        "id": "CARD",
+        "name": "CARD",
+        "synonyms": [
+            "NOTE"
+        ],
+        "initialDescription": "There is a card with writing on it here.",
+        "description": "card",
+        "action": "(Not",
+        "canBeContainedBy": "SAFE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 1,
+        "capacity": 0,
+        "text": "Warning: This room was constructed over very weak rock strata. Detonation of explosives in this room is strictly prohibited! Frobozz Magic Cave Company per M. Agrippa, foreman"
+    },
+    "CBAG": {
+        "id": "CBAG",
+        "name": "CBAG",
+        "synonyms": [
+            "BAG"
+        ],
+        "description": "cloth bag",
+        "action": "(Not",
+        "canBeContainedBy": "BALLO",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0,
+        "adjectives": [
+            "CLOTH"
+        ]
+    },
+    "CHALI": {
+        "id": "CHALI",
+        "name": "CHALI",
+        "synonyms": [
+            "CUP GOBLE"
+        ],
+        "initialDescription": "There is a silver chalice, intricately engraved, here.",
+        "description": "chalice",
+        "action": "CHALICE",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 10,
+        "size": 10,
+        "capacity": 5
+    },
+    "COAL": {
+        "id": "COAL",
+        "name": "COAL",
+        "synonyms": [
+            "HEAP",
+            "CHARC"
+        ],
+        "initialDescription": "There is a small heap of coal here.",
+        "description": "small pile of coal",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0
     },
     "COFFI": {
         "id": "COFFI",
-        "name": "gold coffin",
-        "description": "There is a solid-gold coffin, used for the burial of Ramses II, here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+        "name": "COFFI",
+        "synonyms": [
+            "CASKE"
+        ],
+        "initialDescription": "There is a solid-gold coffin, used for the burial of Ramses II, here.",
+        "description": "gold coffin",
+        "action": "(Not",
+        "light": 0,
+        "value": 3,
+        "trophyValue": 7,
+        "size": 55,
+        "capacity": 35,
+        "adjectives": [
+            "GOLD"
+        ]
     },
-    "TORCH": {
-        "id": "TORCH",
-        "name": "torch",
-        "description": "There is an ivory torch here.",
-        "initialDescription": "Sitting on the pedestal is a flaming torch, made of ivory.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+    "COKES": {
+        "id": "COKES",
+        "name": "COKES",
+        "synonyms": [
+            "BOTTL"
+        ],
+        "initialDescription": "Many empty Coke bottles are here. Alas, they can't hold water.",
+        "description": "bunch of Coke bottles",
+        "longDescription": "There is a large pile of empty Coke bottles here, evidently produced by the implementers during their long struggle to win totally.",
+        "action": "COKE-BOTTLES",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 15,
+        "adjectives": [
+            "COKE"
+        ]
     },
-    "TBASK": {
-        "id": "TBASK",
-        "name": "basket",
-        "description": "At the end of the chain is a basket.",
-        "initialDescription": "",
-        "properties": {
-            "function": "T>"
+    "CROWN": {
+        "id": "CROWN",
+        "name": "CROWN",
+        "initialDescription": "Lord Dimwit's crown is here.",
+        "description": "crown",
+        "longDescription": "The excessively gaudy crown of Lord Dimwit Flathead is here.",
+        "action": "(Not",
+        "canBeContainedBy": "SAFE",
+        "light": 0,
+        "value": 15,
+        "trophyValue": 10,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "GAUDY"
+        ]
+    },
+    "CYCLO": {
+        "id": "CYCLO",
+        "name": "CYCLO",
+        "synonyms": [
+            "ONE-E MONST"
+        ],
+        "description": "cyclops",
+        "action": "CYCLOPS",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 10000
+    },
+    "DBALL": {
+        "id": "DBALL",
+        "name": "DBALL",
+        "synonyms": [
+            "BALLO BASKE"
+        ],
+        "initialDescription": "There is a balloon here, broken into pieces.",
+        "description": "broken balloon",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 40,
+        "capacity": 0,
+        "adjectives": [
+            "BROKE"
+        ]
+    },
+    "DBOAT": {
+        "id": "DBOAT",
+        "name": "DBOAT",
+        "synonyms": [
+            "BOAT PLAST PILE"
+        ],
+        "initialDescription": "There is a pile of plastic here with a large hole in it.",
+        "description": "plastic boat (with hole)",
+        "action": "DBOAT-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0
+    },
+    "DIAMO": {
+        "id": "DIAMO",
+        "name": "DIAMO",
+        "synonyms": [
+            "PERFE"
+        ],
+        "initialDescription": "There is an enormous diamond (perfectly cut) here.",
+        "description": "huge diamond",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 6,
+        "size": 5,
+        "capacity": 0
+    },
+    "ECAKE": {
+        "id": "ECAKE",
+        "name": "ECAKE",
+        "synonyms": [
+            "CAKE"
+        ],
+        "initialDescription": "There is a piece of cake here with the words 'Eat Me' on it.",
+        "description": "piece of 'Eat Me' cake",
+        "action": "EATME-FUNCTION",
+        "canBeContainedBy": "ATABL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "EATME",
+            "EAT-M"
+        ]
+    },
+    "EMERA": {
+        "id": "EMERA",
+        "name": "EMERA",
+        "initialDescription": "There is an emerald here.",
+        "description": "large emerald",
+        "action": "(Not",
+        "canBeContainedBy": "BUOY",
+        "light": 0,
+        "value": 5,
+        "trophyValue": 10,
+        "size": 5,
+        "capacity": 0
+    },
+    "FLASK": {
+        "id": "FLASK",
+        "name": "glass flask",
+        "synonyms": [],
+        "adjectives": [
+            "GLASS"
+        ],
+        "description": "glass flask filled with liquid",
+        "initialDescription": "A stoppered glass flask with a skull-and-crossbones marking is here. The flask is filled with some clear liquid.",
+        "flags": {
+            "isTransparent": true,
+            "isVisible": true,
+            "isTakeable": true,
+            "isContainer": true
         },
-        "synonyms": [],
-        "adjectives": []
+        "value": 10,
+        "trophyValue": 5,
+        "size": 10,
+        "action": "FLASK-FUNCTION"
     },
-    "FBASK": {
-        "id": "FBASK",
-        "name": "",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "BIGFIX"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "FOOD": {
+        "id": "FOOD",
+        "name": "FOOD",
+        "synonyms": [
+            "SANDW",
+            "LUNCH",
+            "PEPPE",
+            "DINNE",
+            "SNACK"
+        ],
+        "initialDescription": "A hot pepper sandwich is here.",
+        "description": ".lunch",
+        "action": "(Not",
+        "canBeContainedBy": "SBAG",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0
     },
-    "BRACE": {
-        "id": "BRACE",
-        "name": "sapphire bracelet",
-        "description": "There is a sapphire-encrusted bracelet here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+    "FRONT-DOOR": {
+        "id": "FRONT-DOOR",
+        "name": "door",
+        "synonyms": [
+            "door",
+            "front door",
+            "boarded door",
+            "FRONT"
+        ],
+        "description": "The front door is boarded and you can't remove the boards.",
+        "flags": {
+            "isScenery": true,
+            "isNotDescribed": true,
+            "isDoor": true
+        }
+    },
+    "FUSE": {
+        "id": "FUSE",
+        "name": "FUSE",
+        "synonyms": [
+            "COIL WIRE"
+        ],
+        "initialDescription": "There is a coil of thin shiny wire here.",
+        "description": "wire coil",
+        "action": "FUSE-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 1,
+        "capacity": 0,
+        "adjectives": [
+            "SHINY THIN"
+        ]
+    },
+    "GARLI": {
+        "id": "GARLI",
+        "name": "GARLI",
+        "synonyms": [
+            "CLOVE"
+        ],
+        "initialDescription": "There is a clove of garlic here.",
+        "description": "clove of garlic",
+        "action": "(Not",
+        "canBeContainedBy": "SBAG",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0
+    },
+    "GHOST": {
+        "id": "GHOST",
+        "name": "GHOST",
+        "synonyms": [
+            "SPIRI",
+            "FIEND"
+        ],
+        "action": "GHOST-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "GNOME": {
+        "id": "GNOME",
+        "name": "GNOME",
+        "synonyms": [
+            "TROLL"
+        ],
+        "initialDescription": "There is a nervous Volcano Gnome here.",
+        "description": "Volcano Gnome",
+        "action": "GNOME-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "GRAIL": {
+        "id": "GRAIL",
+        "name": "GRAIL",
+        "synonyms": [
+            "CUP",
+            "GOBLE"
+        ],
+        "initialDescription": "There is an extremely valuable (perhaps original) grail here.",
+        "description": "grail",
+        "action": "(Not",
+        "light": 0,
+        "value": 2,
+        "trophyValue": 5,
+        "size": 10,
+        "capacity": 5
+    },
+    "GRBK": {
+        "id": "GRBK",
+        "name": "GRBK",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There is a green book here.",
+        "description": "green book",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 2,
+        "adjectives": [
+            "GREEN"
+        ]
+    },
+    "GRUE": {
+        "id": "GRUE",
+        "name": "GRUE",
+        "description": "lurking grue",
+        "action": "GRUE-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 0,
+        "capacity": 0,
+        "adjectives": [
+            "LURKI"
+        ]
+    },
+    "GUANO": {
+        "id": "GUANO",
+        "name": "GUANO",
+        "synonyms": [
+            "CRAP SHIT HUNK"
+        ],
+        "initialDescription": "There is a hunk of bat guano here.",
+        "description": "hunk of bat guano",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0
+    },
+    "GUIDE": {
+        "id": "GUIDE",
+        "name": "GUIDE",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There are tour guidebooks here.",
+        "description": "tour guidebook",
+        "longDescription": "Some guidebooks entitled 'Flood Control Dam #3' are on the reception desk.",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "TOUR"
+        ]
+    },
+    "GUNK": {
+        "id": "GUNK",
+        "name": "GUNK",
+        "synonyms": [
+            "MESS",
+            "SLAG"
+        ],
+        "initialDescription": "There is a small piece of vitreous slag here.",
+        "description": "piece of vitreous slag",
+        "action": "GUNK-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "VITRE"
+        ]
+    },
+    "HEADS": {
+        "id": "HEADS",
+        "name": "HEADS",
+        "synonyms": [
+            "HEAD POLE POLES PDL BKD TAA MARC IMPLE LOSER"
+        ],
+        "initialDescription": "There are four heads here, mounted securely on poles.",
+        "description": "set of poled heads",
+        "action": "HEAD-FUNCTION"
+    },
+    "HOOK1": {
+        "id": "HOOK1",
+        "name": "HOOK1",
+        "synonyms": [
+            "HOOK"
+        ],
+        "initialDescription": "There is a small hook attached to the rock here.",
+        "description": "hook",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "HOOK2": {
+        "id": "HOOK2",
+        "name": "HOOK2",
+        "synonyms": [
+            "HOOK"
+        ],
+        "initialDescription": "There is a small hook attached to the rock here.",
+        "description": "hook",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "HOUSE": {
+        "id": "HOUSE",
+        "name": "house",
+        "description": "The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.",
+        "flags": {
+            "isScenery": true,
+            "isNotDescribed": true
+        }
+    },
+    "IBOAT": {
+        "id": "IBOAT",
+        "name": "IBOAT",
+        "synonyms": [
+            "BOAT PLAST PILE"
+        ],
+        "initialDescription": "There is a folded pile of plastic here which has a small valve attached.",
+        "description": "plastic inflatable boat",
+        "action": "IBOAT-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0
+    },
+    "ICE": {
+        "id": "ICE",
+        "name": "ICE",
+        "synonyms": [
+            "GLACI"
+        ],
+        "initialDescription": "A mass of ice fills the western half of the room.",
+        "description": "glacier",
+        "action": "GLACIER",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
     },
     "IRBOX": {
         "id": "IRBOX",
         "name": "iron box",
-        "description": "There is a dented iron box here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "STRAD": {
-        "id": "STRAD",
-        "name": "fancy violin",
-        "description": "There is a Stradavarius here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "GHOST": {
-        "id": "GHOST",
-        "name": "",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "GHOST-FUNCTION"
+        "synonyms": [
+            "BOX"
+        ],
+        "adjectives": [
+            "IRON",
+            "DENTE"
+        ],
+        "description": "iron box",
+        "initialDescription": "There is a dented iron box here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": true,
+            "isContainer": true
         },
-        "synonyms": [],
-        "adjectives": []
+        "size": 40,
+        "trophyValue": 20,
+        "contents": [
+            "STRAD"
+        ]
     },
-    "GRAIL": {
-        "id": "GRAIL",
-        "name": "grail",
-        "description": "There is an extremely valuable (perhaps original) grail here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+    "JADE": {
+        "id": "JADE",
+        "name": "JADE",
+        "synonyms": [
+            "FIGUR"
+        ],
+        "initialDescription": "There is an exquisite jade figurine here.",
+        "description": "jade figurine",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 5,
+        "size": 10,
+        "capacity": 0
     },
-    "TRUNK": {
-        "id": "TRUNK",
-        "name": "trunk with jewels",
-        "description": "There is an old trunk here, bulging with assorted jewels.",
-        "initialDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
-        "properties": {
-            "function": "TAKEBIT"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "KEYS": {
+        "id": "KEYS",
+        "name": "KEYS",
+        "initialDescription": "There is a set of skeleton keys here.",
+        "description": "set of skeleton keys",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0
     },
-    "BELL": {
-        "id": "BELL",
-        "name": "bell",
-        "description": "There is a small brass bell here.",
-        "initialDescription": "Lying in a corner of the room is a small brass bell.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BOOK": {
-        "id": "BOOK",
-        "name": "book",
-        "description": "There is a large black book here.",
-        "initialDescription": "On the altar is a large black book, open to page 569.",
-        "properties": {
-            "function": "BLACK-BOOK"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "CANDL": {
-        "id": "CANDL",
-        "name": "pair of candles",
-        "description": "There are two candles here.",
-        "initialDescription": "On the two ends of the altar are burning candles.",
-        "properties": {
-            "function": "CANDLES"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "GUIDE": {
-        "id": "GUIDE",
-        "name": "tour guidebook",
-        "description": "There are tour guidebooks here.",
-        "initialDescription": "Some guidebooks entitled 'Flood Control Dam #3' are on the reception\ndesk.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "PAPER": {
-        "id": "PAPER",
-        "name": "newspaper",
-        "description": "",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "MATCH": {
-        "id": "MATCH",
-        "name": "matchbook",
-        "description": "There is a matchbook whose cover says 'Visit Beautiful FCD#3' here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "MATCH-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "ADVER": {
-        "id": "ADVER",
-        "name": "leaflet",
-        "description": "There is a small leaflet here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "MAILB": {
-        "id": "MAILB",
-        "name": "mailbox",
-        "description": "There is a small mailbox here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "TUBE": {
-        "id": "TUBE",
-        "name": "tube",
-        "description": "There is an object which looks like a tube of toothpaste here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "TUBE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "PUTTY": {
-        "id": "PUTTY",
-        "name": "viscous material",
-        "description": "There is some gunk here",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "WRENC": {
-        "id": "WRENC",
-        "name": "wrench",
-        "description": "There is a wrench here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "SCREW": {
-        "id": "SCREW",
-        "name": "screwdriver",
-        "description": "There is a screwdriver here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "CYCLO": {
-        "id": "CYCLO",
-        "name": "cyclops",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "CYCLOPS"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "CHALI": {
-        "id": "CHALI",
-        "name": "chalice",
-        "description": "There is a silver chalice, intricately engraved, here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "CHALICE"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "PAINT": {
-        "id": "PAINT",
-        "name": "painting",
-        "description": "A masterpiece by a neglected genius is here.",
-        "initialDescription": "Fortunately, there is still one chance for you to be a vandal, for on\nthe far wall is a work of unparalleled beauty.",
-        "properties": {
-            "function": "PAINTING"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "THIEF": {
-        "id": "THIEF",
-        "name": "",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "ROBBER-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "STILL": {
-        "id": "STILL",
-        "name": "stilletto",
-        "description": "There is a vicious-looking stilletto here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "POT": {
-        "id": "POT",
-        "name": "pot filled with gold",
-        "description": "There is a pot of gold here.",
-        "initialDescription": "At the end of the rainbow is a pot of gold.",
-        "properties": {
-            "function": "TAKEBIT"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "STATU": {
-        "id": "STATU",
-        "name": "statue",
-        "description": "There is a beautiful statue here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "TAKEBIT"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "IBOAT": {
-        "id": "IBOAT",
-        "name": "plastic inflatable boat",
-        "description": "There is a folded pile of plastic here which has a small valve\nattached.",
-        "initialDescription": "",
-        "properties": {
-            "function": "IBOAT-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "DBOAT": {
-        "id": "DBOAT",
-        "name": "plastic boat (with hole)",
-        "description": "There is a pile of plastic here with a large hole in it.",
-        "initialDescription": "",
-        "properties": {
-            "function": "DBOAT-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "PUMP": {
-        "id": "PUMP",
-        "name": "hand-held air pump",
-        "description": "There is a small pump here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "RBOAT": {
-        "id": "RBOAT",
-        "name": "magic boat",
-        "description": "There is an inflated boat here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "RBOAT-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "KNIFE": {
+        "id": "KNIFE",
+        "name": "KNIFE",
+        "synonyms": [
+            "BLADE"
+        ],
+        "initialDescription": "There is a nasty-looking knife lying here.",
+        "description": "knife",
+        "longDescription": "On a table is a nasty-looking knife.",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "NASTY"
+        ]
     },
     "LABEL": {
         "id": "LABEL",
-        "name": "tan label",
-        "description": "There is a tan label here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+        "name": "LABEL",
+        "synonyms": [
+            "FINEP"
+        ],
+        "initialDescription": "There is a tan label here.",
+        "description": "tan label",
+        "action": "(Not",
+        "canBeContainedBy": "RBOAT",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 2,
+        "capacity": 0,
+        "adjectives": [
+            "TAN"
+        ]
     },
-    "STICK": {
-        "id": "STICK",
-        "name": "broken sharp stick",
-        "description": "There is a broken sharp stick here.",
-        "initialDescription": "A sharp stick, which appears to have been broken at one end, is here.",
-        "properties": {
-            "function": "STICK-FUNCTION"
+    "LAMP": {
+        "id": "LAMP",
+        "name": "LAMP",
+        "synonyms": [
+            "LANTE"
+        ],
+        "initialDescription": "There is a brass lantern (battery-powered) here.",
+        "description": "lamp",
+        "longDescription": "A battery-powered brass lantern is on the trophy case.",
+        "action": "LANTERN",
+        "light": -1,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 15,
+        "capacity": 0,
+        "adjectives": [
+            "BRASS"
+        ]
+    },
+    "LANTERN": {
+        "id": "LANTERN",
+        "name": "lantern",
+        "synonyms": [
+            "LANTE"
+        ],
+        "adjectives": [
+            "BRASS"
+        ],
+        "description": "lamp",
+        "initialDescription": "There is a brass lantern (battery-powered) here.",
+        "action": "LANTERN",
+        "flags": {
+            "isTakeable": true,
+            "isVisible": true,
+            "isLightSource": true,
+            "isLight": false
         },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BUOY": {
-        "id": "BUOY",
-        "name": "red buoy",
-        "description": "There is a red buoy here (probably a warning).",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "EMERA": {
-        "id": "EMERA",
-        "name": "large emerald",
-        "description": "There is an emerald here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "SHOVE": {
-        "id": "SHOVE",
-        "name": "shovel",
-        "description": "There is a large shovel here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "GUANO": {
-        "id": "GUANO",
-        "name": "hunk of bat guano",
-        "description": "There is a hunk of bat guano here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "GRUE": {
-        "id": "GRUE",
-        "name": "lurking grue",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "OVISON"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BALLO": {
-        "id": "BALLO",
-        "name": "basket",
-        "description": "There is a very large and extremely heavy wicker basket with a cloth\nbag here. Inside the basket is a metal receptacle of some kind. \nAttached to the basket on the outside is a piece of wire.",
-        "initialDescription": "",
-        "properties": {
-            "function": "BALLOON"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "RECEP": {
-        "id": "RECEP",
-        "name": "receptacle",
-        "description": "",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "CBAG": {
-        "id": "CBAG",
-        "name": "cloth bag",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "BIGFIX"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BROPE": {
-        "id": "BROPE",
-        "name": "braided wire",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "WIRE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "HOOK1": {
-        "id": "HOOK1",
-        "name": "hook",
-        "description": "There is a small hook attached to the rock here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "BIGFIX"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "HOOK2": {
-        "id": "HOOK2",
-        "name": "hook",
-        "description": "There is a small hook attached to the rock here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "BIGFIX"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "ZORKM": {
-        "id": "ZORKM",
-        "name": "priceless zorkmid",
-        "description": "There is an engraved zorkmid coin here.",
-        "initialDescription": "On the floor is a gold zorkmid coin (a valuable collector's item).",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "SAFE": {
-        "id": "SAFE",
-        "name": "box",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "SAFE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "CARD": {
-        "id": "CARD",
-        "name": "card",
-        "description": "There is a card with writing on it here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "SSLOT": {
-        "id": "SSLOT",
-        "name": "hole",
-        "description": "",
-        "initialDescription": "",
-        "properties": {
-            "function": "BIGFIX"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "CROWN": {
-        "id": "CROWN",
-        "name": "crown",
-        "description": "Lord Dimwit's crown is here.",
-        "initialDescription": "The excessively gaudy crown of Lord Dimwit Flathead is here.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BRICK": {
-        "id": "BRICK",
-        "name": "brick",
-        "description": "There is a square brick here which feels like clay.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "FUSE": {
-        "id": "FUSE",
-        "name": "wire coil",
-        "description": "There is a coil of thin shiny wire here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "FUSE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "GNOME": {
-        "id": "GNOME",
-        "name": "Volcano Gnome",
-        "description": "There is a nervous Volcano Gnome here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "GNOME-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BLABE": {
-        "id": "BLABE",
-        "name": "blue label",
-        "description": "There is a blue label here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "DBALL": {
-        "id": "DBALL",
-        "name": "broken balloon",
-        "description": "There is a balloon here, broken into pieces.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BLBK": {
-        "id": "BLBK",
-        "name": "blue book",
-        "description": "There is a blue book here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "GRBK": {
-        "id": "GRBK",
-        "name": "green book",
-        "description": "There is a green book here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "PUBK": {
-        "id": "PUBK",
-        "name": "purple book",
-        "description": "There is a purple book here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "WHBK": {
-        "id": "WHBK",
-        "name": "white book",
-        "description": "There is a white book here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "STAMP": {
-        "id": "STAMP",
-        "name": "stamp",
-        "description": "There is a Flathead Commemorative stamp here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
-    },
-    "TOMB": {
-        "id": "TOMB",
-        "name": "tomb",
-        "description": "There is a tomb here, made of the finest marble, and large enough\nfor four headless corpses.  On one end is the cryptic inscription:\n\t\t    \n\t\t      \\Feel Free.\\\n",
-        "initialDescription": "",
-        "properties": {
-            "function": "HEAD-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "HEADS": {
-        "id": "HEADS",
-        "name": "set of poled heads",
-        "description": "There are four heads here, mounted securely on poles.",
-        "initialDescription": "",
-        "properties": {
-            "function": "HEAD-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "COKES": {
-        "id": "COKES",
-        "name": "bunch of Coke bottles",
-        "description": "Many empty Coke bottles are here.  Alas, they can't hold water.",
-        "initialDescription": "There is a large pile of empty Coke bottles here, evidently produced\nby the implementers during their long struggle to win totally.",
-        "properties": {
-            "function": "COKE-BOTTLES"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "LISTS": {
-        "id": "LISTS",
-        "name": "stack of listings",
-        "description": "There is an enormous stack of line-printer paper here.  It is barely\nreadable.",
-        "initialDescription": "There is a gigantic pile of line-printer output here.  Although the\npaper once contained useful information, almost nothing can be\ndistinguished now.",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+        "light": -1,
+        "size": 15,
+        "longDescription": "A battery-powered brass lantern is on the trophy case."
     },
     "LCASE": {
         "id": "LCASE",
-        "name": "large case",
-        "description": "There is a large case here, containing objects which you used to\npossess.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+        "name": "LCASE",
+        "synonyms": [
+            "CASE"
+        ],
+        "initialDescription": "There is a large case here, containing objects which you used to possess.",
+        "description": "large case",
+        "action": "(Not",
+        "adjectives": [
+            "LARGE"
+        ]
     },
-    "CAGE": {
-        "id": "CAGE",
-        "name": "mangled cage",
-        "description": "There is a mangled cage here.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+    "LEAVE": {
+        "id": "LEAVE",
+        "name": "LEAVE",
+        "synonyms": [
+            "LEAF",
+            "PILE"
+        ],
+        "initialDescription": "There is a pile of leaves on the ground.",
+        "description": "pile of leaves",
+        "action": "LEAF-PILE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 25,
+        "capacity": 0
     },
-    "RCAGE": {
-        "id": "RCAGE",
-        "name": "iron cage",
-        "description": "There is an iron cage in the middle of the room.",
-        "initialDescription": "",
-        "properties": {
-            "function": "OVISON"
+    "LISTS": {
+        "id": "LISTS",
+        "name": "LISTS",
+        "synonyms": [
+            "PAPER LIST PRINT LISTI STACK"
+        ],
+        "initialDescription": "There is an enormous stack of line-printer paper here. It is barely readable.",
+        "description": "stack of listings",
+        "longDescription": "There is a gigantic pile of line-printer output here. Although the paper once contained useful information, almost nothing can be distinguished now.",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 70,
+        "text": "The rest is, alas, unintelligible (as were the implementers)."
+    },
+    "MACHI": {
+        "id": "MACHI",
+        "name": "MACHI",
+        "synonyms": [
+            "PDP10",
+            "DRYER",
+            "LID"
+        ],
+        "description": "machine",
+        "action": "MACHINE-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 50
+    },
+    "MAILB": {
+        "id": "MAILB",
+        "name": "MAILB",
+        "synonyms": [
+            "BOX"
+        ],
+        "initialDescription": "There is a small mailbox here.",
+        "description": "mailbox",
+        "action": "(Not",
+        "contents": [
+            "ADVER"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 10
+    },
+    "MAILBOX": {
+        "id": "MAILBOX",
+        "name": "mailbox",
+        "synonyms": [
+            "MAIL",
+            "BOX"
+        ],
+        "description": "A small mailbox",
+        "initialDescription": "There is a mailbox here.",
+        "flags": {
+            "isContainer": true,
+            "isVisible": true,
+            "isOpen": false,
+            "isTakeable": false
         },
-        "synonyms": [],
-        "adjectives": []
+        "capacity": 10,
+        "contents": [
+            "ADVER"
+        ]
     },
-    "SPHER": {
-        "id": "SPHER",
-        "name": "crystal sphere",
-        "description": "There is a beautiful crystal sphere here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "SPHERE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "MAT": {
+        "id": "MAT",
+        "name": "mat",
+        "synonyms": [
+            "rubber mat",
+            "welcome mat"
+        ],
+        "description": "A rubber mat saying 'Welcome to Zork!' lies by the door.",
+        "flags": {
+            "isScenery": true,
+            "isNotDescribed": true
+        }
     },
-    "FLASK": {
-        "id": "FLASK",
-        "name": "glass flask filled with liquid",
-        "description": "A stoppered glass flask with a skull-and-crossbones marking is here.\nThe flask is filled with some clear liquid.",
-        "initialDescription": "",
-        "properties": {
-            "function": "FLASK-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "MATCH": {
+        "id": "MATCH",
+        "name": "MATCH",
+        "synonyms": [
+            "FLINT"
+        ],
+        "initialDescription": "There is a matchbook whose cover says 'Visit Beautiful FCD#3' here.",
+        "description": "matchbook",
+        "action": "MATCH-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 2,
+        "capacity": 0
+    },
+    "NEST": {
+        "id": "NEST",
+        "name": "nest",
+        "description": "There is a nest here, containing a jewel-encrusted egg.",
+        "flags": {
+            "isContainer": true,
+            "isVisible": true,
+            "isScenery": true
+        }
+    },
+    "ORICE": {
+        "id": "ORICE",
+        "name": "ORICE",
+        "description": "orange icing",
+        "action": "(Not",
+        "canBeContainedBy": "ATABL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "ORANG",
+            "ECCH"
+        ]
+    },
+    "PAINT": {
+        "id": "PAINT",
+        "name": "PAINT",
+        "synonyms": [
+            "ART CANVA MASTE"
+        ],
+        "initialDescription": "A masterpiece by a neglected genius is here.",
+        "description": "painting",
+        "longDescription": "Fortunately, there is still one chance for you to be a vandal, for on the far wall is a work of unparalleled beauty.",
+        "action": "PAINTING",
+        "light": 0,
+        "value": 4,
+        "trophyValue": 7,
+        "size": 15,
+        "capacity": 0
+    },
+    "PAPER": {
+        "id": "PAPER",
+        "name": "PAPER",
+        "synonyms": [
+            "NEWSP",
+            "ISSUE",
+            "REPOR",
+            "MAGAZ",
+            "NEWS"
+        ],
+        "description": "newspaper",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 2,
+        "capacity": 0
+    },
+    "PEARL": {
+        "id": "PEARL",
+        "name": "PEARL",
+        "synonyms": [
+            "NECKL"
+        ],
+        "initialDescription": "There is a pearl necklace here with hundreds of large pearls.",
+        "description": "pearl necklace",
+        "action": "(Not",
+        "light": 0,
+        "value": 9,
+        "trophyValue": 5,
+        "size": 10,
+        "capacity": 0
     },
     "POOL": {
         "id": "POOL",
         "name": "pool of sewage",
-        "description": "The leak has submerged the depressed area in a pool of sewage.",
-        "initialDescription": "",
-        "properties": {},
-        "synonyms": [],
-        "adjectives": []
+        "synonyms": [
+            "SEWAG"
+        ],
+        "adjectives": [
+            "LARGE"
+        ],
+        "description": "pool of sewage",
+        "initialDescription": "The leak has submerged the depressed area in a pool of sewage.",
+        "flags": {
+            "isVisible": true,
+            "isWater": true,
+            "isVictim": true,
+            "isScenery": true
+        }
     },
-    "SAFFR": {
-        "id": "SAFFR",
-        "name": "tin of spices",
-        "description": "There is a tin of rare spices here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "TAKEBIT"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "POT": {
+        "id": "POT",
+        "name": "POT",
+        "initialDescription": "There is a pot of gold here.",
+        "description": "pot filled with gold",
+        "longDescription": "At the end of the rainbow is a pot of gold.",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 10,
+        "size": 15,
+        "capacity": 0,
+        "adjectives": [
+            "GOLD"
+        ]
     },
-    "BUCKE": {
-        "id": "BUCKE",
-        "name": "wooden bucket",
-        "description": "There is a wooden bucket here, 3 feet in diameter and 3 feet high.",
-        "initialDescription": "",
-        "properties": {
-            "function": "BUCKET"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "PUBK": {
+        "id": "PUBK",
+        "name": "PUBK",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There is a purple book here.",
+        "description": "purple book",
+        "action": "(Not",
+        "contents": [
+            "STAMP"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 2,
+        "adjectives": [
+            "PURPL"
+        ]
     },
-    "ECAKE": {
-        "id": "ECAKE",
-        "name": "piece of 'Eat Me' cake",
-        "description": "There is a piece of cake here with the words 'Eat Me' on it.",
-        "initialDescription": "",
-        "properties": {
-            "function": "EATME-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "PUMP": {
+        "id": "PUMP",
+        "name": "PUMP",
+        "synonyms": [
+            "AIR-P AIRPU"
+        ],
+        "initialDescription": "There is a small pump here.",
+        "description": "hand-held air pump",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0
     },
-    "ORICE": {
-        "id": "ORICE",
-        "name": "piece of cake with orange icing",
-        "description": "There is a piece of cake with orange icing here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "CAKE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "PUTTY": {
+        "id": "PUTTY",
+        "name": "PUTTY",
+        "synonyms": [
+            "MATER",
+            "GUNK",
+            "GLUE"
+        ],
+        "initialDescription": "There is some gunk here",
+        "description": "viscous material",
+        "action": "(Not",
+        "canBeContainedBy": "TUBE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 6,
+        "capacity": 0,
+        "adjectives": [
+            "VISCO"
+        ]
     },
-    "RDICE": {
-        "id": "RDICE",
-        "name": "piece of cake with red icing",
-        "description": "There is a piece of cake with red icing here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "CAKE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "BLICE": {
-        "id": "BLICE",
-        "name": "piece of cake with blue icing",
-        "description": "There is a piece of cake with blue (ecch) icing here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "CAKE-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
-    },
-    "ROBOT": {
-        "id": "ROBOT",
-        "name": "robot",
-        "description": "There is a robot here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "ROBOT-FUNCTION"
-        },
-        "synonyms": [],
-        "adjectives": []
+    "RBOAT": {
+        "id": "RBOAT",
+        "name": "RBOAT",
+        "synonyms": [
+            "BOAT"
+        ],
+        "initialDescription": "There is an inflated boat here.",
+        "description": "magic boat",
+        "action": "RBOAT-FUNCTION",
+        "contents": [
+            "LABEL"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 100,
+        "adjectives": [
+            "PLAST SEAWO"
+        ]
     },
     "RBTLB": {
         "id": "RBTLB",
-        "name": "green piece of paper",
-        "description": "There is a green piece of paper here.",
-        "initialDescription": "",
-        "properties": {},
+        "name": "RBTLB",
+        "synonyms": [
+            "PAPER"
+        ],
+        "initialDescription": "There is a green piece of paper here.",
+        "description": "green piece of paper",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 3,
+        "capacity": 0,
+        "adjectives": [
+            "GREEN"
+        ],
+        "text": "!!!! FROBOZZ MAGIC ROBOT COMPANY !!!! Hello, Master! I am a late-model robot, trained at MIT Tech to perform various simple household functions. Instructions for use: To activate me, use the following formula: >TELL ROBOT '' The quotation marks are required! Warranty: No warranty is expressed or implied. At your service!"
+    },
+    "RCAGE": {
+        "id": "RCAGE",
+        "name": "RCAGE",
+        "synonyms": [
+            "CAGE"
+        ],
+        "initialDescription": "There is an iron cage in the middle of the room.",
+        "description": "iron cage",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 0,
+        "capacity": 0,
+        "adjectives": [
+            "IRON"
+        ]
+    },
+    "RDICE": {
+        "id": "RDICE",
+        "name": "RDICE",
+        "synonyms": [
+            "ICING"
+        ],
+        "description": "red icing",
+        "action": "(Not",
+        "canBeContainedBy": "ATABL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0,
+        "adjectives": [
+            "RED",
+            "ECCH"
+        ]
+    },
+    "RECEP": {
+        "id": "RECEP",
+        "name": "RECEP",
+        "description": "receptacle",
+        "action": "(Not",
+        "canBeContainedBy": "BALLO",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 6
+    },
+    "REFL1": {
+        "id": "REFL1",
+        "name": "REFL1",
+        "synonyms": [
+            "MIRRO"
+        ],
+        "description": "mirror",
+        "action": "MIRROR-MIRROR",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "REFL2": {
+        "id": "REFL2",
+        "name": "REFL2",
+        "synonyms": [
+            "MIRRO"
+        ],
+        "description": "mirror",
+        "action": "MIRROR-MIRROR",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0
+    },
+    "RKNIF": {
+        "id": "RKNIF",
+        "name": "RKNIF",
+        "synonyms": [
+            "KNIFE"
+        ],
+        "initialDescription": "There is a rusty knife here.",
+        "description": "rusty knife",
+        "longDescription": "Beside the skeleton is a rusty knife.",
+        "action": "RUSTY-KNIFE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 20,
+        "capacity": 0,
+        "adjectives": [
+            "RUSTY"
+        ]
+    },
+    "ROBOT": {
+        "id": "ROBOT",
+        "name": "ROBOT",
+        "synonyms": [
+            "R2D2 C3PO ROBBY"
+        ],
+        "initialDescription": "There is a robot here.",
+        "description": "robot",
+        "action": "ROBOT-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 0,
+        "capacity": 0
+    },
+    "ROPE": {
+        "id": "ROPE",
+        "name": "ROPE",
+        "synonyms": [
+            "HEMP",
+            "COIL"
+        ],
+        "initialDescription": "There is a large coil of rope here.",
+        "description": "rope",
+        "longDescription": "A large coil of rope is lying in the corner.",
+        "action": "ROPE-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0
+    },
+    "RUBY": {
+        "id": "RUBY",
+        "name": "RUBY",
+        "synonyms": [
+            "RUBY"
+        ],
+        "initialDescription": "There is a moby ruby lying here.",
+        "description": "ruby",
+        "longDescription": "On the floor lies a moby ruby.",
+        "action": "(Not",
+        "light": 0,
+        "value": 15,
+        "trophyValue": 8,
+        "size": 5,
+        "capacity": 0
+    },
+    "RUG": {
+        "id": "RUG",
+        "name": "RUG",
+        "synonyms": [
+            "CARPE"
+        ],
+        "description": "carpet",
+        "action": "RUG",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 0,
+        "adjectives": [
+            "ORIEN"
+        ]
+    },
+    "SACK": {
+        "id": "SACK",
+        "synonyms": [
+            "BAG"
+        ],
+        "adjectives": [
+            "LEATH"
+        ],
+        "description": "leather sack",
+        "initialDescription": "There is an old leather bag here.",
+        "flags": {
+            "isContainer": true,
+            "isFlammable": true,
+            "isVisible": true,
+            "isTakeable": true
+        },
+        "size": 3,
+        "capacity": 15,
+        "contents": [
+            "GARLI",
+            "FOOD"
+        ]
+    },
+    "SAFE": {
+        "id": "SAFE",
+        "name": "SAFE",
+        "synonyms": [
+            "BOX"
+        ],
+        "description": "box",
+        "action": "SAFE-FUNCTION",
+        "contents": [
+            "CROWN",
+            "CARD"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 15
+    },
+    "SAFFR": {
+        "id": "SAFFR",
+        "name": "tin of rare spices",
+        "synonyms": [
+            "TIN"
+        ],
+        "adjectives": [
+            "RARE"
+        ],
+        "description": "tin of rare spices",
+        "initialDescription": "There is a tin of rare spices here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": true,
+            "isFood": true
+        },
+        "value": 10,
+        "trophyValue": 5,
+        "size": 5
+    },
+    "SBAG": {
+        "id": "SBAG",
+        "name": "SBAG",
+        "synonyms": [
+            "BAG",
+            "SACK",
+            "BAGGI"
+        ],
+        "initialDescription": "A sandwich bag is here.",
+        "description": "sandwich bag",
+        "longDescription": "On the table is an elongated brown sack, smelling of hot peppers.",
+        "action": "(Not",
+        "contents": [
+            "GARLI",
+            "FOOD"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 3,
+        "capacity": 15,
+        "adjectives": [
+            "BROWN"
+        ]
+    },
+    "SCREW": {
+        "id": "SCREW",
+        "name": "SCREW",
+        "initialDescription": "There is a screwdriver here.",
+        "description": "screwdriver",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 5,
+        "capacity": 0
+    },
+    "SHOVE": {
+        "id": "SHOVE",
+        "name": "SHOVE",
+        "initialDescription": "There is a large shovel here.",
+        "description": "shovel",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 15,
+        "capacity": 0
+    },
+    "SPHER": {
+        "id": "SPHER",
+        "name": "SPHER",
+        "synonyms": [
+            "BALL"
+        ],
+        "initialDescription": "There is a beautiful crystal sphere here.",
+        "description": "crystal sphere",
+        "action": "SPHERE-FUNCTION",
+        "light": 0,
+        "value": 6,
+        "trophyValue": 6,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "CRYST",
+            "GLASS"
+        ]
+    },
+    "SSLOT": {
+        "id": "SSLOT",
+        "name": "SSLOT",
+        "synonyms": [
+            "SLOT HOLE"
+        ],
+        "description": "hole",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 10
+    },
+    "STAMP": {
+        "id": "STAMP",
+        "name": "STAMP",
+        "initialDescription": "There is a Flathead Commemorative stamp here.",
+        "description": "stamp",
+        "action": "(Not",
+        "canBeContainedBy": "PUBK",
+        "light": 0,
+        "value": 4,
+        "trophyValue": 10,
+        "size": 1,
+        "capacity": 0
+    },
+    "STATU": {
+        "id": "STATU",
+        "name": "STATU",
+        "synonyms": [
+            "SCULP ROCK"
+        ],
+        "initialDescription": "There is a beautiful statue here.",
+        "description": "statue",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 13,
+        "size": 8,
+        "capacity": 0
+    },
+    "STICK": {
+        "id": "STICK",
+        "name": "STICK",
+        "initialDescription": "There is a broken sharp stick here.",
+        "description": "broken sharp stick",
+        "longDescription": "A sharp stick, which appears to have been broken at one end, is here.",
+        "action": "STICK-FUNCTION",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 3,
+        "capacity": 0,
+        "adjectives": [
+            "SHARP BROKE"
+        ]
+    },
+    "STILL": {
+        "id": "STILL",
+        "name": "STILL",
+        "initialDescription": "There is a vicious-looking stilletto here.",
+        "description": "stilletto",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "VICIO"
+        ]
+    },
+    "STRAD": {
+        "id": "STRAD",
+        "name": "Stradivarius",
+        "synonyms": [
+            "VIOLI"
+        ],
+        "adjectives": [
+            "FANCY"
+        ],
+        "description": "fancy violin",
+        "initialDescription": "There is a Stradivarius here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": true
+        },
+        "value": 10,
+        "trophyValue": 10,
+        "size": 10,
+        "canBeContainedBy": "IRBOX"
+    },
+    "SWORD": {
+        "id": "SWORD",
+        "name": "SWORD",
+        "synonyms": [
+            "ORCRI",
+            "GLAMD",
+            "BLADE"
+        ],
+        "initialDescription": "There is an elvish sword here.",
+        "description": "sword",
+        "longDescription": "On hooks above the mantelpiece hangs an elvish sword of great antiquity.",
+        "action": "SWORD",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 30,
+        "capacity": 0,
+        "adjectives": [
+            "ELVIS"
+        ]
+    },
+    "TCASE": {
+        "id": "TCASE",
+        "name": "TCASE",
+        "synonyms": [
+            "CASE"
+        ],
+        "initialDescription": "There is a trophy case here.",
+        "description": "trophy case",
+        "action": "TROPHY-CASE",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "adjectives": [
+            "TROPH"
+        ]
+    },
+    "THIEF": {
+        "id": "THIEF",
+        "name": "THIEF",
+        "synonyms": [
+            "ROBBE CROOK CRIME CRIMI BANDI GENT GENTL MAN SHADY THUG BAGMA MAFIA"
+        ],
+        "description": "thief",
+        "action": "ROBBER-FUNCTION",
+        "contents": [
+            "STILL"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 4
+    },
+    "TOMB": {
+        "id": "TOMB",
+        "name": "TOMB",
+        "synonyms": [
+            "GRAVE"
+        ],
+        "initialDescription": "There is a tomb here, made of the finest marble, and large enough for four headless corpses. On one end is the cryptic inscription:",
+        "description": "tomb",
+        "action": "HEAD-FUNCTION",
+        "text": "Here lie the implementers, whose heads were placed on poles by the Keeper of the Dungeon for amazing untastefulness."
+    },
+    "TORCH": {
+        "id": "TORCH",
+        "name": "TORCH",
+        "initialDescription": "There is an ivory torch here.",
+        "description": "torch",
+        "longDescription": "Sitting on the pedestal is a flaming torch, made of ivory.",
+        "action": "(Not",
+        "light": 1,
+        "value": 14,
+        "trophyValue": 6,
+        "size": 20,
+        "capacity": 0,
+        "adjectives": [
+            "IVORY"
+        ]
+    },
+    "TRAP-DOOR": {
+        "id": "TRAP-DOOR",
+        "name": "trap door",
+        "synonyms": [
+            "trapdoor",
+            "cover",
+            "TRAPD",
+            "TRAP-"
+        ],
+        "adjectives": [
+            "trap",
+            "dusty"
+        ],
+        "description": "A dusty trap door is here, obviously closed.",
+        "openDescription": "The trap door is open.",
+        "action": "TRAP-DOOR",
+        "flags": {
+            "isDoor": true,
+            "isInvisible": true,
+            "isOpen": false,
+            "isTakeable": false
+        }
+    },
+    "TRIDE": {
+        "id": "TRIDE",
+        "name": "TRIDE",
+        "synonyms": [
+            "FORK"
+        ],
+        "initialDescription": "Neptune's own crystal trident is here.",
+        "description": "crystal trident",
+        "longDescription": "On the shore lies Neptune's own crystal trident.",
+        "action": "(Not",
+        "light": 0,
+        "value": 4,
+        "trophyValue": 11,
+        "size": 20,
+        "capacity": 0,
+        "adjectives": [
+            "CRYST"
+        ]
+    },
+    "TROLL": {
+        "id": "TROLL",
+        "name": "TROLL",
+        "description": "troll",
+        "action": "TROLL",
+        "contents": [
+            "AXE"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "capacity": 2
+    },
+    "TROPHY-CASE": {
+        "id": "TROPHY-CASE",
+        "name": "trophy case",
+        "synonyms": [
+            "CASE"
+        ],
+        "adjectives": [
+            "TROPH"
+        ],
+        "description": "trophy case",
+        "action": "TROPHY-CASE",
+        "flags": {
+            "isContainer": true,
+            "isTransparent": true,
+            "isVisible": true,
+            "isTakeable": false,
+            "isNotDescribed": true
+        },
+        "size": 99999,
+        "capacity": 99999,
+        "initialDescription": "There is a trophy case here."
+    },
+    "TRUNK": {
+        "id": "TRUNK",
+        "name": "TRUNK",
+        "synonyms": [
+            "CHEST"
+        ],
+        "initialDescription": "There is an old trunk here, bulging with assorted jewels.",
+        "description": "trunk with jewels",
+        "longDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
+        "action": "(Not",
+        "light": 0,
+        "value": 15,
+        "trophyValue": 8,
+        "size": 35,
+        "capacity": 0
+    },
+    "TUBE": {
+        "id": "TUBE",
+        "name": "TUBE",
+        "initialDescription": "There is an object which looks like a tube of toothpaste here.",
+        "description": "tube",
+        "action": "TUBE-FUNCTION",
+        "contents": [
+            "PUTTY"
+        ],
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 7
+    },
+    "WATER": {
+        "id": "WATER",
+        "name": "WATER",
+        "synonyms": [
+            "LIQUI",
+            "H2O"
+        ],
+        "initialDescription": "Water",
+        "description": "quantity of water",
+        "longDescription": "There is some water here",
+        "action": "WATER-FUNCTION",
+        "canBeContainedBy": "BOTTL",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 4,
+        "capacity": 0
+    },
+    "WHBK": {
+        "id": "WHBK",
+        "name": "WHBK",
+        "synonyms": [
+            "BOOK"
+        ],
+        "initialDescription": "There is a white book here.",
+        "description": "white book",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 2,
+        "adjectives": [
+            "WHITE"
+        ]
+    },
+    "WINDOW": {
+        "id": "WINDOW",
+        "name": "window",
+        "synonyms": [
+            "win",
+            "WINDO"
+        ],
+        "description": "A window is here.",
+        "action": "WINDOW-FUNCTION",
+        "flags": {
+            "isDoor": true,
+            "isVisible": true,
+            "isOpen": false,
+            "isTakeable": false,
+            "isNotDescribed": true
+        }
+    },
+    "WRENC": {
+        "id": "WRENC",
+        "name": "WRENC",
+        "initialDescription": "There is a wrench here.",
+        "description": "wrench",
+        "action": "(Not",
+        "light": 0,
+        "value": 0,
+        "trophyValue": 0,
+        "size": 10,
+        "capacity": 0
+    },
+    "WRENCH": {
+        "id": "WRENCH",
+        "name": "wrench",
         "synonyms": [],
-        "adjectives": []
+        "description": "wrench",
+        "initialDescription": "There is a wrench here.",
+        "flags": {
+            "isVisible": true,
+            "isTakeable": true,
+            "isTool": true
+        },
+        "size": 5
+    },
+    "ZORKM": {
+        "id": "ZORKM",
+        "name": "ZORKM",
+        "synonyms": [
+            "COIN"
+        ],
+        "initialDescription": "There is an engraved zorkmid coin here.",
+        "description": "priceless zorkmid",
+        "longDescription": "On the floor is a gold zorkmid coin (a valuable collector's item).",
+        "action": "(Not",
+        "light": 0,
+        "value": 10,
+        "trophyValue": 12,
+        "size": 10,
+        "capacity": 0,
+        "adjectives": [
+            "GOLD"
+        ]
     }
 };
 const roomsData = {
-    "PASS1": {
-        "id": "PASS1",
-        "shortDesc": "East-West Passage",
-        "longDesc": "You are in a narrow east-west passageway.  There is a narrow stairway\nleading down at the north end of the room.",
+    "WEST-OF-HOUSE": {
+        "id": "WEST-OF-HOUSE",
+        "name": "West of House",
+        "description": "You are in an open field west of a big white house, with a boarded front door.",
         "exits": {
-            "EAST": "CAROU",
-            "WEST": "MTROL",
-            "DOWN": "RAVI1",
-            "NORTH": "RAVI1"
+            "NORTH": "NORTH-OF-HOUSE",
+            "SOUTH": "SOUTH-OF-HOUSE",
+            "EAST": "EAST-OF-HOUSE",
+            "WEST": "FOREST-1"
         },
-        "objects": [],
-        "properties": []
-    },
-    "WHOUS": {
-        "id": "WHOUS",
-        "shortDesc": "West of House",
-        "longDesc": "You are in an open field west of a big white house, with a boarded\nfront door.",
-        "exits": {
-            "NORTH": "NHOUS",
-            "SOUTH": "SHOUS",
-            "WEST": "FORE1",
-            "EAST": {
-                "blocked": "The door is locked, and there is evidently no key."
-            }
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
         },
         "objects": [
-            "FDOOR",
-            "MAILB"
-        ],
-        "properties": [
-            "LIT"
+            "MAILBOX",
+            "ADVER",
+            "MAT",
+            "FRONT-DOOR"
         ]
     },
-    "NHOUS": {
-        "id": "NHOUS",
-        "shortDesc": "North of House",
-        "longDesc": "You are facing the north side of a white house.  There is no door here,\nand all the windows are barred.",
+    "HOUSE-BLOCKED": {
+        "id": "HOUSE-BLOCKED",
+        "name": "West of House",
+        "description": "The door is boarded and you can't remove the boards."
+    },
+    "NORTH-OF-HOUSE": {
+        "id": "NORTH-OF-HOUSE",
+        "name": "North of House",
+        "description": "You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.",
         "exits": {
-            "WEST": "WHOUS",
-            "EAST": "EHOUS",
-            "NORTH": "FORE3",
-            "SOUTH": {
-                "blocked": "The windows are all barred."
-            }
+            "WEST": "WEST-OF-HOUSE",
+            "EAST": "EAST-OF-HOUSE",
+            "NORTH": "PATH"
         },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "SHOUS": {
-        "id": "SHOUS",
-        "shortDesc": "South of House",
-        "longDesc": "You are facing the south side of a white house. There is no door here,\nand all the windows are barred.",
-        "exits": {
-            "WEST": "WHOUS",
-            "EAST": "EHOUS",
-            "SOUTH": "FORE2",
-            "NORTH": {
-                "blocked": "The windows are all barred."
-            }
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
         },
-        "objects": [],
-        "properties": [
-            "LIT"
+        "objects": [
+            "HOUSE"
         ]
     },
-    "EHOUS": {
-        "id": "EHOUS",
-        "shortDesc": "Behind House",
-        "longDesc": "",
+    "EAST-OF-HOUSE": {
+        "id": "EAST-OF-HOUSE",
+        "name": "Behind House",
+        "description": "You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.",
         "exits": {
-            "NORTH": "NHOUS",
-            "SOUTH": "SHOUS",
-            "EAST": "CLEAR",
+            "NORTH": "NORTH-OF-HOUSE",
+            "SOUTH": "SOUTH-OF-HOUSE",
+            "EAST": "CLEARING-BEHIND-HOUSE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        },
+        "objects": [
+            "WINDOW"
+        ]
+    },
+    "SOUTH-OF-HOUSE": {
+        "id": "SOUTH-OF-HOUSE",
+        "name": "South of House",
+        "description": "You are on the south side of a white house. There is no door here, and all the windows are boarded.",
+        "exits": {
+            "WEST": "WEST-OF-HOUSE",
+            "EAST": "EAST-OF-HOUSE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    "FOREST-1": {
+        "id": "FOREST-1",
+        "name": "Forest",
+        "description": "This is a forest, with trees in all directions. To the east, there is a large tree with some low branches. To the west, the forest continues.",
+        "exits": {
+            "EAST": "WEST-OF-HOUSE",
+            "WEST": "FOREST-2",
+            "UP": "UP-A-TREE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    "UP-A-TREE": {
+        "id": "UP-A-TREE",
+        "name": "Up a Tree",
+        "description": "You are about 10 feet up in a big tree. You can see a nest with a large egg in it. The egg is covered with fine gold inlay. You can also see the roof of the house.",
+        "exits": {
+            "DOWN": "FOREST-1"
+        },
+        "flags": {
+            "isOnLand": false,
+            "isLit": true
+        },
+        "objects": [
+            "EGG",
+            "NEST"
+        ]
+    },
+    "FOREST-2": {
+        "id": "FOREST-2",
+        "name": "Forest",
+        "description": "This is a dimly lit forest, with trees all around. To the east, the forest appears to become clearer.",
+        "exits": {
+            "EAST": "FOREST-1",
+            "WEST": "FOREST-3"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    "FOREST-3": {
+        "id": "FOREST-3",
+        "name": "Forest",
+        "description": "This is a forest, with trees in all directions. There is a clearing to the west.",
+        "exits": {
+            "EAST": "FOREST-2",
+            "WEST": "CLEARING"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    "CLEARING": {
+        "id": "CLEARING",
+        "name": "Clearing",
+        "description": "You are in a small clearing in a forest. Piles of leaves can be seen here. There is a large grating, securely bolted to the ground, to the west.",
+        "exits": {
+            "EAST": "FOREST-3"
+        },
+        "conditionalExits": {
             "WEST": {
-                "condition": "\"KITCHEN-WINDOW\"",
-                "destination": "KITCH",
-                "message": "You can't go that way."
-            },
-            "ENTER": {
-                "condition": "\"KITCHEN-WINDOW\"",
-                "destination": "KITCH",
-                "message": "You can't go that way."
+                "target": "MGRAT",
+                "conditionFlag": "KEY-FLAG",
+                "conditionValue": "CLEAR",
+                "message": "The grating is locked"
             }
         },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        },
         "objects": [
-            "WIND1"
-        ],
-        "properties": [
-            "LIT"
+            "LEAVES",
+            "GRAT2"
         ]
     },
-    "KITCH": {
-        "id": "KITCH",
-        "shortDesc": "Kitchen",
-        "longDesc": "",
+    "PATH": {
+        "id": "PATH",
+        "name": "Path",
+        "description": "This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.",
         "exits": {
-            "EAST": {
-                "condition": "\"KITCHEN-WINDOW\"",
-                "destination": "EHOUS",
-                "message": "You can't go that way."
-            },
-            "WEST": "LROOM",
-            "EXIT": {
-                "condition": "\"KITCHEN-WINDOW\"",
-                "destination": "EHOUS",
-                "message": "You can't go that way."
-            },
+            "SOUTH": "NORTH-OF-HOUSE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    "CLEARING-BEHIND-HOUSE": {
+        "id": "CLEARING-BEHIND-HOUSE",
+        "name": "Clearing",
+        "description": "You are in a clearing, with a forest surrounding you on all sides. A path leads south.",
+        "exits": {
+            "WEST": "EAST-OF-HOUSE"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    "KITCHEN": {
+        "id": "KITCHEN",
+        "name": "Kitchen",
+        "description": "You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.",
+        "exits": {
+            "WEST": "LIVING-ROOM",
             "UP": "ATTIC",
-            "DOWN": {
-                "blocked": "Only Santa Claus climbs down chimneys."
-            }
+            "DOWN": "CHIMNEY"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
         },
         "objects": [
-            "WIND2",
-            "SBAG",
-            "BOTTL"
-        ],
-        "properties": [
-            "LIT"
+            "BOTTLE",
+            "SACK"
         ]
     },
     "ATTIC": {
         "id": "ATTIC",
-        "shortDesc": "Attic",
-        "longDesc": "You are in the attic.  The only exit is stairs that lead down.",
+        "name": "Attic",
+        "description": "You are in the attic. There is a large coil of rope here.",
         "exits": {
-            "DOWN": "KITCH"
+            "DOWN": "KITCHEN"
+        },
+        "flags": {
+            "isLit": true
         },
         "objects": [
-            "BRICK",
-            "ROPE",
-            "KNIFE"
-        ],
-        "properties": []
-    },
-    "LROOM": {
-        "id": "LROOM",
-        "shortDesc": "Living Room",
-        "longDesc": "",
-        "exits": {
-            "EAST": "KITCH",
-            "WEST": {
-                "condition": "\"MAGIC-FLAG\"",
-                "destination": "BLROO",
-                "message": "The door is nailed shut."
-            },
-            "DOWN": {
-                "condition": "\"TRAP-DOOR\"",
-                "destination": "CELLA",
-                "message": "You can't go that way."
-            }
-        },
-        "objects": [
-            "WDOOR",
-            "DOOR",
-            "TCASE",
-            "LAMP",
-            "RUG",
-            "PAPER",
-            "SWORD"
-        ],
-        "properties": [
-            "LIT"
+            "ROPE"
         ]
     },
-    "CELLA": {
-        "id": "CELLA",
-        "shortDesc": "Cellar",
-        "longDesc": "",
+    "LIVING-ROOM": {
+        "id": "LIVING-ROOM",
+        "name": "Living Room",
+        "description": "You are in the living room. There is a doorway to the east. To the west is a wooden door with strange gothic lettering, which is closed. A dark staircase leads up and down. There is a trophy case here.",
         "exits": {
-            "EAST": "MTROL",
-            "SOUTH": "CHAS2",
-            "UP": {
-                "condition": "\"TRAP-DOOR\"",
-                "destination": "LROOM",
-                "message": "The trap door has been barred from the other side."
-            },
-            "WEST": {
-                "blocked": "You try to ascend the ramp, but it is impossible, and you slide back down."
-            }
+            "EAST": "KITCHEN",
+            "UP": "UP-STAIRS",
+            "DOWN": "CELLAR"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
         },
         "objects": [
-            "TDOOR"
-        ],
-        "properties": []
+            "TROPHY-CASE",
+            "LANTERN",
+            "RUG",
+            "SWORD"
+        ]
     },
-    "MTROL": {
-        "id": "MTROL",
-        "shortDesc": "The Troll Room",
-        "longDesc": "You are in a small room with passages off in all directions. \nBloodstains and deep scratches (perhaps made by an axe) mar the\nwalls.",
+    "CELLAR": {
+        "id": "CELLAR",
+        "name": "Cellar",
+        "description": "You are in a dark and damp cellar with a narrow passage leading north. To the west is a circular room with a railing.",
         "exits": {
-            "WEST": "CELLA",
-            "EAST": {
-                "condition": "\"TROLL-FLAG\"",
-                "destination": "CRAW4",
-                "message": "You can't go that way."
-            },
-            "NORTH": {
-                "condition": "\"TROLL-FLAG\"",
-                "destination": "PASS1",
-                "message": "You can't go that way."
-            },
-            "SOUTH": {
-                "condition": "\"TROLL-FLAG\"",
-                "destination": "MAZE1",
-                "message": "You can't go that way."
-            }
+            "UP": "LIVING-ROOM",
+            "NORTH": "TROLL-ROOM"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": false
+        }
+    },
+    "TROLL-ROOM": {
+        "id": "TROLL-ROOM",
+        "name": "The Troll Room",
+        "description": "This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mark the walls.",
+        "exits": {
+            "SOUTH": "CELLAR",
+            "EAST": "EAST-OF-CHASM",
+            "WEST": "CHASM-ROOM"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true,
+            "isMunged": false
         },
         "objects": [
             "TROLL"
-        ],
-        "properties": []
+        ]
+    },
+    "CHASM-ROOM": {
+        "id": "CHASM-ROOM",
+        "name": "Chasm",
+        "description": "A chasm extends to the east and west. A narrow ledge of rock runs along the southern wall of the chasm. You can hear the sound of rapidly flowing water from below.",
+        "exits": {
+            "EAST": "TROLL-ROOM"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
+    },
+    "EAST-OF-CHASM": {
+        "id": "EAST-OF-CHASM",
+        "name": "East of Chasm",
+        "description": "You are on the east edge of a chasm, the bottom of which is filled with water. A narrow passage goes north, and the path you are on continues to the west.",
+        "exits": {
+            "WEST": "TROLL-ROOM"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "MAZE1": {
         "id": "MAZE1",
-        "shortDesc": "",
-        "longDesc": "",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
         "exits": {
             "WEST": "MTROL",
             "NORTH": "MAZE1",
             "SOUTH": "MAZE2",
             "EAST": "MAZE4"
         },
-        "objects": [],
-        "properties": []
+        "flags": {
+            "isMaze": true,
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "MAZE2": {
         "id": "MAZE2",
-        "shortDesc": "",
-        "longDesc": "",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
         "exits": {
             "SOUTH": "MAZE1",
             "NORTH": "MAZE4",
             "EAST": "MAZE3"
         },
-        "objects": [],
-        "properties": []
+        "flags": {
+            "isMaze": true,
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "MAZE3": {
         "id": "MAZE3",
-        "shortDesc": "",
-        "longDesc": "",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
         "exits": {
             "WEST": "MAZE2",
             "NORTH": "MAZE4",
             "UP": "MAZE5"
         },
-        "objects": [],
-        "properties": []
+        "flags": {
+            "isMaze": true,
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "MAZE4": {
         "id": "MAZE4",
-        "shortDesc": "",
-        "longDesc": "",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
         "exits": {
             "WEST": "MAZE3",
             "NORTH": "MAZE1",
             "EAST": "DEAD1"
         },
-        "objects": [],
-        "properties": []
+        "flags": {
+            "isMaze": true,
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "DEAD1": {
         "id": "DEAD1",
-        "shortDesc": "",
-        "longDesc": "",
+        "name": "Dead End",
+        "description": "You are in a dead end.",
+        "longDescription": "You are in a dead end.",
         "exits": {
             "SOUTH": "MAZE4"
         },
-        "objects": [],
-        "properties": []
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "MAZE5": {
         "id": "MAZE5",
-        "shortDesc": "",
-        "longDesc": "",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
         "exits": {
             "EAST": "DEAD2",
             "NORTH": "MAZE3",
             "SW": "MAZE6"
+        },
+        "flags": {
+            "isMaze": true,
+            "isOnLand": true,
+            "isLit": true
         },
         "objects": [
             "BONES",
@@ -1451,1905 +2422,246 @@ const roomsData = {
             "KEYS",
             "BLANT",
             "RKNIF"
-        ],
-        "properties": []
+        ]
     },
     "DEAD2": {
         "id": "DEAD2",
-        "shortDesc": "",
-        "longDesc": "",
+        "name": "Dead End",
+        "description": "You are in a dead end.",
+        "longDescription": "You are in a dead end.",
         "exits": {
             "WEST": "MAZE5"
         },
-        "objects": [],
-        "properties": []
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "MAZE6": {
         "id": "MAZE6",
-        "shortDesc": "",
-        "longDesc": "",
+        "name": "Maze",
+        "description": "You are in a maze.",
+        "longDescription": "You are in a maze.",
         "exits": {
             "DOWN": "MAZE5",
             "EAST": "MAZE7",
             "WEST": "MAZE6",
             "UP": "MAZE9"
         },
-        "objects": [],
-        "properties": []
-    },
-    "MAZE7": {
-        "id": "MAZE7",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "UP": "MAZ14",
-            "WEST": "MAZE6",
-            "NE": "DEAD1",
-            "EAST": "MAZE8",
-            "SOUTH": "MAZ15"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MAZE8": {
-        "id": "MAZE8",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NE": "MAZE7",
-            "WEST": "MAZE8",
-            "SE": "DEAD3"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "DEAD3": {
-        "id": "DEAD3",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "MAZE8"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MAZE9": {
-        "id": "MAZE9",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "MAZE6",
-            "EAST": "MAZ11",
-            "DOWN": "MAZ10",
-            "SOUTH": "MAZ13",
-            "WEST": "MAZ12",
-            "NW": "MAZE9"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MAZ10": {
-        "id": "MAZ10",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "EAST": "MAZE9",
-            "WEST": "MAZ13",
-            "UP": "MAZ11"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MAZ11": {
-        "id": "MAZ11",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NE": "MGRAT",
-            "DOWN": "MAZ10",
-            "NW": "MAZ13",
-            "SW": "MAZ12"
-        },
-        "objects": [],
-        "properties": []
+        "flags": {
+            "isMaze": true,
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "MGRAT": {
         "id": "MGRAT",
-        "shortDesc": "Grating Room",
-        "longDesc": "",
+        "name": "Grating Room",
+        "description": "You are in the Grating Room.",
+        "longDescription": "Grating Room",
         "exits": {
-            "SW": "MAZ11",
+            "SW": "MAZ11"
+        },
+        "conditionalExits": {
             "UP": {
-                "condition": "\"KEY-FLAG\"",
-                "destination": "CLEAR",
+                "target": "CLEAR",
+                "conditionFlag": "KEY-FLAG",
+                "conditionValue": "CLEAR",
                 "message": "The grating is locked"
             }
         },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        },
         "objects": [
             "GRAT2"
-        ],
-        "properties": []
-    },
-    "MAZ12": {
-        "id": "MAZ12",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "WEST": "MAZE5",
-            "SW": "MAZ11",
-            "EAST": "MAZ13",
-            "UP": "MAZE9",
-            "NORTH": "DEAD4"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "DEAD4": {
-        "id": "DEAD4",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "SOUTH": "MAZ12"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MAZ13": {
-        "id": "MAZ13",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "EAST": "MAZE9",
-            "DOWN": "MAZ12",
-            "SOUTH": "MAZ10",
-            "WEST": "MAZ11"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MAZ14": {
-        "id": "MAZ14",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "WEST": "MAZ15",
-            "NW": "MAZ14",
-            "NE": "MAZE7",
-            "SOUTH": "MAZE7"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MAZ15": {
-        "id": "MAZ15",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "WEST": "MAZ14",
-            "SOUTH": "MAZE7",
-            "NE": "CYCLO"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "FORE1": {
-        "id": "FORE1",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "FORE1",
-            "EAST": "FORE3",
-            "SOUTH": "FORE2",
-            "WEST": "FORE1"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
         ]
-    },
-    "FORE4": {
-        "id": "FORE4",
-        "shortDesc": "",
-        "longDesc": "You are in a large forest, with trees obstructing all views except\nto the east, where a small clearing may be seen through the trees.",
-        "exits": {
-            "EAST": "CLTOP",
-            "NORTH": "FORE5",
-            "SOUTH": "FORE4",
-            "WEST": "FORE2"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "FORE5": {
-        "id": "FORE5",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "FORE5",
-            "SE": "CLTOP",
-            "SOUTH": "FORE4",
-            "WEST": "FORE2"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "FORE2": {
-        "id": "FORE2",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "SHOUS",
-            "EAST": "CLEAR",
-            "SOUTH": "FORE4",
-            "WEST": "FORE1"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "FORE3": {
-        "id": "FORE3",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "FORE2",
-            "EAST": "CLEAR",
-            "SOUTH": "CLEAR",
-            "WEST": "NHOUS"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "CLEAR": {
-        "id": "CLEAR",
-        "shortDesc": "Clearing",
-        "longDesc": "",
-        "exits": {
-            "SW": "EHOUS",
-            "SE": "FORE5",
-            "NORTH": "CLEAR",
-            "EAST": "CLEAR",
-            "WEST": "FORE3",
-            "SOUTH": "FORE2",
-            "DOWN": {
-                "condition": "\"KEY-FLAG\"",
-                "destination": "MGRAT",
-                "message": "You can't go that way."
-            }
-        },
-        "objects": [
-            "GRAT1",
-            "LEAVE"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "RAVI1": {
-        "id": "RAVI1",
-        "shortDesc": "Deep Ravine",
-        "longDesc": "You are in a deep ravine at a crossing with an east-west crawlway. \nSome stone steps are at the south of the ravine and a steep staircase\ndescends.",
-        "exits": {
-            "SOUTH": "PASS1",
-            "DOWN": "RESES",
-            "EAST": "CHAS1",
-            "WEST": "CRAW1"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CRAW1": {
-        "id": "CRAW1",
-        "shortDesc": "Rocky Crawl",
-        "longDesc": "You are in a crawlway with a three-foot high ceiling.  Your footing\nis very unsure here due to the assortment of rocks underfoot. \nPassages can be seen in the east, west, and northwest corners of the\npassage.",
-        "exits": {
-            "WEST": "RAVI1",
-            "EAST": "DOME",
-            "NW": "EGYPT"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "RESES": {
-        "id": "RESES",
-        "shortDesc": "Reservoir South",
-        "longDesc": "",
-        "exits": {
-            "SOUTH": {
-                "condition": "\"EGYPT-FLAG\"",
-                "destination": "RAVI1",
-                "message": "The coffin will not fit through this passage."
-            },
-            "WEST": "STREA",
-            "CROSS": {
-                "condition": "\"LOW-TIDE\"",
-                "destination": "RESEN",
-                "message": "You are not equipped for swimming."
-            },
-            "NORTH": {
-                "condition": "\"LOW-TIDE\"",
-                "destination": "RESEN",
-                "message": "You are not equipped for swimming."
-            },
-            "UP": {
-                "condition": "\"EGYPT-FLAG\"",
-                "destination": "CANY1",
-                "message": "The stairs are too steep for carrying the coffin."
-            }
-        },
-        "objects": [
-            "TRUNK"
-        ],
-        "properties": []
-    },
-    "RESEN": {
-        "id": "RESEN",
-        "shortDesc": "Reservoir North",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "ATLAN",
-            "CROSS": {
-                "condition": "\"LOW-TIDE\"",
-                "destination": "RESES",
-                "message": "You are not equipped for swimming."
-            },
-            "SOUTH": {
-                "condition": "\"LOW-TIDE\"",
-                "destination": "RESES",
-                "message": "You are not equipped for swimming."
-            }
-        },
-        "objects": [
-            "PUMP"
-        ],
-        "properties": []
     },
     "STREA": {
         "id": "STREA",
-        "shortDesc": "Stream",
-        "longDesc": "You are standing on a path beside a flowing stream.  The path\ntravels to the north and the east.",
+        "name": "Stream",
+        "description": "You are in a stream. The stream travels to the north and the east.",
+        "longDescription": "Stream",
         "exits": {
             "EAST": "RESES",
             "NORTH": "ICY"
         },
+        "flags": {
+            "isWater": true,
+            "isOnLand": true,
+            "isLit": true
+        },
         "objects": [
             "FUSE"
-        ],
-        "properties": []
+        ]
     },
     "EGYPT": {
         "id": "EGYPT",
-        "shortDesc": "Egyptian Room",
-        "longDesc": "You are in a room which looks like an Egyptian tomb.  There is an\nascending staircase in the room as well as doors, east and south.",
+        "name": "Egyptian Room",
+        "description": "You are in a room which looks like an Egyptian tomb. There is an ascending staircase in the room as well as doors, east and south.",
+        "longDescription": "Egyptian Room",
         "exits": {
             "UP": "ICY",
-            "SOUTH": "LEDG3",
+            "SOUTH": "LEDG3"
+        },
+        "conditionalExits": {
             "EAST": {
-                "condition": "\"EGYPT-FLAG\"",
-                "destination": "CRAW1",
+                "target": "CRAW1",
+                "conditionFlag": "EGYPT-FLAG",
+                "conditionValue": "CRAW1",
                 "message": "The passage is too narrow to accomodate coffins."
             }
         },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        },
         "objects": [
             "COFFI"
-        ],
-        "properties": []
+        ]
     },
     "ICY": {
         "id": "ICY",
-        "shortDesc": "Glacier Room",
-        "longDesc": "",
+        "name": "Glacier Room",
+        "description": "You are in the Glacier Room.",
+        "longDescription": "Glacier Room",
         "exits": {
             "NORTH": "STREA",
-            "EAST": "EGYPT",
+            "EAST": "EGYPT"
+        },
+        "conditionalExits": {
             "WEST": {
-                "condition": "\"GLACIER-FLAG\"",
-                "destination": "RUBYR",
-                "message": "You can't go that way."
+                "target": "RUBYR",
+                "conditionFlag": "GLACIER-FLAG",
+                "conditionValue": "RUBYR",
+                "message": "The glacier blocks the way."
             }
         },
-        "objects": [
-            "ICE"
-        ],
-        "properties": []
-    },
-    "RUBYR": {
-        "id": "RUBYR",
-        "shortDesc": "Ruby Room",
-        "longDesc": "You are in a small chamber behind the remains of the Great Glacier.\nTo the south and west are small passageways.",
-        "exits": {
-            "WEST": "LAVA",
-            "SOUTH": "ICY"
-        },
-        "objects": [
-            "RUBY"
-        ],
-        "properties": []
-    },
-    "ATLAN": {
-        "id": "ATLAN",
-        "shortDesc": "Atlantis Room",
-        "longDesc": "You are in an ancient room, long buried by the Reservoir.  There are\nexits here to the southeast and upward.",
-        "exits": {
-            "SE": "RESEN",
-            "UP": "CAVE1"
-        },
-        "objects": [
-            "TRIDE"
-        ],
-        "properties": []
-    },
-    "CANY1": {
-        "id": "CANY1",
-        "shortDesc": "Deep Canyon",
-        "longDesc": "You are on the south edge of a deep canyon.  Passages lead off\nto the east, south, and northwest.  You can hear the sound of\nflowing water below.",
-        "exits": {
-            "NW": "RESES",
-            "EAST": "DAM",
-            "SOUTH": "CAROU"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "ECHO": {
-        "id": "ECHO",
-        "shortDesc": "Loud Room",
-        "longDesc": "You are in a large room with a ceiling which cannot be detected from\nthe ground. There is a narrow passage from east to west and a stone\nstairway leading upward.  The room is extremely noisy.  In fact, it is\ndifficult to hear yourself think.",
-        "exits": {
-            "EAST": "CHAS3",
-            "WEST": "PASS5",
-            "UP": "CAVE3"
-        },
-        "objects": [
-            "BAR"
-        ],
-        "properties": []
-    },
-    "MIRR1": {
-        "id": "MIRR1",
-        "shortDesc": "Mirror Room",
-        "longDesc": "",
-        "exits": {
-            "WEST": "PASS3",
-            "NORTH": "CRAW2",
-            "EAST": "CAVE1"
-        },
-        "objects": [
-            "REFL1"
-        ],
-        "properties": []
-    },
-    "MIRR2": {
-        "id": "MIRR2",
-        "shortDesc": "Mirror Room",
-        "longDesc": "",
-        "exits": {
-            "WEST": "PASS4",
-            "NORTH": "CRAW3",
-            "EAST": "CAVE2"
-        },
-        "objects": [
-            "REFL2"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "CAVE1": {
-        "id": "CAVE1",
-        "shortDesc": "Cave",
-        "longDesc": "You are in a small cave with an entrance to the north and a stairway\nleading down.",
-        "exits": {
-            "NORTH": "MIRR1",
-            "DOWN": "ATLAN"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CAVE2": {
-        "id": "CAVE2",
-        "shortDesc": "Cave",
-        "longDesc": "You are in a tiny cave with entrances west and north, and a dark,\nforbidding staircase leading down.",
-        "exits": {
-            "NORTH": "CRAW3",
-            "WEST": "MIRR2",
-            "DOWN": "LLD1"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CRAW2": {
-        "id": "CRAW2",
-        "shortDesc": "Steep Crawlway",
-        "longDesc": "You are in a steep and narrow crawlway.  There are two exits nearby to\nthe south and southwest.",
-        "exits": {
-            "SOUTH": "MIRR1",
-            "SW": "PASS3"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CRAW3": {
-        "id": "CRAW3",
-        "shortDesc": "Narrow Crawlway",
-        "longDesc": "You are in a narrow crawlway.  The crawlway leads from north to south.\nHowever the south passage divides to the south and southwest.",
-        "exits": {
-            "SOUTH": "CAVE2",
-            "SW": "MIRR2",
-            "NORTH": "MGRAI"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "PASS3": {
-        "id": "PASS3",
-        "shortDesc": "Cold Passage",
-        "longDesc": "You are in a cold and damp corridor where a long east-west passageway\nintersects with a northward path.",
-        "exits": {
-            "EAST": "MIRR1",
-            "WEST": "SLIDE",
-            "NORTH": "CRAW2"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "PASS4": {
-        "id": "PASS4",
-        "shortDesc": "Winding Passage",
-        "longDesc": "You are in a winding passage.  It seems that there is only an exit\non the east end although the whirring from the round room can be\nheard faintly to the north.",
-        "exits": {
-            "EAST": "MIRR2",
-            "NORTH": {
-                "blocked": "You hear the whir of the carousel room but can find no entrance."
-            }
-        },
-        "objects": [],
-        "properties": []
-    },
-    "SLIDE": {
-        "id": "SLIDE",
-        "shortDesc": "Slide Room",
-        "longDesc": "You are in a small chamber, which appears to have been part of a\ncoal mine. On the south wall of the chamber the letters \\Granite\nWall\\ are etched in the rock. To the east is a long passage and\nthere is a steep metal slide twisting downward. From the appearance\nof the slide, an attempt to climb up it would be impossible.  To the\nnorth is a small opening.",
-        "exits": {
-            "EAST": "PASS3",
-            "DOWN": "CELLA",
-            "NORTH": "ENTRA"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "ENTRA": {
-        "id": "ENTRA",
-        "shortDesc": "Mine Entrance",
-        "longDesc": "You are standing at the entrance of what might have been a coal\nmine. To the northeast and the northwest are entrances to the mine,\nand there is another exit on the south end of the room.",
-        "exits": {
-            "SOUTH": "SLIDE",
-            "NW": "SQUEE",
-            "NE": "TSHAF"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "SQUEE": {
-        "id": "SQUEE",
-        "shortDesc": "Squeaky Room",
-        "longDesc": "You are a small room.  Strange squeaky sounds may be heard coming from\nthe passage at the west end.  You may also escape to the south.",
-        "exits": {
-            "WEST": "BATS",
-            "SOUTH": "ENTRA"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "TSHAF": {
-        "id": "TSHAF",
-        "shortDesc": "Shaft Room",
-        "longDesc": "You are in a large room, in the middle of which is a small shaft\ndescending through the floor into darkness below.  To the west and\nthe north are exits from this room.  Constructed over the top of the\nshaft is a metal framework to which a heavy iron chain is attached.",
-        "exits": {
-            "DOWN": {
-                "blocked": "You wouldn't fit and would die if you could."
-            },
-            "WEST": "ENTRA",
-            "NORTH": "TUNNE"
-        },
-        "objects": [
-            "TBASK"
-        ],
-        "properties": []
-    },
-    "TUNNE": {
-        "id": "TUNNE",
-        "shortDesc": "Wooden Tunnel",
-        "longDesc": "You are in a narrow tunnel with large wooden beams running across\nthe ceiling and around the walls.  A path from the south splits into\npaths running west and northeast.",
-        "exits": {
-            "SOUTH": "TSHAF",
-            "WEST": "SMELL",
-            "NE": "MINE1"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "SMELL": {
-        "id": "SMELL",
-        "shortDesc": "Smelly Room",
-        "longDesc": "You are in a small non-descript room.  However, from the direction\nof a small descending staircase a foul odor can be detected.  To the\neast is a narrow path.",
-        "exits": {
-            "DOWN": "BOOM",
-            "EAST": "TUNNE"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "BOOM": {
-        "id": "BOOM",
-        "shortDesc": "Gas Room",
-        "longDesc": "You are in a small room which smells strongly of coal gas.",
-        "exits": {
-            "UP": "SMELL"
-        },
-        "objects": [
-            "BRACE"
-        ],
-        "properties": []
-    },
-    "TLADD": {
-        "id": "TLADD",
-        "shortDesc": "Ladder Top",
-        "longDesc": "You are in a very small room.  In the corner is a rickety wooden\nladder, leading downward.  It might be safe to descend.  There is\nalso a staircase leading upward.",
-        "exits": {
-            "DOWN": "BLADD",
-            "UP": "MINE7"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MINE1": {
-        "id": "MINE1",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "MINE4",
-            "SW": "MINE2",
-            "EAST": "TUNNE"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MINE2": {
-        "id": "MINE2",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "SOUTH": "MINE1",
-            "WEST": "MINE5",
-            "UP": "MINE3",
-            "NE": "MINE4"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MINE3": {
-        "id": "MINE3",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "WEST": "MINE2",
-            "NE": "MINE5",
-            "EAST": "MINE5"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MINE4": {
-        "id": "MINE4",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "UP": "MINE5",
-            "NE": "MINE6",
-            "SOUTH": "MINE1",
-            "WEST": "MINE2"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MINE5": {
-        "id": "MINE5",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "DOWN": "MINE6",
-            "NORTH": "MINE7",
-            "WEST": "MINE2",
-            "SOUTH": "MINE3",
-            "UP": "MINE3",
-            "EAST": "MINE4"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MINE6": {
-        "id": "MINE6",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "SE": "MINE4",
-            "UP": "MINE5",
-            "NW": "MINE7"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "MINE7": {
-        "id": "MINE7",
-        "shortDesc": "",
-        "longDesc": "",
-        "exits": {
-            "EAST": "MINE1",
-            "WEST": "MINE5",
-            "DOWN": "TLADD",
-            "SOUTH": "MINE6"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "BLADD": {
-        "id": "BLADD",
-        "shortDesc": "Ladder Bottom",
-        "longDesc": "You are in a rather wide room.  On one side is the bottom of a\nnarrow wooden ladder.  To the northeast and the south are passages\nleaving the room.",
-        "exits": {
-            "NE": "DEAD7",
-            "SOUTH": "TIMBE",
-            "UP": "TLADD"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "DEAD7": {
-        "id": "DEAD7",
-        "shortDesc": "Dead End",
-        "longDesc": "Dead End",
-        "exits": {
-            "SOUTH": "BLADD"
-        },
-        "objects": [
-            "COAL"
-        ],
-        "properties": []
-    },
-    "TIMBE": {
-        "id": "TIMBE",
-        "shortDesc": "Timber Room",
-        "longDesc": "You are in a long and narrow passage, which is cluttered with broken\ntimbers.  A wide passage comes from the north and turns at the \nsouthwest corner of the room into a very narrow passageway.",
-        "exits": {
-            "NORTH": "BLADD",
-            "SW": {
-                "condition": "\"EMPTY-HANDED\"",
-                "destination": "BSHAF",
-                "message": "You can't go that way."
-            }
-        },
-        "objects": [],
-        "properties": []
-    },
-    "BSHAF": {
-        "id": "BSHAF",
-        "shortDesc": "Lower Shaft",
-        "longDesc": "You are in a small square room which is at the bottom of a long\nshaft. To the east is a passageway and to the northeast a very narrow\npassage. In the shaft can be seen a heavy iron chain.",
-        "exits": {
-            "EAST": "MACHI",
-            "OUT": {
-                "condition": "\"EMPTY-HANDED\"",
-                "destination": "TIMBE",
-                "message": "You can't go that way."
-            },
-            "NE": {
-                "condition": "\"EMPTY-HANDED\"",
-                "destination": "TIMBE",
-                "message": "You can't go that way."
-            },
-            "UP": {
-                "blocked": "Not a chance."
-            },
-            "CLIMB": {
-                "blocked": "The chain is not climbable."
-            }
-        },
-        "objects": [
-            "FBASK"
-        ],
-        "properties": []
-    },
-    "MACHI": {
-        "id": "MACHI",
-        "shortDesc": "Machine Room",
-        "longDesc": "",
-        "exits": {
-            "NW": "BSHAF"
-        },
-        "objects": [
-            "MSWIT",
-            "MACHI"
-        ],
-        "properties": []
-    },
-    "BATS": {
-        "id": "BATS",
-        "shortDesc": "Bat Room",
-        "longDesc": "",
-        "exits": {
-            "EAST": "SQUEE"
-        },
-        "objects": [
-            "JADE",
-            "BAT"
-        ],
-        "properties": []
-    },
-    "DOME": {
-        "id": "DOME",
-        "shortDesc": "Dome Room",
-        "longDesc": "",
-        "exits": {
-            "EAST": "CRAW1",
-            "DOWN": {
-                "condition": "\"DOME-FLAG\"",
-                "destination": "MTORC",
-                "message": "You cannot go down without fracturing many bones."
-            },
-            "CLIMB": {
-                "condition": "\"DOME-FLAG\"",
-                "destination": "MTORC",
-                "message": "You cannot go down without fracturing many bones."
-            }
-        },
-        "objects": [
-            "RAILI"
-        ],
-        "properties": []
-    },
-    "MTORC": {
-        "id": "MTORC",
-        "shortDesc": "Torch Room",
-        "longDesc": "",
-        "exits": {
-            "UP": {
-                "blocked": "You cannot reach the rope."
-            },
-            "WEST": "MTORC",
-            "DOWN": "CRAW4"
-        },
-        "objects": [
-            "TORCH"
-        ],
-        "properties": []
-    },
-    "CRAW4": {
-        "id": "CRAW4",
-        "shortDesc": "North-South Crawlway",
-        "longDesc": "You are in a north-south crawlway; a passage goes to the east also.\nThere is a hole above, but it provides no opportunities for climbing.",
-        "exits": {
-            "NORTH": "CHAS2",
-            "SOUTH": "STUDI",
-            "EAST": "MTROL",
-            "UP": {
-                "blocked": "Not even a human fly could get up it."
-            }
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CHAS2": {
-        "id": "CHAS2",
-        "shortDesc": "West of Chasm",
-        "longDesc": "You are on the west edge of a chasm, the bottom of which cannot be\nseen. The east side is sheer rock, providing no exits.  A narrow\npassage goes west, and the path you are on continues to the north and\nsouth.",
-        "exits": {
-            "WEST": "CELLA",
-            "NORTH": "CRAW4",
-            "SOUTH": "GALLE",
-            "DOWN": {
-                "blocked": "The chasm probably leads straight to the infernal regions."
-            }
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CAROU": {
-        "id": "CAROU",
-        "shortDesc": "Round room",
-        "longDesc": "",
-        "exits": {
-            "NORTH": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "CAVE4",
-                "message": ""
-            },
-            "SOUTH": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "CAVE4",
-                "message": ""
-            },
-            "EAST": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "MGRAI",
-                "message": ""
-            },
-            "WEST": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "PASS1",
-                "message": ""
-            },
-            "NW": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "CANY1",
-                "message": ""
-            },
-            "NE": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "PASS5",
-                "message": ""
-            },
-            "SE": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "PASS4",
-                "message": ""
-            },
-            "SW": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "MAZE1",
-                "message": ""
-            },
-            "EXIT": {
-                "condition": "\"CAROUSEL-FLIP\"",
-                "destination": "PASS3",
-                "message": ""
-            }
-        },
-        "objects": [
-            "IRBOX"
-        ],
-        "properties": []
-    },
-    "PASS5": {
-        "id": "PASS5",
-        "shortDesc": "North-South Passage",
-        "longDesc": "You are in a high north-south passage, which forks to the northeast.",
-        "exits": {
-            "NORTH": "CHAS1",
-            "NE": "ECHO",
-            "SOUTH": "CAROU"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CHAS1": {
-        "id": "CHAS1",
-        "shortDesc": "Chasm",
-        "longDesc": "A chasm runs southwest to northeast.  You are on the south edge; the\npath exits to the south and to the east.",
-        "exits": {
-            "SOUTH": "RAVI1",
-            "EAST": "PASS5",
-            "DOWN": {
-                "blocked": "Are you out of your mind?"
-            }
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CAVE3": {
-        "id": "CAVE3",
-        "shortDesc": "Damp Cave",
-        "longDesc": "You are in a cave.  Passages exit to the south and to the east, but\nthe cave narrows to a crack to the west.  The earth is particularly\ndamp here.",
-        "exits": {
-            "SOUTH": "ECHO",
-            "EAST": "DAM",
-            "WEST": {
-                "blocked": "It is too narrow for most insects."
-            }
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CHAS3": {
-        "id": "CHAS3",
-        "shortDesc": "Ancient Chasm",
-        "longDesc": "A chasm, evidently produced by an ancient river, runs through the\ncave here.  Passages lead off in all directions.",
-        "exits": {
-            "SOUTH": "ECHO",
-            "EAST": "TCAVE",
-            "NORTH": "DEAD5",
-            "WEST": "DEAD6"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "DEAD5": {
-        "id": "DEAD5",
-        "shortDesc": "Dead end",
-        "longDesc": "Dead end",
-        "exits": {
-            "SW": "CHAS3"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "DEAD6": {
-        "id": "DEAD6",
-        "shortDesc": "Dead end",
-        "longDesc": "Dead end",
-        "exits": {
-            "EAST": "CHAS3"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "CAVE4": {
-        "id": "CAVE4",
-        "shortDesc": "Engravings Cave",
-        "longDesc": "You have entered a cave with passages leading north and southeast.",
-        "exits": {
-            "NORTH": "CAROU",
-            "SE": "RIDDL"
-        },
-        "objects": [
-            "ENGRA"
-        ],
-        "properties": []
-    },
-    "RIDDL": {
-        "id": "RIDDL",
-        "shortDesc": "Riddle Room",
-        "longDesc": "This is a room which is bare on all sides.  There is an exit down. \nTo the east is a great door made of stone.  Above the stone, the\nfollowing words are written: 'No man shall enter this room without\nsolving this riddle:\n  What is tall as a house,\n\t  round as a cup, \n\t  and all the king's horses can't draw it up?'",
-        "exits": {
-            "DOWN": "CAVE4",
-            "EAST": {
-                "condition": "\"RIDDLE-FLAG\"",
-                "destination": "MPEAR",
-                "message": "Your way is blocked by an invisible force."
-            }
-        },
-        "objects": [
-            "SDOOR"
-        ],
-        "properties": []
-    },
-    "MPEAR": {
-        "id": "MPEAR",
-        "shortDesc": "Pearl Room",
-        "longDesc": "This is a former broom closet.  The exits are to the east and west.",
-        "exits": {
-            "EAST": "BWELL",
-            "WEST": "RIDDL"
-        },
-        "objects": [
-            "PEARL"
-        ],
-        "properties": []
-    },
-    "LLD1": {
-        "id": "LLD1",
-        "shortDesc": "Entrance to Hades",
-        "longDesc": "",
-        "exits": {
-            "EAST": {
-                "condition": "\"LLD-FLAG\"",
-                "destination": "LLD2",
-                "message": "Some invisible force prevents you from passing through the gate."
-            },
-            "UP": "CAVE2",
-            "ENTER": {
-                "condition": "\"LLD-FLAG\"",
-                "destination": "LLD2",
-                "message": "Some invisible force prevents you from passing through the gate."
-            }
-        },
-        "objects": [
-            "CORPS",
-            "GATES",
-            "GHOST"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "LLD2": {
-        "id": "LLD2",
-        "shortDesc": "Land of the Living Dead",
-        "longDesc": "",
-        "exits": {
-            "EAST": "TOMB",
-            "EXIT": "LLD1",
-            "WEST": "LLD1"
-        },
-        "objects": [
-            "BODIE"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "MGRAI": {
-        "id": "MGRAI",
-        "shortDesc": "Grail Room",
-        "longDesc": "You are standing in a small circular room with a pedestal.  A set of\nstairs leads up, and passages leave to the east and west.",
-        "exits": {
-            "WEST": "CAROU",
-            "EAST": "CRAW3",
-            "UP": "TEMP1"
-        },
-        "objects": [
-            "GRAIL"
-        ],
-        "properties": []
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        }
     },
     "TEMP1": {
         "id": "TEMP1",
-        "shortDesc": "Temple",
-        "longDesc": "You are in the west end of a large temple.  On the south wall is an \nancient inscription, probably a prayer in a long-forgotten language. \nThe north wall is solid granite.  The entrance at the west end of the\nroom is through huge marble pillars.",
+        "name": "West Temple",
+        "description": "You are in the west end of a large temple. On the south wall is an ancient inscription, probably a prayer in a long-forgotten language. The north wall is solid granite. The entrance at the west end of the room is through huge marble pillars.",
+        "longDescription": "Temple",
         "exits": {
-            "WEST": "MGRAI",
+            "WEST": "MGRAT",
             "EAST": "TEMP2"
+        },
+        "flags": {
+            "isSacred": true,
+            "isLit": true,
+            "isOnLand": true
         },
         "objects": [
             "PRAYE",
             "BELL"
-        ],
-        "properties": [
-            "LIT"
         ]
     },
     "TEMP2": {
         "id": "TEMP2",
-        "shortDesc": "Altar",
-        "longDesc": "You are in the east end of a large temple.  In front of you is what\nappears to be an altar.",
+        "name": "East Temple",
+        "description": "You are in the east end of a large temple. In front of you is what appears to be an altar.",
+        "longDescription": "Altar",
         "exits": {
             "WEST": "TEMP1"
         },
+        "flags": {
+            "isSacred": true,
+            "isLit": true,
+            "isOnLand": true
+        },
         "objects": [
             "BOOK",
-            "CANDL"
-        ],
-        "properties": [
-            "LIT"
+            "CANDL",
+            "TRUNK"
         ]
-    },
-    "DAM": {
-        "id": "DAM",
-        "shortDesc": "Dam",
-        "longDesc": "",
-        "exits": {
-            "SOUTH": "CANY1",
-            "DOWN": "DOCK",
-            "EAST": "CAVE3",
-            "NORTH": "LOBBY"
-        },
-        "objects": [
-            "BOLT",
-            "DAM",
-            "BUBBL"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "LOBBY": {
-        "id": "LOBBY",
-        "shortDesc": "Dam Lobby",
-        "longDesc": "This room appears to have been the waiting room for groups touring\nthe dam.  There are exits here to the north and east marked\n'Private', though the doors are open, and an exit to the south.",
-        "exits": {
-            "SOUTH": "DAM",
-            "NORTH": "MAINT",
-            "EAST": "MAINT"
-        },
-        "objects": [
-            "MATCH",
-            "GUIDE"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "MAINT": {
-        "id": "MAINT",
-        "shortDesc": "Maintenance Room",
-        "longDesc": "You are in what appears to have been the maintenance room for Flood\nControl Dam #3, judging by the assortment of tool chests around the\nroom.  Apparently, this room has been ransacked recently, for most of\nthe valuable equipment is gone. On the wall in front of you is a\npanel of buttons, which are labelled in EBCDIC. However, they are of\ndifferent colors:  Blue, Yellow, Brown, and Red. The doors to this\nroom are in the west and south ends.",
-        "exits": {
-            "SOUTH": "LOBBY",
-            "WEST": "LOBBY"
-        },
-        "objects": [
-            "LEAK",
-            "TUBE",
-            "WRENC",
-            "BLBUT",
-            "RBUTT",
-            "BRBUT",
-            "YBUTT",
-            "SCREW"
-        ],
-        "properties": []
     },
     "CYCLO": {
         "id": "CYCLO",
-        "shortDesc": "Cyclops Room",
-        "longDesc": "",
+        "name": "Cyclops Room",
+        "description": "You are in a room with an exit on the west side, and a staircase leading up. The cyclops, perhaps affected by a drug in your drink, is sleeping.",
+        "longDescription": "Cyclops Room",
         "exits": {
-            "WEST": "MAZ15",
+            "WEST": "MAZ15"
+        },
+        "conditionalExits": {
             "NORTH": {
-                "condition": "\"MAGIC-FLAG\"",
-                "destination": "BLROO",
+                "target": "BLROO",
+                "conditionFlag": "MAGIC-FLAG",
                 "message": "The north wall is solid rock."
             },
             "UP": {
-                "condition": "\"CYCLOPS-FLAG\"",
-                "destination": "TREAS",
+                "target": "TREAS",
+                "conditionFlag": "CYCLOPS-FLAG",
                 "message": "The cyclops doesn't look like he'll let you past."
             }
         },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
+        },
         "objects": [
             "CYCLO"
-        ],
-        "properties": []
-    },
-    "BLROO": {
-        "id": "BLROO",
-        "shortDesc": "Strange Passage",
-        "longDesc": "You are in a long passage.  To the south is one entrance.  On the\neast there is an old wooden door, with a large hole in it (about\ncyclops sized).",
-        "exits": {
-            "SOUTH": "CYCLO",
-            "EAST": "LROOM"
-        },
-        "objects": [],
-        "properties": []
+        ]
     },
     "TREAS": {
         "id": "TREAS",
-        "shortDesc": "Treasure Room",
-        "longDesc": "This is a large room, whose north wall is solid granite.  A number\nof discarded bags, which crumble at your touch, are scattered about\non the floor.",
+        "name": "Treasure Room",
+        "description": "This is a large room, whose north wall is solid granite. A number of discarded bags, which crumble at your touch, are scattered about on the floor.",
+        "longDescription": "Treasure Room",
         "exits": {
             "DOWN": "CYCLO"
         },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true,
+            "isSacred": true
+        },
         "objects": [
             "CHALI"
-        ],
-        "properties": []
-    },
-    "STUDI": {
-        "id": "STUDI",
-        "shortDesc": "Studio",
-        "longDesc": "You are in what appears to have been an artist's studio.  The walls\nand floors are splattered with paints of 69 different colors. \nStrangely enough, nothing of value is hanging here.  At the north and\nnorthwest of the room are open doors (also covered with paint).  An\nextremely dark and narrow chimney leads up from a fireplace; although\nyou might be able to get up it, it seems unlikely you could get back\ndown.",
-        "exits": {
-            "NORTH": "CRAW4",
-            "NW": "GALLE",
-            "UP": {
-                "condition": "\"LIGHT-LOAD\"",
-                "destination": "KITCH",
-                "message": "The chimney is too narrow for you and all of your baggage."
-            }
-        },
-        "objects": [],
-        "properties": []
-    },
-    "GALLE": {
-        "id": "GALLE",
-        "shortDesc": "Gallery",
-        "longDesc": "You are in an art gallery.  Most of the paintings which were here\nhave been stolen by vandals with exceptional taste.  The vandals\nleft through either the north or south exits.",
-        "exits": {
-            "NORTH": "CHAS2",
-            "SOUTH": "STUDI"
-        },
-        "objects": [
-            "PAINT"
-        ],
-        "properties": [
-            "LIT"
         ]
-    },
-    "DOCK": {
-        "id": "DOCK",
-        "shortDesc": "Dam Base",
-        "longDesc": "You are at the base of Flood Control Dam #3, which looms above you\nand to the north.  The river Frigid is flowing by here.  Across the\nriver are the White Cliffs which seem to form a giant wall stretching\nfrom north to south along the east shore of the river as it winds its\nway downstream.",
-        "exits": {
-            "NORTH": "DAM",
-            "UP": "DAM",
-            "LAUNC": "RIVR1"
-        },
-        "objects": [
-            "IBOAT",
-            "STICK"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "RIVR1": {
-        "id": "RIVR1",
-        "shortDesc": "",
-        "longDesc": "You are on the River Frigid in the vicinity of the Dam.  The river\nflows quietly here.  There is a landing on the west shore.",
-        "exits": {
-            "CURRENT": "WEST",
-            "DOCK": "DOWN",
-            "RIVR2": "EAST",
-            ",": "CLIFFS"
-        },
-        "objects": [],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
-    },
-    "RIVR2": {
-        "id": "RIVR2",
-        "shortDesc": "",
-        "longDesc": "The River turns a corner here making it impossible to see the\nDam.  The White Cliffs loom on the east bank and large rocks prevent\nlanding on the west.",
-        "exits": {
-            "CURRENT": "DOWN",
-            "RIVR3": "EAST",
-            ",": "CLIFFS"
-        },
-        "objects": [],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
-    },
-    "RIVR3": {
-        "id": "RIVR3",
-        "shortDesc": "",
-        "longDesc": "The river descends here into a valley.  There is a narrow beach on\nthe east below the cliffs and there is some shore on the west which\nmay be suitable.  In the distance a faint rumbling can be heard.",
-        "exits": {
-            "CURRENT": "DOWN",
-            "RIVR4": "EAST",
-            "WCLF1": "WEST",
-            "RCAVE": "LAND"
-        },
-        "objects": [],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
-    },
-    "WCLF1": {
-        "id": "WCLF1",
-        "shortDesc": "White Cliffs Beach",
-        "longDesc": "You are on a narrow strip of beach which runs along the base of the\nWhite Cliffs. The only path here is a narrow one, heading south\nalong the Cliffs.",
-        "exits": {
-            "SOUTH": {
-                "condition": "\"DEFLATE\"",
-                "destination": "WCLF2",
-                "message": "You can't go that way."
-            },
-            "LAUNC": "RIVR3"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "WCLF2": {
-        "id": "WCLF2",
-        "shortDesc": "White Cliffs Beach",
-        "longDesc": "You are on a rocky, narrow strip of beach beside the Cliffs.  A\nnarrow path leads north along the shore.",
-        "exits": {
-            "NORTH": {
-                "condition": "\"DEFLATE\"",
-                "destination": "WCLF1",
-                "message": "You can't go that way."
-            },
-            "LAUNC": "RIVR4"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "RIVR4": {
-        "id": "RIVR4",
-        "shortDesc": "",
-        "longDesc": "The river is running faster here and the sound ahead appears to be\nthat of rushing water.  On the west shore is a sandy beach.  A small\narea of beach can also be seen below the Cliffs.",
-        "exits": {
-            "CURRENT": "DOWN",
-            "RIVR5": "EAST",
-            "WCLF2": "WEST",
-            "BEACH": "LAND"
-        },
-        "objects": [
-            "BUOY"
-        ],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
-    },
-    "RIVR5": {
-        "id": "RIVR5",
-        "shortDesc": "",
-        "longDesc": "The sound of rushing water is nearly unbearable here.  On the west\nshore is a large landing area.",
-        "exits": {
-            "CURRENT": "DOWN",
-            "FCHMP": "LAND"
-        },
-        "objects": [],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
-    },
-    "FCHMP": {
-        "id": "FCHMP",
-        "shortDesc": "Moby lossage",
-        "longDesc": "",
-        "exits": {
-            "NORTH": {
-                "blocked": ""
-            }
-        },
-        "objects": [],
-        "properties": []
-    },
-    "FANTE": {
-        "id": "FANTE",
-        "shortDesc": "Shore",
-        "longDesc": "You are on the shore of the River.  The river here seems somewhat\ntreacherous.  A path travels from north to south here, the south end\nquickly turning around a sharp corner.",
-        "exits": {
-            "LAUNC": "RIVR5",
-            "NORTH": "BEACH",
-            "SOUTH": "FALLS"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "BEACH": {
-        "id": "BEACH",
-        "shortDesc": "Sandy Beach",
-        "longDesc": "You are on a large sandy beach at the shore of the river, which is\nflowing quickly by.  A path runs beside the river to the south here.",
-        "exits": {
-            "LAUNC": "RIVR4",
-            "SOUTH": "FANTE"
-        },
-        "objects": [
-            "STATU"
-        ],
-        "properties": []
-    },
-    "RCAVE": {
-        "id": "RCAVE",
-        "shortDesc": "Rocky Shore",
-        "longDesc": "You are on the west shore of the river.  An entrance to a cave is\nto the northwest.  The shore is very rocky here.",
-        "exits": {
-            "LAUNC": "RIVR3",
-            "NW": "TCAVE"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "TCAVE": {
-        "id": "TCAVE",
-        "shortDesc": "Small Cave",
-        "longDesc": "You are in a small cave whose exits are on the south and northwest.",
-        "exits": {
-            "SOUTH": "RCAVE",
-            "NW": "CHAS3"
-        },
-        "objects": [
-            "GUANO",
-            "SHOVE"
-        ],
-        "properties": []
-    },
-    "BARRE": {
-        "id": "BARRE",
-        "shortDesc": "Barrel",
-        "longDesc": "You are in a barrel.  Congratulations.  Etched into the side of the\nbarrel is the word 'Geronimo!'.",
-        "exits": {
-            "EXIT": "FALLS"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "FALLS": {
-        "id": "FALLS",
-        "shortDesc": "Aragain Falls",
-        "longDesc": "",
-        "exits": {
-            "EAST": {
-                "condition": "\"RAINBOW\"",
-                "destination": "RAINB",
-                "message": "You can't go that way."
-            },
-            "DOWN": "FCHMP",
-            "NORTH": "FANTE",
-            "ENTER": "BARRE",
-            "UP": {
-                "condition": "\"RAINBOW\"",
-                "destination": "RAINB",
-                "message": "You can't go that way."
-            }
-        },
-        "objects": [
-            "RAINB",
-            "BARRE"
-        ],
-        "properties": []
-    },
-    "RAINB": {
-        "id": "RAINB",
-        "shortDesc": "Rainbow Room",
-        "longDesc": "You are on top of a rainbow (I bet you never thought you would walk\non a rainbow), with a magnificent view of the Falls.  The rainbow\ntravels east-west here.  There is an NBC Commissary here.",
-        "exits": {
-            "EAST": "POG",
-            "WEST": "FALLS"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "POG": {
-        "id": "POG",
-        "shortDesc": "End of Rainbow",
-        "longDesc": "You are on a small beach on the continuation of the Frigid River\npast the Falls.  The beach is narrow due to the presence of the White\nCliffs.  The river canyon opens here and sunlight shines in from\nabove. A rainbow crosses over the falls to the west and a narrow path\ncontinues to the southeast.",
-        "exits": {
-            "CRAIN": "SE",
-            ",": "CRAIN"
-        },
-        "objects": [
-            "RAINB",
-            "POT"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "CLBOT": {
-        "id": "CLBOT",
-        "shortDesc": "Canyon Bottom",
-        "longDesc": "You are beneath the walls of the river canyon which may be climbable\nhere.  There is a small stream here, which is the lesser part of the\nrunoff of Aragain Falls. To the north is a narrow path.",
-        "exits": {
-            "UP": "CLMID",
-            "CLIMB": "CLMID",
-            "NORTH": "POG"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "CLMID": {
-        "id": "CLMID",
-        "shortDesc": "Rocky Ledge",
-        "longDesc": "You are on a ledge about halfway up the wall of the river canyon.\nYou can see from here that the main flow from Aragain Falls twists\nalong a passage which it is impossible to enter.  Below you is the\ncanyon bottom.  Above you is more cliff, which still appears\nclimbable.",
-        "exits": {
-            "UP": "CLTOP",
-            "CLIMB": "CLTOP",
-            "DOWN": "CLBOT"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "CLTOP": {
-        "id": "CLTOP",
-        "shortDesc": "Canyon View",
-        "longDesc": "You are at the top of the Great Canyon on its south wall.  From here\nthere is a marvelous view of the Canyon and parts of the Frigid River\nupstream.  Across the canyon, the walls of the White Cliffs still\nappear to loom far above.  Following the Canyon upstream (north and\nnorthwest), Aragain Falls may be seen, complete with rainbow. \nFortunately, my vision is better than average and I can discern the\ntop of the Flood Control Dam #3 far to the distant north.  To the\nwest and south can be seen an immense forest, stretching for miles\naround.  It is possible to climb down into the canyon from here.",
-        "exits": {
-            "DOWN": "CLMID",
-            "CLIMB": "CLMID",
-            "SOUTH": "FORE4",
-            "WEST": "FORE5"
-        },
-        "objects": [],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "VLBOT": {
-        "id": "VLBOT",
-        "shortDesc": "Volcano Bottom",
-        "longDesc": "You are at the bottom of a large dormant volcano.  High above you\nlight may be seen entering from the cone of the volcano.  The only\nexit here is to the north.",
-        "exits": {
-            "NORTH": "LAVA"
-        },
-        "objects": [
-            "BALLO"
-        ],
-        "properties": []
-    },
-    "VAIR1": {
-        "id": "VAIR1",
-        "shortDesc": "",
-        "longDesc": "You are about one hundred feet above the bottom of the volcano.  The\ntop of the volcano is clearly visible here.",
-        "exits": {},
-        "objects": [],
-        "properties": [],
-        "flags": {
-            "isAir": true
-        }
-    },
-    "VAIR2": {
-        "id": "VAIR2",
-        "shortDesc": "",
-        "longDesc": "You are about two hundred feet above the volcano floor.  Looming\nabove is the rim of the volcano.  There is a small ledge on the west\nside.",
-        "exits": {
-            "WEST": "LEDG2",
-            "LAND": "LEDG2"
-        },
-        "objects": [],
-        "properties": [],
-        "flags": {
-            "isAir": true
-        }
-    },
-    "VAIR3": {
-        "id": "VAIR3",
-        "shortDesc": "",
-        "longDesc": "You are high above the floor of the volcano.  From here the rim of\nthe volcano looks very narrow and you are very near it.  To the \neast is what appears to be a viewing ledge, too thin to land on.",
-        "exits": {},
-        "objects": [],
-        "properties": [],
-        "flags": {
-            "isAir": true
-        }
-    },
-    "VAIR4": {
-        "id": "VAIR4",
-        "shortDesc": "",
-        "longDesc": "You are near the rim of the volcano which is only about 15 feet\nacross.  To the west, there is a place to land on a wide ledge.",
-        "exits": {
-            "LAND": "LEDG4",
-            "EAST": "LEDG4"
-        },
-        "objects": [],
-        "properties": [],
-        "flags": {
-            "isAir": true
-        }
-    },
-    "LEDG2": {
-        "id": "LEDG2",
-        "shortDesc": "Narrow Ledge",
-        "longDesc": "You are on a narrow ledge overlooking the inside of an old dormant\nvolcano.  This ledge appears to be about in the middle between the\nfloor below and the rim above. There is an exit here to the south.",
-        "exits": {
-            "DOWN": {
-                "blocked": "I wouldn't jump from here."
-            },
-            "LAUNC": "VAIR2",
-            "CXGNOME": "SOUTH"
-        },
-        "objects": [
-            "HOOK1",
-            "ZORKM"
-        ],
-        "properties": []
-    },
-    "LIBRA": {
-        "id": "LIBRA",
-        "shortDesc": "Library",
-        "longDesc": "You are in a room which must have been a large library, probably\nfor the royal family.  All of the shelves appear to have been gnawed\nto pieces by unfriendly gnomes.  To the north is an exit.",
-        "exits": {
-            "NORTH": "LEDG2",
-            "OUT": "LEDG2"
-        },
-        "objects": [
-            "BLBK",
-            "GRBK",
-            "PUBK",
-            "WHBK"
-        ],
-        "properties": []
-    },
-    "LEDG3": {
-        "id": "LEDG3",
-        "shortDesc": "Volcano View",
-        "longDesc": "You are on a ledge in the middle of a large volcano.  Below you\nthe volcano bottom can be seen and above is the rim of the volcano.\nA couple of ledges can be seen on the other side of the volcano;\nit appears that this ledge is intermediate in elevation between\nthose on the other side.  The exit from this room is to the east.",
-        "exits": {
-            "DOWN": {
-                "blocked": "I wouldn't try that."
-            },
-            "CROSS": {
-                "blocked": "It is impossible to cross this distance."
-            },
-            "EAST": "EGYPT"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "LEDG4": {
-        "id": "LEDG4",
-        "shortDesc": "Wide Ledge",
-        "longDesc": "",
-        "exits": {
-            "DOWN": {
-                "blocked": "It's a long way down."
-            },
-            "LAUNC": "VAIR4",
-            "CXGNOME": "SOUTH"
-        },
-        "objects": [
-            "HOOK2"
-        ],
-        "properties": []
-    },
-    "SAFE": {
-        "id": "SAFE",
-        "shortDesc": "Dusty Room",
-        "longDesc": "",
-        "exits": {
-            "NORTH": "LEDG4"
-        },
-        "objects": [
-            "SSLOT",
-            "SAFE"
-        ],
-        "properties": [
-            "LIT"
-        ]
-    },
-    "LAVA": {
-        "id": "LAVA",
-        "shortDesc": "Lava Room",
-        "longDesc": "You are in a small room, whose walls are formed by an old lava flow.\nThere are exits here to the west and the south.",
-        "exits": {
-            "SOUTH": "VLBOT",
-            "WEST": "RUBYR"
-        },
-        "objects": [],
-        "properties": []
-    },
-    "TOMB": {
-        "id": "TOMB",
-        "shortDesc": "Tomb of the Unknown Implementer",
-        "longDesc": "You are in the Tomb of the Unknown Implementer.\nA hollow voice says:  \\That's not a bug, it's a feature!\\",
-        "exits": {
-            "WEST": "LLD2"
-        },
-        "objects": [
-            "TOMB",
-            "HEADS",
-            "COKES",
-            "LISTS"
-        ],
-        "properties": []
-    },
-    "MAGNE": {
-        "id": "MAGNE",
-        "shortDesc": "Low Room",
-        "longDesc": "",
-        "exits": {
-            "MAGCMACH": "NE",
-            ",": "MAGCMACH",
-            "MAGALICE": "EAST"
-        },
-        "objects": [
-            "RBTLB",
-            "ROBOT"
-        ],
-        "properties": []
-    },
-    "CMACH": {
-        "id": "CMACH",
-        "shortDesc": "Machine Room",
-        "longDesc": "",
-        "exits": {
-            "WEST": "MAGNE",
-            "SOUTH": "CAGER"
-        },
-        "objects": [
-            "SQBUT",
-            "RNBUT",
-            "TRBUT"
-        ],
-        "properties": []
-    },
-    "CAGER": {
-        "id": "CAGER",
-        "shortDesc": "Dingy Closet",
-        "longDesc": "You are in a dingy closet adjacent to the machine room.  On one wall\nis a small sticker which says\n\t\tProtected by\n\t\t  FROBOZZ\n\t     Magic Alarm Company\n\t      (Hello, footpad!)\n",
-        "exits": {
-            "NORTH": "CMACH"
-        },
-        "objects": [
-            "SPHER"
-        ],
-        "properties": []
-    },
-    "CAGED": {
-        "id": "CAGED",
-        "shortDesc": "Cage",
-        "longDesc": "You are trapped inside an iron cage.",
-        "exits": {
-            "NORTH": {
-                "blocked": ""
-            }
-        },
-        "objects": [
-            "CAGE"
-        ],
-        "properties": []
     },
     "TWELL": {
         "id": "TWELL",
-        "shortDesc": "Top of Well",
-        "longDesc": "You are at the top of the well.  Well done.  There are etchings on\nthe side of the well. There is a small crack across the floor at the\nentrance to a room on the east, but it can be crossed easily.",
+        "name": "Top of Well",
+        "description": "You are at the top of the well. Well done. There are etchings on the side of the well. There is a small crack across the floor at the entrance to a room on the east, but it can be crossed easily.",
+        "longDescription": "Top of Well",
         "exits": {
-            "EAST": "ALICE",
+            "EAST": "ALICE"
+        },
+        "conditionalExits": {
             "DOWN": {
-                "blocked": "It's a long way down!"
+                "target": "BWELL",
+                "message": "It's a long way down!"
             }
         },
-        "objects": [
-            "ETCH2"
-        ],
-        "properties": []
+        "flags": {
+            "isOnLand": true,
+            "isLit": true,
+            "canFillBucket": true,
+            "isWater": false
+        }
     },
     "BWELL": {
         "id": "BWELL",
-        "shortDesc": "Circular Room",
-        "longDesc": "You are in a damp circular room, whose walls are made of brick and\nmortar.  The roof of this room is not visible, but there appear to be\nsome etchings on the walls.  There is a passageway to the west.",
+        "name": "Damp Circular Room",
+        "description": "You are in a damp circular room, whose walls are made of brick and mortar.",
+        "longDescription": "Damp Circular Room",
         "exits": {
-            "WEST": "MPEAR",
-            "UP": {
-                "blocked": "The walls cannot be climbed."
-            }
+            "UP": "TWELL"
+        },
+        "flags": {
+            "isOnLand": true,
+            "isLit": true
         },
         "objects": [
-            "BUCKE",
-            "ETCH1"
-        ],
-        "properties": []
-    },
-    "ALICE": {
-        "id": "ALICE",
-        "shortDesc": "Tea Room",
-        "longDesc": "You are in a small square room, in the center of which is a large\noblong table, no doubt set for afternoon tea.  It is clear from the\nobjects on the table that the users were indeed mad.  In the eastern\ncorner of the room is a small hole (no more that four inches high). \nThere are passageways leading away to the west and the northwest.",
-        "exits": {
-            "EAST": {
-                "blocked": "Only a mouse could get in there."
-            },
-            "WEST": "TWELL",
-            "NW": "MAGNE"
-        },
-        "objects": [
-            "ATABL",
-            "ECAKE",
-            "ORICE",
-            "RDICE",
-            "BLICE"
-        ],
-        "properties": []
-    },
-    "ALISM": {
-        "id": "ALISM",
-        "shortDesc": "Posts Room",
-        "longDesc": "You are in an enormous room, in the center of which are four wooden\nposts delineating a rectanular area, above which is what appears to\nbe a wooden roof.  In fact, all objects in this room appear to be\nabnormally large. To the east is a passageway.  There is a large\nchasm on the west and the northwest.",
-        "exits": {
-            "SMDROP": "EAST",
-            "ALITR": "WEST",
-            ",": "SMDROP"
-        },
-        "objects": [
-            "POSTS"
-        ],
-        "properties": []
-    },
-    "ALITR": {
-        "id": "ALITR",
-        "shortDesc": "Pool Room",
-        "longDesc": "You are in a large room, one half of which is depressed.  There is a\nlarge leak in the ceiling through which brown colored goop is\nfalling.  The only exit to this room is to the west.",
-        "exits": {
-            "EXIT": "ALISM",
-            "WEST": "ALISM"
-        },
-        "objects": [
-            "FLASK",
-            "POOL",
-            "SAFFR"
-        ],
-        "properties": []
+            "BRICK"
+        ]
     }
 };
 const vocabularyData = {
@@ -3648,35 +2960,17 @@ class Room {
         this.id = data.id;
         this.name = data.name;
         this.description = data.description;
-        this.objects = data.objects || [];
-        this.flags = data.flags || {};
-        this.rbits = 0;
+        this.exits = data.exits || {};     // Standard exits
+        this.conditionalExits = data.conditionalExits || {}; // For MDL #CEXIT
+        this.objects = data.objects || []; // IDs of objects initially in the room
+        this.flags = data.flags || {};     // Original boolean flags
+        this.rbits = 0;                    // Bitmask for RBITS
 
-        this.longDescription = data.longDescription || data.description;
-        this.shortDescription = data.shortDescription || data.name;
-        this.action = data.action || null;
-        this.value = data.value || 0;
-
-        this.exits = {};
-        this.conditionalExits = {};
-        this.blockedExits = {};
-
-        const rawExits = data.exits || {};
-        for (const dir in rawExits) {
-            const exit = rawExits[dir];
-            if (typeof exit === 'string') {
-                this.exits[dir] = exit;
-            } else if (exit.destination) {
-                this.conditionalExits[dir] = {
-                    roomId: exit.destination,
-                    flag: exit.condition.replace(/"/g, ''), // Remove quotes from flag name
-                    value: 'CLEAR', // Assuming 'CLEAR' is the success state for now
-                    message: exit.message
-                };
-            } else if (exit.blocked) {
-                this.blockedExits[dir] = exit.blocked;
-            }
-        }
+        // Additional properties derived from MDL
+        this.longDescription = data.longDescription || data.description; // MDL RDESC1
+        this.shortDescription = data.shortDescription || data.name; // MDL RDESC2
+        this.action = data.action || null; // MDL RACTION
+        this.value = data.value || 0;      // MDL RVAL
 
         this.initRFlags();
     }
@@ -3914,36 +3208,21 @@ const actionHandlers = {
 
     GO: (dobj, iobj, game, action) => {
         const room = game.rooms.get(game.player.location);
-        const direction = action.verb.replace('GO ', '');
+        const direction = action.verb.replace('GO ', ''); // Assumes action.verb is like "GO NORTH"
+        const targetRoomId = room.exits[direction];
 
-        // Check for standard exits
-        if (room.exits[direction]) {
-            const targetRoomId = room.exits[direction];
+        if (targetRoomId) {
+            // Handle "pseudo-rooms" which are just descriptions for failed movement
+            if (targetRoomId === 'HOUSE-BLOCKED') {
+                return game.rooms.get(targetRoomId).description;
+            }
+
+            // Handle actual movement
             game.player.location = targetRoomId;
             const targetRoom = game.rooms.get(targetRoomId);
-            targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
-            return '';
+            targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT); // Force room description on next turn
+            return ''; // Movement actions in Zork don't print anything, they just trigger a LOOK
         }
-
-        // Check for conditional exits
-        if (room.conditionalExits[direction]) {
-            const ce = room.conditionalExits[direction];
-            const flagValue = game.getGameFlag(ce.flag);
-            if (flagValue === ce.value) {
-                game.player.location = ce.roomId;
-                const targetRoom = game.rooms.get(ce.roomId);
-                targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
-                return '';
-            } else {
-                return ce.message;
-            }
-        }
-
-        // Check for blocked exits
-        if (room.blockedExits[direction]) {
-            return room.blockedExits[direction];
-        }
-
         return "You can't go that way.";
     },
 
@@ -4035,7 +3314,7 @@ const actionHandlers = {
                  return "The rug is already moved.";
             }
             dobj.oflags = setFlag(dobj.oflags, OFLAGS.INVISIBLE); // Hide the rug
-            const trapDoor = game.objects.get('DOOR');
+            const trapDoor = game.objects.get('TRAP-DOOR');
             trapDoor.oflags = clearFlag(trapDoor.oflags, OFLAGS.INVISIBLE); // Reveal the trap door
             trapDoor.location = game.player.location;
             return "With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap door appears.";
@@ -4131,7 +3410,6 @@ class Game {
         this.player = new Player({ location: 'WEST-OF-HOUSE' }); // Starting location
         this.vocabulary = data.vocabulary;
         this.deathMessages = data.deathMessages;
-        this.flags = new Map(); // For global game flags
 
         this.initGameFlags();
         this.initObjectLocations();
@@ -4169,14 +3447,6 @@ class Game {
                 }
             }
         }
-    }
-
-    setGameFlag(flag, value) {
-        this.flags.set(flag, value);
-    }
-
-    getGameFlag(flag) {
-        return this.flags.get(flag);
     }
 
     run() {

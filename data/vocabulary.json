@@ -81,7 +81,7 @@
         {"id": "TRAP-DOOR", "synonyms": ["trapdoor", "cover", "trap", "dusty trap door"]},
         {"id": "TROLL", "synonyms": ["nasty-looking troll", "volcano gnome"]},
         {"id": "WATER", "synonyms": ["liqui", "h2o", "quantity of water"]},
-        {"id": "WINDOW", "synonyms": ["win", "window"]},
+        {"id": "WIND1", "synonyms": ["win", "window"]},
         {"id": "HOUSE", "synonyms": ["white house"]},
         {"id": "MAT", "synonyms": ["rubber mat", "welcome mat"]},
         {"id": "FRONT-DOOR", "synonyms": ["door", "front door", "boarded door"]},

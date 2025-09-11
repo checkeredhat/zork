@@ -41,33 +41,73 @@ const actionHandlers = {
     GO: (dobj, iobj, game, action) => {
         const room = game.rooms.get(game.player.location);
         const direction = action.verb.replace('GO ', '');
+        const exit = room.exits[direction];
 
-        // Check for standard exits
-        if (room.exits[direction]) {
-            const targetRoomId = room.exits[direction];
-            game.player.location = targetRoomId;
-            const targetRoom = game.rooms.get(targetRoomId);
+        if (!exit) {
+            return "You can't go that way.";
+        }
+
+        // Handle simple string-based exits
+        if (typeof exit === 'string') {
+            game.player.location = exit;
+            const targetRoom = game.rooms.get(exit);
             targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
             return '';
         }
 
-        // Check for conditional exits
-        if (room.conditionalExits[direction]) {
-            const ce = room.conditionalExits[direction];
-            const flagValue = game.getGameFlag(ce.flag);
-            if (flagValue === ce.value) {
-                game.player.location = ce.roomId;
-                const targetRoom = game.rooms.get(ce.roomId);
+        // Handle conditional exits (object-based)
+        if (typeof exit === 'object' && exit.destination) {
+            let conditionMet = false;
+            // TODO: This is a hack. The parser should provide better conditional information.
+            // We are hardcoding the logic for specific puzzles for now.
+            switch (room.id) {
+                case 'LROOM':
+                    if (direction === 'DOWN') {
+                        const trapDoor = game.objects.get('TRAP-DOOR');
+                        conditionMet = trapDoor && hasFlag(trapDoor.oflags, OFLAGS.OPENBIT);
+                    }
+                    break;
+                case 'MGRAT':
+                     if (direction === 'UP') {
+                        const grating = game.objects.get('GRAT2');
+                        conditionMet = grating && !hasFlag(grating.oflags, OFLAGS.LOCKBIT);
+                    }
+                    break;
+                case 'MTROL':
+                    if (direction === 'SOUTH' || direction === 'EAST' || direction === 'NORTH') {
+                        const troll = game.objects.get('TROLL');
+                        conditionMet = troll && troll.trollState.unconscious;
+                    }
+                    break;
+                case 'CYCLO':
+                    if (direction === 'UP') {
+                        const cyclops = game.objects.get('CYCLOPS');
+                        // In the original game, this is more complex (e.g., Ulysses).
+                        // For now, we'll say if the cyclops is "disarmed" (e.g. fled), you can pass.
+                        conditionMet = cyclops && hasFlag(cyclops.oflags, OFLAGS.DISARMEDBIT);
+                    }
+                    break;
+                 case 'EHOUS':
+                    if (direction === 'WEST' || direction === 'ENTER') {
+                        const window = game.objects.get('WINDOW');
+                        conditionMet = window && hasFlag(window.oflags, OFLAGS.OPENBIT);
+                    }
+                    break;
+            }
+
+            if (conditionMet) {
+                game.player.location = exit.destination;
+                const targetRoom = game.rooms.get(exit.destination);
                 targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
                 return '';
             } else {
-                return ce.message;
+                return exit.message || "You can't go that way.";
             }
         }
 
-        // Check for blocked exits
-        if (room.blockedExits[direction]) {
-            return room.blockedExits[direction];
+        // Handle blocked exits (object with 'blocked' message)
+        if (typeof exit === 'object' && exit.blocked) {
+            return exit.blocked;
         }
 
         return "You can't go that way.";
@@ -118,7 +158,7 @@ const actionHandlers = {
             }
 
             // Special response for the window
-            if (dobj.id === 'WINDOW') {
+            if (dobj.id === 'WIND1') {
                 return 'With great effort, you open the window far enough to allow entry.';
             }
 
@@ -161,7 +201,7 @@ const actionHandlers = {
                  return "The rug is already moved.";
             }
             dobj.oflags = setFlag(dobj.oflags, OFLAGS.INVISIBLE); // Hide the rug
-            const trapDoor = game.objects.get('DOOR');
+            const trapDoor = game.objects.get('TRAP-DOOR');
             trapDoor.oflags = clearFlag(trapDoor.oflags, OFLAGS.INVISIBLE); // Reveal the trap door
             trapDoor.location = game.player.location;
             return "With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap door appears.";
@@ -179,10 +219,13 @@ const actionHandlers = {
             return "Attacking the troll with your bare hands is suicidal.";
         }
 
-        game.trollState.hits++;
+        if (troll.trollState.hits === undefined) {
+            troll.trollState.hits = 0;
+        }
+        troll.trollState.hits++;
 
-        if (game.trollState.hits >= 2) {
-             game.trollState.unconscious = true;
+        if (troll.trollState.hits >= 2) {
+             troll.trollState.unconscious = true;
              troll.description = "The troll is lying on the ground, unconscious.";
              return "The troll is knocked out!";
         } else {
@@ -197,6 +240,10 @@ const actionHandlers = {
     WEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO WEST' }),
     UP: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO UP' }),
     DOWN: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO DOWN' }),
+    NORTHEAST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO NE' }),
+    NORTHWEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO NW' }),
+    SOUTHEAST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO SE' }),
+    SOUTHWEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO SW' }),
     'TURN-ON': (dobj, iobj, game) => {
         if (!dobj) return "Turn on what?";
         if (dobj.id !== 'LANTERN') return "You can't turn that on.";
@@ -215,6 +262,21 @@ const actionHandlers = {
         dobj.oflags = clearFlag(dobj.oflags, OFLAGS.LIGHTBIT);
         return `The ${dobj.name} is now off.`;
     },
+
+    UNLOCK: (dobj, iobj, game) => {
+        if (!dobj) return "Unlock what?";
+        if (!iobj) return "Unlock it with what?";
+
+        if (dobj.id === 'GRAT2' && iobj.id === 'KEYS') {
+            if (!hasFlag(dobj.oflags, OFLAGS.LOCKBIT)) {
+                return "The grating is already unlocked.";
+            }
+            dobj.oflags = clearFlag(dobj.oflags, OFLAGS.LOCKBIT);
+            return "The grating is unlocked.";
+        }
+
+        return "You can't unlock that.";
+    }
 };
 
 // Add a generic 'ENTER' handler that maps to GO
@@ -222,11 +284,20 @@ actionHandlers.ENTER = (dobj, iobj, game, action) => {
     // In Zork, "enter" is often a synonym for "go" but can be more contextual.
     const room = game.rooms.get(game.player.location);
 
+    // If no direct object, see if there's an obvious thing to enter.
+    if (!dobj) {
+        // Is there an open window in the room?
+        const window = Array.from(game.objects.values()).find(o => o.location === room.id && o.id === 'WIND1');
+        if (window && hasFlag(window.oflags, OFLAGS.OPENBIT)) {
+            dobj = window;
+        }
+    }
+
     // Special case for entering the window
-    if (dobj && dobj.id === 'WINDOW') {
+    if (dobj && dobj.id === 'WIND1') {
         if (hasFlag(dobj.oflags, OFLAGS.OPENBIT)) {
-            game.player.location = 'KITCHEN';
-            game.rooms.get('KITCHEN').rbits = setFlag(game.rooms.get('KITCHEN').rbits, RBITS.RDESCBIT);
+            game.player.location = 'KITCH';
+            game.rooms.get('KITCH').rbits = setFlag(game.rooms.get('KITCH').rbits, RBITS.RDESCBIT);
             return ''; // Success, triggers a look
         } else {
             return "The window is closed.";

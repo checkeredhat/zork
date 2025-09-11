@@ -4,6 +4,7 @@
         "name": "cretin",
         "description": "You are here",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "OVISON"
         },
@@ -15,6 +16,7 @@
         "name": "sandwich bag",
         "description": "A sandwich bag is here.",
         "initialDescription": "On the table is an elongated brown sack, smelling of hot peppers.",
+        "flags": 67125265,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -24,6 +26,7 @@
         "name": "clove of garlic",
         "description": "There is a clove of garlic here.",
         "initialDescription": "",
+        "flags": 18433,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -33,6 +36,7 @@
         "name": "\\.lunch",
         "description": "A hot pepper sandwich is here.",
         "initialDescription": "",
+        "flags": 18433,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -42,6 +46,7 @@
         "name": "piece of vitreous slag",
         "description": "There is a small piece of vitreous slag here.",
         "initialDescription": "",
+        "flags": 16793601,
         "properties": {
             "function": "GUNK-FUNCTION"
         },
@@ -53,6 +58,7 @@
         "name": "small pile of coal",
         "description": "There is a small heap of coal here.",
         "initialDescription": "",
+        "flags": 16417,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -62,6 +68,7 @@
         "name": "jade figurine",
         "description": "There is an exquisite jade figurine here.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -71,8 +78,9 @@
         "name": "machine",
         "description": "",
         "initialDescription": "",
+        "flags": 16400,
         "properties": {
-            "function": "MACHINE-FUNCTION"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -82,6 +90,7 @@
         "name": "huge diamond",
         "description": "There is an enormous diamond (perfectly cut) here.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -91,8 +100,9 @@
         "name": "trophy case",
         "description": "There is a trophy case here.",
         "initialDescription": "",
+        "flags": 33570832,
         "properties": {
-            "function": "TROPHY-CASE"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -102,6 +112,7 @@
         "name": "glass bottle",
         "description": "A clear glass bottle is here.",
         "initialDescription": "A bottle is sitting on the table.",
+        "flags": 33570833,
         "properties": {
             "function": "BOTTLE-FUNCTION"
         },
@@ -113,6 +124,7 @@
         "name": "quantity of water",
         "description": "Water",
         "initialDescription": "There is some water here",
+        "flags": 17409,
         "properties": {
             "function": "WATER-FUNCTION"
         },
@@ -124,6 +136,7 @@
         "name": "rope",
         "description": "There is a large coil of rope here.",
         "initialDescription": "A large coil of rope is lying in the corner.",
+        "flags": 20481,
         "properties": {
             "function": "ROPE-FUNCTION"
         },
@@ -135,47 +148,41 @@
         "name": "knife",
         "description": "There is a nasty-looking knife lying here.",
         "initialDescription": "On a table is a nasty-looking knife.",
+        "flags": 16449,
         "properties": {},
         "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isWeapon": true
-        }
+        "adjectives": []
     },
     "SWORD": {
         "id": "SWORD",
         "name": "sword",
         "description": "There is an elvish sword here.",
         "initialDescription": "On hooks above the mantelpiece hangs an elvish sword of great\nantiquity.",
+        "flags": 16449,
         "properties": {
             "function": "SWORD"
         },
         "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isWeapon": true
-        }
+        "adjectives": []
     },
     "LAMP": {
         "id": "LAMP",
         "name": "lamp",
         "description": "There is a brass lantern (battery-powered) here.",
         "initialDescription": "A battery-powered brass lantern is on the trophy case.",
+        "flags": 16385,
         "properties": {
-            "function": "LANTERN"
+            "function": "-1"
         },
         "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isTakeable": true,
-            "isVisible": true
-        }
+        "adjectives": []
     },
     "BLAMP": {
         "id": "BLAMP",
         "name": "broken lamp",
         "description": "There is a broken brass lantern here.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -185,55 +192,19 @@
         "name": "carpet",
         "description": "",
         "initialDescription": "",
+        "flags": 25182208,
         "properties": {
-            "function": "RUG"
+            "function": "BIGFIX"
         },
         "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isNotDescribed": true,
-            "isTryTakeable": true
-        }
-    },
-    "DOOR": {
-        "id": "DOOR",
-        "name": "trap door",
-        "description": "There is a trap door here.",
-        "longDescription": "There is a trap door here.",
-        "initialDescription": "",
-        "properties": {
-            "function": "TRAP-DOOR"
-        },
-        "synonyms": ["TRAPD", "TRAP-"],
-        "adjectives": ["TRAP"],
-        "flags": {
-            "isDoor": true,
-            "isNotDescribed": true,
-            "isInvisible": true
-        }
-    },
-    "GRAT1": {
-        "id": "GRAT1",
-        "name": "grating",
-        "description": "There is a grating on the ground.",
-        "longDescription": "There is a grating on the ground.",
-        "initialDescription": "",
-        "properties": {
-            "function": "GRAT1-FUNCTION"
-        },
-        "synonyms": ["GRATI", "GRATE"],
-        "adjectives": [],
-        "flags": {
-            "isDoor": true,
-            "isNotDescribed": true
-        }
+        "adjectives": []
     },
     "LEAVE": {
         "id": "LEAVE",
         "name": "pile of leaves",
         "description": "There is a pile of leaves on the ground.",
-        "longDescription": "A pile of leaves is here.",
         "initialDescription": "",
+        "flags": 16417,
         "properties": {
             "function": "LEAF-PILE"
         },
@@ -245,22 +216,19 @@
         "name": "",
         "description": "",
         "initialDescription": "",
+        "flags": 114688,
         "properties": {
-            "function": "TROLL"
+            "function": "BIGFIX"
         },
         "synonyms": [],
-        "adjectives": [],
-        "flags": {
-            "isVictim": true,
-            "isVisible": true,
-            "isVillain": true
-        }
+        "adjectives": []
     },
     "AXE": {
         "id": "AXE",
         "name": "bloody axe",
         "description": "There is a bloody axe here.",
         "initialDescription": "",
+        "flags": 16448,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -270,6 +238,7 @@
         "name": "rusty knife",
         "description": "There is a rusty knife here.",
         "initialDescription": "Beside the skeleton is a rusty knife.",
+        "flags": 16449,
         "properties": {
             "function": "RUSTY-KNIFE"
         },
@@ -281,6 +250,7 @@
         "name": "burned-out lantern",
         "description": "There is a burned-out lantern here.",
         "initialDescription": "The deceased adventurer's useless lantern is here.",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -290,6 +260,7 @@
         "name": "set of skeleton keys",
         "description": "There is a set of skeleton keys here.",
         "initialDescription": "",
+        "flags": 16897,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -299,8 +270,9 @@
         "name": "",
         "description": "A skeleton, probably the remains of a luckless adventurer, lies here.",
         "initialDescription": "",
+        "flags": 16793600,
         "properties": {
-            "function": "SKELETON"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -310,6 +282,7 @@
         "name": "bag of coins",
         "description": "An old leather bag, bulging with coins, is here.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -319,6 +292,7 @@
         "name": "platinum bar",
         "description": "There is a large platinum bar here.",
         "initialDescription": "",
+        "flags": 16641,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -328,6 +302,7 @@
         "name": "pearl necklace",
         "description": "There is a pearl necklace here with hundreds of large pearls.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -337,8 +312,9 @@
         "name": "mirror",
         "description": "",
         "initialDescription": "",
+        "flags": 16859136,
         "properties": {
-            "function": "MIRROR-MIRROR"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -348,8 +324,9 @@
         "name": "mirror",
         "description": "",
         "initialDescription": "",
+        "flags": 16859136,
         "properties": {
-            "function": "MIRROR-MIRROR"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -359,8 +336,9 @@
         "name": "glacier",
         "description": "A mass of ice fills the western half of the room.",
         "initialDescription": "",
+        "flags": 81920,
         "properties": {
-            "function": "GLACIER"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -370,6 +348,7 @@
         "name": "ruby",
         "description": "There is a moby ruby lying here.",
         "initialDescription": "On the floor lies a moby ruby.",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -379,6 +358,7 @@
         "name": "crystal trident",
         "description": "Neptune's own crystal trident is here.",
         "initialDescription": "On the shore lies Neptune's own crystal trident.",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -388,6 +368,7 @@
         "name": "gold coffin",
         "description": "There is a solid-gold coffin, used for the burial of Ramses II, here.",
         "initialDescription": "",
+        "flags": 16657,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -397,6 +378,7 @@
         "name": "torch",
         "description": "There is an ivory torch here.",
         "initialDescription": "Sitting on the pedestal is a flaming torch, made of ivory.",
+        "flags": 67125761,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -406,8 +388,9 @@
         "name": "basket",
         "description": "At the end of the chain is a basket.",
         "initialDescription": "",
+        "flags": 33570832,
         "properties": {
-            "function": "T>"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -417,6 +400,7 @@
         "name": "",
         "description": "",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "BIGFIX"
         },
@@ -428,6 +412,7 @@
         "name": "sapphire bracelet",
         "description": "There is a sapphire-encrusted bracelet here.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -437,6 +422,7 @@
         "name": "iron box",
         "description": "There is a dented iron box here.",
         "initialDescription": "",
+        "flags": 17,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -446,6 +432,7 @@
         "name": "fancy violin",
         "description": "There is a Stradavarius here.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -455,8 +442,9 @@
         "name": "",
         "description": "",
         "initialDescription": "",
+        "flags": 81920,
         "properties": {
-            "function": "GHOST-FUNCTION"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -466,6 +454,7 @@
         "name": "grail",
         "description": "There is an extremely valuable (perhaps original) grail here.",
         "initialDescription": "",
+        "flags": 16401,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -475,6 +464,7 @@
         "name": "trunk with jewels",
         "description": "There is an old trunk here, bulging with assorted jewels.",
         "initialDescription": "Lying half buried in the mud is an old trunk, bulging with jewels.",
+        "flags": 0,
         "properties": {
             "function": "TAKEBIT"
         },
@@ -486,6 +476,7 @@
         "name": "bell",
         "description": "There is a small brass bell here.",
         "initialDescription": "Lying in a corner of the room is a small brass bell.",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -495,6 +486,7 @@
         "name": "book",
         "description": "There is a large black book here.",
         "initialDescription": "On the altar is a large black book, open to page 569.",
+        "flags": 16545,
         "properties": {
             "function": "BLACK-BOOK"
         },
@@ -506,6 +498,7 @@
         "name": "pair of candles",
         "description": "There are two candles here.",
         "initialDescription": "On the two ends of the altar are burning candles.",
+        "flags": 67125249,
         "properties": {
             "function": "CANDLES"
         },
@@ -517,6 +510,7 @@
         "name": "tour guidebook",
         "description": "There are tour guidebooks here.",
         "initialDescription": "Some guidebooks entitled 'Flood Control Dam #3' are on the reception\ndesk.",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -526,6 +520,7 @@
         "name": "newspaper",
         "description": "",
         "initialDescription": "",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -535,6 +530,7 @@
         "name": "matchbook",
         "description": "There is a matchbook whose cover says 'Visit Beautiful FCD#3' here.",
         "initialDescription": "",
+        "flags": 16513,
         "properties": {
             "function": "MATCH-FUNCTION"
         },
@@ -546,6 +542,7 @@
         "name": "leaflet",
         "description": "There is a small leaflet here.",
         "initialDescription": "",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -555,7 +552,10 @@
         "name": "mailbox",
         "description": "There is a small mailbox here.",
         "initialDescription": "",
-        "properties": {},
+        "flags": 16400,
+        "properties": {
+            "function": "BIGFIX"
+        },
         "synonyms": [],
         "adjectives": []
     },
@@ -564,6 +564,7 @@
         "name": "tube",
         "description": "There is an object which looks like a tube of toothpaste here.",
         "initialDescription": "",
+        "flags": 16401,
         "properties": {
             "function": "TUBE-FUNCTION"
         },
@@ -575,6 +576,7 @@
         "name": "viscous material",
         "description": "There is some gunk here",
         "initialDescription": "",
+        "flags": 16897,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -584,6 +586,7 @@
         "name": "wrench",
         "description": "There is a wrench here.",
         "initialDescription": "",
+        "flags": 16897,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -593,6 +596,7 @@
         "name": "screwdriver",
         "description": "There is a screwdriver here.",
         "initialDescription": "",
+        "flags": 16897,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -602,8 +606,9 @@
         "name": "cyclops",
         "description": "",
         "initialDescription": "",
+        "flags": 114688,
         "properties": {
-            "function": "CYCLOPS"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -613,6 +618,7 @@
         "name": "chalice",
         "description": "There is a silver chalice, intricately engraved, here.",
         "initialDescription": "",
+        "flags": 16401,
         "properties": {
             "function": "CHALICE"
         },
@@ -624,6 +630,7 @@
         "name": "painting",
         "description": "A masterpiece by a neglected genius is here.",
         "initialDescription": "Fortunately, there is still one chance for you to be a vandal, for on\nthe far wall is a work of unparalleled beauty.",
+        "flags": 16417,
         "properties": {
             "function": "PAINTING"
         },
@@ -635,8 +642,9 @@
         "name": "",
         "description": "",
         "initialDescription": "",
+        "flags": 114688,
         "properties": {
-            "function": "ROBBER-FUNCTION"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -646,6 +654,7 @@
         "name": "stilletto",
         "description": "There is a vicious-looking stilletto here.",
         "initialDescription": "",
+        "flags": 16448,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -655,6 +664,7 @@
         "name": "pot filled with gold",
         "description": "There is a pot of gold here.",
         "initialDescription": "At the end of the rainbow is a pot of gold.",
+        "flags": 0,
         "properties": {
             "function": "TAKEBIT"
         },
@@ -666,6 +676,7 @@
         "name": "statue",
         "description": "There is a beautiful statue here.",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "TAKEBIT"
         },
@@ -677,6 +688,7 @@
         "name": "plastic inflatable boat",
         "description": "There is a folded pile of plastic here which has a small valve\nattached.",
         "initialDescription": "",
+        "flags": 16417,
         "properties": {
             "function": "IBOAT-FUNCTION"
         },
@@ -688,6 +700,7 @@
         "name": "plastic boat (with hole)",
         "description": "There is a pile of plastic here with a large hole in it.",
         "initialDescription": "",
+        "flags": 16417,
         "properties": {
             "function": "DBOAT-FUNCTION"
         },
@@ -699,6 +712,7 @@
         "name": "hand-held air pump",
         "description": "There is a small pump here.",
         "initialDescription": "",
+        "flags": 16897,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -708,6 +722,7 @@
         "name": "magic boat",
         "description": "There is an inflated boat here.",
         "initialDescription": "",
+        "flags": 24609,
         "properties": {
             "function": "RBOAT-FUNCTION"
         },
@@ -719,6 +734,7 @@
         "name": "tan label",
         "description": "There is a tan label here.",
         "initialDescription": "",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -728,6 +744,7 @@
         "name": "broken sharp stick",
         "description": "There is a broken sharp stick here.",
         "initialDescription": "A sharp stick, which appears to have been broken at one end, is here.",
+        "flags": 16385,
         "properties": {
             "function": "STICK-FUNCTION"
         },
@@ -739,6 +756,7 @@
         "name": "red buoy",
         "description": "There is a red buoy here (probably a warning).",
         "initialDescription": "",
+        "flags": 134234129,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -748,6 +766,7 @@
         "name": "large emerald",
         "description": "There is an emerald here.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -757,6 +776,7 @@
         "name": "shovel",
         "description": "There is a large shovel here.",
         "initialDescription": "",
+        "flags": 16897,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -766,6 +786,7 @@
         "name": "hunk of bat guano",
         "description": "There is a hunk of bat guano here.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -775,6 +796,7 @@
         "name": "lurking grue",
         "description": "",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "OVISON"
         },
@@ -786,6 +808,7 @@
         "name": "basket",
         "description": "There is a very large and extremely heavy wicker basket with a cloth\nbag here. Inside the basket is a metal receptacle of some kind. \nAttached to the basket on the outside is a piece of wire.",
         "initialDescription": "",
+        "flags": 24576,
         "properties": {
             "function": "BALLOON"
         },
@@ -797,7 +820,10 @@
         "name": "receptacle",
         "description": "",
         "initialDescription": "",
-        "properties": {},
+        "flags": 278544,
+        "properties": {
+            "function": "BIGFIX"
+        },
         "synonyms": [],
         "adjectives": []
     },
@@ -806,6 +832,7 @@
         "name": "cloth bag",
         "description": "",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "BIGFIX"
         },
@@ -817,8 +844,9 @@
         "name": "braided wire",
         "description": "",
         "initialDescription": "",
+        "flags": 20480,
         "properties": {
-            "function": "WIRE-FUNCTION"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -828,6 +856,7 @@
         "name": "hook",
         "description": "There is a small hook attached to the rock here.",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "BIGFIX"
         },
@@ -839,6 +868,7 @@
         "name": "hook",
         "description": "There is a small hook attached to the rock here.",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "BIGFIX"
         },
@@ -850,6 +880,7 @@
         "name": "priceless zorkmid",
         "description": "There is an engraved zorkmid coin here.",
         "initialDescription": "On the floor is a gold zorkmid coin (a valuable collector's item).",
+        "flags": 16513,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -859,8 +890,9 @@
         "name": "box",
         "description": "",
         "initialDescription": "",
+        "flags": 16400,
         "properties": {
-            "function": "SAFE-FUNCTION"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -870,6 +902,7 @@
         "name": "card",
         "description": "There is a card with writing on it here.",
         "initialDescription": "",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -879,6 +912,7 @@
         "name": "hole",
         "description": "",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "BIGFIX"
         },
@@ -890,6 +924,7 @@
         "name": "crown",
         "description": "Lord Dimwit's crown is here.",
         "initialDescription": "The excessively gaudy crown of Lord Dimwit Flathead is here.",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -899,6 +934,7 @@
         "name": "brick",
         "description": "There is a square brick here which feels like clay.",
         "initialDescription": "",
+        "flags": 278561,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -908,6 +944,7 @@
         "name": "wire coil",
         "description": "There is a coil of thin shiny wire here.",
         "initialDescription": "",
+        "flags": 16417,
         "properties": {
             "function": "FUSE-FUNCTION"
         },
@@ -919,8 +956,9 @@
         "name": "Volcano Gnome",
         "description": "There is a nervous Volcano Gnome here.",
         "initialDescription": "",
+        "flags": 81920,
         "properties": {
-            "function": "GNOME-FUNCTION"
+            "function": "BIGFIX"
         },
         "synonyms": [],
         "adjectives": []
@@ -930,6 +968,7 @@
         "name": "blue label",
         "description": "There is a blue label here.",
         "initialDescription": "",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -939,6 +978,7 @@
         "name": "broken balloon",
         "description": "There is a balloon here, broken into pieces.",
         "initialDescription": "",
+        "flags": 16385,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -948,6 +988,7 @@
         "name": "blue book",
         "description": "There is a blue book here.",
         "initialDescription": "",
+        "flags": 16529,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -957,6 +998,7 @@
         "name": "green book",
         "description": "There is a green book here.",
         "initialDescription": "",
+        "flags": 16529,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -966,6 +1008,7 @@
         "name": "purple book",
         "description": "There is a purple book here.",
         "initialDescription": "",
+        "flags": 16529,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -975,6 +1018,7 @@
         "name": "white book",
         "description": "There is a white book here.",
         "initialDescription": "",
+        "flags": 16529,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -984,6 +1028,7 @@
         "name": "stamp",
         "description": "There is a Flathead Commemorative stamp here.",
         "initialDescription": "",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -993,6 +1038,7 @@
         "name": "tomb",
         "description": "There is a tomb here, made of the finest marble, and large enough\nfor four headless corpses.  On one end is the cryptic inscription:\n\t\t    \n\t\t      \\Feel Free.\\\n",
         "initialDescription": "",
+        "flags": 16793728,
         "properties": {
             "function": "HEAD-FUNCTION"
         },
@@ -1004,6 +1050,7 @@
         "name": "set of poled heads",
         "description": "There are four heads here, mounted securely on poles.",
         "initialDescription": "",
+        "flags": 16793856,
         "properties": {
             "function": "HEAD-FUNCTION"
         },
@@ -1015,6 +1062,7 @@
         "name": "bunch of Coke bottles",
         "description": "Many empty Coke bottles are here.  Alas, they can't hold water.",
         "initialDescription": "There is a large pile of empty Coke bottles here, evidently produced\nby the implementers during their long struggle to win totally.",
+        "flags": 16385,
         "properties": {
             "function": "COKE-BOTTLES"
         },
@@ -1026,6 +1074,7 @@
         "name": "stack of listings",
         "description": "There is an enormous stack of line-printer paper here.  It is barely\nreadable.",
         "initialDescription": "There is a gigantic pile of line-printer output here.  Although the\npaper once contained useful information, almost nothing can be\ndistinguished now.",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -1035,6 +1084,7 @@
         "name": "large case",
         "description": "There is a large case here, containing objects which you used to\npossess.",
         "initialDescription": "",
+        "flags": 33570816,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -1044,6 +1094,7 @@
         "name": "mangled cage",
         "description": "There is a mangled cage here.",
         "initialDescription": "",
+        "flags": 8404992,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -1053,6 +1104,7 @@
         "name": "iron cage",
         "description": "There is an iron cage in the middle of the room.",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "OVISON"
         },
@@ -1064,6 +1116,7 @@
         "name": "crystal sphere",
         "description": "There is a beautiful crystal sphere here.",
         "initialDescription": "",
+        "flags": 16793856,
         "properties": {
             "function": "SPHERE-FUNCTION"
         },
@@ -1075,6 +1128,7 @@
         "name": "glass flask filled with liquid",
         "description": "A stoppered glass flask with a skull-and-crossbones marking is here.\nThe flask is filled with some clear liquid.",
         "initialDescription": "",
+        "flags": 33570817,
         "properties": {
             "function": "FLASK-FUNCTION"
         },
@@ -1086,6 +1140,7 @@
         "name": "pool of sewage",
         "description": "The leak has submerged the depressed area in a pool of sewage.",
         "initialDescription": "",
+        "flags": 81920,
         "properties": {},
         "synonyms": [],
         "adjectives": []
@@ -1095,6 +1150,7 @@
         "name": "tin of spices",
         "description": "There is a tin of rare spices here.",
         "initialDescription": "",
+        "flags": 0,
         "properties": {
             "function": "TAKEBIT"
         },
@@ -1106,6 +1162,7 @@
         "name": "wooden bucket",
         "description": "There is a wooden bucket here, 3 feet in diameter and 3 feet high.",
         "initialDescription": "",
+        "flags": 24576,
         "properties": {
             "function": "BUCKET"
         },
@@ -1117,6 +1174,7 @@
         "name": "piece of 'Eat Me' cake",
         "description": "There is a piece of cake here with the words 'Eat Me' on it.",
         "initialDescription": "",
+        "flags": 18433,
         "properties": {
             "function": "EATME-FUNCTION"
         },
@@ -1128,6 +1186,7 @@
         "name": "piece of cake with orange icing",
         "description": "There is a piece of cake with orange icing here.",
         "initialDescription": "",
+        "flags": 18561,
         "properties": {
             "function": "CAKE-FUNCTION"
         },
@@ -1139,6 +1198,7 @@
         "name": "piece of cake with red icing",
         "description": "There is a piece of cake with red icing here.",
         "initialDescription": "",
+        "flags": 18561,
         "properties": {
             "function": "CAKE-FUNCTION"
         },
@@ -1150,6 +1210,7 @@
         "name": "piece of cake with blue icing",
         "description": "There is a piece of cake with blue (ecch) icing here.",
         "initialDescription": "",
+        "flags": 18561,
         "properties": {
             "function": "CAKE-FUNCTION"
         },
@@ -1161,6 +1222,7 @@
         "name": "robot",
         "description": "There is a robot here.",
         "initialDescription": "",
+        "flags": 536953088,
         "properties": {
             "function": "ROBOT-FUNCTION"
         },
@@ -1172,8 +1234,49 @@
         "name": "green piece of paper",
         "description": "There is a green piece of paper here.",
         "initialDescription": "",
+        "flags": 16545,
         "properties": {},
         "synonyms": [],
+        "adjectives": []
+    },
+    "WIND1": {
+        "id": "WIND1",
+        "name": "window",
+        "description": "There is a small window here.",
+        "initialDescription": "There is a small window here.",
+        "flags": 2,
+        "properties": {},
+        "synonyms": ["window"],
+        "adjectives": ["small"]
+    },
+    "TRAP-DOOR": {
+        "id": "TRAP-DOOR",
+        "name": "trap door",
+        "description": "There is a trap door here.",
+        "initialDescription": "The dusty cover of a closed trap door is here.",
+        "flags": 8388610,
+        "properties": {},
+        "synonyms": ["trapdoor", "door"],
+        "adjectives": ["trap"]
+    },
+    "TDOOR": {
+        "id": "TDOOR",
+        "name": "trap door",
+        "description": "The trap door is open.",
+        "initialDescription": "The trap door is open.",
+        "flags": 2,
+        "properties": {},
+        "synonyms": ["trapdoor", "door"],
+        "adjectives": ["trap"]
+    },
+    "GRAT2": {
+        "id": "GRAT2",
+        "name": "grating",
+        "description": "There is a grating here.",
+        "initialDescription": "There is a grating here.",
+        "flags": 8,
+        "properties": {},
+        "synonyms": ["grate"],
         "adjectives": []
     }
 }

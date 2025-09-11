@@ -10,6 +10,7 @@
             "NORTH": "RAVI1"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "WHOUS": {
@@ -28,6 +29,7 @@
             "FDOOR",
             "MAILB"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -45,6 +47,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -62,6 +65,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -88,6 +92,7 @@
         "objects": [
             "WIND1"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -118,6 +123,7 @@
             "SBAG",
             "BOTTL"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -134,6 +140,7 @@
             "ROPE",
             "KNIFE"
         ],
+        "flags": 0,
         "properties": []
     },
     "LROOM": {
@@ -160,8 +167,10 @@
             "LAMP",
             "RUG",
             "PAPER",
-            "SWORD"
+            "SWORD",
+            "TRAP-DOOR"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -169,7 +178,7 @@
     "CELLA": {
         "id": "CELLA",
         "shortDesc": "Cellar",
-        "longDesc": "",
+        "longDesc": "You are in the cellar.",
         "exits": {
             "EAST": "MTROL",
             "SOUTH": "CHAS2",
@@ -185,6 +194,7 @@
         "objects": [
             "TDOOR"
         ],
+        "flags": 0,
         "properties": []
     },
     "MTROL": {
@@ -212,12 +222,13 @@
         "objects": [
             "TROLL"
         ],
+        "flags": 0,
         "properties": []
     },
     "MAZE1": {
         "id": "MAZE1",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "WEST": "MTROL",
             "NORTH": "MAZE1",
@@ -225,58 +236,63 @@
             "EAST": "MAZE4"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZE2": {
         "id": "MAZE2",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "SOUTH": "MAZE1",
             "NORTH": "MAZE4",
             "EAST": "MAZE3"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZE3": {
         "id": "MAZE3",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "WEST": "MAZE2",
             "NORTH": "MAZE4",
             "UP": "MAZE5"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZE4": {
         "id": "MAZE4",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "WEST": "MAZE3",
             "NORTH": "MAZE1",
             "EAST": "DEAD1"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "DEAD1": {
         "id": "DEAD1",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Dead End",
+        "longDesc": "You are in a dead end.",
         "exits": {
             "SOUTH": "MAZE4"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZE5": {
         "id": "MAZE5",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "EAST": "DEAD2",
             "NORTH": "MAZE3",
@@ -289,22 +305,24 @@
             "BLANT",
             "RKNIF"
         ],
+        "flags": 0,
         "properties": []
     },
     "DEAD2": {
         "id": "DEAD2",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Dead End",
+        "longDesc": "You are in a dead end.",
         "exits": {
             "WEST": "MAZE5"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZE6": {
         "id": "MAZE6",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "DOWN": "MAZE5",
             "EAST": "MAZE7",
@@ -312,12 +330,13 @@
             "UP": "MAZE9"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZE7": {
         "id": "MAZE7",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "UP": "MAZ14",
             "WEST": "MAZE6",
@@ -326,34 +345,37 @@
             "SOUTH": "MAZ15"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZE8": {
         "id": "MAZE8",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "NE": "MAZE7",
             "WEST": "MAZE8",
             "SE": "DEAD3"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "DEAD3": {
         "id": "DEAD3",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Dead End",
+        "longDesc": "You are in a dead end.",
         "exits": {
             "NORTH": "MAZE8"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZE9": {
         "id": "MAZE9",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "NORTH": "MAZE6",
             "EAST": "MAZ11",
@@ -363,24 +385,26 @@
             "NW": "MAZE9"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZ10": {
         "id": "MAZ10",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "EAST": "MAZE9",
             "WEST": "MAZ13",
             "UP": "MAZ11"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZ11": {
         "id": "MAZ11",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "NE": "MGRAT",
             "DOWN": "MAZ10",
@@ -388,12 +412,13 @@
             "SW": "MAZ12"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MGRAT": {
         "id": "MGRAT",
         "shortDesc": "Grating Room",
-        "longDesc": "",
+        "longDesc": "You are in the Grating Room.",
         "exits": {
             "SW": "MAZ11",
             "UP": {
@@ -405,12 +430,13 @@
         "objects": [
             "GRAT2"
         ],
+        "flags": 0,
         "properties": []
     },
     "MAZ12": {
         "id": "MAZ12",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "WEST": "MAZE5",
             "SW": "MAZ11",
@@ -419,22 +445,24 @@
             "NORTH": "DEAD4"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "DEAD4": {
         "id": "DEAD4",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Dead End",
+        "longDesc": "You are in a dead end.",
         "exits": {
             "SOUTH": "MAZ12"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZ13": {
         "id": "MAZ13",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "EAST": "MAZE9",
             "DOWN": "MAZ12",
@@ -442,12 +470,13 @@
             "WEST": "MAZ11"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZ14": {
         "id": "MAZ14",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "WEST": "MAZ15",
             "NW": "MAZ14",
@@ -455,18 +484,20 @@
             "SOUTH": "MAZE7"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MAZ15": {
         "id": "MAZ15",
-        "shortDesc": "",
-        "longDesc": "",
+        "shortDesc": "Maze",
+        "longDesc": "You are in a maze of twisty little passages, all alike.",
         "exits": {
             "WEST": "MAZ14",
             "SOUTH": "MAZE7",
             "NE": "CYCLO"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "FORE1": {
@@ -480,6 +511,7 @@
             "WEST": "FORE1"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -495,6 +527,7 @@
             "WEST": "FORE2"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -510,6 +543,7 @@
             "WEST": "FORE2"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -525,6 +559,7 @@
             "WEST": "FORE1"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -540,6 +575,7 @@
             "WEST": "NHOUS"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -547,7 +583,7 @@
     "CLEAR": {
         "id": "CLEAR",
         "shortDesc": "Clearing",
-        "longDesc": "You are in a clearing, with a forest surrounding you on all sides. A path leads south.\nThere is a grating on the ground.",
+        "longDesc": "",
         "exits": {
             "SW": "EHOUS",
             "SE": "FORE5",
@@ -565,6 +601,7 @@
             "GRAT1",
             "LEAVE"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -580,6 +617,7 @@
             "WEST": "CRAW1"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CRAW1": {
@@ -592,6 +630,7 @@
             "NW": "EGYPT"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "RESES": {
@@ -624,6 +663,7 @@
         "objects": [
             "TRUNK"
         ],
+        "flags": 0,
         "properties": []
     },
     "RESEN": {
@@ -646,6 +686,7 @@
         "objects": [
             "PUMP"
         ],
+        "flags": 0,
         "properties": []
     },
     "STREA": {
@@ -659,6 +700,7 @@
         "objects": [
             "FUSE"
         ],
+        "flags": 0,
         "properties": []
     },
     "EGYPT": {
@@ -677,6 +719,7 @@
         "objects": [
             "COFFI"
         ],
+        "flags": 0,
         "properties": []
     },
     "ICY": {
@@ -695,6 +738,7 @@
         "objects": [
             "ICE"
         ],
+        "flags": 0,
         "properties": []
     },
     "RUBYR": {
@@ -708,6 +752,7 @@
         "objects": [
             "RUBY"
         ],
+        "flags": 0,
         "properties": []
     },
     "ATLAN": {
@@ -721,6 +766,7 @@
         "objects": [
             "TRIDE"
         ],
+        "flags": 0,
         "properties": []
     },
     "CANY1": {
@@ -733,6 +779,7 @@
             "SOUTH": "CAROU"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "ECHO": {
@@ -747,6 +794,7 @@
         "objects": [
             "BAR"
         ],
+        "flags": 0,
         "properties": []
     },
     "MIRR1": {
@@ -761,6 +809,7 @@
         "objects": [
             "REFL1"
         ],
+        "flags": 0,
         "properties": []
     },
     "MIRR2": {
@@ -775,6 +824,7 @@
         "objects": [
             "REFL2"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -788,6 +838,7 @@
             "DOWN": "ATLAN"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CAVE2": {
@@ -800,6 +851,7 @@
             "DOWN": "LLD1"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CRAW2": {
@@ -811,6 +863,7 @@
             "SW": "PASS3"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CRAW3": {
@@ -823,6 +876,7 @@
             "NORTH": "MGRAI"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "PASS3": {
@@ -835,6 +889,7 @@
             "NORTH": "CRAW2"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "PASS4": {
@@ -848,6 +903,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "SLIDE": {
@@ -860,6 +916,7 @@
             "NORTH": "ENTRA"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "ENTRA": {
@@ -872,6 +929,7 @@
             "NE": "TSHAF"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "SQUEE": {
@@ -883,6 +941,7 @@
             "SOUTH": "ENTRA"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "TSHAF": {
@@ -899,6 +958,7 @@
         "objects": [
             "TBASK"
         ],
+        "flags": 0,
         "properties": []
     },
     "TUNNE": {
@@ -911,6 +971,7 @@
             "NE": "MINE1"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "SMELL": {
@@ -922,6 +983,7 @@
             "EAST": "TUNNE"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "BOOM": {
@@ -934,6 +996,7 @@
         "objects": [
             "BRACE"
         ],
+        "flags": 0,
         "properties": []
     },
     "TLADD": {
@@ -945,6 +1008,7 @@
             "UP": "MINE7"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MINE1": {
@@ -957,6 +1021,7 @@
             "EAST": "TUNNE"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MINE2": {
@@ -970,6 +1035,7 @@
             "NE": "MINE4"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MINE3": {
@@ -982,6 +1048,7 @@
             "EAST": "MINE5"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MINE4": {
@@ -995,6 +1062,7 @@
             "WEST": "MINE2"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MINE5": {
@@ -1010,6 +1078,7 @@
             "EAST": "MINE4"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MINE6": {
@@ -1022,6 +1091,7 @@
             "NW": "MINE7"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "MINE7": {
@@ -1035,6 +1105,7 @@
             "SOUTH": "MINE6"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "BLADD": {
@@ -1047,6 +1118,7 @@
             "UP": "TLADD"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "DEAD7": {
@@ -1059,6 +1131,7 @@
         "objects": [
             "COAL"
         ],
+        "flags": 0,
         "properties": []
     },
     "TIMBE": {
@@ -1074,6 +1147,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "BSHAF": {
@@ -1102,6 +1176,7 @@
         "objects": [
             "FBASK"
         ],
+        "flags": 0,
         "properties": []
     },
     "MACHI": {
@@ -1115,6 +1190,7 @@
             "MSWIT",
             "MACHI"
         ],
+        "flags": 0,
         "properties": []
     },
     "BATS": {
@@ -1128,6 +1204,7 @@
             "JADE",
             "BAT"
         ],
+        "flags": 0,
         "properties": []
     },
     "DOME": {
@@ -1150,6 +1227,7 @@
         "objects": [
             "RAILI"
         ],
+        "flags": 0,
         "properties": []
     },
     "MTORC": {
@@ -1166,6 +1244,7 @@
         "objects": [
             "TORCH"
         ],
+        "flags": 0,
         "properties": []
     },
     "CRAW4": {
@@ -1181,6 +1260,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CHAS2": {
@@ -1196,6 +1276,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CAROU": {
@@ -1252,6 +1333,7 @@
         "objects": [
             "IRBOX"
         ],
+        "flags": 0,
         "properties": []
     },
     "PASS5": {
@@ -1264,6 +1346,7 @@
             "SOUTH": "CAROU"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CHAS1": {
@@ -1278,6 +1361,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CAVE3": {
@@ -1292,6 +1376,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CHAS3": {
@@ -1305,6 +1390,7 @@
             "WEST": "DEAD6"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "DEAD5": {
@@ -1315,6 +1401,7 @@
             "SW": "CHAS3"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "DEAD6": {
@@ -1325,6 +1412,7 @@
             "EAST": "CHAS3"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "CAVE4": {
@@ -1338,6 +1426,7 @@
         "objects": [
             "ENGRA"
         ],
+        "flags": 0,
         "properties": []
     },
     "RIDDL": {
@@ -1355,6 +1444,7 @@
         "objects": [
             "SDOOR"
         ],
+        "flags": 0,
         "properties": []
     },
     "MPEAR": {
@@ -1368,6 +1458,7 @@
         "objects": [
             "PEARL"
         ],
+        "flags": 0,
         "properties": []
     },
     "LLD1": {
@@ -1392,6 +1483,7 @@
             "GATES",
             "GHOST"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1408,6 +1500,7 @@
         "objects": [
             "BODIE"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1424,6 +1517,7 @@
         "objects": [
             "GRAIL"
         ],
+        "flags": 0,
         "properties": []
     },
     "TEMP1": {
@@ -1438,6 +1532,7 @@
             "PRAYE",
             "BELL"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1453,6 +1548,7 @@
             "BOOK",
             "CANDL"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1472,6 +1568,7 @@
             "DAM",
             "BUBBL"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1489,6 +1586,7 @@
             "MATCH",
             "GUIDE"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1511,6 +1609,7 @@
             "YBUTT",
             "SCREW"
         ],
+        "flags": 0,
         "properties": []
     },
     "CYCLO": {
@@ -1533,6 +1632,7 @@
         "objects": [
             "CYCLO"
         ],
+        "flags": 0,
         "properties": []
     },
     "BLROO": {
@@ -1544,6 +1644,7 @@
             "EAST": "LROOM"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "TREAS": {
@@ -1556,6 +1657,7 @@
         "objects": [
             "CHALI"
         ],
+        "flags": 0,
         "properties": []
     },
     "STUDI": {
@@ -1572,6 +1674,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "GALLE": {
@@ -1585,6 +1688,7 @@
         "objects": [
             "PAINT"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1602,6 +1706,7 @@
             "IBOAT",
             "STICK"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1617,10 +1722,8 @@
             ",": "CLIFFS"
         },
         "objects": [],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "RIVR2": {
         "id": "RIVR2",
@@ -1632,10 +1735,8 @@
             ",": "CLIFFS"
         },
         "objects": [],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "RIVR3": {
         "id": "RIVR3",
@@ -1648,10 +1749,8 @@
             "RCAVE": "LAND"
         },
         "objects": [],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "WCLF1": {
         "id": "WCLF1",
@@ -1666,6 +1765,7 @@
             "LAUNC": "RIVR3"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "WCLF2": {
@@ -1681,6 +1781,7 @@
             "LAUNC": "RIVR4"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "RIVR4": {
@@ -1696,10 +1797,8 @@
         "objects": [
             "BUOY"
         ],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "RIVR5": {
         "id": "RIVR5",
@@ -1710,10 +1809,8 @@
             "FCHMP": "LAND"
         },
         "objects": [],
-        "properties": [],
-        "flags": {
-            "isWater": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "FCHMP": {
         "id": "FCHMP",
@@ -1725,6 +1822,7 @@
             }
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "FANTE": {
@@ -1737,6 +1835,7 @@
             "SOUTH": "FALLS"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "BEACH": {
@@ -1750,6 +1849,7 @@
         "objects": [
             "STATU"
         ],
+        "flags": 0,
         "properties": []
     },
     "RCAVE": {
@@ -1761,6 +1861,7 @@
             "NW": "TCAVE"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "TCAVE": {
@@ -1775,6 +1876,7 @@
             "GUANO",
             "SHOVE"
         ],
+        "flags": 0,
         "properties": []
     },
     "BARRE": {
@@ -1785,6 +1887,7 @@
             "EXIT": "FALLS"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "FALLS": {
@@ -1810,6 +1913,7 @@
             "RAINB",
             "BARRE"
         ],
+        "flags": 0,
         "properties": []
     },
     "RAINB": {
@@ -1821,6 +1925,7 @@
             "WEST": "FALLS"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1837,6 +1942,7 @@
             "RAINB",
             "POT"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1851,6 +1957,7 @@
             "NORTH": "POG"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1865,6 +1972,7 @@
             "DOWN": "CLBOT"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1880,6 +1988,7 @@
             "WEST": "FORE5"
         },
         "objects": [],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -1894,6 +2003,7 @@
         "objects": [
             "BALLO"
         ],
+        "flags": 0,
         "properties": []
     },
     "VAIR1": {
@@ -1902,10 +2012,8 @@
         "longDesc": "You are about one hundred feet above the bottom of the volcano.  The\ntop of the volcano is clearly visible here.",
         "exits": {},
         "objects": [],
-        "properties": [],
-        "flags": {
-            "isAir": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "VAIR2": {
         "id": "VAIR2",
@@ -1916,10 +2024,8 @@
             "LAND": "LEDG2"
         },
         "objects": [],
-        "properties": [],
-        "flags": {
-            "isAir": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "VAIR3": {
         "id": "VAIR3",
@@ -1927,10 +2033,8 @@
         "longDesc": "You are high above the floor of the volcano.  From here the rim of\nthe volcano looks very narrow and you are very near it.  To the \neast is what appears to be a viewing ledge, too thin to land on.",
         "exits": {},
         "objects": [],
-        "properties": [],
-        "flags": {
-            "isAir": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "VAIR4": {
         "id": "VAIR4",
@@ -1941,10 +2045,8 @@
             "EAST": "LEDG4"
         },
         "objects": [],
-        "properties": [],
-        "flags": {
-            "isAir": true
-        }
+        "flags": 0,
+        "properties": []
     },
     "LEDG2": {
         "id": "LEDG2",
@@ -1961,6 +2063,7 @@
             "HOOK1",
             "ZORKM"
         ],
+        "flags": 0,
         "properties": []
     },
     "LIBRA": {
@@ -1977,6 +2080,7 @@
             "PUBK",
             "WHBK"
         ],
+        "flags": 0,
         "properties": []
     },
     "LEDG3": {
@@ -1993,6 +2097,7 @@
             "EAST": "EGYPT"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "LEDG4": {
@@ -2009,6 +2114,7 @@
         "objects": [
             "HOOK2"
         ],
+        "flags": 0,
         "properties": []
     },
     "SAFE": {
@@ -2022,6 +2128,7 @@
             "SSLOT",
             "SAFE"
         ],
+        "flags": 0,
         "properties": [
             "LIT"
         ]
@@ -2035,6 +2142,7 @@
             "WEST": "RUBYR"
         },
         "objects": [],
+        "flags": 0,
         "properties": []
     },
     "TOMB": {
@@ -2050,6 +2158,7 @@
             "COKES",
             "LISTS"
         ],
+        "flags": 0,
         "properties": []
     },
     "MAGNE": {
@@ -2065,6 +2174,7 @@
             "RBTLB",
             "ROBOT"
         ],
+        "flags": 0,
         "properties": []
     },
     "CMACH": {
@@ -2080,6 +2190,7 @@
             "RNBUT",
             "TRBUT"
         ],
+        "flags": 0,
         "properties": []
     },
     "CAGER": {
@@ -2092,6 +2203,7 @@
         "objects": [
             "SPHER"
         ],
+        "flags": 0,
         "properties": []
     },
     "CAGED": {
@@ -2106,6 +2218,7 @@
         "objects": [
             "CAGE"
         ],
+        "flags": 0,
         "properties": []
     },
     "TWELL": {
@@ -2121,6 +2234,7 @@
         "objects": [
             "ETCH2"
         ],
+        "flags": 65552,
         "properties": []
     },
     "BWELL": {
@@ -2137,6 +2251,7 @@
             "BUCKE",
             "ETCH1"
         ],
+        "flags": 65552,
         "properties": []
     },
     "ALICE": {
@@ -2157,6 +2272,7 @@
             "RDICE",
             "BLICE"
         ],
+        "flags": 0,
         "properties": []
     },
     "ALISM": {
@@ -2171,6 +2287,7 @@
         "objects": [
             "POSTS"
         ],
+        "flags": 0,
         "properties": []
     },
     "ALITR": {
@@ -2186,6 +2303,7 @@
             "POOL",
             "SAFFR"
         ],
+        "flags": 0,
         "properties": []
     }
 }
