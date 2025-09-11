@@ -1,54 +1,61 @@
 #!/bin/bash
 
+# This script bundles the game's JavaScript files and data into a single file,
+# dist/game.js. It's a simple concatenation and cleanup process, not a full
+# build with a bundler like esbuild or webpack.
+
 # Re-create the file from scratch to ensure it's correct.
+echo "" > dist/game.js
 
 # 1. Start with the data.
+echo "/* Zork Data */" >> dist/game.js
 objects_json=$(cat data/objects.json)
 rooms_json=$(cat data/rooms.json)
 vocabulary_json=$(cat data/vocabulary.json)
 death_messages_json=$(cat data/death_messages.json)
 
-# 2. Create the initial file content with the data.
-cat <<EOF > dist/game.js
+cat <<EOF >> dist/game.js
 const objectsData = ${objects_json};
 const roomsData = ${rooms_json};
 const vocabularyData = ${vocabulary_json};
 const deathMessagesData = ${death_messages_json};
 EOF
 
-# 3. Append the JS files, cleaning them up properly.
+# 2. Append the JS files in the correct order, cleaning them up properly.
+echo "/* Zork Game Code */" >> dist/game.js
 
-# js/flags.js
-# Remove the entire export block.
+# The order of concatenation is important to satisfy dependencies.
+# Files are ordered from least dependent to most dependent.
+
+# js/flags.js (no dependencies)
 sed '/^export {/,/};/d' js/flags.js >> dist/game.js
 
-# js/models.js
-# Remove import and the export block.
+# js/models.js (depends on flags.js)
 sed -e '/^import/d' -e '/^export {/,/};/d' js/models.js >> dist/game.js
 
-# js/parser.js
-# Remove the export block.
+# js/parser.js (no dependencies)
 sed '/^export {/,/};/d' js/parser.js >> dist/game.js
 
-# js/actions.js
-# Remove the multi-line import and the export block.
+# js/exit.js (no dependencies)
+sed '/^export {/,/};/d' js/exit.js >> dist/game.js
+
+# js/ui.js (no dependencies)
+cat js/ui.js >> dist/game.js
+
+# js/actions.js (depends on models.js, flags.js)
 sed -e '/^import/,/from/d' -e '/^export {/,/};/d' js/actions.js >> dist/game.js
 
-# js/game.js
-# Remove import and the export block.
+# js/game.js (depends on most other files)
 sed -e '/^import/d' -e '/^export {/,/};/d' js/game.js >> dist/game.js
 
-# js/main.js (already modified and restored, so I'll read from original)
-# Create a temporary modified version of main.js
-# I will use a temporary file to avoid issues with sed and pipes
-temp_main=$(mktemp)
-# The search pattern needs to be very specific to avoid accidentally replacing other code
-# The original main.js has been restored, so I can work from it.
+# js/main.js (depends on game.js)
+# The sed commands here are to remove the module loading logic that is
+# not needed in the bundled version.
 original_main_content=$(cat js/main.js)
 modified_main_content=$(echo "${original_main_content}" |
-    sed '/^import/d' | # Remove import
-    sed '/const data = {};/d' | # Remove old data object
-    sed '/\/\/ Load all necessary data files/,/data.deathMessages = deathMessages;/d' | # Remove fetch and data assignment
-    sed '/\/\/ The above line is commented out/,/if needed./d' # Remove the comment about test runner
+    sed '/^import/d' |
+    sed '/const data = {};/d' |
+    sed '/\/\/ Load all necessary data files/,/data.deathMessages = deathMessages;/d' |
+    sed '/\/\/ The above line is commented out/,/if needed./d'
 )
 echo "${modified_main_content}" >> dist/game.js
