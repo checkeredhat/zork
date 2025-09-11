@@ -6,8 +6,8 @@ import { RBITS, OFLAGS, setFlag, hasFlag } from './flags.js';
 
 class Game {
     constructor(data) {
-        this.objects = new Map(data.objects.map(o => [o.id, new GameObject(o)]));
-        this.rooms = new Map(data.rooms.map(r => [r.id, new Room(r)]));
+        this.objects = new Map(Object.values(data.objects).map(o => [o.id, new GameObject(o)]));
+        this.rooms = new Map(Object.values(data.rooms).map(r => [r.id, new Room(r)]));
         this.player = new Player({ location: 'WEST-OF-HOUSE' }); // Starting location
         this.vocabulary = data.vocabulary;
         this.deathMessages = data.deathMessages;
