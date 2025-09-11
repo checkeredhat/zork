@@ -61,6 +61,9 @@ const actionHandlers = {
                 game.player.location = exit.destination;
                 const targetRoom = game.rooms.get(exit.destination);
                 targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
+                if (exit.action) {
+                    executeRoomAction(exit.action, game);
+                }
                 return '';
             } else {
                 return exit.message || "You can't go that way.";
@@ -278,6 +281,16 @@ actionHandlers.ENTER = (dobj, iobj, game, action) => {
 
     return "You can't enter that.";
 };
+
+function executeRoomAction(action, game) {
+    switch (action) {
+        case 'COFFIN-CURE':
+            game.globalFlags.set('EGYPT-FLAG', false);
+            break;
+        default:
+            break;
+    }
+}
 
 function evaluateCondition(condition, game) {
     if (!condition) return true; // No condition means the exit is always open

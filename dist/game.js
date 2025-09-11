@@ -887,36 +887,6 @@ const objectsData = {
         "synonyms": [],
         "adjectives": []
     },
-    "WDOOR": {
-        "id": "WDOOR",
-        "name": "door",
-        "description": "The door is closed.",
-        "initialDescription": "",
-        "flags": 2,
-        "properties": {},
-        "synonyms": ["door"],
-        "adjectives": ["wooden"]
-    },
-    "DOOR": {
-        "id": "DOOR",
-        "name": "door",
-        "description": "The door is closed.",
-        "initialDescription": "",
-        "flags": 2,
-        "properties": {},
-        "synonyms": ["door"],
-        "adjectives": []
-    },
-    "WIND2": {
-        "id": "WIND2",
-        "name": "window",
-        "description": "There is a small window here, which is open.",
-        "initialDescription": "",
-        "flags": 2,
-        "properties": {},
-        "synonyms": ["window"],
-        "adjectives": ["small"]
-    },
     "SAFE": {
         "id": "SAFE",
         "name": "box",
@@ -1294,8 +1264,8 @@ const objectsData = {
     "TDOOR": {
         "id": "TDOOR",
         "name": "trap door",
-        "description": "A dusty trap door is here, obviously closed.",
-        "initialDescription": "A dusty trap door is here, obviously closed.",
+        "description": "The trap door is open.",
+        "initialDescription": "The trap door is open.",
         "flags": 2,
         "properties": {},
         "synonyms": ["trapdoor", "door"],
@@ -1309,6 +1279,66 @@ const objectsData = {
         "flags": 8,
         "properties": {},
         "synonyms": ["grate"],
+        "adjectives": []
+    },
+    "RAILI": {
+        "id": "RAILI",
+        "name": "railing",
+        "description": "There is a railing here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": ["rail"],
+        "adjectives": []
+    },
+    "SDOOR": {
+        "id": "SDOOR",
+        "name": "stone door",
+        "description": "There is a stone door here.",
+        "initialDescription": "",
+        "flags": 2,
+        "properties": {},
+        "synonyms": ["door"],
+        "adjectives": ["stone"]
+    },
+    "CORPS": {
+        "id": "CORPS",
+        "name": "corpses",
+        "description": "There are corpses here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": ["bodies"],
+        "adjectives": []
+    },
+    "GATES": {
+        "id": "GATES",
+        "name": "gates",
+        "description": "There are gates here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": ["gate"],
+        "adjectives": []
+    },
+    "RAINB": {
+        "id": "RAINB",
+        "name": "rainbow",
+        "description": "There is a rainbow here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": [],
+        "adjectives": []
+    },
+    "BARRE": {
+        "id": "BARRE",
+        "name": "barrel",
+        "description": "There is a barrel here.",
+        "initialDescription": "",
+        "flags": 0,
+        "properties": {},
+        "synonyms": [],
         "adjectives": []
     }
 };
@@ -1481,7 +1511,8 @@ const roomsData = {
             "LAMP",
             "RUG",
             "PAPER",
-            "SWORD"
+            "SWORD",
+            "TRAP-DOOR"
         ],
         "flags": 0,
         "properties": [
@@ -1906,8 +1937,7 @@ const roomsData = {
             "SOUTH": "FORE2",
             "DOWN": {
                 "condition": "\"KEY-FLAG\"",
-                "destination": "MGRAT",
-                "message": "You can't go that way."
+                "destination": "MGRAT"
             }
         },
         "objects": [
@@ -4128,6 +4158,9 @@ const actionHandlers = {
                 game.player.location = exit.destination;
                 const targetRoom = game.rooms.get(exit.destination);
                 targetRoom.rbits = setFlag(targetRoom.rbits, RBITS.RDESCBIT);
+                if (exit.action) {
+                    executeRoomAction(exit.action, game);
+                }
                 return '';
             } else {
                 return exit.message || "You can't go that way.";
@@ -4345,6 +4378,16 @@ actionHandlers.ENTER = (dobj, iobj, game, action) => {
 
     return "You can't enter that.";
 };
+
+function executeRoomAction(action, game) {
+    switch (action) {
+        case 'COFFIN-CURE':
+            game.globalFlags.set('EGYPT-FLAG', false);
+            break;
+        default:
+            break;
+    }
+}
 
 function evaluateCondition(condition, game) {
     if (!condition) return true; // No condition means the exit is always open
