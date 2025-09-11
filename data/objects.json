@@ -885,6 +885,36 @@
         "synonyms": [],
         "adjectives": []
     },
+    "WDOOR": {
+        "id": "WDOOR",
+        "name": "door",
+        "description": "The door is closed.",
+        "initialDescription": "",
+        "flags": 2,
+        "properties": {},
+        "synonyms": ["door"],
+        "adjectives": ["wooden"]
+    },
+    "DOOR": {
+        "id": "DOOR",
+        "name": "door",
+        "description": "The door is closed.",
+        "initialDescription": "",
+        "flags": 2,
+        "properties": {},
+        "synonyms": ["door"],
+        "adjectives": []
+    },
+    "WIND2": {
+        "id": "WIND2",
+        "name": "window",
+        "description": "There is a small window here, which is open.",
+        "initialDescription": "",
+        "flags": 2,
+        "properties": {},
+        "synonyms": ["window"],
+        "adjectives": ["small"]
+    },
     "SAFE": {
         "id": "SAFE",
         "name": "box",
@@ -1262,8 +1292,8 @@
     "TDOOR": {
         "id": "TDOOR",
         "name": "trap door",
-        "description": "The trap door is open.",
-        "initialDescription": "The trap door is open.",
+        "description": "A dusty trap door is here, obviously closed.",
+        "initialDescription": "A dusty trap door is here, obviously closed.",
         "flags": 2,
         "properties": {},
         "synonyms": ["trapdoor", "door"],
