@@ -51,6 +51,14 @@ class Game {
     }
 
     tick(command) {
+        // Set EMPTY-HANDED flag
+        const inventory = Array.from(this.objects.values()).filter(o => o.location === 'IN_INVENTORY');
+        if (inventory.length === 0) {
+            this.globalFlags.set('EMPTY-HANDED', true);
+        } else {
+            this.globalFlags.set('EMPTY-HANDED', false);
+        }
+
         // 1. Parse the command
         const action = parseCommand(command, this.vocabulary);
 

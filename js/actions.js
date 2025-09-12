@@ -208,6 +208,14 @@ const actionHandlers = {
     // Default handlers for motion verbs
     NORTH: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO NORTH' }),
     SOUTH: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO SOUTH' }),
+    EXIT: (d, i, g, a) => {
+        const room = g.rooms.get(g.player.location);
+        if (room.exits['OUT']) {
+            return actionHandlers.GO(d, i, g, { ...a, verb: 'GO OUT' });
+        }
+        return actionHandlers.GO(d, i, g, { ...a, verb: 'GO EXIT' });
+    },
+    OUT: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO OUT' }),
     EAST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO EAST' }),
     WEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO WEST' }),
     UP: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO UP' }),
@@ -216,6 +224,7 @@ const actionHandlers = {
     NORTHWEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO NW' }),
     SOUTHEAST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO SE' }),
     SOUTHWEST: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO SW' }),
+    CROSS: (d, i, g, a) => actionHandlers.GO(d, i, g, { ...a, verb: 'GO CROSS' }),
     'TURN-ON': (dobj, iobj, game) => {
         if (!dobj) return "Turn on what?";
         if (dobj.id !== 'LANTERN') return "You can't turn that on.";
