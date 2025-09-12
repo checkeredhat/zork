@@ -13,6 +13,497 @@
         "flags": 0,
         "properties": []
     },
+    "CMACH": {
+        "id": "CMACH",
+        "shortDesc": "Machine Room",
+        "longDesc": "",
+        "exits": {
+            "WEST": "MAGNE",
+            "SOUTH": "CAGER"
+        },
+        "objects": [
+            "SQBUT",
+            "RNBUT",
+            "TRBUT"
+        ],
+        "flags": 0,
+        "properties": [],
+        "roomAction": "CMACH-ROOM"
+    },
+    "BWELL": {
+        "id": "BWELL",
+        "shortDesc": "Circular Room",
+        "longDesc": "You are in a damp circular room, whose walls are made of brick and\nmortar.  The roof of this room is not visible, but there appear to be\nsome etchings on the walls.  There is a passageway to the west.",
+        "exits": {
+            "WEST": "MPEAR",
+            "UP": {
+                "blocked": "The walls cannot be climbed."
+            }
+        },
+        "objects": [
+            "BUCKE",
+            "ETCH1"
+        ],
+        "flags": 65552,
+        "properties": []
+    },
+    "LAVA": {
+        "id": "LAVA",
+        "shortDesc": "Lava Room",
+        "longDesc": "You are in a small room, whose walls are formed by an old lava flow.\nThere are exits here to the west and the south.",
+        "exits": {
+            "SOUTH": "VLBOT",
+            "WEST": "RUBYR"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "LEDG4": {
+        "id": "LEDG4",
+        "shortDesc": "Wide Ledge",
+        "longDesc": "",
+        "exits": {
+            "DOWN": {
+                "blocked": "It's a long way down."
+            },
+            "LAUNC": "VAIR4",
+            "WEST": {
+                "condition": "\"GNOME-PLEASED\"",
+                "destination": "SAFE",
+                "message": "A gnome bars your way"
+            },
+            "SOUTH": "SAFE"
+        },
+        "objects": [
+            "HOOK2"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "LEDG3": {
+        "id": "LEDG3",
+        "shortDesc": "Volcano View",
+        "longDesc": "You are on a ledge in the middle of a large volcano.  Below you\nthe volcano bottom can be seen and above is the rim of the volcano.\nA couple of ledges can be seen on the other side of the volcano;\nit appears that this ledge is intermediate in elevation between\nthose on the other side.  The exit from this room is to the east.",
+        "exits": {
+            "DOWN": {
+                "blocked": "I wouldn't try that."
+            },
+            "CROSS": {
+                "blocked": "It is impossible to cross this distance."
+            },
+            "EAST": "EGYPT"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "LIBRA": {
+        "id": "LIBRA",
+        "shortDesc": "Library",
+        "longDesc": "You are in a room which must have been a large library, probably\nfor the royal family.  All of the shelves appear to have been gnawed\nto pieces by unfriendly gnomes.  To the north is an exit.",
+        "exits": {
+            "NORTH": "LEDG2",
+            "OUT": "LEDG2"
+        },
+        "objects": [
+            "BLBK",
+            "GRBK",
+            "PUBK",
+            "WHBK"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "RAINB": {
+        "id": "RAINB",
+        "shortDesc": "Rainbow Room",
+        "longDesc": "You are on top of a rainbow (I bet you never thought you would walk\non a rainbow), with a magnificent view of the Falls.  The rainbow\ntravels east-west here.  There is an NBC Commissary here.",
+        "exits": {
+            "EAST": "POG",
+            "WEST": "FALLS"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": [
+            "LIT"
+        ]
+    },
+    "LEDG2": {
+        "id": "LEDG2",
+        "shortDesc": "Narrow Ledge",
+        "longDesc": "You are on a narrow ledge overlooking the inside of an old dormant\nvolcano.  This ledge appears to be about in the middle between the\nfloor below and the rim above. There is an exit here to the south.",
+        "exits": {
+            "DOWN": {
+                "blocked": "I wouldn't jump from here."
+            },
+            "LAUNC": "VAIR2",
+            "WEST": {
+                "condition": "\"GNOME-PLEASED\"",
+                "destination": "LIBRA",
+                "message": "A gnome bars your way"
+            },
+            "SOUTH": "LIBRA"
+        },
+        "objects": [
+            "HOOK1",
+            "ZORKM"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "FALLS": {
+        "id": "FALLS",
+        "shortDesc": "Aragain Falls",
+        "longDesc": "",
+        "exits": {
+            "EAST": {
+                "condition": "\"RAINBOW\"",
+                "destination": "RAINB"
+            },
+            "DOWN": "FCHMP",
+            "NORTH": "FANTE",
+            "ENTER": "BARRE",
+            "UP": {
+                "condition": "\"RAINBOW\"",
+                "destination": "RAINB"
+            }
+        },
+        "objects": [
+            "RAINB",
+            "BARRE"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "BARRE": {
+        "id": "BARRE",
+        "shortDesc": "Barrel",
+        "longDesc": "You are in a barrel.  Congratulations.  Etched into the side of the\nbarrel is the word 'Geronimo!'.",
+        "exits": {
+            "EXIT": "FALLS"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "GALLE": {
+        "id": "GALLE",
+        "shortDesc": "Gallery",
+        "longDesc": "You are in an art gallery.  Most of the paintings which were here\nhave been stolen by vandals with exceptional taste.  The vandals\nleft through either the north or south exits.",
+        "exits": {
+            "NORTH": "CHAS2",
+            "SOUTH": "STUDI"
+        },
+        "objects": [
+            "PAINT"
+        ],
+        "flags": 0,
+        "properties": [
+            "LIT"
+        ]
+    },
+    "TCAVE": {
+        "id": "TCAVE",
+        "shortDesc": "Small Cave",
+        "longDesc": "You are in a small cave whose exits are on the south and northwest.",
+        "exits": {
+            "SOUTH": "RCAVE",
+            "NW": "CHAS3"
+        },
+        "objects": [
+            "GUANO",
+            "SHOVE"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "STUDI": {
+        "id": "STUDI",
+        "shortDesc": "Studio",
+        "longDesc": "You are in what appears to have been an artist's studio.  The walls\nand floors are splattered with paints of 69 different colors. \nStrangely enough, nothing of value is hanging here.  At the north and\nnorthwest of the room are open doors (also covered with paint).  An\nextremely dark and narrow chimney leads up from a fireplace; although\nyou might be able to get up it, it seems unlikely you could get back\ndown.",
+        "exits": {
+            "NORTH": "CRAW4",
+            "NW": "GALLE",
+            "UP": {
+                "condition": "\"LIGHT-LOAD\"",
+                "destination": "KITCH",
+                "message": "The chimney is too narrow for you and all of your baggage."
+            }
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "LLD1": {
+        "id": "LLD1",
+        "shortDesc": "Entrance to Hades",
+        "longDesc": "",
+        "exits": {
+            "EAST": {
+                "condition": "\"LLD-FLAG\"",
+                "destination": "LLD2",
+                "message": "Some invisible force prevents you from passing through the gate."
+            },
+            "UP": "CAVE2",
+            "ENTER": {
+                "condition": "\"LLD-FLAG\"",
+                "destination": "LLD2"
+            }
+        },
+        "objects": [
+            "CORPS",
+            "GATES",
+            "GHOST"
+        ],
+        "flags": 0,
+        "properties": [
+            "LIT"
+        ]
+    },
+    "BLROO": {
+        "id": "BLROO",
+        "shortDesc": "Strange Passage",
+        "longDesc": "You are in a long passage.  To the south is one entrance.  On the\neast there is an old wooden door, with a large hole in it (about\ncyclops sized).",
+        "exits": {
+            "SOUTH": "CYCLO",
+            "EAST": "LROOM"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "MPEAR": {
+        "id": "MPEAR",
+        "shortDesc": "Pearl Room",
+        "longDesc": "This is a former broom closet.  The exits are to the east and west.",
+        "exits": {
+            "EAST": "BWELL",
+            "WEST": "RIDDL"
+        },
+        "objects": [
+            "PEARL"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "RIDDL": {
+        "id": "RIDDL",
+        "shortDesc": "Riddle Room",
+        "longDesc": "This is a room which is bare on all sides.  There is an exit down. \nTo the east is a great door made of stone.  Above the stone, the\nfollowing words are written: 'No man shall enter this room without\nsolving this riddle:\n  What is tall as a house,\n\t  round as a cup, \n\t  and all the king's horses can't draw it up?'",
+        "exits": {
+            "DOWN": "CAVE4",
+            "EAST": {
+                "condition": "\"RIDDLE-FLAG\"",
+                "destination": "MPEAR",
+                "message": "Your way is blocked by an invisible force."
+            }
+        },
+        "objects": [
+            "SDOOR"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "CHAS1": {
+        "id": "CHAS1",
+        "shortDesc": "Chasm",
+        "longDesc": "A chasm runs southwest to northeast.  You are on the south edge; the\npath exits to the south and to the east.",
+        "exits": {
+            "SOUTH": "RAVI1",
+            "EAST": "PASS5",
+            "DOWN": {
+                "blocked": "Are you out of your mind?"
+            }
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "CAROU": {
+        "id": "CAROU",
+        "shortDesc": "Round room",
+        "longDesc": "",
+        "exits": {
+            "NORTH": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "CAVE4",
+                "message": ""
+            },
+            "SOUTH": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "CAVE4",
+                "message": ""
+            },
+            "EAST": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "MGRAI",
+                "message": ""
+            },
+            "WEST": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "PASS1",
+                "message": ""
+            },
+            "NW": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "CANY1",
+                "message": ""
+            },
+            "NE": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "PASS5",
+                "message": ""
+            },
+            "SE": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "PASS4",
+                "message": ""
+            },
+            "SW": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "MAZE1",
+                "message": ""
+            },
+            "EXIT": {
+                "condition": "\"CAROUSEL-FLIP\"",
+                "destination": "PASS3",
+                "message": ""
+            }
+        },
+        "objects": [
+            "IRBOX"
+        ],
+        "flags": 0,
+        "properties": [],
+        "roomAction": "CAROUSEL-ROOM"
+    },
+    "PASS5": {
+        "id": "PASS5",
+        "shortDesc": "North-South Passage",
+        "longDesc": "You are in a high north-south passage, which forks to the northeast.",
+        "exits": {
+            "NORTH": "CHAS1",
+            "NE": "ECHO",
+            "SOUTH": "CAROU"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "MTORC": {
+        "id": "MTORC",
+        "shortDesc": "Torch Room",
+        "longDesc": "",
+        "exits": {
+            "UP": {
+                "blocked": "You cannot reach the rope."
+            },
+            "WEST": "MTORC",
+            "DOWN": "CRAW4"
+        },
+        "objects": [
+            "TORCH"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "DOME": {
+        "id": "DOME",
+        "shortDesc": "Dome Room",
+        "longDesc": "",
+        "exits": {
+            "EAST": "CRAW1",
+            "DOWN": {
+                "condition": "\"DOME-FLAG\"",
+                "destination": "MTORC",
+                "message": "You cannot go down without fracturing many bones."
+            },
+            "CLIMB": {
+                "condition": "\"DOME-FLAG\"",
+                "destination": "MTORC",
+                "message": "You cannot go down without fracturing many bones."
+            }
+        },
+        "objects": [
+            "RAILI"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "MACHI": {
+        "id": "MACHI",
+        "shortDesc": "Machine Room",
+        "longDesc": "",
+        "exits": {
+            "NW": "BSHAF"
+        },
+        "objects": [
+            "MSWIT",
+            "MACHI"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "TIMBE": {
+        "id": "TIMBE",
+        "shortDesc": "Timber Room",
+        "longDesc": "You are in a long and narrow passage, which is cluttered with broken\ntimbers.  A wide passage comes from the north and turns at the \nsouthwest corner of the room into a very narrow passageway.",
+        "exits": {
+            "NORTH": "BLADD",
+            "SW": {
+                "condition": "\"EMPTY-HANDED\"",
+                "destination": "BSHAF",
+                "message": "You cannot fit through this passage with that load."
+            }
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "BSHAF": {
+        "id": "BSHAF",
+        "shortDesc": "Lower Shaft",
+        "longDesc": "You are in a small square room which is at the bottom of a long\nshaft. To the east is a passageway and to the northeast a very narrow\npassage. In the shaft can be seen a heavy iron chain.",
+        "exits": {
+            "EAST": "MACHI",
+            "OUT": {
+                "condition": "\"EMPTY-HANDED\"",
+                "destination": "TIMBE",
+                "message": "You cannot fit through this passage with that load."
+            },
+            "NE": {
+                "condition": "\"EMPTY-HANDED\"",
+                "destination": "TIMBE",
+                "message": "You cannot fit through this passage with that load."
+            },
+            "UP": {
+                "blocked": "Not a chance."
+            },
+            "CLIMB": {
+                "blocked": "The chain is not climbable."
+            }
+        },
+        "objects": [
+            "FBASK"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "PASS4": {
+        "id": "PASS4",
+        "shortDesc": "Winding Passage",
+        "longDesc": "You are in a winding passage.  It seems that there is only an exit\non the east end although the whirring from the round room can be\nheard faintly to the north.",
+        "exits": {
+            "EAST": "MIRR2",
+            "NORTH": {
+                "blocked": "You hear the whir of the carousel room but can find no entrance."
+            }
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
     "WHOUS": {
         "id": "WHOUS",
         "shortDesc": "West of House",
@@ -206,17 +697,17 @@
             "EAST": {
                 "condition": "\"TROLL-FLAG\"",
                 "destination": "CRAW4",
-                "message": "The troll is blocking your way."
+                "message": "The troll spits in your face, saying \"Better luck next time.\""
             },
             "NORTH": {
                 "condition": "\"TROLL-FLAG\"",
                 "destination": "PASS1",
-                "message": "The troll is blocking your way."
+                "message": "The troll spits in your face, saying \"Better luck next time.\""
             },
             "SOUTH": {
                 "condition": "\"TROLL-FLAG\"",
                 "destination": "MAZE1",
-                "message": "The troll is blocking your way."
+                "message": "The troll spits in your face, saying \"Better luck next time.\""
             }
         },
         "objects": [
@@ -422,7 +913,7 @@
         "exits": {
             "SW": "MAZ11",
             "UP": {
-                "condition": "\"GRATING-UNLOCKED\"",
+                "condition": "\"KEY-FLAG\"",
                 "destination": "CLEAR",
                 "message": "The grating is locked"
             }
@@ -594,7 +1085,8 @@
             "SOUTH": "FORE2",
             "DOWN": {
                 "condition": "\"KEY-FLAG\"",
-                "destination": "MGRAT"
+                "destination": "MGRAT",
+                "message": "The grating is locked"
             }
         },
         "objects": [
@@ -732,7 +1224,7 @@
             "WEST": {
                 "condition": "\"GLACIER-FLAG\"",
                 "destination": "RUBYR",
-                "message": "You can't go that way."
+                "message": "The glacier blocks the way."
             }
         },
         "objects": [
@@ -849,6 +1341,19 @@
             "NORTH": "CRAW3",
             "WEST": "MIRR2",
             "DOWN": "LLD1"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "PASS3": {
+        "id": "PASS3",
+        "shortDesc": "Cold Passage",
+        "longDesc": "You are in a cold and damp corridor where a long east-west passageway\nintersects with a northward path.",
+        "exits": {
+            "EAST": "MIRR1",
+            "WEST": "SLIDE",
+            "NORTH": "CRAW2"
         },
         "objects": [],
         "flags": 0,
@@ -1143,7 +1648,7 @@
             "SW": {
                 "condition": "\"EMPTY-HANDED\"",
                 "destination": "BSHAF",
-                "message": "You can't go that way."
+                "message": "You cannot fit through this passage with that load."
             }
         },
         "objects": [],
@@ -1159,12 +1664,12 @@
             "OUT": {
                 "condition": "\"EMPTY-HANDED\"",
                 "destination": "TIMBE",
-                "message": "You can't go that way."
+                "message": "You cannot fit through this passage with that load."
             },
             "NE": {
                 "condition": "\"EMPTY-HANDED\"",
                 "destination": "TIMBE",
-                "message": "You can't go that way."
+                "message": "You cannot fit through this passage with that load."
             },
             "UP": {
                 "blocked": "Not a chance."
@@ -2060,8 +2565,8 @@
             "LAUNC": "VAIR2",
             "WEST": {
                 "condition": "\"GNOME-PLEASED\"",
-                "destination": "VLBOT",
-                "message": "The gnome is blocking your way."
+                "destination": "LIBRA",
+                "message": "A gnome bars your way"
             },
             "SOUTH": "LIBRA"
         },
@@ -2117,8 +2622,8 @@
             "LAUNC": "VAIR4",
             "WEST": {
                 "condition": "\"GNOME-PLEASED\"",
-                "destination": "VLBOT",
-                "message": "The gnome is blocking your way."
+                "destination": "SAFE",
+                "message": "A gnome bars your way"
             },
             "SOUTH": "SAFE"
         },
@@ -2177,9 +2682,14 @@
         "shortDesc": "Low Room",
         "longDesc": "",
         "exits": {
-            "MAGCMACH": "NE",
-            ",": "MAGCMACH",
-            "MAGALICE": "EAST"
+            "NORTH": { "destination": "CMACH", "message": "A mysterious force holds you back." },
+            "SOUTH": { "destination": "CMACH", "message": "A mysterious force holds you back." },
+            "WEST": { "destination": "CMACH", "message": "A mysterious force holds you back." },
+            "NE": { "destination": "CMACH", "message": "A mysterious force holds you back." },
+            "EAST": { "destination": "CMACH", "message": "A mysterious force holds you back." },
+            "NW": { "destination": "ALICE", "message": "A mysterious force holds you back." },
+            "SW": { "destination": "ALICE", "message": "A mysterious force holds you back." },
+            "SE": { "destination": "ALICE", "message": "A mysterious force holds you back." }
         },
         "objects": [
             "RBTLB",
@@ -2271,11 +2781,10 @@
         "shortDesc": "Tea Room",
         "longDesc": "You are in a small square room, in the center of which is a large\noblong table, no doubt set for afternoon tea.  It is clear from the\nobjects on the table that the users were indeed mad.  In the eastern\ncorner of the room is a small hole (no more that four inches high). \nThere are passageways leading away to the west and the northwest.",
         "exits": {
-            "EAST": {
-                "blocked": "Only a mouse could get in there."
-            },
+            "EAST": "ALITR",
             "WEST": "TWELL",
-            "NW": "MAGNE"
+            "NW": "MAGNE",
+            "DOWN": { "condition": "\"PLAYER-SMALL\"", "destination": "ALISM", "message": "You are too large to fit through the hole."}
         },
         "objects": [
             "ATABL",
@@ -2292,9 +2801,17 @@
         "shortDesc": "Posts Room",
         "longDesc": "You are in an enormous room, in the center of which are four wooden\nposts delineating a rectanular area, above which is what appears to\nbe a wooden roof.  In fact, all objects in this room appear to be\nabnormally large. To the east is a passageway.  There is a large\nchasm on the west and the northwest.",
         "exits": {
-            "SMDROP": "EAST",
-            "ALITR": "WEST",
-            ",": "SMDROP"
+            "EAST": "ALITR",
+            "NW": {
+                "blocked": "There is a chasm too large to jump across."
+            },
+            "WEST": {
+                "blocked": "There is a chasm too large to jump across."
+            },
+            "DOWN": {
+                "blocked": "There is a chasm too large to jump across."
+            },
+            "UP": "ALICE"
         },
         "objects": [
             "POSTS"
@@ -2324,6 +2841,105 @@
         "longDesc": "This is a secret room! You found it!",
         "exits": {
             "WEST": "CMACH"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "RAVI1": {
+        "id": "RAVI1",
+        "shortDesc": "Deep Ravine",
+        "longDesc": "You are in a deep ravine at a crossing with an east-west crawlway. \nSome stone steps are at the south of the ravine and a steep staircase\ndescends.",
+        "exits": {
+            "SOUTH": "PASS1",
+            "DOWN": "RESES",
+            "EAST": "CHAS1",
+            "WEST": "CRAW1"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "RUBYR": {
+        "id": "RUBYR",
+        "shortDesc": "Ruby Room",
+        "longDesc": "You are in a small chamber behind the remains of the Great Glacier.\nTo the south and west are small passageways.",
+        "exits": {
+            "WEST": "LAVA",
+            "SOUTH": "ICY"
+        },
+        "objects": [
+            "RUBY"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "ATLAN": {
+        "id": "ATLAN",
+        "shortDesc": "Atlantis Room",
+        "longDesc": "You are in an ancient room, long buried by the Reservoir.  There are\nexits here to the southeast and upward.",
+        "exits": {
+            "SE": "RESEN",
+            "UP": "CAVE1"
+        },
+        "objects": [
+            "TRIDE"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "CANY1": {
+        "id": "CANY1",
+        "shortDesc": "Deep Canyon",
+        "longDesc": "You are on the south edge of a deep canyon.  Passages lead off\nto the east, south, and northwest.  You can hear the sound of\nflowing water below.",
+        "exits": {
+            "NW": "RESES",
+            "EAST": "DAM",
+            "SOUTH": "CAROU"
+        },
+        "objects": [],
+        "flags": 0,
+        "properties": []
+    },
+    "MIRR1": {
+        "id": "MIRR1",
+        "shortDesc": "Mirror Room",
+        "longDesc": "",
+        "exits": {
+            "WEST": "PASS3",
+            "NORTH": "CRAW2",
+            "EAST": "CAVE1"
+        },
+        "objects": [
+            "REFL1"
+        ],
+        "flags": 0,
+        "properties": []
+    },
+    "MIRR2": {
+        "id": "MIRR2",
+        "shortDesc": "Mirror Room",
+        "longDesc": "",
+        "exits": {
+            "WEST": "PASS4",
+            "NORTH": "CRAW3",
+            "EAST": "CAVE2"
+        },
+        "objects": [
+            "REFL2"
+        ],
+        "flags": 0,
+        "properties": [
+            "LIT"
+        ]
+    },
+    "CAVE1": {
+        "id": "CAVE1",
+        "shortDesc": "Cave",
+        "longDesc": "You are in a small cave with an entrance to the north and a stairway\nleading down.",
+        "exits": {
+            "NORTH": "MIRR1",
+            "DOWN": "ATLAN"
         },
         "objects": [],
         "flags": 0,
